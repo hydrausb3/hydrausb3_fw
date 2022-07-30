@@ -1,4 +1,4 @@
-# hydrausb3_fw
+# HydraUSB3 v1 Test firmware / examples / libraries(drivers)
 hydrausb3_fw contains open source (see LICENSE) test firmware / examples / libraries(drivers)(see [peripheral](SRC/Peripheral/)) for HydraUSB3 board using WCH CH569W MCU.
 
 For more details on HydraUSB3 see https://hydrabus.com/hydrausb3-v1-0-specifications
@@ -6,6 +6,8 @@ For more details on HydraUSB3 see https://hydrabus.com/hydrausb3-v1-0-specificat
 All examples with name HydraUSB3_DualBoard_XXX requires 2x HydraUSB3 v1 boards to be plugged together.
 * First HydraUSB3 board shall have PB24 not populated (called Host board)
 * Seconds HydraUSB3 board shall have PB24 populated with a 2.54mm Jumper (called Device board)
+
+![2xHydraUSB3 plugged together](2xHydraUSB3_Plugged_TopView.png)
 
 [SRC](SRC/) directory contains [Startup](SRC/Startup/) / [Linker Script](SRC/Ld/) / [RVMSIS](SRC/RVMSIS/) / [Peripherals code](SRC/Peripheral/) based on WCH official code from https://github.com/openwch/ch569/tree/main/EVT/EXAM/SRC (but heavily refactored/rewritten on lot of parts)
 
