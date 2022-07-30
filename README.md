@@ -5,6 +5,8 @@ All examples with name HydraUSB3_DualBoard_XXX requires 2x HydraUSB3 v1 boards t
 * First HydraUSB3 board shall have PB24 not populated (called Host board)
 * Seconds HydraUSB3 board shall have PB24 populated with a 2.54mm Jumper (called Device board)
 
+[SRC](SRC/) directory contains [Startup](SRC/Startup/) / [Linker Script](SRC/Ld/) / [RVMSIS](SRC/RVMSIS/) / [Peripherals code](SRC/Peripheral/) based on WCH official code from https://github.com/openwch/ch569/tree/main/EVT/EXAM/SRC (but heavily refactored/rewritten on lot of parts)
+
 ### How to build the firmware source code for HydraUSB3 (CH569W MCU)
 It is recommended to use MounRiver Studio "Embedded RISC-V IDE" or "RISC-V IDE (Community)" to build the source code 
 * See http://www.mounriver.com/download
