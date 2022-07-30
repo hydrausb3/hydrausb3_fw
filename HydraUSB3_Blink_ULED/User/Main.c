@@ -1,9 +1,9 @@
 /********************************** (C) COPYRIGHT *******************************
-* File Name          : Main.c
-* Author             : bvernoux
-* Version            : V1.0
-* Date               : 2022/07/30
-* Description 		 : Basic example with minimal MCU speed(15MHz) and ULED blinking
+* File Name   : Main.c
+* Author      : bvernoux
+* Version     : V1.0
+* Date        : 2022/07/30
+* Description : Basic example with minimal MCU speed(15MHz) and ULED blinking
 * Copyright (c) 2022 Benjamin VERNOUX
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
