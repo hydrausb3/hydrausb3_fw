@@ -1,9 +1,9 @@
 /********************************** (C) COPYRIGHT *******************************
-* File Name          : Main.c
-* Author             : bvernoux
-* Version            : V1.0
-* Date               : 2022/07/30
-* Description 		 : Basic example to test HSPI communication between 2x HydraUSB3 boards
+* File Name   : Main.c
+* Author      : bvernoux
+* Version     : V1.0
+* Date        : 2022/07/30
+* Description : Basic example to test HSPI communication between 2x HydraUSB3 boards
 * Copyright (c) 2022 Benjamin VERNOUX
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
