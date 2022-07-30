@@ -1,5 +1,5 @@
 # hydrausb3_fw
-hydrausb3_fw contains open source (see LICENSE) test firmware / examples / libraries(see [peripheral](SRC/Peripheral/)) with drivers for HydraUSB3 board using WCH CH569W MCU.
+hydrausb3_fw contains open source (see LICENSE) test firmware / examples / libraries(drivers)(see [peripheral](SRC/Peripheral/)) for HydraUSB3 board using WCH CH569W MCU.
 
 All examples with name HydraUSB3_DualBoard_XXX requires 2x HydraUSB3 v1 boards to be plugged together.
 * First HydraUSB3 board shall have PB24 not populated (called Host board)
