@@ -3,7 +3,7 @@
 * Author             : WCH
 * Version            : V1.0
 * Date               : 2020/07/31
-* Description 
+* Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
@@ -20,24 +20,24 @@
  *                  DISABLE - 关闭外设时钟
  *                  perph -
  *                     please refer to Peripher CLK control bit define
- 
+
  * @return   None
  */
 void PWR_PeriphClkCfg( UINT8 s, UINT16 perph )
 {
-    if( s == DISABLE )
-    {
-        R8_SAFE_ACCESS_SIG = 0x57;
-        R8_SAFE_ACCESS_SIG = 0xA8;
-        R32_SLEEP_CONTROL |= perph;
-    }
-    else
-    {
-        R8_SAFE_ACCESS_SIG = 0x57;
-        R8_SAFE_ACCESS_SIG = 0xA8;
-        R32_SLEEP_CONTROL &= ~perph;
-    }
-    R8_SAFE_ACCESS_SIG = 0;
+	if( s == DISABLE )
+	{
+		R8_SAFE_ACCESS_SIG = 0x57;
+		R8_SAFE_ACCESS_SIG = 0xA8;
+		R32_SLEEP_CONTROL |= perph;
+	}
+	else
+	{
+		R8_SAFE_ACCESS_SIG = 0x57;
+		R8_SAFE_ACCESS_SIG = 0xA8;
+		R32_SLEEP_CONTROL &= ~perph;
+	}
+	R8_SAFE_ACCESS_SIG = 0;
 }
 
 /*******************************************************************************
@@ -58,19 +58,19 @@ void PWR_PeriphClkCfg( UINT8 s, UINT16 perph )
  */
 void PWR_PeriphWakeUpCfg( UINT8 s, UINT16 perph )
 {
-    if( s == DISABLE )
-    {
-        R8_SAFE_ACCESS_SIG = 0x57;
-        R8_SAFE_ACCESS_SIG = 0xA8;
-        R8_SLP_WAKE_CTRL &= ~perph;
-    }
-    else
-    {
-        R8_SAFE_ACCESS_SIG = 0x57;
-        R8_SAFE_ACCESS_SIG = 0xA8;
-        R8_SLP_WAKE_CTRL |= perph;
-    }
-    R8_SAFE_ACCESS_SIG = 0;
+	if( s == DISABLE )
+	{
+		R8_SAFE_ACCESS_SIG = 0x57;
+		R8_SAFE_ACCESS_SIG = 0xA8;
+		R8_SLP_WAKE_CTRL &= ~perph;
+	}
+	else
+	{
+		R8_SAFE_ACCESS_SIG = 0x57;
+		R8_SAFE_ACCESS_SIG = 0xA8;
+		R8_SLP_WAKE_CTRL |= perph;
+	}
+	R8_SAFE_ACCESS_SIG = 0;
 }
 
 /*******************************************************************************
@@ -84,7 +84,7 @@ void LowPower_Idle( void )
 {
 
 	PFIC->SCTLR &= ~1<<2;				// 设置内核PFIC_SCTLR寄存器的SleepDeep字段为0
-    __WFI();                            // 设置唤醒条件后执行__WFI()
+	__WFI();                            // 设置唤醒条件后执行__WFI()
 
 }
 
@@ -92,7 +92,7 @@ void LowPower_Idle( void )
  * @fn     LowPower_Halt
  *
  * @brief  低功耗-Halt模式
- * 
+ *
  * @return   None
  */
 void LowPower_Halt( void )

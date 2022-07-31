@@ -3,7 +3,7 @@
 * Author             : WCH
 * Version            : V1.0
 * Date               : 2020/07/31
-* Description 
+* Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
@@ -35,7 +35,7 @@ void ECDC_Init( UINT8 ecdcmode, UINT8 clkmode, UINT8 keylen, PUINT32 pkey, PUINT
 	ECDC_SetKey(pkey, keylen);
 
 	if(R16_ECEC_CTRL & RB_ECDC_CIPHER_MOD)			//只在CTR模式下执行，CTR与ECB模式编程时的唯一区别
-			ECDC_SetCount(pcount);
+		ECDC_SetCount(pcount);
 
 	R8_ECDC_INT_FG |= RB_ECDC_IF_EKDONE;
 	R16_ECEC_CTRL |= RB_ECDC_KEYEX_EN;
@@ -52,7 +52,7 @@ void ECDC_Init( UINT8 ecdcmode, UINT8 clkmode, UINT8 keylen, PUINT32 pkey, PUINT
  *
  * @param  pkey -   密钥值指针
  *         keylen - 0-128bit   1-192bit   2-256bit
- 
+
  * @return   None
  */
 void ECDC_SetKey( PUINT32 pkey, UINT8 keylen )
@@ -64,11 +64,13 @@ void ECDC_SetKey( PUINT32 pkey, UINT8 keylen )
 	R32_ECDC_KEY_95T64 = *pkey++;
 	R32_ECDC_KEY_127T96 = *pkey++;
 
-	if(keylen){
+	if(keylen)
+	{
 		R32_ECDC_KEY_159T128 = *pkey++;
 		R32_ECDC_KEY_191T160 = *pkey++;
 	}
-	if(keylen>1){
+	if(keylen>1)
+	{
 		R32_ECDC_KEY_223T192 = *pkey++;
 		R32_ECDC_KEY_255T224 = *pkey++;
 	}

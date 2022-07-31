@@ -75,7 +75,7 @@ void SystemInit(uint32_t systemclck)
 			R8_CLK_CFG_CTRL = 0x80 | RB_CLK_SEL_PLL;
 
 			break;
-	   /*
+		/*
 		case CLK_SOURCE_PLL_240MHz:
 			R8_SAFE_ACCESS_SIG = 0x57; // enable safe access mode
 			R8_SAFE_ACCESS_SIG = 0xa8;
@@ -105,7 +105,8 @@ UINT32 GetSysClock( void )
 
 	rev = R8_CLK_PLL_DIV & 0x0F;
 	if(R8_CLK_CFG_CTRL & RB_CLK_SEL_PLL)
-	{ // The system clock source comes from the 480M provided by the USB PHY
+	{
+		// The system clock source comes from the 480M provided by the USB PHY
 		if(rev == 0)
 		{
 			return (30000000);
@@ -116,7 +117,8 @@ UINT32 GetSysClock( void )
 		}
 	}
 	else
-	{ // The system clock source comes from an external crystal oscillator 30M
+	{
+		// The system clock source comes from an external crystal oscillator 30M
 		if(rev == 0)
 		{
 			return (2000000);

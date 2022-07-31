@@ -633,7 +633,8 @@ uint16_t UART1_rx(uint8_t* buf, int buf_len_max)
 		{
 			*buf++ = R8_UART1_RBR;
 			len++;
-		}else
+		}
+		else
 		{
 			/* Not enough space in buffer exit loop */
 			break;
@@ -685,7 +686,8 @@ uint16_t UART2_rx(uint8_t* buf, int buf_len_max)
 		{
 			*buf++ = R8_UART2_RBR;
 			len++;
-		}else
+		}
+		else
 		{
 			/* Not enough space in buffer exit loop */
 			break;
@@ -737,7 +739,8 @@ uint16_t UART3_rx(uint8_t* buf, int buf_len_max)
 		{
 			*buf++ = R8_UART3_RBR;
 			len++;
-		}else
+		}
+		else
 		{
 			/* Not enough space in buffer exit loop */
 			break;

@@ -3,7 +3,7 @@
 * Author             : WCH
 * Version            : V1.0
 * Date               : 2020/07/31
-* Description 
+* Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
@@ -34,86 +34,86 @@
  * @return   None
  */
 void GPIOA_ModeCfg( UINT32 pin, GPIOModeTypeDef mode )
-{	
-    switch(mode)
-    {
-        case GPIO_ModeIN_Floating:
-            R32_PA_PD &= ~pin;
-            R32_PA_PU     &= ~pin;
-            R32_PA_DIR    &= ~pin;
-            break;
+{
+	switch(mode)
+	{
+		case GPIO_ModeIN_Floating:
+			R32_PA_PD &= ~pin;
+			R32_PA_PU     &= ~pin;
+			R32_PA_DIR    &= ~pin;
+			break;
 
-        case GPIO_ModeIN_PU_NSMT:
-        	R32_PA_SMT &=~ pin;
-            R32_PA_PD &= ~pin;
-            R32_PA_PU     |= pin;
-            R32_PA_DIR    &= ~pin;
-            break;
+		case GPIO_ModeIN_PU_NSMT:
+			R32_PA_SMT &=~ pin;
+			R32_PA_PD &= ~pin;
+			R32_PA_PU     |= pin;
+			R32_PA_DIR    &= ~pin;
+			break;
 
-        case GPIO_ModeIN_PD_NSMT:
-        	R32_PA_SMT &=~ pin;
-            R32_PA_PD |= pin;
-            R32_PA_PU     &= ~pin;
-            R32_PA_DIR    &= ~pin;
-            break;
+		case GPIO_ModeIN_PD_NSMT:
+			R32_PA_SMT &=~ pin;
+			R32_PA_PD |= pin;
+			R32_PA_PU     &= ~pin;
+			R32_PA_DIR    &= ~pin;
+			break;
 
-        case GPIO_ModeIN_PU_SMT:
-        	R32_PA_SMT |= pin;
-            R32_PA_PD &= ~pin;
-            R32_PA_PU     |= pin;
-            R32_PA_DIR    &= ~pin;
-            break;
+		case GPIO_ModeIN_PU_SMT:
+			R32_PA_SMT |= pin;
+			R32_PA_PD &= ~pin;
+			R32_PA_PU     |= pin;
+			R32_PA_DIR    &= ~pin;
+			break;
 
-        case GPIO_ModeIN_PD_SMT:
-        	R32_PA_SMT |= pin;
-            R32_PA_PD |= pin;
-            R32_PA_PU     &= ~pin;
-            R32_PA_DIR    &= ~pin;
-            break;
+		case GPIO_ModeIN_PD_SMT:
+			R32_PA_SMT |= pin;
+			R32_PA_PD |= pin;
+			R32_PA_PU     &= ~pin;
+			R32_PA_DIR    &= ~pin;
+			break;
 
-        case GPIO_Slowascent_PP_8mA:
-        	R32_PA_SMT |= pin;
-        	R32_PA_DRV &= ~pin;
-            R32_PA_PD &= ~pin;
-            R32_PA_DIR |= pin;
-            break;
+		case GPIO_Slowascent_PP_8mA:
+			R32_PA_SMT |= pin;
+			R32_PA_DRV &= ~pin;
+			R32_PA_PD &= ~pin;
+			R32_PA_DIR |= pin;
+			break;
 
-        case GPIO_Slowascent_PP_16mA:
-        	R32_PA_SMT |= pin;
-        	R32_PA_DRV |= pin;
-            R32_PA_PD &= ~pin;
-            R32_PA_DIR |= pin;
-            break;
+		case GPIO_Slowascent_PP_16mA:
+			R32_PA_SMT |= pin;
+			R32_PA_DRV |= pin;
+			R32_PA_PD &= ~pin;
+			R32_PA_DIR |= pin;
+			break;
 
-        case GPIO_Highspeed_PP_8mA:
-        	R32_PA_SMT &= ~pin;
-        	R32_PA_DRV &= ~pin;
-            R32_PA_PD &= ~pin;
-            R32_PA_DIR |= pin;
-            break;
+		case GPIO_Highspeed_PP_8mA:
+			R32_PA_SMT &= ~pin;
+			R32_PA_DRV &= ~pin;
+			R32_PA_PD &= ~pin;
+			R32_PA_DIR |= pin;
+			break;
 
-        case GPIO_Highspeed_PP_16mA:
-        	R32_PA_SMT &= ~pin;
-        	R32_PA_DRV |= pin;
-            R32_PA_PD &= ~pin;
-            R32_PA_DIR    |= pin;
-            break;
+		case GPIO_Highspeed_PP_16mA:
+			R32_PA_SMT &= ~pin;
+			R32_PA_DRV |= pin;
+			R32_PA_PD &= ~pin;
+			R32_PA_DIR    |= pin;
+			break;
 
-        case GPIO_ModeOut_OP_8mA:
-        	R32_PA_DRV &= ~pin;
-            R32_PA_PD  |= pin;
-            R32_PA_DIR    |= pin;
-            break;
+		case GPIO_ModeOut_OP_8mA:
+			R32_PA_DRV &= ~pin;
+			R32_PA_PD  |= pin;
+			R32_PA_DIR    |= pin;
+			break;
 
-        case GPIO_ModeOut_OP_16mA:
-        	R32_PA_DRV  |= pin;
-            R32_PA_PD  |= pin;
-            R32_PA_DIR    |= pin;
-            break;
+		case GPIO_ModeOut_OP_16mA:
+			R32_PA_DRV  |= pin;
+			R32_PA_PD  |= pin;
+			R32_PA_DIR    |= pin;
+			break;
 
-        default:
-            break;
-    }
+		default:
+			break;
+	}
 }
 
 /*******************************************************************************
@@ -141,85 +141,85 @@ void GPIOA_ModeCfg( UINT32 pin, GPIOModeTypeDef mode )
 
 void GPIOB_ModeCfg( UINT32 pin, GPIOModeTypeDef mode )
 {
-    switch(mode)
-    {
-        case GPIO_ModeIN_Floating:
-            R32_PB_PD &= ~pin;
-            R32_PB_PU     &= ~pin;
-            R32_PB_DIR    &= ~pin;
-            break;
+	switch(mode)
+	{
+		case GPIO_ModeIN_Floating:
+			R32_PB_PD &= ~pin;
+			R32_PB_PU     &= ~pin;
+			R32_PB_DIR    &= ~pin;
+			break;
 
-        case GPIO_ModeIN_PU_NSMT:
-        	R32_PB_SMT &=~ pin;  
-            R32_PB_PD &= ~pin;
-            R32_PB_PU     |= pin;
-            R32_PB_DIR    &= ~pin;
-            break;
+		case GPIO_ModeIN_PU_NSMT:
+			R32_PB_SMT &=~ pin;
+			R32_PB_PD &= ~pin;
+			R32_PB_PU     |= pin;
+			R32_PB_DIR    &= ~pin;
+			break;
 
-        case GPIO_ModeIN_PD_NSMT:
-        	R32_PB_SMT &=~ pin;  
-            R32_PB_PD |= pin;
-            R32_PB_PU     &= ~pin;
-            R32_PB_DIR    &= ~pin;
-            break;
+		case GPIO_ModeIN_PD_NSMT:
+			R32_PB_SMT &=~ pin;
+			R32_PB_PD |= pin;
+			R32_PB_PU     &= ~pin;
+			R32_PB_DIR    &= ~pin;
+			break;
 
-        case GPIO_ModeIN_PU_SMT:
-        	R32_PB_SMT |= pin;  
-            R32_PB_PD &= ~pin;
-            R32_PB_PU     |= pin;
-            R32_PB_DIR    &= ~pin;
-            break;
+		case GPIO_ModeIN_PU_SMT:
+			R32_PB_SMT |= pin;
+			R32_PB_PD &= ~pin;
+			R32_PB_PU     |= pin;
+			R32_PB_DIR    &= ~pin;
+			break;
 
-        case GPIO_ModeIN_PD_SMT:
-        	R32_PB_SMT |= pin;  
-            R32_PB_PD |= pin;
-            R32_PB_PU     &= ~pin;
-            R32_PB_DIR    &= ~pin;
-            break;
+		case GPIO_ModeIN_PD_SMT:
+			R32_PB_SMT |= pin;
+			R32_PB_PD |= pin;
+			R32_PB_PU     &= ~pin;
+			R32_PB_DIR    &= ~pin;
+			break;
 
-        case GPIO_Slowascent_PP_8mA:
-        	R32_PB_SMT |= pin;  
-        	R32_PB_DRV &= ~pin;
-            R32_PB_PD &= ~pin;
-            R32_PB_DIR |= pin;
-            break;
+		case GPIO_Slowascent_PP_8mA:
+			R32_PB_SMT |= pin;
+			R32_PB_DRV &= ~pin;
+			R32_PB_PD &= ~pin;
+			R32_PB_DIR |= pin;
+			break;
 
-        case GPIO_Slowascent_PP_16mA:
-        	R32_PB_SMT |= pin;  
-        	R32_PB_DRV |= pin;
-            R32_PB_PD &= ~pin;
-            R32_PB_DIR |= pin;
-            break;
+		case GPIO_Slowascent_PP_16mA:
+			R32_PB_SMT |= pin;
+			R32_PB_DRV |= pin;
+			R32_PB_PD &= ~pin;
+			R32_PB_DIR |= pin;
+			break;
 
-        case GPIO_Highspeed_PP_8mA:
-        	R32_PB_SMT &= ~pin;  
-        	R32_PB_DRV &= ~pin;
-            R32_PB_PD &= ~pin;
-            R32_PB_DIR |= pin;
-            break;
+		case GPIO_Highspeed_PP_8mA:
+			R32_PB_SMT &= ~pin;
+			R32_PB_DRV &= ~pin;
+			R32_PB_PD &= ~pin;
+			R32_PB_DIR |= pin;
+			break;
 
-        case GPIO_Highspeed_PP_16mA:
-        	R32_PB_SMT &= ~pin;  
-        	R32_PB_DRV |= pin;
-            R32_PB_PD &= ~pin;
-            R32_PB_DIR    |= pin;
-            break;
+		case GPIO_Highspeed_PP_16mA:
+			R32_PB_SMT &= ~pin;
+			R32_PB_DRV |= pin;
+			R32_PB_PD &= ~pin;
+			R32_PB_DIR    |= pin;
+			break;
 
-        case GPIO_ModeOut_OP_8mA:
-        	R32_PB_DRV &= ~pin;
-            R32_PB_PD  |= pin;
-            R32_PB_DIR    |= pin;
-            break;
+		case GPIO_ModeOut_OP_8mA:
+			R32_PB_DRV &= ~pin;
+			R32_PB_PD  |= pin;
+			R32_PB_DIR    |= pin;
+			break;
 
-        case GPIO_ModeOut_OP_16mA:
-        	R32_PB_DRV |= pin;
-            R32_PB_PD  |= pin;
-            R32_PB_DIR    |= pin;
-            break;
+		case GPIO_ModeOut_OP_16mA:
+			R32_PB_DRV |= pin;
+			R32_PB_PD  |= pin;
+			R32_PB_DIR    |= pin;
+			break;
 
-        default:
-            break;
-    }
+		default:
+			break;
+	}
 }
 
 /*******************************************************************************
@@ -238,37 +238,37 @@ void GPIOB_ModeCfg( UINT32 pin, GPIOModeTypeDef mode )
  */
 void GPIOA_ITModeCfg( UINT32 pin, GPIOITModeTpDef mode )
 {
-    switch( mode )
-    {
-        case GPIO_ITMode_LowLevel:		// 低电平触发
-        	R32_PA_DIR &= ~pin;
-        	R8_GPIO_INT_MODE &= ~(pin>>2);
-        	R8_GPIO_INT_POLAR &= ~(pin>>2);
-            break;
+	switch( mode )
+	{
+		case GPIO_ITMode_LowLevel:		// 低电平触发
+			R32_PA_DIR &= ~pin;
+			R8_GPIO_INT_MODE &= ~(pin>>2);
+			R8_GPIO_INT_POLAR &= ~(pin>>2);
+			break;
 
-        case GPIO_ITMode_HighLevel:		// 高电平触发
-        	R32_PA_DIR &= ~pin;
-        	R8_GPIO_INT_MODE &= ~(pin>>2);
-            R8_GPIO_INT_POLAR |= (pin>>2);
-            break;
+		case GPIO_ITMode_HighLevel:		// 高电平触发
+			R32_PA_DIR &= ~pin;
+			R8_GPIO_INT_MODE &= ~(pin>>2);
+			R8_GPIO_INT_POLAR |= (pin>>2);
+			break;
 
-        case GPIO_ITMode_FallEdge:		// 下降沿触发
-        	R32_PA_DIR &= ~pin;
-        	R8_GPIO_INT_MODE |= (pin>>2);
-            R8_GPIO_INT_POLAR &= ~(pin>>2);
-            break;
+		case GPIO_ITMode_FallEdge:		// 下降沿触发
+			R32_PA_DIR &= ~pin;
+			R8_GPIO_INT_MODE |= (pin>>2);
+			R8_GPIO_INT_POLAR &= ~(pin>>2);
+			break;
 
-        case GPIO_ITMode_RiseEdge:		// 上升沿触发
-        	R32_PA_DIR &= ~pin;
-        	R8_GPIO_INT_MODE |= (pin>>2);
-            R8_GPIO_INT_POLAR |= (pin>>2);
-            break;
+		case GPIO_ITMode_RiseEdge:		// 上升沿触发
+			R32_PA_DIR &= ~pin;
+			R8_GPIO_INT_MODE |= (pin>>2);
+			R8_GPIO_INT_POLAR |= (pin>>2);
+			break;
 
-        default :
-            break;
-    }
-    R8_GPIO_INT_FLAG = (pin>>2);
-    R8_GPIO_INT_ENABLE |= (pin>>2);
+		default :
+			break;
+	}
+	R8_GPIO_INT_FLAG = (pin>>2);
+	R8_GPIO_INT_ENABLE |= (pin>>2);
 }
 
 /*******************************************************************************
@@ -288,184 +288,184 @@ void GPIOA_ITModeCfg( UINT32 pin, GPIOITModeTpDef mode )
 
 void GPIOB_ITModeCfg( UINT32 pin, GPIOITModeTpDef mode )
 {
-    switch( mode )
-    {
-        case GPIO_ITMode_LowLevel:		// 低电平触发
-          if(pin==3)
-          {
-        	R32_PB_DIR &= ~(1<<3);
-        	R8_GPIO_INT_MODE &= ~(1<<3);
-        	R8_GPIO_INT_POLAR &= ~(1<<3);
-        	R8_GPIO_INT_FLAG = (1<<3);
-            R8_GPIO_INT_ENABLE |= (1<<3);
-          }
-          else if(pin==4)
-          {
-         	R32_PB_DIR &= ~(1<<4);
-        	R8_GPIO_INT_MODE &= ~(1<<4);
-        	R8_GPIO_INT_POLAR &= ~(1<<4);
-        	R8_GPIO_INT_FLAG = (1<<4);
-            R8_GPIO_INT_ENABLE |= (1<<4);
-          }
-          else if(pin==11)
-          {
-         	R32_PB_DIR &= ~(1<<11);
-        	R8_GPIO_INT_MODE &= ~(1<<5);
-        	R8_GPIO_INT_POLAR &= ~(1<<5);
-        	R8_GPIO_INT_FLAG = (1<<5);
-            R8_GPIO_INT_ENABLE |= (1<<5);
-          }
-          else if(pin==12)
-          {
-         	R32_PB_DIR &= ~(1<<12);
-        	R8_GPIO_INT_MODE &= ~(1<<6);
-        	R8_GPIO_INT_POLAR &= ~(1<<6);
-        	R8_GPIO_INT_FLAG = (1<<6);
-            R8_GPIO_INT_ENABLE |= (1<<6);
-          }
-          else if(pin==15)
-          {
-         	R32_PB_DIR &= ~(1<<15);
-        	R8_GPIO_INT_MODE &= ~(1<<7);
-        	R8_GPIO_INT_POLAR &= ~(1<<7);
-        	R8_GPIO_INT_FLAG = (1<<7);
-            R8_GPIO_INT_ENABLE |= (1<<7);
-          }
-          break;
+	switch( mode )
+	{
+		case GPIO_ITMode_LowLevel:		// 低电平触发
+			if(pin==3)
+			{
+				R32_PB_DIR &= ~(1<<3);
+				R8_GPIO_INT_MODE &= ~(1<<3);
+				R8_GPIO_INT_POLAR &= ~(1<<3);
+				R8_GPIO_INT_FLAG = (1<<3);
+				R8_GPIO_INT_ENABLE |= (1<<3);
+			}
+			else if(pin==4)
+			{
+				R32_PB_DIR &= ~(1<<4);
+				R8_GPIO_INT_MODE &= ~(1<<4);
+				R8_GPIO_INT_POLAR &= ~(1<<4);
+				R8_GPIO_INT_FLAG = (1<<4);
+				R8_GPIO_INT_ENABLE |= (1<<4);
+			}
+			else if(pin==11)
+			{
+				R32_PB_DIR &= ~(1<<11);
+				R8_GPIO_INT_MODE &= ~(1<<5);
+				R8_GPIO_INT_POLAR &= ~(1<<5);
+				R8_GPIO_INT_FLAG = (1<<5);
+				R8_GPIO_INT_ENABLE |= (1<<5);
+			}
+			else if(pin==12)
+			{
+				R32_PB_DIR &= ~(1<<12);
+				R8_GPIO_INT_MODE &= ~(1<<6);
+				R8_GPIO_INT_POLAR &= ~(1<<6);
+				R8_GPIO_INT_FLAG = (1<<6);
+				R8_GPIO_INT_ENABLE |= (1<<6);
+			}
+			else if(pin==15)
+			{
+				R32_PB_DIR &= ~(1<<15);
+				R8_GPIO_INT_MODE &= ~(1<<7);
+				R8_GPIO_INT_POLAR &= ~(1<<7);
+				R8_GPIO_INT_FLAG = (1<<7);
+				R8_GPIO_INT_ENABLE |= (1<<7);
+			}
+			break;
 
-       case GPIO_ITMode_HighLevel:		// 高电平触发
-          if(pin==3)
-          {
-        	R32_PB_DIR &= ~(1<<3);
-        	R8_GPIO_INT_MODE &= ~(1<<3);
-        	R8_GPIO_INT_POLAR |= (1<<3);
-        	R8_GPIO_INT_FLAG = (1<<3);
-            R8_GPIO_INT_ENABLE |= (1<<3);
-          }
-          else if(pin==4)
-          {
-         	R32_PB_DIR &= ~(1<<4);
-        	R8_GPIO_INT_MODE &= ~(1<<4);
-        	R8_GPIO_INT_POLAR |= (1<<4);
-        	R8_GPIO_INT_FLAG = (1<<4);
-            R8_GPIO_INT_ENABLE |= (1<<4);
-          }
-          else if(pin==11)
-          {
-         	R32_PB_DIR &= ~(1<<11);
-        	R8_GPIO_INT_MODE &= ~(1<<5);
-        	R8_GPIO_INT_POLAR |= (1<<5);
-        	R8_GPIO_INT_FLAG = (1<<5);
-            R8_GPIO_INT_ENABLE |= (1<<5);
-          }
-          else if(pin==12)
-          {
-         	R32_PB_DIR &= ~(1<<12);
-        	R8_GPIO_INT_MODE &= ~(1<<6);
-        	R8_GPIO_INT_POLAR |= (1<<6);
-        	R8_GPIO_INT_FLAG = (1<<6);
-            R8_GPIO_INT_ENABLE |= (1<<6);
-          }
-          else if(pin==15)
-          {
-         	R32_PB_DIR &= ~(1<<15);
-        	R8_GPIO_INT_MODE &= ~(1<<7);
-        	R8_GPIO_INT_POLAR |= (1<<7);
-        	R8_GPIO_INT_FLAG = (1<<7);
-            R8_GPIO_INT_ENABLE |= (1<<7);
-          }
-          break;
+		case GPIO_ITMode_HighLevel:		// 高电平触发
+			if(pin==3)
+			{
+				R32_PB_DIR &= ~(1<<3);
+				R8_GPIO_INT_MODE &= ~(1<<3);
+				R8_GPIO_INT_POLAR |= (1<<3);
+				R8_GPIO_INT_FLAG = (1<<3);
+				R8_GPIO_INT_ENABLE |= (1<<3);
+			}
+			else if(pin==4)
+			{
+				R32_PB_DIR &= ~(1<<4);
+				R8_GPIO_INT_MODE &= ~(1<<4);
+				R8_GPIO_INT_POLAR |= (1<<4);
+				R8_GPIO_INT_FLAG = (1<<4);
+				R8_GPIO_INT_ENABLE |= (1<<4);
+			}
+			else if(pin==11)
+			{
+				R32_PB_DIR &= ~(1<<11);
+				R8_GPIO_INT_MODE &= ~(1<<5);
+				R8_GPIO_INT_POLAR |= (1<<5);
+				R8_GPIO_INT_FLAG = (1<<5);
+				R8_GPIO_INT_ENABLE |= (1<<5);
+			}
+			else if(pin==12)
+			{
+				R32_PB_DIR &= ~(1<<12);
+				R8_GPIO_INT_MODE &= ~(1<<6);
+				R8_GPIO_INT_POLAR |= (1<<6);
+				R8_GPIO_INT_FLAG = (1<<6);
+				R8_GPIO_INT_ENABLE |= (1<<6);
+			}
+			else if(pin==15)
+			{
+				R32_PB_DIR &= ~(1<<15);
+				R8_GPIO_INT_MODE &= ~(1<<7);
+				R8_GPIO_INT_POLAR |= (1<<7);
+				R8_GPIO_INT_FLAG = (1<<7);
+				R8_GPIO_INT_ENABLE |= (1<<7);
+			}
+			break;
 
-          case GPIO_ITMode_FallEdge:		// 下降沿触发
-              if(pin==3)
-                    {
-                  	R32_PB_DIR &= ~(1<<3);
-                  	R8_GPIO_INT_MODE |= (1<<3);
-                  	R8_GPIO_INT_POLAR &= ~(1<<3);
-                  	R8_GPIO_INT_FLAG = (1<<3);
-                      R8_GPIO_INT_ENABLE |= (1<<3);
-                    }
-                    else if(pin==4)
-                    {
-                   	R32_PB_DIR &= ~(1<<4);
-                  	R8_GPIO_INT_MODE |= (1<<4);
-                  	R8_GPIO_INT_POLAR &= ~(1<<4);
-                  	R8_GPIO_INT_FLAG = (1<<4);
-                      R8_GPIO_INT_ENABLE |= (1<<4);
-                    }
-                    else if(pin==11)
-                    {
-                   	R32_PB_DIR &= ~(1<<11);
-                  	R8_GPIO_INT_MODE |= (1<<5);
-                  	R8_GPIO_INT_POLAR &= ~(1<<5);
-                  	R8_GPIO_INT_FLAG = (1<<5);
-                      R8_GPIO_INT_ENABLE |= (1<<5);
-                    }
-                    else if(pin==12)
-                    {
-                   	R32_PB_DIR &= ~(1<<12);
-                  	R8_GPIO_INT_MODE |= (1<<6);
-                  	R8_GPIO_INT_POLAR &= ~(1<<6);
-                  	R8_GPIO_INT_FLAG = (1<<6);
-                      R8_GPIO_INT_ENABLE |= (1<<6);
-                    }
-                    else if(pin==15)
-                    {
-                   	R32_PB_DIR &= ~(1<<15);
-                  	R8_GPIO_INT_MODE |= (1<<7);
-                  	R8_GPIO_INT_POLAR &= ~(1<<7);
-                  	R8_GPIO_INT_FLAG = (1<<7);
-                      R8_GPIO_INT_ENABLE |= (1<<7);
-                    }
-              break;
+		case GPIO_ITMode_FallEdge:		// 下降沿触发
+			if(pin==3)
+			{
+				R32_PB_DIR &= ~(1<<3);
+				R8_GPIO_INT_MODE |= (1<<3);
+				R8_GPIO_INT_POLAR &= ~(1<<3);
+				R8_GPIO_INT_FLAG = (1<<3);
+				R8_GPIO_INT_ENABLE |= (1<<3);
+			}
+			else if(pin==4)
+			{
+				R32_PB_DIR &= ~(1<<4);
+				R8_GPIO_INT_MODE |= (1<<4);
+				R8_GPIO_INT_POLAR &= ~(1<<4);
+				R8_GPIO_INT_FLAG = (1<<4);
+				R8_GPIO_INT_ENABLE |= (1<<4);
+			}
+			else if(pin==11)
+			{
+				R32_PB_DIR &= ~(1<<11);
+				R8_GPIO_INT_MODE |= (1<<5);
+				R8_GPIO_INT_POLAR &= ~(1<<5);
+				R8_GPIO_INT_FLAG = (1<<5);
+				R8_GPIO_INT_ENABLE |= (1<<5);
+			}
+			else if(pin==12)
+			{
+				R32_PB_DIR &= ~(1<<12);
+				R8_GPIO_INT_MODE |= (1<<6);
+				R8_GPIO_INT_POLAR &= ~(1<<6);
+				R8_GPIO_INT_FLAG = (1<<6);
+				R8_GPIO_INT_ENABLE |= (1<<6);
+			}
+			else if(pin==15)
+			{
+				R32_PB_DIR &= ~(1<<15);
+				R8_GPIO_INT_MODE |= (1<<7);
+				R8_GPIO_INT_POLAR &= ~(1<<7);
+				R8_GPIO_INT_FLAG = (1<<7);
+				R8_GPIO_INT_ENABLE |= (1<<7);
+			}
+			break;
 
 
-       case GPIO_ITMode_RiseEdge:		// 上升沿触发
-             if(pin==3)
-                    {
-                     R32_PB_DIR &= ~(1<<3);
-                     R8_GPIO_INT_MODE |= (1<<3);
-                     R8_GPIO_INT_POLAR |= (1<<3);
-                     R8_GPIO_INT_FLAG = (1<<3);
-                     R8_GPIO_INT_ENABLE |= (1<<3);
-                    }
-                    else if(pin==4)
-                    {
-                    R32_PB_DIR &= ~(1<<4);
-                    R8_GPIO_INT_MODE |= (1<<4);
-                    R8_GPIO_INT_POLAR |= (1<<4);
-                    R8_GPIO_INT_FLAG = (1<<4);
-                    R8_GPIO_INT_ENABLE |= (1<<4);
-                    }
-                    else if(pin==11)
-                    {
-                    R32_PB_DIR &= ~(1<<11);
-                    R8_GPIO_INT_MODE |= (1<<5);
-                    R8_GPIO_INT_POLAR |= (1<<5);
-                    R8_GPIO_INT_FLAG = (1<<5);
-                    R8_GPIO_INT_ENABLE |= (1<<5);
-                    }
-                    else if(pin==12)
-                    {
-                    R32_PB_DIR &= ~(1<<12);
-                    R8_GPIO_INT_MODE |= (1<<6);
-                    R8_GPIO_INT_POLAR |= (1<<6);
-                    R8_GPIO_INT_FLAG = (1<<6);
-                    R8_GPIO_INT_ENABLE |= (1<<6);
-                    }
-                    else if(pin==15)
-                    {
-                    R32_PB_DIR &= ~(1<<15);
-                    R8_GPIO_INT_MODE |= (1<<7);
-                    R8_GPIO_INT_POLAR |= (1<<7);
-                    R8_GPIO_INT_FLAG = (1<<7);
-                    R8_GPIO_INT_ENABLE |= (1<<7);
-                    }
-             break;
+		case GPIO_ITMode_RiseEdge:		// 上升沿触发
+			if(pin==3)
+			{
+				R32_PB_DIR &= ~(1<<3);
+				R8_GPIO_INT_MODE |= (1<<3);
+				R8_GPIO_INT_POLAR |= (1<<3);
+				R8_GPIO_INT_FLAG = (1<<3);
+				R8_GPIO_INT_ENABLE |= (1<<3);
+			}
+			else if(pin==4)
+			{
+				R32_PB_DIR &= ~(1<<4);
+				R8_GPIO_INT_MODE |= (1<<4);
+				R8_GPIO_INT_POLAR |= (1<<4);
+				R8_GPIO_INT_FLAG = (1<<4);
+				R8_GPIO_INT_ENABLE |= (1<<4);
+			}
+			else if(pin==11)
+			{
+				R32_PB_DIR &= ~(1<<11);
+				R8_GPIO_INT_MODE |= (1<<5);
+				R8_GPIO_INT_POLAR |= (1<<5);
+				R8_GPIO_INT_FLAG = (1<<5);
+				R8_GPIO_INT_ENABLE |= (1<<5);
+			}
+			else if(pin==12)
+			{
+				R32_PB_DIR &= ~(1<<12);
+				R8_GPIO_INT_MODE |= (1<<6);
+				R8_GPIO_INT_POLAR |= (1<<6);
+				R8_GPIO_INT_FLAG = (1<<6);
+				R8_GPIO_INT_ENABLE |= (1<<6);
+			}
+			else if(pin==15)
+			{
+				R32_PB_DIR &= ~(1<<15);
+				R8_GPIO_INT_MODE |= (1<<7);
+				R8_GPIO_INT_POLAR |= (1<<7);
+				R8_GPIO_INT_FLAG = (1<<7);
+				R8_GPIO_INT_ENABLE |= (1<<7);
+			}
+			break;
 
-        default :
-        break;
-    }
+		default :
+			break;
+	}
 }
 
 /*******************************************************************************
@@ -486,8 +486,8 @@ void GPIOB_ITModeCfg( UINT32 pin, GPIOITModeTpDef mode )
  */
 void GPIOPinRemap( UINT8 s, UINT16 perph )
 {
-    if( s )     R8_PIN_ALTERNATE |= perph;
-    else        R8_PIN_ALTERNATE &= ~perph;
+	if( s )     R8_PIN_ALTERNATE |= perph;
+	else        R8_PIN_ALTERNATE &= ~perph;
 }
 
 /*******************************************************************************

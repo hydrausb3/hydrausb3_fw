@@ -138,7 +138,8 @@ int main()
 			*p32_txdma++ = data;
 			data += 0x01010101;
 			n++;
-		}while(n!=(2048/4));
+		}
+		while(n!=(2048/4));
 
 		log_printf("Wait 100us\n"); /* Wait 100us RX is ready before to TX */
 		bsp_wait_us_delay(100);
@@ -165,7 +166,8 @@ int main()
 					{
 						*p32_txdma++ = data;
 						n++;
-					}while(n!=(8/4));
+					}
+					while(n!=(8/4));
 					SerDes_DMA_Tx_CFG(TX_DMA_addr,8,SERDES_CUSTOM_NUMBER);
 					state = 2;
 				}
@@ -177,7 +179,8 @@ int main()
 					{
 						*p32_txdma++ = data;
 						n++;
-					}while(n!=(16/4));
+					}
+					while(n!=(16/4));
 					SerDes_DMA_Tx_CFG(TX_DMA_addr,16,SERDES_CUSTOM_NUMBER);
 					state = 3;
 				}
@@ -189,7 +192,8 @@ int main()
 					{
 						*p32_txdma++ = data;
 						n++;
-					}while(n!=(64/4));
+					}
+					while(n!=(64/4));
 					SerDes_DMA_Tx_CFG(TX_DMA_addr,64,SERDES_CUSTOM_NUMBER);
 					state = 4;
 				}
@@ -201,7 +205,8 @@ int main()
 					{
 						*p32_txdma++ = data;
 						n++;
-					}while(n!=(128/4));
+					}
+					while(n!=(128/4));
 					SerDes_DMA_Tx_CFG(TX_DMA_addr,128,SERDES_CUSTOM_NUMBER);
 					state = 5;
 				}
@@ -213,7 +218,8 @@ int main()
 					{
 						*p32_txdma++ = data;
 						n++;
-					}while(n!=(512/4));
+					}
+					while(n!=(512/4));
 					SerDes_DMA_Tx_CFG(TX_DMA_addr,512,SERDES_CUSTOM_NUMBER);
 					state = 6;
 				}
@@ -225,7 +231,8 @@ int main()
 					{
 						*p32_txdma++ = data;
 						n++;
-					}while(n!=(576/4));
+					}
+					while(n!=(576/4));
 					SerDes_DMA_Tx_CFG(TX_DMA_addr,576,SERDES_CUSTOM_NUMBER);
 					state = 7;
 				}
@@ -237,7 +244,8 @@ int main()
 					{
 						*p32_txdma++ = data;
 						n++;
-					}while(n!=(1024/4));
+					}
+					while(n!=(1024/4));
 					SerDes_DMA_Tx_CFG(TX_DMA_addr,1024,SERDES_CUSTOM_NUMBER);
 					state = 8;
 				}
@@ -249,7 +257,8 @@ int main()
 					{
 						*p32_txdma++ = data;
 						n++;
-					}while(n!=(2048/4));
+					}
+					while(n!=(2048/4));
 					SerDes_DMA_Tx_CFG(TX_DMA_addr,2048,SERDES_CUSTOM_NUMBER);
 					state = 9;
 				}
@@ -262,7 +271,8 @@ int main()
 						*p32_txdma++ = data;
 						data += 0x01010101;
 						n++;
-					}while(n!=(2048/4));
+					}
+					while(n!=(2048/4));
 					SerDes_DMA_Tx_CFG(TX_DMA_addr,2048,SERDES_CUSTOM_NUMBER);
 					state = 10;
 				}
@@ -274,7 +284,8 @@ int main()
 						*p32_txdma++ = data;
 						data += 0x10101010;
 						n++;
-					}while(n!=(2048/4));
+					}
+					while(n!=(2048/4));
 					SerDes_DMA_Tx_CFG(TX_DMA_addr,2048,SERDES_CUSTOM_NUMBER);
 					state = 11;
 				}
@@ -286,7 +297,8 @@ int main()
 						*p32_txdma++ = data;
 						data += 0x10101010;
 						n++;
-					}while(n!=(4096/4));
+					}
+					while(n!=(4096/4));
 					SerDes_DMA_Tx_CFG(TX_DMA_addr,4096,SERDES_CUSTOM_NUMBER);
 					state = 12;
 				}
@@ -298,7 +310,8 @@ int main()
 						*p32_txdma++ = data;
 						data += 0x10101010;
 						n++;
-					}while(n!=(4096/4));
+					}
+					while(n!=(4096/4));
 					SerDes_DMA_Tx_CFG(TX_DMA_addr,4096,SERDES_CUSTOM_NUMBER);
 					state = 0;
 				}
@@ -329,7 +342,8 @@ int main()
 					*p32_txdma++ = data;
 					data += 0x10101010;
 					n++;
-				}while(n!=(4096/4));
+				}
+				while(n!=(4096/4));
 				SerDes_DMA_Tx_CFG(TX_DMA_addr,4096,SERDES_CUSTOM_NUMBER);
 
 				while(hydrausb3_ubtn())
@@ -349,13 +363,14 @@ int main()
 			}
 			bsp_wait_ms_delay(2000);
 		} // loop while(1)
-	}else  // SerDes RX
+	}
+	else   // SerDes RX
 	{
 		PFIC_EnableIRQ(INT_ID_SERDES);
 
 		log_printf("SerDes_DoubleDMA_Rx_CFG() Before\n");
 		log_printf("RX_DMA0_addr=0x%08X RX_DMA1_addr=0x%08X\n", RX_DMA0_addr, RX_DMA1_addr);
-		SerDes_DoubleDMA_Rx_CFG(RX_DMA0_addr ,RX_DMA1_addr);
+		SerDes_DoubleDMA_Rx_CFG(RX_DMA0_addr,RX_DMA1_addr);
 		log_printf("SerDes_DoubleDMA_Rx_CFG() After\n");
 
 		log_printf("SerDes_Rx_Init(SERDES_TX_RX_SPEED=0x%04X) Before\n", SERDES_TX_RX_SPEED);
@@ -378,7 +393,7 @@ int main()
 				SDS_RX_LEN0 = SDS->SDS_RX_LEN0;
 				SDS_RX_LEN1 = SDS->SDS_RX_LEN1;
 				if( (SDS_STATUS[0] & SDS_RX_CRC_OK) &&
-					(SDS_STATUS[1] & SDS_RX_CRC_OK))
+						(SDS_STATUS[1] & SDS_RX_CRC_OK))
 				{
 					RX_CRC_OK = 1;
 				}
@@ -391,26 +406,28 @@ int main()
 				{
 					d = (uint32_t *)(RX_DMA0_addr);
 					log_printf("%08X\n",
-							d[0], d[1]);
+							   d[0], d[1]);
 					d = (uint32_t *)(RX_DMA1_addr);
 					log_printf("%08X\n",
-							d[0], d[1]);
-				}else if (SDS_RX_LEN0 <= 8)
+							   d[0], d[1]);
+				}
+				else if (SDS_RX_LEN0 <= 8)
 				{
 					d = (uint32_t *)(RX_DMA0_addr);
 					log_printf("%08X %08X\n",
-							d[0], d[1]);
+							   d[0], d[1]);
 					d = (uint32_t *)(RX_DMA1_addr);
 					log_printf("%08X %08X\n",
-							d[0], d[1]);
-				}else if (SDS_RX_LEN0 <= 16)
+							   d[0], d[1]);
+				}
+				else if (SDS_RX_LEN0 <= 16)
 				{
 					d = (uint32_t *)(RX_DMA0_addr);
 					log_printf("%08X %08X %08X %08X\n",
-							d[0], d[1], d[2], d[3]);
+							   d[0], d[1], d[2], d[3]);
 					d = (uint32_t *)(RX_DMA1_addr);
 					log_printf("%08X %08X %08X %08X\n",
-							d[0], d[1], d[2], d[3]);
+							   d[0], d[1], d[2], d[3]);
 				}
 				else
 				{
@@ -418,12 +435,12 @@ int main()
 					{
 						d = (uint32_t *)(RX_DMA0_addr+4*i);
 						log_printf("%08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X\n",
-								d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7],
-								d[8], d[9], d[10], d[11], d[12], d[13], d[14], d[15]);
+								   d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7],
+								   d[8], d[9], d[10], d[11], d[12], d[13], d[14], d[15]);
 						d = (uint32_t *)(RX_DMA1_addr+4*i);
 						log_printf("%08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X %08X\n",
-								d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7],
-								d[8], d[9], d[10], d[11], d[12], d[13], d[14], d[15]);
+								   d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7],
+								   d[8], d[9], d[10], d[11], d[12], d[13], d[14], d[15]);
 					}
 				}
 			}
@@ -451,7 +468,8 @@ void SERDES_IRQHandler (void)
 			CNT_S = bsp_get_SysTickCNT_LSB();
 #endif
 			SDS_STATUS[0] = sds_it_status;
-		}else if(k == 1)
+		}
+		else if(k == 1)
 		{
 #ifdef CNT_64BITS
 			CNT_E = bsp_get_SysTickCNT();

@@ -20,7 +20,7 @@
  **/
 void hydrausb3_gpio_init(void)
 {
-	#define GPIOA_Pins (GPIO_Pin_All & ~(GPIO_Pin_7 | GPIO_Pin_8) ) /* All GPIOA except Pin7 & Pin8 used by UART1 */
+#define GPIOA_Pins (GPIO_Pin_All & ~(GPIO_Pin_7 | GPIO_Pin_8) ) /* All GPIOA except Pin7 & Pin8 used by UART1 */
 
 	/* Configure all GPIO to safe state Input Floating */
 	GPIOA_ModeCfg(GPIOA_Pins, GPIO_ModeIN_Floating);

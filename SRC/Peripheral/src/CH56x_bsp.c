@@ -114,7 +114,7 @@ inline uint64_t bsp_get_SysTickCNT(void)
 		uint32_t lo = SysTickU32->CNT_LSB;
 		if (hi == SysTickU32->CNT_MSB)
 		{
-		  return ( ((uint64_t)(hi) << 32) | (uint64_t)(lo) );
+			return ( ((uint64_t)(hi) << 32) | (uint64_t)(lo) );
 		}
 	}
 	/*
@@ -146,7 +146,7 @@ inline uint64_t bsp_get_tick(void)
 		uint32_t lo = SysTickU32->CNT_LSB;
 		if (hi == SysTickU32->CNT_MSB)
 		{
-		  return ( ~(((uint64_t)(hi) << 32) | (uint64_t)(lo)) ); // Invert the value at end
+			return ( ~(((uint64_t)(hi) << 32) | (uint64_t)(lo)) ); // Invert the value at end
 		}
 	}
 }

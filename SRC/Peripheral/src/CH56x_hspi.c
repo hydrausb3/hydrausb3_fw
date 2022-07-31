@@ -32,8 +32,8 @@
  * @return   None
  */
 void HSPI_DoubleDMA_Init(HSPI_ModeTypeDef mode_type, uint8_t mode_data,
-		uint32_t DMA0_addr , uint32_t DMA1_addr,
-		uint16_t DMA_addr_len)
+						 uint32_t DMA0_addr, uint32_t DMA1_addr,
+						 uint16_t DMA_addr_len)
 {
 	/* HSPI GPIO configuration */
 	// TX GPIO PA9/PA11/PA21 Push-pull output
@@ -64,7 +64,8 @@ void HSPI_DoubleDMA_Init(HSPI_ModeTypeDef mode_type, uint8_t mode_data,
 		R8_HSPI_CFG |= RB_HSPI_TX_TOG_EN;
 	}
 	else
-	{ // HSPI_DEVICE
+	{
+		// HSPI_DEVICE
 		R8_HSPI_CFG |= RB_HSPI_RX_TOG_EN;
 	}
 
@@ -93,7 +94,8 @@ void HSPI_DoubleDMA_Init(HSPI_ModeTypeDef mode_type, uint8_t mode_data,
 		R8_HSPI_INT_EN |= RB_HSPI_IE_FIFO_OV;
 	}
 	else
-	{ // HSPI_DEVICE
+	{
+		// HSPI_DEVICE
 		R8_HSPI_INT_EN |= RB_HSPI_IE_R_DONE;  // Single packet reception completed
 		R8_HSPI_INT_EN |= RB_HSPI_IE_FIFO_OV;
 	}
@@ -168,7 +170,8 @@ void HSPI_DMA_Tx_CFG(uint32_t DMAaddr, uint32_t Tx_len)
 	do
 	{
 		hspi_int_status = R8_HSPI_INT_FLAG;
-	} while ( !(hspi_int_status & RB_HSPI_IF_T_DONE) );
+	}
+	while ( !(hspi_int_status & RB_HSPI_IF_T_DONE) );
 	R8_HSPI_INT_FLAG = RB_HSPI_IF_T_DONE; // Clear Interrupt
 
 	// addr0 DMA TX RX addr
@@ -203,6 +206,7 @@ void HSPI_Wait_Txdone(void)
 	do
 	{
 		hspi_int_status = R8_HSPI_INT_FLAG;
-	} while(!(hspi_int_status & RB_HSPI_IF_T_DONE));
+	}
+	while(!(hspi_int_status & RB_HSPI_IF_T_DONE));
 	R8_HSPI_INT_FLAG = RB_HSPI_IF_T_DONE; // Clear Interrupt
 }

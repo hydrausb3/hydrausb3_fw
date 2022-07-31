@@ -99,7 +99,8 @@ int main()
 	{
 		is_HostBoard = TRUE;
 		i = hydrausb3_sync2boards(PA14, PA12, HYDRAUSB3_HOST);
-	}else
+	}
+	else
 	{
 		is_HostBoard = FALSE;
 		i = hydrausb3_sync2boards(PA14, PA12, HYDRAUSB3_DEVICE);
@@ -117,7 +118,8 @@ int main()
 	if(is_HostBoard == FALSE)
 	{
 		log_printf("HSPI_Tx 2022/07/30 @ChipID=%02X\n", R8_CHIP_ID );
-	}else
+	}
+	else
 	{
 		log_printf("HSPI_Rx 2022/07/30 @ChipID=%02X\n", R8_CHIP_ID );
 	}
@@ -132,7 +134,7 @@ int main()
 		// Write RAMX
 		for(i = 0; i < 8192; i++) // 8192*4 = 32K
 		{
-		  *(UINT32*)(0x20020000+i*4) = (i + 0x55555555);
+			*(UINT32*)(0x20020000+i*4) = (i + 0x55555555);
 		}
 
 		log_printf("Wait 100us\n"); /* Wait 100us RX is ready before to TX */
@@ -158,7 +160,7 @@ int main()
 				// Write RAMX
 				for(i=0; i<8192; i++) // 8192*4 = 32K
 				{
-				  *(UINT32*)(0x20020000+i*4) = i + 0x55555555;
+					*(UINT32*)(0x20020000+i*4) = i + 0x55555555;
 				}
 				log_printf("Start Tx 32K\n");
 				HSPI_DMA_Tx();
@@ -177,17 +179,18 @@ int main()
 			ULED_OFF();
 			bsp_wait_ms_delay(blink_ms);
 		}
-	} else // DEVICE RX mode
+	}
+	else   // DEVICE RX mode
 	{
 		log_printf("HSPI Dev Data_Size=%d\n", Data_Size);
 
 		log_printf("Clear RAMX 32K\n");
 		for(i = 0; i < 8192; i++) // 8192*4 = 32K
 		{
-		  *(uint32_t*)(0x20020000+i*4) = 0;
+			*(uint32_t*)(0x20020000+i*4) = 0;
 		}
 		log_printf("DMA_RX_Addr0[0]=0x%08X [8191]=0x%08X\n",
-				((uint32_t*)RX_DMA_Addr0)[0], ((uint32_t*)RX_DMA_Addr0)[8191]);
+				   ((uint32_t*)RX_DMA_Addr0)[0], ((uint32_t*)RX_DMA_Addr0)[8191]);
 
 		Rx_End_Flag = 0;  // Receive completion flag
 		Rx_End_Err = 0; // 0=No Error else >0 Error code
@@ -208,18 +211,18 @@ int main()
 				//verify
 				for(i = 0; i < 8192; i++) // 8192*4 = 32K
 				{
-				  uint32_t val_u32;
-				  val_u32 = *(UINT32*)(0x20020000+i*4);
-				  if(val_u32 != (i + 0x55555555))
-				  {
-					Rx_Verify_Flag = 1;
-					log_printf("Verify err Rx_End_Err=%d\n", Rx_End_Err);
-					log_printf("Err addr=0x%08X val=0x%08X expected val=0x%08X\n",
-							(0x20020000+i*4),
-							val_u32,
-							(i + 0x55555555));
-					break;
-				  }
+					uint32_t val_u32;
+					val_u32 = *(UINT32*)(0x20020000+i*4);
+					if(val_u32 != (i + 0x55555555))
+					{
+						Rx_Verify_Flag = 1;
+						log_printf("Verify err Rx_End_Err=%d\n", Rx_End_Err);
+						log_printf("Err addr=0x%08X val=0x%08X expected val=0x%08X\n",
+								   (0x20020000+i*4),
+								   val_u32,
+								   (i + 0x55555555));
+						break;
+					}
 				}
 			}
 			else
@@ -231,10 +234,11 @@ int main()
 			{
 				log_printf("Verify suc\n");
 				log_printf("DMA_RX_Addr0[0]=0x%08X [8191]=0x%08X\n",
-						((uint32_t*)RX_DMA_Addr0)[0], ((uint32_t*)RX_DMA_Addr0)[8191]);
+						   ((uint32_t*)RX_DMA_Addr0)[0], ((uint32_t*)RX_DMA_Addr0)[8191]);
 			}
 			else
-			{ // Error reset Rx_Verify_Flag
+			{
+				// Error reset Rx_Verify_Flag
 				Rx_Verify_Flag = 0;
 				log_printf("HSPI_Init\n");
 				HSPI_DoubleDMA_Init(HSPI_DEVICE, RB_HSPI_DAT32_MOD, RX_DMA_Addr0, RX_DMA_Addr1, 0);
@@ -243,10 +247,10 @@ int main()
 			log_printf("Clear RAMX 32K\n");
 			for(i=0; i<8192; i++) // 8192*4 = 32K
 			{
-			  *(UINT32*)(0x20020000+i*4) = 0;
+				*(UINT32*)(0x20020000+i*4) = 0;
 			}
 			log_printf("DMA_RX_Addr0[0]=0x%08X [8191]=0x%08X\n",
-					((uint32_t*)RX_DMA_Addr0)[0], ((uint32_t*)RX_DMA_Addr0)[8191]);
+					   ((uint32_t*)RX_DMA_Addr0)[0], ((uint32_t*)RX_DMA_Addr0)[8191]);
 
 			Rx_End_Err = 0;
 			Rx_End_Flag = 0;
@@ -286,9 +290,12 @@ void HSPI_IRQHandler(void)
 			// log_printf("Tx_Cnt=%d addr_cnt=%d\r\n", Tx_Cnt, addr_cnt);
 			if(Tx_Cnt<64) // Send 32K (64*512 bytes)
 			{
-				if(addr_cnt%2){
+				if(addr_cnt%2)
+				{
 					R32_HSPI_TX_ADDR0 += DMA_Tx_Len0*2;
-				} else {
+				}
+				else
+				{
 					R32_HSPI_TX_ADDR1 += DMA_Tx_Len0*2;
 				}
 				// bsp_wait_us_delay(1); // Send Data each 1us (to let time to the Device/Receiver to retrieve the packet)
@@ -310,7 +317,7 @@ void HSPI_IRQHandler(void)
 	if(R8_HSPI_INT_FLAG & RB_HSPI_IF_R_DONE) // Single packet reception completed
 	{
 		ULED_ON();
-	    //log_printf("R8_HSPI_INT_FLAG=0x%02X\n", R8_HSPI_INT_FLAG);
+		//log_printf("R8_HSPI_INT_FLAG=0x%02X\n", R8_HSPI_INT_FLAG);
 		R8_HSPI_INT_FLAG = RB_HSPI_IF_R_DONE;  // Clear Interrupt
 
 		// The CRC is correct, the received serial number matches (data is received correctly)
@@ -328,15 +335,18 @@ void HSPI_IRQHandler(void)
 				{
 					R32_HSPI_RX_ADDR1 += 512*2;
 				}
-			} else
-			{ // Receive completed
+			}
+			else
+			{
+				// Receive completed
 				HSPI_IRQHandler_ReInitRX();
 				Rx_End_Flag = 1;
 			}
 		}
 		// Determine whether the CRC is correct
 		if(R8_HSPI_RTX_STATUS & RB_HSPI_CRC_ERR)
-		{  // CRC check err
+		{
+			// CRC check err
 			// R8_HSPI_CTRL &= ~RB_HSPI_ENABLE;
 			log_printf("CRC err\n");
 			HSPI_IRQHandler_ReInitRX();
@@ -345,7 +355,8 @@ void HSPI_IRQHandler(void)
 		}
 		// Whether the received serial number matches, (does not match, modify the packet serial number)
 		if(R8_HSPI_RTX_STATUS & RB_HSPI_NUM_MIS)
-		{  // Mismatch
+		{
+			// Mismatch
 			log_printf("NUM_MIS err\n");
 			HSPI_IRQHandler_ReInitRX();
 			Rx_End_Err |= 2;

@@ -3,7 +3,7 @@
 * Author             : WCH
 * Version            : V1.0
 * Date               : 2020/07/31
-* Description 
+* Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
@@ -22,9 +22,9 @@
  */
 void TMR0_TimerInit( UINT32 t )
 {
-    R32_TMR0_CNT_END = t;
-    R8_TMR0_CTRL_MOD = RB_TMR_ALL_CLEAR;
-    R8_TMR0_CTRL_MOD = RB_TMR_COUNT_EN | RB_TMR_CAP_COUNT;
+	R32_TMR0_CNT_END = t;
+	R8_TMR0_CTRL_MOD = RB_TMR_ALL_CLEAR;
+	R8_TMR0_CTRL_MOD = RB_TMR_COUNT_EN | RB_TMR_CAP_COUNT;
 }
 
 /*******************************************************************************
@@ -38,9 +38,9 @@ void TMR0_TimerInit( UINT32 t )
  */
 void TMR1_TimerInit( UINT32 t )
 {
-    R32_TMR1_CNT_END = t;
-    R8_TMR1_CTRL_MOD = RB_TMR_ALL_CLEAR;
-    R8_TMR1_CTRL_MOD = RB_TMR_COUNT_EN | RB_TMR_CAP_COUNT;
+	R32_TMR1_CNT_END = t;
+	R8_TMR1_CTRL_MOD = RB_TMR_ALL_CLEAR;
+	R8_TMR1_CTRL_MOD = RB_TMR_COUNT_EN | RB_TMR_CAP_COUNT;
 }
 
 /*******************************************************************************
@@ -54,9 +54,9 @@ void TMR1_TimerInit( UINT32 t )
  */
 void TMR2_TimerInit( UINT32 t )
 {
-    R32_TMR2_CNT_END = t;
-    R8_TMR2_CTRL_MOD = RB_TMR_ALL_CLEAR;
-    R8_TMR2_CTRL_MOD = RB_TMR_COUNT_EN | RB_TMR_CAP_COUNT;
+	R32_TMR2_CNT_END = t;
+	R8_TMR2_CTRL_MOD = RB_TMR_ALL_CLEAR;
+	R8_TMR2_CTRL_MOD = RB_TMR_COUNT_EN | RB_TMR_CAP_COUNT;
 }
 
 /*******************************************************************************
@@ -70,9 +70,9 @@ void TMR2_TimerInit( UINT32 t )
  */
 void TMR0_EXTSignalCounterInit( UINT32 c )
 {
-    R32_TMR0_CNT_END = c;
-    R8_TMR0_CTRL_MOD = RB_TMR_ALL_CLEAR;
-    R8_TMR0_CTRL_MOD = RB_TMR_CAP_COUNT|RB_TMR_MODE_IN|RB_TMR_COUNT_EN;
+	R32_TMR0_CNT_END = c;
+	R8_TMR0_CTRL_MOD = RB_TMR_ALL_CLEAR;
+	R8_TMR0_CTRL_MOD = RB_TMR_CAP_COUNT|RB_TMR_MODE_IN|RB_TMR_COUNT_EN;
 }
 
 /*******************************************************************************
@@ -86,9 +86,9 @@ void TMR0_EXTSignalCounterInit( UINT32 c )
  */
 void TMR1_EXTSignalCounterInit( UINT32 c )
 {
-    R32_TMR1_CNT_END = c;
-    R8_TMR1_CTRL_MOD = RB_TMR_ALL_CLEAR;
-    R8_TMR1_CTRL_MOD = RB_TMR_CAP_COUNT|RB_TMR_MODE_IN|RB_TMR_COUNT_EN;
+	R32_TMR1_CNT_END = c;
+	R8_TMR1_CTRL_MOD = RB_TMR_ALL_CLEAR;
+	R8_TMR1_CTRL_MOD = RB_TMR_CAP_COUNT|RB_TMR_MODE_IN|RB_TMR_COUNT_EN;
 }
 
 /*******************************************************************************
@@ -102,9 +102,9 @@ void TMR1_EXTSignalCounterInit( UINT32 c )
  */
 void TMR2_EXTSignalCounterInit( UINT32 c )
 {
-    R32_TMR2_CNT_END = c;
-    R8_TMR2_CTRL_MOD = RB_TMR_ALL_CLEAR;
-    R8_TMR2_CTRL_MOD = RB_TMR_CAP_COUNT|RB_TMR_MODE_IN|RB_TMR_COUNT_EN;
+	R32_TMR2_CNT_END = c;
+	R8_TMR2_CTRL_MOD = RB_TMR_ALL_CLEAR;
+	R8_TMR2_CTRL_MOD = RB_TMR_CAP_COUNT|RB_TMR_MODE_IN|RB_TMR_COUNT_EN;
 }
 
 /*******************************************************************************
@@ -119,11 +119,11 @@ void TMR2_EXTSignalCounterInit( UINT32 c )
  */
 void TMR0_PWMInit( PWM_PolarTypeDef pr, PWM_RepeatTsTypeDef ts )
 {
-    R8_TMR0_CTRL_MOD = RB_TMR_ALL_CLEAR;
-    R8_TMR0_CTRL_MOD = RB_TMR_COUNT_EN
-                        |RB_TMR_OUT_EN
-                        |(pr<<4)
-                        |(ts<<6);
+	R8_TMR0_CTRL_MOD = RB_TMR_ALL_CLEAR;
+	R8_TMR0_CTRL_MOD = RB_TMR_COUNT_EN
+					   |RB_TMR_OUT_EN
+					   |(pr<<4)
+					   |(ts<<6);
 }
 
 /*******************************************************************************
@@ -138,11 +138,11 @@ void TMR0_PWMInit( PWM_PolarTypeDef pr, PWM_RepeatTsTypeDef ts )
  */
 void TMR1_PWMInit( PWM_PolarTypeDef pr, PWM_RepeatTsTypeDef ts )
 {
-    R8_TMR1_CTRL_MOD = RB_TMR_ALL_CLEAR;
-    R8_TMR1_CTRL_MOD = RB_TMR_COUNT_EN
-                        |RB_TMR_OUT_EN
-                        |(pr<<4)
-                        |(ts<<6);
+	R8_TMR1_CTRL_MOD = RB_TMR_ALL_CLEAR;
+	R8_TMR1_CTRL_MOD = RB_TMR_COUNT_EN
+					   |RB_TMR_OUT_EN
+					   |(pr<<4)
+					   |(ts<<6);
 }
 
 /*******************************************************************************
@@ -157,11 +157,11 @@ void TMR1_PWMInit( PWM_PolarTypeDef pr, PWM_RepeatTsTypeDef ts )
  */
 void TMR2_PWMInit( PWM_PolarTypeDef pr, PWM_RepeatTsTypeDef ts )
 {
-    R8_TMR2_CTRL_MOD = RB_TMR_ALL_CLEAR;
-    R8_TMR2_CTRL_MOD = RB_TMR_COUNT_EN
-                        |RB_TMR_OUT_EN
-                        |(pr<<4)
-                        |(ts<<6);
+	R8_TMR2_CTRL_MOD = RB_TMR_ALL_CLEAR;
+	R8_TMR2_CTRL_MOD = RB_TMR_COUNT_EN
+					   |RB_TMR_OUT_EN
+					   |(pr<<4)
+					   |(ts<<6);
 }
 
 /*******************************************************************************
@@ -175,10 +175,10 @@ void TMR2_PWMInit( PWM_PolarTypeDef pr, PWM_RepeatTsTypeDef ts )
  */
 void TMR0_CapInit( CapModeTypeDef cap )
 {
-        R8_TMR0_CTRL_MOD = RB_TMR_ALL_CLEAR;
-        R8_TMR0_CTRL_MOD = RB_TMR_COUNT_EN      \
-                            |RB_TMR_MODE_IN     \
-                            |(cap<<6);
+	R8_TMR0_CTRL_MOD = RB_TMR_ALL_CLEAR;
+	R8_TMR0_CTRL_MOD = RB_TMR_COUNT_EN      \
+					   |RB_TMR_MODE_IN     \
+					   |(cap<<6);
 }
 
 /*******************************************************************************
@@ -192,10 +192,10 @@ void TMR0_CapInit( CapModeTypeDef cap )
  */
 void TMR1_CapInit( CapModeTypeDef cap )
 {
-        R8_TMR1_CTRL_MOD = RB_TMR_ALL_CLEAR;
-        R8_TMR1_CTRL_MOD = RB_TMR_COUNT_EN      \
-                            |RB_TMR_MODE_IN     \
-                            |(cap<<6);
+	R8_TMR1_CTRL_MOD = RB_TMR_ALL_CLEAR;
+	R8_TMR1_CTRL_MOD = RB_TMR_COUNT_EN      \
+					   |RB_TMR_MODE_IN     \
+					   |(cap<<6);
 }
 
 /*******************************************************************************
@@ -209,10 +209,10 @@ void TMR1_CapInit( CapModeTypeDef cap )
  */
 void TMR2_CapInit( CapModeTypeDef cap )
 {
-     R8_TMR2_CTRL_MOD = RB_TMR_ALL_CLEAR;
-     R8_TMR2_CTRL_MOD = RB_TMR_COUNT_EN      \
-                         |RB_TMR_MODE_IN     \
-                         |(cap<<6);
+	R8_TMR2_CTRL_MOD = RB_TMR_ALL_CLEAR;
+	R8_TMR2_CTRL_MOD = RB_TMR_COUNT_EN      \
+					   |RB_TMR_MODE_IN     \
+					   |(cap<<6);
 }
 
 /*******************************************************************************
@@ -228,15 +228,17 @@ void TMR2_CapInit( CapModeTypeDef cap )
  **/
 void TMR1_DMACfg( UINT8 s, UINT16 startAddr, UINT16 endAddr, DMAModeTypeDef m )
 {
-        if(s == DISABLE){
-            R8_TMR1_CTRL_DMA = 0;
-        }
-        else{
-            if(m)   R8_TMR1_CTRL_DMA = RB_TMR_DMA_LOOP|RB_TMR_DMA_ENABLE;
-            else    R8_TMR1_CTRL_DMA = RB_TMR_DMA_ENABLE;
-            R32_TMR1_DMA_BEG = startAddr;
-            R32_TMR1_DMA_END = endAddr;
-        }
+	if(s == DISABLE)
+	{
+		R8_TMR1_CTRL_DMA = 0;
+	}
+	else
+	{
+		if(m)   R8_TMR1_CTRL_DMA = RB_TMR_DMA_LOOP|RB_TMR_DMA_ENABLE;
+		else    R8_TMR1_CTRL_DMA = RB_TMR_DMA_ENABLE;
+		R32_TMR1_DMA_BEG = startAddr;
+		R32_TMR1_DMA_END = endAddr;
+	}
 }
 
 /*******************************************************************************
@@ -253,15 +255,17 @@ void TMR1_DMACfg( UINT8 s, UINT16 startAddr, UINT16 endAddr, DMAModeTypeDef m )
 
 void TMR2_DMACfg( UINT8 s, UINT16 startAddr, UINT16 endAddr, DMAModeTypeDef m )
 {
-        if(s == DISABLE){
-            R8_TMR2_CTRL_DMA = 0;
-        }
-        else{
-            if(m)   R8_TMR2_CTRL_DMA = RB_TMR_DMA_LOOP|RB_TMR_DMA_ENABLE;
-            else    R8_TMR2_CTRL_DMA = RB_TMR_DMA_ENABLE;
-            R32_TMR2_DMA_BEG = startAddr;
-            R32_TMR2_DMA_END = endAddr;
-        }
+	if(s == DISABLE)
+	{
+		R8_TMR2_CTRL_DMA = 0;
+	}
+	else
+	{
+		if(m)   R8_TMR2_CTRL_DMA = RB_TMR_DMA_LOOP|RB_TMR_DMA_ENABLE;
+		else    R8_TMR2_CTRL_DMA = RB_TMR_DMA_ENABLE;
+		R32_TMR2_DMA_BEG = startAddr;
+		R32_TMR2_DMA_END = endAddr;
+	}
 }
 
 

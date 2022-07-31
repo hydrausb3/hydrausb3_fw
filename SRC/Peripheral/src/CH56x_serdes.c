@@ -37,7 +37,8 @@ void SerDes_Tx_Init(e_sds_pll_freq SDS_PLL_FREQ)
 	do
 	{
 		sds_status = SDS->SDS_STATUS;
-	} while ( !(sds_status & SDS_PLL_READY) );
+	}
+	while ( !(sds_status & SDS_PLL_READY) );
 
 	bsp_wait_us_delay(1);
 
@@ -57,7 +58,8 @@ void SerDes_Tx_Init(e_sds_pll_freq SDS_PLL_FREQ)
 	do
 	{
 		sds_status = SDS->SDS_STATUS;
-	} while(!(sds_status & SDS_TX_READY));
+	}
+	while(!(sds_status & SDS_TX_READY));
 }
 
 /*******************************************************************************
@@ -91,7 +93,8 @@ void SerDes_Rx_Init(e_sds_pll_freq SDS_PLL_FREQ)
 	do
 	{
 		sds_status = SDS->SDS_STATUS;
-	} while(!(sds_status & SDS_PLL_READY));
+	}
+	while(!(sds_status & SDS_PLL_READY));
 
 	bsp_wait_us_delay(1);
 
@@ -115,7 +118,8 @@ void SerDes_DMA_Tx_CFG(uint32_t DMAaddr, uint32_t Tx_len, uint32_t custom_number
 	do
 	{
 		sds_status = SDS->SDS_STATUS;
-	} while(!(sds_status & SDS_TX_READY));
+	}
+	while(!(sds_status & SDS_TX_READY));
 
 	SDS->SDS_DMA0 = DMAaddr;
 	SDS->SDS_RTX_CTRL = Tx_len;
@@ -134,7 +138,8 @@ void SerDes_DMA_Tx(void)
 	do
 	{
 		sds_status = SDS->SDS_STATUS;
-	} while(!(sds_status & SDS_TX_READY));
+	}
+	while(!(sds_status & SDS_TX_READY));
 
 	SDS->SDS_RTX_CTRL |= SDS_TX_START;
 }
@@ -153,12 +158,15 @@ void SerDes_Wait_Txdone(void)
 	do
 	{
 		sds_status = SDS->SDS_STATUS;
-	} while((sds_status & SDS_TX_INT_FLG) == 0);
+	}
+	while((sds_status & SDS_TX_INT_FLG) == 0);
 
 	SDS->SDS_RTX_CTRL &= ~SDS_TX_START;
-	do {
+	do
+	{
 		sds_rtx_ctrl = SDS->SDS_RTX_CTRL;
-	} while(sds_rtx_ctrl & SDS_TX_START);
+	}
+	while(sds_rtx_ctrl & SDS_TX_START);
 
 	/* Clear TX Interrupt Flag */
 	SDS->SDS_STATUS = SDS_TX_INT_FLG;
@@ -177,7 +185,8 @@ void SerDes_Wait_commadone(void)
 	do
 	{
 		sds_status = SDS->SDS_STATUS;
-	} while((sds_status & SDS_COMMA_INT_FLG) == 0);
+	}
+	while((sds_status & SDS_COMMA_INT_FLG) == 0);
 	SDS->SDS_STATUS = SDS_COMMA_INT_FLG;
 }
 
@@ -188,7 +197,7 @@ void SerDes_Wait_commadone(void)
 				   DMA1_addr: DMA1 starting address
 * Return         : None
 *******************************************************************************/
-void SerDes_DoubleDMA_Rx_CFG(uint32_t DMA0_addr ,uint32_t DMA1_addr)
+void SerDes_DoubleDMA_Rx_CFG(uint32_t DMA0_addr,uint32_t DMA1_addr)
 {
 	SDS->SDS_DMA0 = DMA0_addr;
 	SDS->SDS_DMA1 = DMA1_addr;

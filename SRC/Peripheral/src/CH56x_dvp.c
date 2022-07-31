@@ -3,7 +3,7 @@
 * Author             : WCH
 * Version            : V1.0
 * Date               : 2020/07/31
-* Description 
+* Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
@@ -30,12 +30,14 @@
  **/
 void DVP_INTCfg( UINT8 s,  UINT8 i )
 {
-    if(s){
-    	R8_DVP_INT_EN |= i;
-    }
-    else{
-    	R8_DVP_INT_EN &= ~i;
-    }
+	if(s)
+	{
+		R8_DVP_INT_EN |= i;
+	}
+	else
+	{
+		R8_DVP_INT_EN &= ~i;
+	}
 }
 
 /*******************************************************************************
@@ -57,19 +59,23 @@ void DVP_Mode( UINT8 s,  DVP_Data_ModeTypeDef i)
 {
 	R8_DVP_CR0 &= ~RB_DVP_MSK_DAT_MOD;   //恢复默认模式8bit模式
 
-    if(s){
-    	R8_DVP_CR0 |= s;
-    }
-    else{
-    	R8_DVP_CR0 &= ~(3<<4);
-    }
+	if(s)
+	{
+		R8_DVP_CR0 |= s;
+	}
+	else
+	{
+		R8_DVP_CR0 &= ~(3<<4);
+	}
 
-    if(i){
-    	R8_DVP_CR0 |= RB_DVP_JPEG;
-    }
-    else{
-    	R8_DVP_CR0 &= ~RB_DVP_JPEG;
-    }
+	if(i)
+	{
+		R8_DVP_CR0 |= RB_DVP_JPEG;
+	}
+	else
+	{
+		R8_DVP_CR0 &= ~RB_DVP_JPEG;
+	}
 }
 
 /*******************************************************************************
@@ -91,40 +97,40 @@ void DVP_Mode( UINT8 s,  DVP_Data_ModeTypeDef i)
  */
 void DVP_Cfg( DVP_DMATypeDef s,  DVP_FLAG_FIFO_RESETTypeDef i, DVP_RX_RESETTypeDef j)
 {
-    switch( s )
-    {
-        case DVP_DMA_Enable:
-        	R8_DVP_CR1 |= RB_DVP_DMA_EN;
-            break;
-        case DVP_DMA_Disable:
-        	R8_DVP_CR1 &= ~RB_DVP_DMA_EN;
-            break;
-        default:
-            break;
-    }
+	switch( s )
+	{
+		case DVP_DMA_Enable:
+			R8_DVP_CR1 |= RB_DVP_DMA_EN;
+			break;
+		case DVP_DMA_Disable:
+			R8_DVP_CR1 &= ~RB_DVP_DMA_EN;
+			break;
+		default:
+			break;
+	}
 
-    switch( i )
-    {
-        case DVP_RX_RESET_Enable:
-        	R8_DVP_CR1 |= RB_DVP_ALL_CLR;
-            break;
-        case DVP_RX_RESET_Disable:
-        	R8_DVP_CR1 &= ~RB_DVP_ALL_CLR;
-            break;
-        default:
-            break;
-    }
+	switch( i )
+	{
+		case DVP_RX_RESET_Enable:
+			R8_DVP_CR1 |= RB_DVP_ALL_CLR;
+			break;
+		case DVP_RX_RESET_Disable:
+			R8_DVP_CR1 &= ~RB_DVP_ALL_CLR;
+			break;
+		default:
+			break;
+	}
 
-    switch( j )
-    {
-        case DVP_RX_RESET_Enable:
-        	R8_DVP_CR1 |= RB_DVP_RCV_CLR;
-            break;
-        case DVP_RX_RESET_Disable:
-        	R8_DVP_CR1 &= ~RB_DVP_RCV_CLR;
-            break;
-        default:
-            break;
-    }
+	switch( j )
+	{
+		case DVP_RX_RESET_Enable:
+			R8_DVP_CR1 |= RB_DVP_RCV_CLR;
+			break;
+		case DVP_RX_RESET_Disable:
+			R8_DVP_CR1 &= ~RB_DVP_RCV_CLR;
+			break;
+		default:
+			break;
+	}
 
 }

@@ -1,4 +1,4 @@
- /********************************** (C) COPYRIGHT *******************************
+/********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_debug_log.c
 * Author             : bvernoux
 * Version            : V1.0
@@ -17,9 +17,9 @@
 // CH56x_DEBUG_LOG_LIBDIVIDE_SYSLCLK=120000000
 
 #ifdef CH56x_DEBUG_LOG_BASIC_TIMESTAMP
-	#ifdef CH56x_DEBUG_LOG_LIBDIVIDE_SYSLCLK
-		#error "CH56x_DEBUG_LOG_BASIC_TIMESTAMP and CH56x_DEBUG_LOG_LIBDIVIDE_SYSLCLK shall not be set together"
-	#endif
+#ifdef CH56x_DEBUG_LOG_LIBDIVIDE_SYSLCLK
+#error "CH56x_DEBUG_LOG_BASIC_TIMESTAMP and CH56x_DEBUG_LOG_LIBDIVIDE_SYSLCLK shall not be set together"
+#endif
 #endif
 
 #ifdef CH56x_DEBUG_LOG_BASIC_TIMESTAMP
@@ -93,7 +93,8 @@ void print_hex(uint8_t* data, uint16_t size)
 			if((i+1) % 16 == 0)
 			{
 				cprintf("\n");
-			} else if(i+1 == size)
+			}
+			else if(i+1 == size)
 			{
 				if((i+1) % 16 <= 8)
 				{

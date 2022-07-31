@@ -151,12 +151,13 @@ void WWDG_ClearFlag( void )
  *
  * @return   size - Data length
  **/
- __attribute__((used))
+__attribute__((used))
 int _write(int fd, char *buf, int size)
 {
 	int i;
 
-	for(i=0; i<size; i++){
+	for(i=0; i<size; i++)
+	{
 #if  DEBUG == Debug_UART0
 		while( R8_UART0_TFC == UART_FIFO_SIZE );
 		R8_UART0_THR = *buf++;
