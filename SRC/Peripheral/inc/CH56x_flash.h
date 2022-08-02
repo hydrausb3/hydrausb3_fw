@@ -19,6 +19,9 @@
 UINT8  FLASH_ROMA_ReadByte ( UINT32 addr );
 UINT32 FLASH_ROMA_ReadWord ( UINT32 addr );
 UINT8  FLASH_ROMA_WRITE    ( UINT32 StartAddr, PVOID Buffer, UINT32 Length );
+void FLASH_ROMA_ERASE_4K   ( UINT32 Addr );
+void FLASH_ROMA_ERASE_64K  ( UINT32 Addr );
+
 
 #ifdef __cplusplus
 }

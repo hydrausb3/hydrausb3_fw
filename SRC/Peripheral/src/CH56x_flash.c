@@ -123,6 +123,20 @@ static void FLASH_ROMA_WriteStart()
     FLASH_ROMA_Begin(0b10);
 }
 
+static void FLASH_ROMA_ERASE_4K_Start()
+{
+    FLASH_ROMA_Begin(ROM_BEGIN_WRITE);
+    FLASH_ROMA_AccessEnd();
+    FLASH_ROMA_Begin(0x20);
+}
+
+static void FLASH_ROMA_ERASE_64K_Start()
+{
+    FLASH_ROMA_Begin(ROM_BEGIN_WRITE);
+    FLASH_ROMA_AccessEnd();
+    FLASH_ROMA_Begin(0xd8);
+}
+
 static UINT8 FLASH_ROMA_WriteEnd()
 {
     FLASH_ROMA_AccessEnd();
@@ -201,3 +215,52 @@ UINT8 FLASH_ROMA_WRITE( UINT32 StartAddr, PVOID Buffer, UINT32 Length )
     return 1;
 }
 
+/*******************************************************************************
+ * @fn     FLASH_ROMA_ERASE_4K
+ *
+ * @brief  erase a 1kB ROM page
+ *
+ * @param  Addr - memory location to erase
+ *
+ * @return success   - 0: failure, 1: success
+ **/
+void FLASH_ROMA_ERASE_4K( UINT32 Addr )
+{
+    // rom writes need to be word aligned
+    UINT32 rom_addr = ~0xfff & Addr + ROM_ADDR_OFFSET;
+
+    if (rom_addr >= ROM_END) return 0;
+
+    FLASH_ROMA_WriteEnable();
+    FLASH_ROMA_ERASE_4K_Start();
+    FLASH_ROMA_WriteAddr(rom_addr);
+    UINT8 write_success = FLASH_ROMA_WriteEnd();
+    FLASH_ROMA_WriteDisable();
+
+    return write_success;
+}
+
+/*******************************************************************************
+ * @fn     FLASH_ROMA_ERASE_64K
+ *
+ * @brief  erase a 64kB ROM page
+ *
+ * @param  Addr - memory location to erase
+ *
+ * @return success   - 0: failure, 1: success
+ **/
+void FLASH_ROMA_ERASE_64K( UINT32 Addr )
+{
+    // rom writes need to be word aligned
+    UINT32 rom_addr = ~0xffff & Addr + ROM_ADDR_OFFSET;
+
+    if (rom_addr >= ROM_END) return 0;
+
+    FLASH_ROMA_WriteEnable();
+    FLASH_ROMA_ERASE_64K_Start();
+    FLASH_ROMA_WriteAddr(rom_addr);
+    UINT8 write_success = FLASH_ROMA_WriteEnd();
+    FLASH_ROMA_WriteDisable();
+
+    return write_success;
+}
