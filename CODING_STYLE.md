@@ -13,6 +13,7 @@ Coding Style of the project: Linux Kernel coding style see: https://www.kernel.o
 - **Do not** apply following kernel.org coding-styles (see below coding style with AStyle):
   - `1) Indentation`
   - `2) Breaking long lines and strings`
+  - `3) Placing Braces and Spaces`
 
 ### Configuration of coding style with AStyle
 
