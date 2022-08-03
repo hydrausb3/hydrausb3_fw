@@ -9,6 +9,11 @@ C code conventions
 ==================
 When writing new C code, please adhere to the following conventions.
 
+Coding Style of the project: Linux Kernel coding style see: https://www.kernel.org/doc/html/latest/process/coding-style.html
+- **Do not** apply following kernel.org coding-styles (see below coding style with AStyle):
+  - `1) Indentation`
+  - `2) Breaking long lines and strings`
+
 ### Configuration of coding style with AStyle
 
 Can be also done automatically with open source tool AStyle: http://astyle.sourceforge.net/
