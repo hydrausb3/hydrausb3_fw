@@ -16,11 +16,11 @@
 #define ROM_BEGIN_WRITE 0b0110
 #define ROM_END_WRITE   0b0101
 
-static inline void FLASH_ROMA_WaitControlRegister()
+static  void FLASH_ROMA_WaitControlRegister()
 {
     INT32 status;
     do {
-        status = (INT32)(((UINT8)R16_SPI_ROM_CR) << 24);
+        status = (INT32)(R8_SPI_ROM_CR << 24);
         status >>= 24;
     } while (status < 0);
 }
@@ -28,10 +28,10 @@ static inline void FLASH_ROMA_WaitControlRegister()
 static void FLASH_ROMA_Access(UINT8 access_code)
 {
     FLASH_ROMA_WaitControlRegister();
-    R16_SPI_ROM_CR = access_code;
+    R8_SPI_ROM_CR = access_code;
 }
 
-static inline void FLASH_ROMA_AccessEnd()
+static  void FLASH_ROMA_AccessEnd()
 {
     FLASH_ROMA_Access(0);
 }
@@ -50,8 +50,8 @@ static UINT8 FLASH_ROMA_DataRead()
 
 static void FLASH_ROMA_Begin(UINT8 begin_code)
 {
-    R16_SPI_ROM_CR   = 0;
-    R16_SPI_ROM_CR   = 0b111;
+    R8_SPI_ROM_CR    = 0;
+    R8_SPI_ROM_CR    = 0b111;
     R32_SPI_ROM_CTRL = begin_code;
 }
 
@@ -201,7 +201,7 @@ UINT8 FLASH_ROMA_WRITE( UINT32 StartAddr, PVOID Buffer, UINT32 Length )
         for (int i = 0; i < (Length >> 2); i ++)
         {
             R32_SPI_ROM_DATA = ((PUINT32)Buffer)[i];
-            UINT8 cr_value = R16_SPI_ROM_CR | 0x10;
+            UINT8 cr_value = R8_SPI_ROM_CR | 0x10;
             FLASH_ROMA_Access(cr_value);
             FLASH_ROMA_Access(cr_value);
             FLASH_ROMA_Access(cr_value);
@@ -224,7 +224,7 @@ UINT8 FLASH_ROMA_WRITE( UINT32 StartAddr, PVOID Buffer, UINT32 Length )
  *
  * @return success   - 0: failure, 1: success
  **/
-void FLASH_ROMA_ERASE_4K( UINT32 Addr )
+UINT8 FLASH_ROMA_ERASE_4K( UINT32 Addr )
 {
     // rom writes need to be word aligned
     UINT32 rom_addr = ~0xfff & Addr + ROM_ADDR_OFFSET;
@@ -249,7 +249,7 @@ void FLASH_ROMA_ERASE_4K( UINT32 Addr )
  *
  * @return success   - 0: failure, 1: success
  **/
-void FLASH_ROMA_ERASE_64K( UINT32 Addr )
+UINT8 FLASH_ROMA_ERASE_64K( UINT32 Addr )
 {
     // rom writes need to be word aligned
     UINT32 rom_addr = ~0xffff & Addr + ROM_ADDR_OFFSET;
