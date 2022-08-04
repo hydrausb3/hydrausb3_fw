@@ -16,7 +16,7 @@
 #endif
 
 #include <stdint.h>
-#include "CH56xSFR.H"
+#include "CH56xSFR.h"
 
 /* IO definitions */
 #ifdef __cplusplus
