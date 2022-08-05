@@ -1117,6 +1117,7 @@ extern "C" {
 
 /* SPI Flash register */
 #define R32_SPI_ROM_CTRL        (*((PUINT32V)0x40001018))
+#define R8_SPI_ROM_CTRL         (*((PUINT8V)0x40001018))
 #define R32_SPI_ROM_DATA        (*((PUINT32V)0x40001014))   //RW
 #define R8_SPI_ROM_DATA         (*((PUINT8V)0x40001018))    //RW
 #define R16_SPI_ROM_CR          (*((PUINT16V)0x4000101A))   //RW

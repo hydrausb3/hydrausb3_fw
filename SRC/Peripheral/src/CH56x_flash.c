@@ -16,12 +16,11 @@
 #define ROM_BEGIN_WRITE 0b0110
 #define ROM_END_WRITE   0b0101
 
-static  void FLASH_ROMA_WaitControlRegister()
+static void FLASH_ROMA_WaitControlRegister()
 {
-    INT32 status;
+    INT8 status;
     do {
-        status = (INT32)(R8_SPI_ROM_CR << 24);
-        status >>= 24;
+        status = (INT8)R8_SPI_ROM_CR;
     } while (status < 0);
 }
 
@@ -31,7 +30,7 @@ static void FLASH_ROMA_Access(UINT8 access_code)
     R8_SPI_ROM_CR = access_code;
 }
 
-static  void FLASH_ROMA_AccessEnd()
+static void FLASH_ROMA_AccessEnd()
 {
     FLASH_ROMA_Access(0);
 }
@@ -52,7 +51,7 @@ static void FLASH_ROMA_Begin(UINT8 begin_code)
 {
     R8_SPI_ROM_CR    = 0;
     R8_SPI_ROM_CR    = 0b111;
-    R32_SPI_ROM_CTRL = begin_code;
+    R8_SPI_ROM_CTRL  = begin_code;
 }
 
 static void FLASH_ROMA_WriteAddr(UINT32 rom_addr)
