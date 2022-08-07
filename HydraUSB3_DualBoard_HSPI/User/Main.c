@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name   : Main.c
 * Author      : bvernoux
-* Version     : V1.0
-* Date        : 2022/07/30
+* Version     : V1.0.1
+* Date        : 2022/08/07
 * Description : Basic example to test HSPI communication between 2x HydraUSB3 boards
 * Copyright (c) 2022 Benjamin VERNOUX
 * SPDX-License-Identifier: Apache-2.0
@@ -65,11 +65,8 @@ int blink_ms = BLINK_SLOW;
 
 int is_HostBoard; /* Return TRUE or FALSE */
 
-/* Required for CH56x_debug_log.h */
-char debug_log_buf[DEBUG_LOG_BUF_SIZE+1];
-volatile int debug_log_buf_idx = 0;
-
-void HSPI_IRQHandler (void) __attribute__((interrupt("WCH-Interrupt-fast")));
+/* Required for log_init() => log_printf()/cprintf() */
+debug_log_buf_t log_buf;
 
 /*********************************************************************
  * @fn      main
@@ -86,7 +83,7 @@ int main()
 	hydrausb3_gpio_init();
 	/* Init BSP (MCU Frequency & SysTick) */
 	bsp_init(FREQ_SYS);
-	log_init();
+	log_init(&log_buf);
 	/* Configure serial debugging for printf()/log_printf()... */
 	UART1_init(UART1_BAUD, FREQ_SYS);
 	printf("\n");
@@ -273,6 +270,7 @@ void HSPI_IRQHandler_ReInitRX(void)
  *
  * @return  none
  */
+void HSPI_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
 void HSPI_IRQHandler(void)
 {
 	/**************/

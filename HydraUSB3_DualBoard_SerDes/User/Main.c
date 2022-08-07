@@ -1,7 +1,7 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name   : Main.c
 * Author      : bvernoux
-* Version     : V1.0
+* Version     : V1.0.1
 * Date        : 2022/07/30
 * Description : Basic example to test SerDes communication between 2x HydraUSB3 boards
 * Copyright (c) 2022 Benjamin VERNOUX
@@ -15,7 +15,7 @@
 /* System clock / MCU frequency in Hz */
 #define FREQ_SYS (120000000)
 
-#if(defined DEBUG) // DEBUG=1 to be defined in C Compiler Prepocessor defined symbols
+#if(defined DEBUG) // DEBUG=1 to be defined in pre-processor compiler option
 //#define UART1_BAUD (115200)
 //#define UART1_BAUD (921600)
 //#define UART1_BAUD (3000000) // Real baud rate 3Mbauds(For Fsys 96MHz or 120MHz) => Requires USB2HS Serial like FTDI C232HM-DDHSL-0
@@ -64,11 +64,8 @@ uint32_t CNT_nb_cycles;
 
 int is_HostBoard; /* Return TRUE or FALSE */
 
-/* Required for CH56x_debug_log.h */
-char debug_log_buf[DEBUG_LOG_BUF_SIZE+1];
-volatile int debug_log_buf_idx = 0;
-
-void SERDES_IRQHandler (void) __attribute__((interrupt("WCH-Interrupt-fast")));
+/* Required for log_init() => log_printf()/cprintf() */
+debug_log_buf_t log_buf;
 
 /*******************************************************************************
 * Function Name  : main
@@ -84,7 +81,7 @@ int main()
 	hydrausb3_gpio_init();
 	/* Init BSP (MCU Frequency & SysTick) */
 	bsp_init(FREQ_SYS);
-	log_init();
+	log_init(&log_buf);
 	/* Configure serial debugging for printf()/log_printf()... */
 	UART1_init(UART1_BAUD, FREQ_SYS);
 	printf("\n");
@@ -454,7 +451,8 @@ int main()
 * Input          : None
 * Return         : None
 *******************************************************************************/
-void SERDES_IRQHandler (void)
+void SERDES_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
+void SERDES_IRQHandler(void)
 {
 	uint32_t sds_it_status;
 	sds_it_status = SerDes_StatusIT();
