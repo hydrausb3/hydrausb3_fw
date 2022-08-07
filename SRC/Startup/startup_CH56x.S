@@ -2,9 +2,10 @@
 ;* File Name          : startup_CH56x.s
 ;* Author             : WCH
 ;* Version            : V1.0
-;* Date               : 2020/07/31
+;* Date               : 2020/08/07
 ;* Description        : CH56x vector table for eclipse toolchain.
 ;* Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+;* Copyright (c) 2022 Benjamin VERNOUX
 ;* SPDX-License-Identifier: Apache-2.0
 ;*******************************************************************************/
 
@@ -162,10 +163,17 @@ handle_reset:
 	la t0, _vector_base
     ori t0, t0, 1
 	csrw mtvec, t0
+
+	/* Jump to main() function with Machine mode privilege which allow using all core_riscv.h macro __get_MXX() or __set_MXX() */
+__app_main_enter:
+    li    a0,   0 /* argc = 0 */
+    li    a1,   0 /* argv = NULL */
+    jal   ra,   main /* Call main() with return address */
+__app_main_exit:
+    j     __app_main_exit /* Endless loop */
+/*
+	// Code to jump to main() function without Machine mode privilege (all core_riscv.h macro __get_MXX() or __set_MXX() trig an exception)
 	la t0, main
 	csrw mepc, t0
-
-	
 	mret
-
-
+*/
