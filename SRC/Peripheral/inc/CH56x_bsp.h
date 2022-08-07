@@ -1,10 +1,11 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_bsp.h
 * Author             : bvernoux
-* Version            : V1.0
-* Date               : 2022/07/30
+* Version            : V1.0.1
+* Date               : 2022/08/07
 * Description        : This file contains all the functions prototypes for 
 *                      Board Support Package(BSP) related to Init/Delays/Timebase
+*                      DisableInterrupts/EnableInterrupts
 * Copyright (c) 2022 Benjamin VERNOUX
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
@@ -32,6 +33,14 @@ typedef struct __attribute__((packed))
 extern uint64_t bsp_us_nbcycles;
 extern uint64_t bsp_ms_nbcycles;
 extern uint32_t bsp_tick_frequency;
+
+/* Disable Global Interrupt (Enter Critical Section) */
+//#define bsp_disable_interrupts()
+#define bsp_disable_interrupt() __asm volatile( "csrci mstatus,0x8" ) // Disable interrupt (mie = 0)
+
+/* Enable Global Interrupt (Exit Critical Section) */
+//#define bsp_enable_interrupt()
+#define bsp_enable_interrupt() __asm volatile ( "csrsi mstatus,0x8" ) // Enable interrupt (mie = 1)
 
 /*
 Set MCU frequency and SysTick

@@ -1,10 +1,11 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_bsp.c
 * Author             : bvernoux
-* Version            : V1.0
-* Date               : 2022/07/30
+* Version            : V1.0.1
+* Date               : 2022/08/06
 * Description        : This file contains all the functions prototypes for
 *                      Board Support Package(BSP) related to Init/Delays/Timebase
+*                      DisableInterrupts/EnableInterrupts(see .h macros)
 * Copyright (c) 2022 Benjamin VERNOUX
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
