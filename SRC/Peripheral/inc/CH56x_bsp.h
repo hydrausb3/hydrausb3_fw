@@ -17,7 +17,7 @@
 
 #include "CH56xSFR.h"
 
-/* Memory mapped structure for lowleve SysTick access */
+/* Memory mapped structure for lowlevel SysTick access */
 typedef struct __attribute__((packed))
 {
  __IO uint32_t CTLR;
