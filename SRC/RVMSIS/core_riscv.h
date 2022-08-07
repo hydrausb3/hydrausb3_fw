@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT  *******************************
 * File Name          : core_riscv.h
 * Author             : WCH, bvernoux
-* Version            : V1.0.1
-* Date               : 2022/07/30
+* Version            : V1.0.2
+* Date               : 2022/08/07
 * Description        : RISC-V Core Peripheral Access Layer Header File
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * Copyright (c) 2022 Benjamin VERNOUX
@@ -305,26 +305,23 @@ RV_STATIC_INLINE void PFIC_INTNestCfg(FunctionalState NewState){
     }
 }
 
-
 #define SysTick_LOAD_RELOAD_Msk            (0xFFFFFFFFFFFFFFFFULL)
 #define SysTick_CTRL_RELOAD_Msk            (1 << 8)
 #define SysTick_CTRL_CLKSOURCE_Msk         (1 << 2)
 #define SysTick_CTRL_TICKINT_Msk           (1 << 1)
 #define SysTick_CTRL_ENABLE_Msk            (1 << 0)
 
-
 RV_STATIC_INLINE uint32_t SysTick_Config( UINT64 ticks ){
-  if ((ticks - 1) > SysTick_LOAD_RELOAD_Msk)  return (1);      /* Reload value impossible */
+  if ((ticks - 1) > SysTick_LOAD_RELOAD_Msk)  return (1); /* Reload value impossible */
 
-  SysTick->CMP  = ticks - 1;                                  /* set reload register */
+  SysTick->CMP  = ticks - 1; /* set reload register */
   PFIC_EnableIRQ( SysTick_IRQn );
   SysTick->CTLR  = SysTick_CTRL_RELOAD_Msk    |
                    SysTick_CTRL_CLKSOURCE_Msk |
                    SysTick_CTRL_TICKINT_Msk   |
-                   SysTick_CTRL_ENABLE_Msk;                    /* Enable SysTick IRQ and SysTick Timer */
-  return (0);                                                  /* Function successful */
+                   SysTick_CTRL_ENABLE_Msk; /* Enable SysTick IRQ and SysTick Timer */
+  return (0); /* Function successful */
 }
-
 
 /* Core_Exported_Functions */  
 extern uint32_t __get_FFLAGS(void);
@@ -333,6 +330,8 @@ extern uint32_t __get_FRM(void);
 extern void __set_FRM(uint32_t value);
 extern uint32_t __get_FCSR(void);
 extern void __set_FCSR(uint32_t value);
+
+/* Requires Machine privilege */
 extern uint32_t __get_MSTATUS(void);
 extern void __set_MSTATUS(uint32_t value);
 extern uint32_t __get_MISA(void);
@@ -352,15 +351,16 @@ extern void __set_MTVAL(uint32_t value);
 extern uint32_t __get_MIP(void);
 extern void __set_MIP(uint32_t value);
 /*
+// Disabled / Not supported on CH569
 extern uint32_t __get_MCYCLE(void);
 extern void __set_MCYCLE(uint32_t value);
 extern uint32_t __get_MCYCLEH(void);
 extern void __set_MCYCLEH(uint32_t value);
-*/
 extern uint32_t __get_MINSTRET(void);
 extern void __set_MINSTRET(uint32_t value);
 extern uint32_t __get_MINSTRETH(void);
 extern void __set_MINSTRETH(uint32_t value);
+*/
 extern uint32_t __get_MVENDORID(void);
 extern uint32_t __get_MARCHID(void);
 extern uint32_t __get_MIMPID(void);

@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT  *******************************
 * File Name          : core_riscv.c
 * Author             : WCH, bvernoux
-* Version            : V1.0.1
-* Date               : 2022/07/30
+* Version            : V1.0.2
+* Date               : 2022/08/07
 * Description        : RISC-V Core Peripheral Access Layer Source File
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * Copyright (c) 2022 Benjamin VERNOUX
@@ -366,7 +366,8 @@ void __set_MIP(uint32_t value)
 /*********************************************************************
  * @fn      __get_MCYCLE
  *
- * @brief   Return Lower 32 bits of Cycle counter => Disabled / Not supported on CH569W => use SysTick
+ * @brief   Return Lower 32 bits of Cycle counter => Disabled
+ *          Disabled / Not supported on CH569 => use SysTick
  *
  * @return  mcycle value
  */
@@ -382,7 +383,8 @@ uint32_t __get_MCYCLE(void)
 /*********************************************************************
  * @fn      __set_MCYCLE
  *
- * @brief   Set Lower 32 bits of Cycle counter => Disabled / Not supported on CH569W
+ * @brief   Set Lower 32 bits of Cycle counter
+ *          Disabled / Not supported on CH569
  *
  * @return  mcycle value
  */
@@ -395,7 +397,8 @@ void __set_MCYCLE(uint32_t value)
 /*********************************************************************
  * @fn      __get_MCYCLEH
  *
- * @brief   Return Upper 32 bits of Cycle counter => Disabled / Not supported on CH569W => use SysTick
+ * @brief   Return Upper 32 bits of Cycle counter
+ *          Disabled / Not supported on CH569 => use SysTick
  *
  * @return  mcycleh value
  */
@@ -411,7 +414,8 @@ uint32_t __get_MCYCLEH(void)
 /*********************************************************************
  * @fn      __set_MCYCLEH
  *
- * @brief   Set Upper 32 bits of Cycle counter => Disabled / Not supported on CH569W
+ * @brief   Set Upper 32 bits of Cycle counter
+ *          Disabled / Not supported on CH569W
  *
  * @return  mcycleh value
  */
@@ -425,9 +429,11 @@ void __set_MCYCLEH(uint32_t value)
  * @fn      __get_MINSTRET
  *
  * @brief   Return Lower 32 bits of Instructions-retired counter
+ *          Disabled / Not supported on CH569
  *
  * @return  mcause value
  */
+/*
 uint32_t __get_MINSTRET(void)
 {
 	uint32_t result;
@@ -435,26 +441,31 @@ uint32_t __get_MINSTRET(void)
 	__ASM volatile ( "csrr %0," "minstret" : "=r" (result) );
 	return (result);
 }
-
+*/
 /*********************************************************************
  * @fn      __set_MINSTRET
  *
  * @brief   Set Lower 32 bits of Instructions-retired counter
+ *          Disabled / Not supported on CH569
  *
  * @return  minstret value
  */
+/*
 void __set_MINSTRET(uint32_t value)
 {
 	__ASM volatile ("csrw minstret, %0" : : "r" (value) );
 }
+*/
 
 /*********************************************************************
  * @fn      __get_MINSTRETH
  *
  * @brief   Return Upper 32 bits of Instructions-retired counter
+ *          Disabled / Not supported on CH569
  *
  * @return  minstreth value
  */
+/*
 uint32_t __get_MINSTRETH(void)
 {
 	uint32_t result;
@@ -462,19 +473,21 @@ uint32_t __get_MINSTRETH(void)
 	__ASM volatile ( "csrr %0," "minstreth" : "=r" (result) );
 	return (result);
 }
-
+*/
 /*********************************************************************
  * @fn      __set_MINSTRETH
  *
  * @brief   Set Upper 32 bits of Instructions-retired counter
+ *          Disabled / Not supported on CH569
  *
  * @return  minstreth value
  */
+/*
 void __set_MINSTRETH(uint32_t value)
 {
 	__ASM volatile ("csrw minstreth, %0" : : "r" (value) );
 }
-
+*/
 /*********************************************************************
  * @fn      __get_MVENDORID
  *
