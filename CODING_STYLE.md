@@ -1,7 +1,11 @@
 Coding rules
 ==================
-* Use types from stdint.h => uint8_t/uint16_t/uint32_t ...
-* Avoid any malloc
+* Use standard types from stdbool.h/stdint.h => uint8_t/uint16_t/uint32_t ...
+* Avoid any mmeory allocation like `malloc()/free()` (if required a dedicated memory allocator shall be used)
+* All string functions that do not take an explicit buffer size argument are forbidden.
+  * This includes but is not limited to `strcpy()`, `sprintf()`, etc.
+* Use of C string manipulation functions with an explicit size, such as `snprintf()`, is acceptable.
+* Field width specifiers are required on all sscanf() calls that write to strings. For example, %30s rather than %s.
 * Avoid big stack usage (as the stack is very limited)
 * Do not use reserved keywords for files (like CON, PRN, AUX, NUL, COM1, COM2, COM3, COM4, COM5, COM6, COM7, COM8, COM9, LPT1, LPT2, LPT3, LPT4, LPT5, LPT6, LPT7, LPT8, and LPT9) This is documented on: https://docs.microsoft.com/en-us/windows/desktop/FileIO/naming-a-file
 
