@@ -1,10 +1,11 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_sys.c
 * Author             : Hans Baier
-* Version            : V1.1
-* Date               : 2022/08/02
+* Version            : V1.1.1
+* Date               : 2022/08/07
 * Description        : code for reading/writing the internal flash memory
 * Copyright (c) 2022 Hans Baier
+* Copyright (c) 2022 Benjamin VERNOUX
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
 #include "CH56x_flash.h"
@@ -115,6 +116,42 @@ UINT32 FLASH_ROMA_ReadWord(UINT32 addr)
 
 	FLASH_ROMA_AccessEnd();
 	return result;
+}
+
+/*******************************************************************************
+ * @fn     FLASH_ROMA_READ
+ *
+ * @param  StartAddr - memory location to read from
+ * @param  Buffer    - data to read
+ * @param  Length    - how many bytes to read, minimum length is 4 bytes
+ *                     Length shall be multiple of 4
+ * @return success   - 0: failure, 1: success
+ **/
+UINT8 FLASH_ROMA_READ(UINT32 StartAddr, PUINT32 Buffer, UINT32 Length)
+{
+	UINT32 i;
+	UINT32 rom_addr = StartAddr + ROM_ADDR_OFFSET;
+
+	if (rom_addr >= ROM_END ||
+		rom_addr + Length >= ROM_END ||
+		Length < 4)
+		return 0;
+
+	FLASH_ROMA_Begin(ROM_BEGIN_READ);
+	FLASH_ROMA_WriteAddr(rom_addr);
+	FLASH_ROMA_DataRead();
+	FLASH_ROMA_DataRead();
+
+	for(i = 0; i < (Length / 4); i++)
+	{
+		FLASH_ROMA_DataRead();
+		FLASH_ROMA_DataRead();
+		FLASH_ROMA_DataRead();
+		FLASH_ROMA_DataRead();
+		Buffer[i] = R32_SPI_ROM_DATA;
+	}
+	FLASH_ROMA_AccessEnd();
+	return 1;
 }
 
 static void FLASH_ROMA_WriteStart()
