@@ -173,9 +173,9 @@ void log_printf(const char *fmt, ...)
 
 	bsp_disable_interrupt(); // Enter Critical Section
 #ifdef CH56x_DEBUG_LOG_BASIC_TIMESTAMP
-	print_size = sprintf(log_printf_buff, "0x%08X ", (uint32_t)(delta));
+	print_size1 = sprintf(log_printf_buff, "0x%08X ", (uint32_t)(delta));
 #else
-	//print_size = sprintf(log_printf_buff, "%02us %03ums %03uus(0x%08X)(%d) ", sec, msec, usec, (uint32_t)(delta), (start - stop));
+	//print_size1 = sprintf(log_printf_buff, "%02us %03ums %03uus(0x%08X)(%d) ", sec, msec, usec, (uint32_t)(delta), (start - stop));
 	print_size1 = sprintf(log_printf_buff, "%02us %03ums %03uus ", sec, msec, usec);
 #endif
 
