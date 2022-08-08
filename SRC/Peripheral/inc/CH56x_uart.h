@@ -12,34 +12,34 @@
 #define __CH56x_UART_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
-/** 
+/**
   * @brief	Line Error Status Definition
-  */     
+  */
 #define  STA_ERR_BREAK   RB_LSR_BREAK_ERR   // Data interval error
 #define  STA_ERR_FRAME   RB_LSR_FRAME_ERR   // Data frame error
 #define  STA_ERR_PAR     RB_LSR_PAR_ERR     // Parity bit error
 #define  STA_ERR_FIFOOV  RB_LSR_OVER_ERR    // Receive data overflow
-     
+
 #define  STA_TXFIFO_EMP  RB_LSR_TX_FIFO_EMP // The current transmit FIFO is empty and can continue to fill the transmit data
 #define  STA_TXALL_EMP   RB_LSR_TX_ALL_EMP  // All data have been sent
 #define  STA_RECV_DATA   RB_LSR_DATA_RDY    // Currently receiving data
 
 /**
   * @brief  Serial port byte trigger configuration
-  */     
+  */
 typedef enum
 {
 	UART_1BYTE_TRIG = 0, // 1 Byte trigger
 	UART_2BYTE_TRIG = 1, // 2 Byte trigger
 	UART_4BYTE_TRIG = 2, // 4 Byte trigger
 	UART_7BYTE_TRIG = 3, // 7 Byte trigger
-	
-}UARTByteTRIGTypeDef;     
- 
-/****************** UART0 */ 
+
+} UARTByteTRIGTypeDef;
+
+/****************** UART0 */
 void UART0_init(uint32_t baudrate, uint32_t systemclck);
 void UART0_DefInit(void); /* Serial Default initialization configuration */
 void UART0_BaudRateCfg(UINT32 baudrate); /* Serial Baud rate configuration */
@@ -63,7 +63,7 @@ void UART0_SendString(PUINT8 buf, UINT16 l); /* Serial Multibyte send */
 UINT16 UART0_RecvString(PUINT8 buf); /*Serial Read multiple bytes */
 uint16_t UART0_rx(uint8_t* buf, int buf_len_max);
 
-/****************** UART1 */ 	 
+/****************** UART1 */
 void UART1_init(uint32_t baudrate, uint32_t systemclck);
 void UART1_DefInit(void); /*Serial Default initialization configuration */
 void UART1_BaudRateCfg(UINT32 baudrate); /*Serial Baud rate configuration */
@@ -86,7 +86,7 @@ void UART1_SendString(PUINT8 buf, UINT16 l); /*Serial Multibyte send */
 UINT16 UART1_RecvString(PUINT8 buf); /* Serial Read multiple bytes */
 uint16_t UART1_rx(uint8_t* buf, int buf_len_max);
 
-/****************** UART2 */ 
+/****************** UART2 */
 void UART2_init(uint32_t baudrate, uint32_t systemclck);
 void UART2_DefInit(void); /*Serial Default initialization configuration */
 void UART2_BaudRateCfg(UINT32 baudrate); /*Serial Baud rate configuration */
@@ -109,7 +109,7 @@ void UART2_SendString(PUINT8 buf, UINT16 l); /* Serial Multibyte send */
 UINT16 UART2_RecvString(PUINT8 buf); /* Serial Read multiple bytes */
 uint16_t UART2_rx(uint8_t* buf, int buf_len_max);
 
-/****************** UART3 */ 
+/****************** UART3 */
 void UART3_init(uint32_t baudrate, uint32_t systemclck);
 void UART3_DefInit(void); /* Serial Default initialization configuration */
 void UART3_BaudRateCfg(UINT32 baudrate); /* Serial Baud rate configuration */

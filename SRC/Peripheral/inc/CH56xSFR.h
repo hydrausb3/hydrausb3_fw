@@ -19,18 +19,18 @@ extern "C" {
 /* Base types & constants */
 
 #ifndef TRUE
-  #define TRUE     1
-  #define FALSE    0
+#define TRUE     1
+#define FALSE    0
 #endif
 #ifndef NULL
-  #define NULL    0
+#define NULL    0
 #endif
 
 #ifndef VOID
-  #define VOID    void
+#define VOID    void
 #endif
 #ifndef CONST
-  #define CONST    const
+#define CONST    const
 #endif
 #ifndef BOOL
 typedef unsigned char BOOL;
@@ -119,16 +119,16 @@ typedef volatile unsigned long *PUINT32V;
 /* Base macros */
 
 #ifndef min
-  #define min(a, b)    (((a) < (b)) ? (a) : (b))
+#define min(a, b)    (((a) < (b)) ? (a) : (b))
 #endif
 #ifndef max
-  #define max(a, b)    (((a) > (b)) ? (a) : (b))
+#define max(a, b)    (((a) > (b)) ? (a) : (b))
 #endif
 
 #ifdef DEBUG
-  #define PRINT(X...)    printf(X)
+#define PRINT(X...)    printf(X)
 #else
-  #define PRINT(X...)
+#define PRINT(X...)
 #endif
 
 /* Calculate the byte offset of a field in a structure of type */
@@ -1134,8 +1134,8 @@ extern "C" {
 
 /* EMMC register */
 #define R16_EMMC_CLK_DIV        (*((PUINT16V)(0x4000A038))) // SD clock divider register, [4:0]:divisor, sdclk1 = 480m/[4:0], default divisor is 20
-                                                            // [8]:clk_oe, [8]==1 indicate supply SDCLK to sdcard, [8]==0 indicate close SDCLK, default clk_oe is 0
-                                                            // [9]:sel_25m_100m, select 400k or 25~100m as SDCLK, [9]==1 indicate SDCLK = 480m/[4:0], [9]==0 indicate SDCLK = 480/[4:0]/64, default is 1
+// [8]:clk_oe, [8]==1 indicate supply SDCLK to sdcard, [8]==0 indicate close SDCLK, default clk_oe is 0
+// [9]:sel_25m_100m, select 400k or 25~100m as SDCLK, [9]==1 indicate SDCLK = 480m/[4:0], [9]==0 indicate SDCLK = 480/[4:0]/64, default is 1
 #define R32_EMMC_ARGUMENT       (*((PUINT32V)(0x4000A000))) // SD 32bits command argument register
 #define R16_EMMC_CMD_SET        (*((PUINT16V)(0x4000A004))) // SD 16bits cmd setting register, [5:0] is the command index, [9:8] indicate the response tye, [10]==1 indicate need to check the response CRC7, [11]==1 indicate need to check the index of the response
 #define R32_EMMC_RESPONSE0      (*((PUINT32V)(0x4000A008))) // SD 128bits response register, [31:0] 32bits
@@ -1336,32 +1336,32 @@ extern "C" {
 #ifndef TABLE_IRQN
 typedef enum IRQn
 {
-    Reset_IRQn = 1,
-    NMI_IRQn = 2,      /*!< Non Maskable Interrupt   */
-    EXC_IRQn = 3,      /*!< Exceptions Interrupt      */
-    SysTick_IRQn = 12, /*!< System timer Interrupt  */
-    SWI_IRQn = 14,     /*!< software Interrupt */
-    WDOG_IRQn = 16,
-    TMR0_IRQn = 17,
-    GPIO_IRQn = 18,
-    SPI0_IRQn = 19,
-    USBSS_IRQn = 20,
-    LINK_IRQn = 21,
-    TMR1_IRQn = 22,
-    TMR2_IRQn = 23,
-    UART0_IRQn = 24,
-    USBHS_IRQn = 25,
-    EMMC_IRQn = 26,
-    DVP_IRQn = 27,
-    HSPI_IRQn = 28,
-    SPI1_IRQn = 29,
-    UART1_IRQn = 30,
-    UART2_IRQn = 31,
-    UART3_IRQn = 32,
-    SERDES_IRQn = 33,
-    ETH_IRQn = 34,
-    PMT_IRQn = 35,
-    ECDC_IRQn = 36,
+	Reset_IRQn = 1,
+	NMI_IRQn = 2,      /*!< Non Maskable Interrupt   */
+	EXC_IRQn = 3,      /*!< Exceptions Interrupt      */
+	SysTick_IRQn = 12, /*!< System timer Interrupt  */
+	SWI_IRQn = 14,     /*!< software Interrupt */
+	WDOG_IRQn = 16,
+	TMR0_IRQn = 17,
+	GPIO_IRQn = 18,
+	SPI0_IRQn = 19,
+	USBSS_IRQn = 20,
+	LINK_IRQn = 21,
+	TMR1_IRQn = 22,
+	TMR2_IRQn = 23,
+	UART0_IRQn = 24,
+	USBHS_IRQn = 25,
+	EMMC_IRQn = 26,
+	DVP_IRQn = 27,
+	HSPI_IRQn = 28,
+	SPI1_IRQn = 29,
+	UART1_IRQn = 30,
+	UART2_IRQn = 31,
+	UART3_IRQn = 32,
+	SERDES_IRQn = 33,
+	ETH_IRQn = 34,
+	PMT_IRQn = 35,
+	ECDC_IRQn = 36,
 } IRQn_Type;
 #endif
 
@@ -1692,115 +1692,115 @@ extern "C" {
 /*                  USB 3.0                              */
 /*********************************************************/
 #ifndef __PACKED
-  #define __PACKED    __attribute__((packed))
+#define __PACKED    __attribute__((packed))
 #endif
 
 #define USBSS_BASE    (0x40008000)
 
 typedef struct __PACKED
 {
-    UINT32V LINK_CFG;          // 0x40008000
-    UINT32V LINK_CTRL;         // 0x40008004
-    UINT32V LINK_INT_CTRL;     // 0x40008008
-    UINT32V LINK_INT_FLAG;     // 0x4000800C
-    UINT32V LINK_STATUS;       // 0x40008010
-    UINT32V LINK_HP_BUF_CTRL;  // 0x40008014
-    UINT32V LINK_ERR_STATUS;   // 0x40008018
-    UINT32V LINK_ERR_CNT;      // 0x4000801C
-    UINT32V USB_CONTROL;       // 0x40008020
-    UINT32V USB_STATUS;        // 0x40008024
-    UINT32V HOST_STATUS;       // 0x40008028
-    UINT32V USB_RX_LEN;        // 0x4000802C
-    UINT32V USB_ITP;           // 0x40008030
-    UINT32V USB_ITP_ADJ;       // 0x40008034
-    UINT32V LINK_ISO_DLY;      // 0x40008038
-    UINT32V LINK_STREAM_ID;    // 0x4000803C
-    UINT32V LINK_ROUTE_STRING; // 0x40008040
-    UINT32V USB_FC_CTRL;       // 0x40008044
-    UINT32V LMP_TX_DATA0;      // 0x40008048
-    UINT32V LMP_TX_DATA1;      // 0x4000804C
-    UINT32V LMP_TX_DATA2;      // 0x40008050
-    UINT32V LMP_PORT_CAP;      // 0x40008054
-    UINT32V LMP_RX_DATA0;      // 0x40008058
-    UINT32V LMP_RX_DATA1;      // 0x4000805C
-    UINT32V LMP_RX_DATA2;      // 0x40008060
-    UINT32V TP_RX_DATA0;       // 0x40008064
-    UINT32V TP_RX_DATA1;       // 0x40008068
-    UINT32V TP_RX_DATA2;       // 0x4000806C
-    UINT32V UEP_CFG;           // 0x40008070
-    UINT32V UEP0_DMA;          // 0x40008074
-    UINT32V UEP0_RX_CTRL;      // 0x40008078
-    UINT32V UEP0_TX_CTRL;      // 0x4000807C
-    UINT32V UEP1_TX_DMA;       // 0x40008080
-    UINT32V UEP1_RX_DMA;       // 0x40008084
-    UINT32V UEP1_RX_CTRL;      // 0x40008088
-    UINT32V UEP1_TX_CTRL;      // 0x4000808C
-    UINT32V UEP2_RX_DMA;       // 0x40008090
-    UINT32V UEP2_TX_DMA;       // 0x40008094
-    UINT32V UEP2_RX_CTRL;      // 0x40008098
-    UINT32V UEP2_TX_CTRL;      // 0x4000809C
-    UINT32V UEP3_TX_DMA;       // 0x400080A0
-    UINT32V UEP3_RX_DMA;       // 0x400080A4
-    UINT32V UEP3_RX_CTRL;      // 0x400080A8
-    UINT32V UEP3_TX_CTRL;      // 0x400080AC
-    UINT32V UEP4_TX_DMA;       // 0x400080B0
-    UINT32V UEP4_RX_DMA;       // 0x400080B4
-    UINT32V UEP4_RX_CTRL;      // 0x400080B8
-    UINT32V UEP4_TX_CTRL;      // 0x400080BC
-    UINT32V UEP5_TX_DMA;       // 0x400080C0
-    UINT32V UEP5_RX_DMA;       // 0x400080C4
-    UINT32V UEP5_RX_CTRL;      // 0x400080C8
-    UINT32V UEP5_TX_CTRL;      // 0x400080CC
-    UINT32V UEP6_TX_DMA;       // 0x400080D0
-    UINT32V UEP6_RX_DMA;       // 0x400080D4
-    UINT32V UEP6_RX_CTRL;      // 0x400080D8
-    UINT32V UEP6_TX_CTRL;      // 0x400080DC
-    UINT32V UEP7_TX_DMA;       // 0x400080E0
-    UINT32V UEP7_RX_DMA;       // 0x400080E4
-    UINT32V UEP7_RX_CTRL;      // 0x400080E8
-    UINT32V UEP7_TX_CTRL;      // 0x400080EC
-    UINT32V UX_EXIT_TIMER;     // 0x400080F0
+	UINT32V LINK_CFG;          // 0x40008000
+	UINT32V LINK_CTRL;         // 0x40008004
+	UINT32V LINK_INT_CTRL;     // 0x40008008
+	UINT32V LINK_INT_FLAG;     // 0x4000800C
+	UINT32V LINK_STATUS;       // 0x40008010
+	UINT32V LINK_HP_BUF_CTRL;  // 0x40008014
+	UINT32V LINK_ERR_STATUS;   // 0x40008018
+	UINT32V LINK_ERR_CNT;      // 0x4000801C
+	UINT32V USB_CONTROL;       // 0x40008020
+	UINT32V USB_STATUS;        // 0x40008024
+	UINT32V HOST_STATUS;       // 0x40008028
+	UINT32V USB_RX_LEN;        // 0x4000802C
+	UINT32V USB_ITP;           // 0x40008030
+	UINT32V USB_ITP_ADJ;       // 0x40008034
+	UINT32V LINK_ISO_DLY;      // 0x40008038
+	UINT32V LINK_STREAM_ID;    // 0x4000803C
+	UINT32V LINK_ROUTE_STRING; // 0x40008040
+	UINT32V USB_FC_CTRL;       // 0x40008044
+	UINT32V LMP_TX_DATA0;      // 0x40008048
+	UINT32V LMP_TX_DATA1;      // 0x4000804C
+	UINT32V LMP_TX_DATA2;      // 0x40008050
+	UINT32V LMP_PORT_CAP;      // 0x40008054
+	UINT32V LMP_RX_DATA0;      // 0x40008058
+	UINT32V LMP_RX_DATA1;      // 0x4000805C
+	UINT32V LMP_RX_DATA2;      // 0x40008060
+	UINT32V TP_RX_DATA0;       // 0x40008064
+	UINT32V TP_RX_DATA1;       // 0x40008068
+	UINT32V TP_RX_DATA2;       // 0x4000806C
+	UINT32V UEP_CFG;           // 0x40008070
+	UINT32V UEP0_DMA;          // 0x40008074
+	UINT32V UEP0_RX_CTRL;      // 0x40008078
+	UINT32V UEP0_TX_CTRL;      // 0x4000807C
+	UINT32V UEP1_TX_DMA;       // 0x40008080
+	UINT32V UEP1_RX_DMA;       // 0x40008084
+	UINT32V UEP1_RX_CTRL;      // 0x40008088
+	UINT32V UEP1_TX_CTRL;      // 0x4000808C
+	UINT32V UEP2_RX_DMA;       // 0x40008090
+	UINT32V UEP2_TX_DMA;       // 0x40008094
+	UINT32V UEP2_RX_CTRL;      // 0x40008098
+	UINT32V UEP2_TX_CTRL;      // 0x4000809C
+	UINT32V UEP3_TX_DMA;       // 0x400080A0
+	UINT32V UEP3_RX_DMA;       // 0x400080A4
+	UINT32V UEP3_RX_CTRL;      // 0x400080A8
+	UINT32V UEP3_TX_CTRL;      // 0x400080AC
+	UINT32V UEP4_TX_DMA;       // 0x400080B0
+	UINT32V UEP4_RX_DMA;       // 0x400080B4
+	UINT32V UEP4_RX_CTRL;      // 0x400080B8
+	UINT32V UEP4_TX_CTRL;      // 0x400080BC
+	UINT32V UEP5_TX_DMA;       // 0x400080C0
+	UINT32V UEP5_RX_DMA;       // 0x400080C4
+	UINT32V UEP5_RX_CTRL;      // 0x400080C8
+	UINT32V UEP5_TX_CTRL;      // 0x400080CC
+	UINT32V UEP6_TX_DMA;       // 0x400080D0
+	UINT32V UEP6_RX_DMA;       // 0x400080D4
+	UINT32V UEP6_RX_CTRL;      // 0x400080D8
+	UINT32V UEP6_TX_CTRL;      // 0x400080DC
+	UINT32V UEP7_TX_DMA;       // 0x400080E0
+	UINT32V UEP7_RX_DMA;       // 0x400080E4
+	UINT32V UEP7_RX_CTRL;      // 0x400080E8
+	UINT32V UEP7_TX_CTRL;      // 0x400080EC
+	UINT32V UX_EXIT_TIMER;     // 0x400080F0
 
 } USBSS_TypeDef;
 
 typedef struct __PACKED
 {
-    UINT32V LINK_CFG;          // 0x40008000
-    UINT32V LINK_CTRL;         // 0x40008004
-    UINT32V LINK_INT_CTRL;     // 0x40008008
-    UINT32V LINK_INT_FLAG;     // 0x4000800C
-    UINT32V LINK_STATUS;       // 0x40008010
-    UINT32V LINK_HP_BUF_CTRL;  // 0x40008014
-    UINT32V LINK_ERR_STATUS;   // 0x40008018
-    UINT32V LINK_ERR_CNT;      // 0x4000801C
-    UINT32V USB_CONTROL;       // 0x40008020
-    UINT32V USB_STATUS;        // 0x40008024
-    UINT32V HOST_STATUS;       // 0x40008028
-    UINT32V USB_RX_LEN;        // 0x4000802C
-    UINT32V USB_ITP;           // 0x40008030
-    UINT32V USB_ITP_ADJ;       // 0x40008034
-    UINT32V LINK_ISO_DLY;      // 0x40008038
-    UINT32V LINK_STREAM_ID;    // 0x4000803C
-    UINT32V LINK_ROUTE_STRING; // 0x40008040
-    UINT32V USB_FC_CTRL;       // 0x40008044
-    UINT32V LMP_TX_DATA0;      // 0x40008048
-    UINT32V LMP_TX_DATA1;      // 0x4000804C
-    UINT32V LMP_TX_DATA2;      // 0x40008050
-    UINT32V LMP_PORT_CAP;      // 0x40008054
-    UINT32V LMP_RX_DATA0;      // 0x40008058
-    UINT32V LMP_RX_DATA1;      // 0x4000805C
-    UINT32V LMP_RX_DATA2;      // 0x40008060
-    UINT32V TP_RX_DATA0;       // 0x40008064
-    UINT32V TP_RX_DATA1;       // 0x40008068
-    UINT32V TP_RX_DATA2;       // 0x4000806C
-    UINT32V UEP_CFG;           // 0x40008070
-    UINT32V reserved0;         // 0x40008074
-    UINT32V reserved1;         // 0x40008078
-    UINT32V reserved2;         // 0x4000807C
-    UINT32V UH_TX_DMA;         // 0x40008080
-    UINT32V UH_RX_DMA;         // 0x40008084
-    UINT32V UH_RX_CTRL;        // 0x40008088
-    UINT32V UH_TX_CTRL;        // 0x4000808C
+	UINT32V LINK_CFG;          // 0x40008000
+	UINT32V LINK_CTRL;         // 0x40008004
+	UINT32V LINK_INT_CTRL;     // 0x40008008
+	UINT32V LINK_INT_FLAG;     // 0x4000800C
+	UINT32V LINK_STATUS;       // 0x40008010
+	UINT32V LINK_HP_BUF_CTRL;  // 0x40008014
+	UINT32V LINK_ERR_STATUS;   // 0x40008018
+	UINT32V LINK_ERR_CNT;      // 0x4000801C
+	UINT32V USB_CONTROL;       // 0x40008020
+	UINT32V USB_STATUS;        // 0x40008024
+	UINT32V HOST_STATUS;       // 0x40008028
+	UINT32V USB_RX_LEN;        // 0x4000802C
+	UINT32V USB_ITP;           // 0x40008030
+	UINT32V USB_ITP_ADJ;       // 0x40008034
+	UINT32V LINK_ISO_DLY;      // 0x40008038
+	UINT32V LINK_STREAM_ID;    // 0x4000803C
+	UINT32V LINK_ROUTE_STRING; // 0x40008040
+	UINT32V USB_FC_CTRL;       // 0x40008044
+	UINT32V LMP_TX_DATA0;      // 0x40008048
+	UINT32V LMP_TX_DATA1;      // 0x4000804C
+	UINT32V LMP_TX_DATA2;      // 0x40008050
+	UINT32V LMP_PORT_CAP;      // 0x40008054
+	UINT32V LMP_RX_DATA0;      // 0x40008058
+	UINT32V LMP_RX_DATA1;      // 0x4000805C
+	UINT32V LMP_RX_DATA2;      // 0x40008060
+	UINT32V TP_RX_DATA0;       // 0x40008064
+	UINT32V TP_RX_DATA1;       // 0x40008068
+	UINT32V TP_RX_DATA2;       // 0x4000806C
+	UINT32V UEP_CFG;           // 0x40008070
+	UINT32V reserved0;         // 0x40008074
+	UINT32V reserved1;         // 0x40008078
+	UINT32V reserved2;         // 0x4000807C
+	UINT32V UH_TX_DMA;         // 0x40008080
+	UINT32V UH_RX_DMA;         // 0x40008084
+	UINT32V UH_RX_CTRL;        // 0x40008088
+	UINT32V UH_TX_CTRL;        // 0x4000808C
 } USBSSH_TypeDef;
 
 #define USBSS     ((USBSS_TypeDef *)USBSS_BASE)
@@ -1826,347 +1826,347 @@ extern "C" {
 
 /* USB PID */
 #ifndef USB_PID_SETUP
-  #define USB_PID_NULL     0x00  /* reserved PID */
-  #define USB_PID_PING     0x04
-  #define USB_PID_SOF      0x05
-  #define USB_PID_SETUP    0x0D
-  #define USB_PID_IN       0x09
-  #define USB_PID_OUT      0x01
-  #define USB_PID_ACK      0x02
-  #define USB_PID_NAK      0x0A
-  #define USB_PID_STALL    0x0E
-  #define USB_PID_NYET     0x06
-  #define USB_PID_DATA0    0x03
-  #define USB_PID_DATA1    0x0B
-  #define USB_PID_PRE      0x0C
-  #define USB_PID_ERR      0x0C
-  #define USB_PID_SPLIT    0x08
-  #define USB_PID_DATA0    0x03
-  #define USB_PID_DATA1    0x0B
-  #define USB_PID_DATA2    0x07
-  #define USB_PID_MDATA    0x0F
+#define USB_PID_NULL     0x00  /* reserved PID */
+#define USB_PID_PING     0x04
+#define USB_PID_SOF      0x05
+#define USB_PID_SETUP    0x0D
+#define USB_PID_IN       0x09
+#define USB_PID_OUT      0x01
+#define USB_PID_ACK      0x02
+#define USB_PID_NAK      0x0A
+#define USB_PID_STALL    0x0E
+#define USB_PID_NYET     0x06
+#define USB_PID_DATA0    0x03
+#define USB_PID_DATA1    0x0B
+#define USB_PID_PRE      0x0C
+#define USB_PID_ERR      0x0C
+#define USB_PID_SPLIT    0x08
+#define USB_PID_DATA0    0x03
+#define USB_PID_DATA1    0x0B
+#define USB_PID_DATA2    0x07
+#define USB_PID_MDATA    0x0F
 #endif
 
 /* USB standard device request code */
 #ifndef USB_GET_DESCRIPTOR
-  #define USB_GET_STATUS           0x00
-  #define USB_CLEAR_FEATURE        0x01
-  #define USB_SET_FEATURE          0x03
-  #define USB_SET_ADDRESS          0x05
-  #define USB_GET_DESCRIPTOR       0x06
-  #define USB_SET_DESCRIPTOR       0x07
-  #define USB_GET_CONFIGURATION    0x08
-  #define USB_SET_CONFIGURATION    0x09
-  #define USB_GET_INTERFACE        0x0A
-  #define USB_SET_INTERFACE        0x0B
-  #define USB_SYNCH_FRAME          0x0C
+#define USB_GET_STATUS           0x00
+#define USB_CLEAR_FEATURE        0x01
+#define USB_SET_FEATURE          0x03
+#define USB_SET_ADDRESS          0x05
+#define USB_GET_DESCRIPTOR       0x06
+#define USB_SET_DESCRIPTOR       0x07
+#define USB_GET_CONFIGURATION    0x08
+#define USB_SET_CONFIGURATION    0x09
+#define USB_GET_INTERFACE        0x0A
+#define USB_SET_INTERFACE        0x0B
+#define USB_SYNCH_FRAME          0x0C
 #endif
 
 /* USB hub class request code */
 #ifndef HUB_GET_DESCRIPTOR
-  #define HUB_GET_STATUS        0x00
-  #define HUB_CLEAR_FEATURE     0x01
-  #define HUB_GET_STATE         0x02
-  #define HUB_SET_FEATURE       0x03
-  #define HUB_GET_DESCRIPTOR    0x06
-  #define HUB_SET_DESCRIPTOR    0x07
+#define HUB_GET_STATUS        0x00
+#define HUB_CLEAR_FEATURE     0x01
+#define HUB_GET_STATE         0x02
+#define HUB_SET_FEATURE       0x03
+#define HUB_GET_DESCRIPTOR    0x06
+#define HUB_SET_DESCRIPTOR    0x07
 #endif
 
 /* USB HID class request code */
 #ifndef HID_GET_REPORT
-  #define HID_GET_REPORT      0x01
-  #define HID_GET_IDLE        0x02
-  #define HID_GET_PROTOCOL    0x03
-  #define HID_SET_REPORT      0x09
-  #define HID_SET_IDLE        0x0A
-  #define HID_SET_PROTOCOL    0x0B
+#define HID_GET_REPORT      0x01
+#define HID_GET_IDLE        0x02
+#define HID_GET_PROTOCOL    0x03
+#define HID_SET_REPORT      0x09
+#define HID_SET_IDLE        0x0A
+#define HID_SET_PROTOCOL    0x0B
 #endif
 
 /* Bit define for USB request type */
 #ifndef USB_REQ_TYP_MASK
-  #define USB_REQ_TYP_IN          0x80  /* control IN, device to host */
-  #define USB_REQ_TYP_OUT         0x00  /* control OUT, host to device */
-  #define USB_REQ_TYP_READ        0x80  /* control read, device to host */
-  #define USB_REQ_TYP_WRITE       0x00  /* control write, host to device */
-  #define USB_REQ_TYP_MASK        0x60  /* bit mask of request type */
-  #define USB_REQ_TYP_STANDARD    0x00
-  #define USB_REQ_TYP_CLASS       0x20
-  #define USB_REQ_TYP_VENDOR      0x40
-  #define USB_REQ_TYP_RESERVED    0x60
-  #define USB_REQ_RECIP_MASK      0x1F  /* bit mask of request recipient */
-  #define USB_REQ_RECIP_DEVICE    0x00
-  #define USB_REQ_RECIP_INTERF    0x01
-  #define USB_REQ_RECIP_ENDP      0x02
-  #define USB_REQ_RECIP_OTHER     0x03
+#define USB_REQ_TYP_IN          0x80  /* control IN, device to host */
+#define USB_REQ_TYP_OUT         0x00  /* control OUT, host to device */
+#define USB_REQ_TYP_READ        0x80  /* control read, device to host */
+#define USB_REQ_TYP_WRITE       0x00  /* control write, host to device */
+#define USB_REQ_TYP_MASK        0x60  /* bit mask of request type */
+#define USB_REQ_TYP_STANDARD    0x00
+#define USB_REQ_TYP_CLASS       0x20
+#define USB_REQ_TYP_VENDOR      0x40
+#define USB_REQ_TYP_RESERVED    0x60
+#define USB_REQ_RECIP_MASK      0x1F  /* bit mask of request recipient */
+#define USB_REQ_RECIP_DEVICE    0x00
+#define USB_REQ_RECIP_INTERF    0x01
+#define USB_REQ_RECIP_ENDP      0x02
+#define USB_REQ_RECIP_OTHER     0x03
 #endif
 
 /* USB request type for hub class request */
 #ifndef HUB_GET_HUB_DESCRIPTOR
-  #define HUB_CLEAR_HUB_FEATURE     0x20
-  #define HUB_CLEAR_PORT_FEATURE    0x23
-  #define HUB_GET_BUS_STATE         0xA3
-  #define HUB_GET_HUB_DESCRIPTOR    0xA0
-  #define HUB_GET_HUB_STATUS        0xA0
-  #define HUB_GET_PORT_STATUS       0xA3
-  #define HUB_SET_HUB_DESCRIPTOR    0x20
-  #define HUB_SET_HUB_FEATURE       0x20
-  #define HUB_SET_PORT_FEATURE      0x23
+#define HUB_CLEAR_HUB_FEATURE     0x20
+#define HUB_CLEAR_PORT_FEATURE    0x23
+#define HUB_GET_BUS_STATE         0xA3
+#define HUB_GET_HUB_DESCRIPTOR    0xA0
+#define HUB_GET_HUB_STATUS        0xA0
+#define HUB_GET_PORT_STATUS       0xA3
+#define HUB_SET_HUB_DESCRIPTOR    0x20
+#define HUB_SET_HUB_FEATURE       0x20
+#define HUB_SET_PORT_FEATURE      0x23
 #endif
 
 /* Hub class feature selectors */
 #ifndef HUB_PORT_RESET
-  #define HUB_C_HUB_LOCAL_POWER      0
-  #define HUB_C_HUB_OVER_CURRENT     1
-  #define HUB_PORT_CONNECTION        0
-  #define HUB_PORT_ENABLE            1
-  #define HUB_PORT_SUSPEND           2
-  #define HUB_PORT_OVER_CURRENT      3
-  #define HUB_PORT_RESET             4
-  #define HUB_PORT_POWER             8
-  #define HUB_PORT_LOW_SPEED         9
-  #define HUB_C_PORT_CONNECTION      16
-  #define HUB_C_PORT_ENABLE          17
-  #define HUB_C_PORT_SUSPEND         18
-  #define HUB_C_PORT_OVER_CURRENT    19
-  #define HUB_C_PORT_RESET           20
+#define HUB_C_HUB_LOCAL_POWER      0
+#define HUB_C_HUB_OVER_CURRENT     1
+#define HUB_PORT_CONNECTION        0
+#define HUB_PORT_ENABLE            1
+#define HUB_PORT_SUSPEND           2
+#define HUB_PORT_OVER_CURRENT      3
+#define HUB_PORT_RESET             4
+#define HUB_PORT_POWER             8
+#define HUB_PORT_LOW_SPEED         9
+#define HUB_C_PORT_CONNECTION      16
+#define HUB_C_PORT_ENABLE          17
+#define HUB_C_PORT_SUSPEND         18
+#define HUB_C_PORT_OVER_CURRENT    19
+#define HUB_C_PORT_RESET           20
 #endif
 
 /* USB descriptor type */
 #ifndef USB_DESCR_TYP_DEVICE
-  #define USB_DESCR_TYP_DEVICE     0x01
-  #define USB_DESCR_TYP_CONFIG     0x02
-  #define USB_DESCR_TYP_STRING     0x03
-  #define USB_DESCR_TYP_INTERF     0x04
-  #define USB_DESCR_TYP_ENDP       0x05
-  #define USB_DESCR_TYP_QUALIF     0x06
-  #define USB_DESCR_TYP_SPEED      0x07
-  #define USB_DESCR_TYP_OTG        0x09
-  #define USB_DESCR_TYP_HID        0x21
-  #define USB_DESCR_TYP_REPORT     0x22
-  #define USB_DESCR_TYP_PHYSIC     0x23
-  #define USB_DESCR_TYP_CS_INTF    0x24
-  #define USB_DESCR_TYP_CS_ENDP    0x25
-  #define USB_DESCR_TYP_HUB        0x29
+#define USB_DESCR_TYP_DEVICE     0x01
+#define USB_DESCR_TYP_CONFIG     0x02
+#define USB_DESCR_TYP_STRING     0x03
+#define USB_DESCR_TYP_INTERF     0x04
+#define USB_DESCR_TYP_ENDP       0x05
+#define USB_DESCR_TYP_QUALIF     0x06
+#define USB_DESCR_TYP_SPEED      0x07
+#define USB_DESCR_TYP_OTG        0x09
+#define USB_DESCR_TYP_HID        0x21
+#define USB_DESCR_TYP_REPORT     0x22
+#define USB_DESCR_TYP_PHYSIC     0x23
+#define USB_DESCR_TYP_CS_INTF    0x24
+#define USB_DESCR_TYP_CS_ENDP    0x25
+#define USB_DESCR_TYP_HUB        0x29
 #endif
 
 /* USB device class */
 #ifndef USB_DEV_CLASS_HUB
-  #define USB_DEV_CLASS_RESERVED     0x00
-  #define USB_DEV_CLASS_AUDIO        0x01
-  #define USB_DEV_CLASS_COMMUNIC     0x02
-  #define USB_DEV_CLASS_HID          0x03
-  #define USB_DEV_CLASS_MONITOR      0x04
-  #define USB_DEV_CLASS_PHYSIC_IF    0x05
-  #define USB_DEV_CLASS_POWER        0x06
-  #define USB_DEV_CLASS_PRINTER      0x07
-  #define USB_DEV_CLASS_STORAGE      0x08
-  #define USB_DEV_CLASS_HUB          0x09
-  #define USB_DEV_CLASS_VEN_SPEC     0xFF
+#define USB_DEV_CLASS_RESERVED     0x00
+#define USB_DEV_CLASS_AUDIO        0x01
+#define USB_DEV_CLASS_COMMUNIC     0x02
+#define USB_DEV_CLASS_HID          0x03
+#define USB_DEV_CLASS_MONITOR      0x04
+#define USB_DEV_CLASS_PHYSIC_IF    0x05
+#define USB_DEV_CLASS_POWER        0x06
+#define USB_DEV_CLASS_PRINTER      0x07
+#define USB_DEV_CLASS_STORAGE      0x08
+#define USB_DEV_CLASS_HUB          0x09
+#define USB_DEV_CLASS_VEN_SPEC     0xFF
 #endif
 
 /* USB endpoint type and attributes */
 #ifndef USB_ENDP_TYPE_MASK
-  #define USB_ENDP_DIR_MASK      0x80
-  #define USB_ENDP_ADDR_MASK     0x0F
-  #define USB_ENDP_TYPE_MASK     0x03
-  #define USB_ENDP_TYPE_CTRL     0x00
-  #define USB_ENDP_TYPE_ISOCH    0x01
-  #define USB_ENDP_TYPE_BULK     0x02
-  #define USB_ENDP_TYPE_INTER    0x03
+#define USB_ENDP_DIR_MASK      0x80
+#define USB_ENDP_ADDR_MASK     0x0F
+#define USB_ENDP_TYPE_MASK     0x03
+#define USB_ENDP_TYPE_CTRL     0x00
+#define USB_ENDP_TYPE_ISOCH    0x01
+#define USB_ENDP_TYPE_BULK     0x02
+#define USB_ENDP_TYPE_INTER    0x03
 #endif
 
 #ifndef USB_DEVICE_ADDR
-  #define USB_DEVICE_ADDR    0x02  /* 默认的USB设备地址 */
+#define USB_DEVICE_ADDR    0x02  /* 默认的USB设备地址 */
 #endif
 #ifndef DEFAULT_ENDP0_SIZE
-  #define DEFAULT_ENDP0_SIZE    8  /* default maximum packet size for endpoint 0 */
+#define DEFAULT_ENDP0_SIZE    8  /* default maximum packet size for endpoint 0 */
 #endif
 #ifndef MAX_PACKET_SIZE
-  #define MAX_PACKET_SIZE    512  /* maximum packet size */
+#define MAX_PACKET_SIZE    512  /* maximum packet size */
 #endif
 #ifndef USB_BO_CBW_SIZE
-  #define USB_BO_CBW_SIZE    0x1F  /* 命令块CBW的总长度 */
-  #define USB_BO_CSW_SIZE    0x0D  /* 命令状态块CSW的总长度 */
+#define USB_BO_CBW_SIZE    0x1F  /* 命令块CBW的总长度 */
+#define USB_BO_CSW_SIZE    0x0D  /* 命令状态块CSW的总长度 */
 #endif
 #ifndef USB_BO_CBW_SIG0
-  #define USB_BO_CBW_SIG0    0x55  /* 命令块CBW识别标志'USBC' */
-  #define USB_BO_CBW_SIG1    0x53
-  #define USB_BO_CBW_SIG2    0x42
-  #define USB_BO_CBW_SIG3    0x43
-  #define USB_BO_CSW_SIG0    0x55  /* 命令状态块CSW识别标志'USBS' */
-  #define USB_BO_CSW_SIG1    0x53
-  #define USB_BO_CSW_SIG2    0x42
-  #define USB_BO_CSW_SIG3    0x53
+#define USB_BO_CBW_SIG0    0x55  /* 命令块CBW识别标志'USBC' */
+#define USB_BO_CBW_SIG1    0x53
+#define USB_BO_CBW_SIG2    0x42
+#define USB_BO_CBW_SIG3    0x43
+#define USB_BO_CSW_SIG0    0x55  /* 命令状态块CSW识别标志'USBS' */
+#define USB_BO_CSW_SIG1    0x53
+#define USB_BO_CSW_SIG2    0x42
+#define USB_BO_CSW_SIG3    0x53
 #endif
 
 #ifndef USB_SETUP_REQ
 typedef struct __PACKED _USB_SETUP_REQ
 {
-    UINT8  bRequestType;
-    UINT8  bRequest;
-    UINT16 wValue;
-    UINT16 wIndex;
-    UINT16 wLength;
+	UINT8  bRequestType;
+	UINT8  bRequest;
+	UINT16 wValue;
+	UINT16 wIndex;
+	UINT16 wLength;
 } USB_SETUP_REQ, *PUSB_SETUP_REQ;
 #endif
 
 #ifndef USB_DEV_DESCR
 typedef struct __PACKED _USB_DEVICE_DESCR
 {
-    UINT8  bLength;
-    UINT8  bDescriptorType;
-    UINT16 bcdUSB;
-    UINT8  bDeviceClass;
-    UINT8  bDeviceSubClass;
-    UINT8  bDeviceProtocol;
-    UINT8  bMaxPacketSize0;
-    UINT16 idVendor;
-    UINT16 idProduct;
-    UINT16 bcdDevice;
-    UINT8  iManufacturer;
-    UINT8  iProduct;
-    UINT8  iSerialNumber;
-    UINT8  bNumConfigurations;
+	UINT8  bLength;
+	UINT8  bDescriptorType;
+	UINT16 bcdUSB;
+	UINT8  bDeviceClass;
+	UINT8  bDeviceSubClass;
+	UINT8  bDeviceProtocol;
+	UINT8  bMaxPacketSize0;
+	UINT16 idVendor;
+	UINT16 idProduct;
+	UINT16 bcdDevice;
+	UINT8  iManufacturer;
+	UINT8  iProduct;
+	UINT8  iSerialNumber;
+	UINT8  bNumConfigurations;
 } USB_DEV_DESCR, *PUSB_DEV_DESCR;
 #endif
 
 #ifndef USB_CFG_DESCR
 typedef struct __PACKED _USB_CONFIG_DESCR
 {
-    UINT8  bLength;
-    UINT8  bDescriptorType;
-    UINT16 wTotalLength;
-    UINT8  bNumInterfaces;
-    UINT8  bConfigurationValue;
-    UINT8  iConfiguration;
-    UINT8  bmAttributes;
-    UINT8  MaxPower;
+	UINT8  bLength;
+	UINT8  bDescriptorType;
+	UINT16 wTotalLength;
+	UINT8  bNumInterfaces;
+	UINT8  bConfigurationValue;
+	UINT8  iConfiguration;
+	UINT8  bmAttributes;
+	UINT8  MaxPower;
 } USB_CFG_DESCR, *PUSB_CFG_DESCR;
 #endif
 
 #ifndef USB_ITF_DESCR
 typedef struct __PACKED _USB_INTERF_DESCR
 {
-    UINT8 bLength;
-    UINT8 bDescriptorType;
-    UINT8 bInterfaceNumber;
-    UINT8 bAlternateSetting;
-    UINT8 bNumEndpoints;
-    UINT8 bInterfaceClass;
-    UINT8 bInterfaceSubClass;
-    UINT8 bInterfaceProtocol;
-    UINT8 iInterface;
+	UINT8 bLength;
+	UINT8 bDescriptorType;
+	UINT8 bInterfaceNumber;
+	UINT8 bAlternateSetting;
+	UINT8 bNumEndpoints;
+	UINT8 bInterfaceClass;
+	UINT8 bInterfaceSubClass;
+	UINT8 bInterfaceProtocol;
+	UINT8 iInterface;
 } USB_ITF_DESCR, *PUSB_ITF_DESCR;
 #endif
 
 #ifndef USB_ENDP_DESCR
 typedef struct __PACKED _USB_ENDPOINT_DESCR
 {
-    UINT8 bLength;
-    UINT8 bDescriptorType;
-    UINT8 bEndpointAddress;
-    UINT8 bmAttributes;
-    UINT8 wMaxPacketSizeL;
-    UINT8 wMaxPacketSizeH;
-    UINT8 bInterval;
+	UINT8 bLength;
+	UINT8 bDescriptorType;
+	UINT8 bEndpointAddress;
+	UINT8 bmAttributes;
+	UINT8 wMaxPacketSizeL;
+	UINT8 wMaxPacketSizeH;
+	UINT8 bInterval;
 } USB_ENDP_DESCR, *PUSB_ENDP_DESCR;
 #endif
 
 #ifndef USB_CFG_DESCR_LONG
 typedef struct __PACKED _USB_CONFIG_DESCR_LONG
 {
-    USB_CFG_DESCR  cfg_descr;
-    USB_ITF_DESCR  itf_descr;
-    USB_ENDP_DESCR endp_descr[2];
+	USB_CFG_DESCR  cfg_descr;
+	USB_ITF_DESCR  itf_descr;
+	USB_ENDP_DESCR endp_descr[2];
 } USB_CFG_DESCR_LONG, *PUSB_CFG_DESCR_LONG;
 #endif
 
 #ifndef USB_HUB_DESCR
 typedef struct __PACKED _USB_HUB_DESCR
 {
-    UINT8 bDescLength;
-    UINT8 bDescriptorType;
-    UINT8 bNbrPorts;
-    UINT8 wHubCharacteristicsL;
-    UINT8 wHubCharacteristicsH;
-    UINT8 bPwrOn2PwrGood;
-    UINT8 bHubContrCurrent;
-    UINT8 DeviceRemovable;
-    UINT8 PortPwrCtrlMask;
+	UINT8 bDescLength;
+	UINT8 bDescriptorType;
+	UINT8 bNbrPorts;
+	UINT8 wHubCharacteristicsL;
+	UINT8 wHubCharacteristicsH;
+	UINT8 bPwrOn2PwrGood;
+	UINT8 bHubContrCurrent;
+	UINT8 DeviceRemovable;
+	UINT8 PortPwrCtrlMask;
 } USB_HUB_DESCR, *PUSB_HUB_DESCR;
 #endif
 
 #ifndef USB_HID_DESCR
 typedef struct __PACKED _USB_HID_DESCR
 {
-    UINT8 bLength;
-    UINT8 bDescriptorType;
-    UINT8 bcdHIDL;
-    UINT8 bcdHIDH;
-    UINT8 bCountryCode;
-    UINT8 bNumDescriptors;
-    UINT8 bDescriptorTypeX;
-    UINT8 wDescriptorLengthL;
-    UINT8 wDescriptorLengthH;
+	UINT8 bLength;
+	UINT8 bDescriptorType;
+	UINT8 bcdHIDL;
+	UINT8 bcdHIDH;
+	UINT8 bCountryCode;
+	UINT8 bNumDescriptors;
+	UINT8 bDescriptorTypeX;
+	UINT8 wDescriptorLengthL;
+	UINT8 wDescriptorLengthH;
 } USB_HID_DESCR, *PUSB_HID_DESCR;
 #endif
 
 #ifndef USB_DEV_QUAL_DESCR
 typedef struct __PACKED _USB_DEVICE_QUALIFIER_DESCRIPTOR
 {
-    UINT8 bLength;
-    UINT8 bDescriptorType;
-    UINT8 bcdUSBL;
-    UINT8 bcdUSBH;
-    UINT8 bDeviceClass;
-    UINT8 bDeviceSubClass;
-    UINT8 bDeviceProtocol;
-    UINT8 bMaxPacketSize0;
-    UINT8 bNumConfigurations;
-    UINT8 bReserved;
+	UINT8 bLength;
+	UINT8 bDescriptorType;
+	UINT8 bcdUSBL;
+	UINT8 bcdUSBH;
+	UINT8 bDeviceClass;
+	UINT8 bDeviceSubClass;
+	UINT8 bDeviceProtocol;
+	UINT8 bMaxPacketSize0;
+	UINT8 bNumConfigurations;
+	UINT8 bReserved;
 } USB_DEV_QUAL_DESCR, *PUSB_DEV_QUAL_DESCR;
 #endif
 
 #ifndef USB_CFG_PWR_DESCR
 typedef struct __PACKED _USB_CONFIGURATION_POWER_DESCRIPTOR
 {
-    UINT8 bLength;
-    UINT8 bDescriptorType;
-    UINT8 SelfPowerConsumedD0[3];
-    UINT8 bPowerSummaryId;
-    UINT8 bBusPowerSavingD1;
-    UINT8 bSelfPowerSavingD1;
-    UINT8 bBusPowerSavingD2;
-    UINT8 bSelfPowerSavingD2;
-    UINT8 bBusPowerSavingD3;
-    UINT8 bSelfPowerSavingD3;
-    UINT8 TransitionTimeFromD1L;
-    UINT8 TransitionTimeFromD1H;
-    UINT8 TransitionTimeFromD2L;
-    UINT8 TransitionTimeFromD2H;
-    UINT8 TransitionTimeFromD3L;
-    UINT8 TransitionTimeFromD3H;
+	UINT8 bLength;
+	UINT8 bDescriptorType;
+	UINT8 SelfPowerConsumedD0[3];
+	UINT8 bPowerSummaryId;
+	UINT8 bBusPowerSavingD1;
+	UINT8 bSelfPowerSavingD1;
+	UINT8 bBusPowerSavingD2;
+	UINT8 bSelfPowerSavingD2;
+	UINT8 bBusPowerSavingD3;
+	UINT8 bSelfPowerSavingD3;
+	UINT8 TransitionTimeFromD1L;
+	UINT8 TransitionTimeFromD1H;
+	UINT8 TransitionTimeFromD2L;
+	UINT8 TransitionTimeFromD2H;
+	UINT8 TransitionTimeFromD3L;
+	UINT8 TransitionTimeFromD3H;
 } USB_CFG_PWR_DESCR, *PUSB_CFG_PWR_DESCR;
 #endif
 
 #ifndef USB_ITF_PWR_DESCR
 typedef struct __PACKED _USB_INTERFACE_POWER_DESCRIPTOR
 {
-    UINT8 bLength;
-    UINT8 bDescriptorType;
-    UINT8 bmCapabilitiesFlags;
-    UINT8 bBusPowerSavingD1;
-    UINT8 bSelfPowerSavingD1;
-    UINT8 bBusPowerSavingD2;
-    UINT8 bSelfPowerSavingD2;
-    UINT8 bBusPowerSavingD3;
-    UINT8 bSelfPowerSavingD3;
-    UINT8 TransitionTimeFromD1L;
-    UINT8 TransitionTimeFromD1H;
-    UINT8 TransitionTimeFromD2L;
-    UINT8 TransitionTimeFromD2H;
-    UINT8 TransitionTimeFromD3L;
-    UINT8 TransitionTimeFromD3H;
+	UINT8 bLength;
+	UINT8 bDescriptorType;
+	UINT8 bmCapabilitiesFlags;
+	UINT8 bBusPowerSavingD1;
+	UINT8 bSelfPowerSavingD1;
+	UINT8 bBusPowerSavingD2;
+	UINT8 bSelfPowerSavingD2;
+	UINT8 bBusPowerSavingD3;
+	UINT8 bSelfPowerSavingD3;
+	UINT8 TransitionTimeFromD1L;
+	UINT8 TransitionTimeFromD1H;
+	UINT8 TransitionTimeFromD2L;
+	UINT8 TransitionTimeFromD2H;
+	UINT8 TransitionTimeFromD3L;
+	UINT8 TransitionTimeFromD3H;
 } USB_ITF_PWR_DESCR, *PUSB_ITF_PWR_DESCR;
 #endif
 
@@ -2175,21 +2175,21 @@ typedef struct __PACKED _USB_INTERFACE_POWER_DESCRIPTOR
 
 typedef struct __PACKED _UDISK_BOC_CBW
 {
-    UINT32 mCBW_Sig;
-    UINT32 mCBW_Tag;
-    UINT32 mCBW_DataLen; /* 输入: 数据传输长度 */
-    UINT8  mCBW_Flag;    /* 输入: 传输方向等标志 */
-    UINT8  mCBW_LUN;
-    UINT8  mCBW_CB_Len;     /* 输入: 命令块的长度,有效值是1到16 */
-    UINT8  mCBW_CB_Buf[16]; /* 输入: 命令块,该缓冲区最多为16个字节 */
+	UINT32 mCBW_Sig;
+	UINT32 mCBW_Tag;
+	UINT32 mCBW_DataLen; /* 输入: 数据传输长度 */
+	UINT8  mCBW_Flag;    /* 输入: 传输方向等标志 */
+	UINT8  mCBW_LUN;
+	UINT8  mCBW_CB_Len;     /* 输入: 命令块的长度,有效值是1到16 */
+	UINT8  mCBW_CB_Buf[16]; /* 输入: 命令块,该缓冲区最多为16个字节 */
 } UDISK_BOC_CBW, *PUDISK_BOC_CBW;
 
 typedef struct __PACKED _UDISK_BOC_CSW
 {
-    UINT32 mCSW_Sig;
-    UINT32 mCSW_Tag;
-    UINT32 mCSW_Residue; /* 返回: 剩余数据长度 */
-    UINT8  mCSW_Status;  /* 返回: 命令执行结果状态 */
+	UINT32 mCSW_Sig;
+	UINT32 mCSW_Tag;
+	UINT32 mCSW_Residue; /* 返回: 剩余数据长度 */
+	UINT8  mCSW_Status;  /* 返回: 命令执行结果状态 */
 } UDISK_BOC_CSW, *PUDISK_BOC_CSW;
 
 #ifdef __cplusplus
@@ -2209,16 +2209,16 @@ extern "C" {
 
 typedef struct
 {
-    UINT32V SDS_CTRL;     // 0x4000B000
-    UINT32V SDS_INT_EN;   // 0x4000B004
-    UINT32V SDS_STATUS;   // 0x4000B008
-    UINT32V SDS_RTX_CTRL; // 0x4000B00C
-    UINT32V SDS_RX_LEN0;  // 0x4000B010
-    UINT32V SDS_DATA0;    // 0x4000B014
-    UINT32V SDS_DMA0;     // 0x4000B018
-    UINT32V SDS_RX_LEN1;  // 0x4000B01C
-    UINT32V SDS_DATA1;    // 0x4000B020
-    UINT32V SDS_DMA1;     // 0x4000B024
+	UINT32V SDS_CTRL;     // 0x4000B000
+	UINT32V SDS_INT_EN;   // 0x4000B004
+	UINT32V SDS_STATUS;   // 0x4000B008
+	UINT32V SDS_RTX_CTRL; // 0x4000B00C
+	UINT32V SDS_RX_LEN0;  // 0x4000B010
+	UINT32V SDS_DATA0;    // 0x4000B014
+	UINT32V SDS_DMA0;     // 0x4000B018
+	UINT32V SDS_RX_LEN1;  // 0x4000B01C
+	UINT32V SDS_DATA1;    // 0x4000B020
+	UINT32V SDS_DMA1;     // 0x4000B024
 } SDS_TypeDef;
 
 #define SDS    ((SDS_TypeDef *)SERDES_BASE)
@@ -2254,164 +2254,164 @@ extern "C" {
 
 typedef struct
 {
-    /**
-     * @brief / * MAC
-     */
-    UINT32 ETH_AutoNegotiation; /*!< Selects or not the AutoNegotiation mode for the external PHY
+	/**
+	 * @brief / * MAC
+	 */
+	UINT32 ETH_AutoNegotiation; /*!< Selects or not the AutoNegotiation mode for the external PHY
                                        The AutoNegotiation allows an automatic setting of the Speed (10/100Mbps)
                                        and the mode (half/full-duplex).
                                        This parameter can be a value of @ref ETH_AutoNegotiation */
 
-    UINT32 ETH_Watchdog; /*!< Selects or not the Watchdog timer
+	UINT32 ETH_Watchdog; /*!< Selects or not the Watchdog timer
                                 When enabled, the MAC allows no more then 2048 bytes to be received.
                                 When disabled, the MAC can receive up to 16384 bytes.
                                 This parameter can be a value of @ref ETH_watchdog */
 
-    UINT32 ETH_Jabber; /*!< Selects or not Jabber timer
+	UINT32 ETH_Jabber; /*!< Selects or not Jabber timer
                               When enabled, the MAC allows no more then 2048 bytes to be sent.
                               When disabled, the MAC can send up to 16384 bytes.
                               This parameter can be a value of @ref ETH_Jabber */
 
-    UINT32 ETH_InterFrameGap; /*!< Selects the minimum IFG between frames during transmission
+	UINT32 ETH_InterFrameGap; /*!< Selects the minimum IFG between frames during transmission
                                      This parameter can be a value of @ref ETH_Inter_Frame_Gap */
 
-    UINT32 ETH_CarrierSense; /*!< Selects or not the Carrier Sense
+	UINT32 ETH_CarrierSense; /*!< Selects or not the Carrier Sense
                                     This parameter can be a value of @ref ETH_Carrier_Sense */
 
-    UINT32 ETH_Speed; /*!< Sets the Ethernet speed: 10/100 Mbps
+	UINT32 ETH_Speed; /*!< Sets the Ethernet speed: 10/100 Mbps
                              This parameter can be a value of @ref ETH_Speed */
 
-    UINT32 ETH_ReceiveOwn; /*!< Selects or not the ReceiveOwn
+	UINT32 ETH_ReceiveOwn; /*!< Selects or not the ReceiveOwn
                                   ReceiveOwn allows the reception of frames when the TX_EN signal is asserted
                                   in Half-Duplex mode
                                   This parameter can be a value of @ref ETH_Receive_Own */
 
-    UINT32 ETH_LoopbackMode; /*!< Selects or not the internal MAC MII Loopback mode
+	UINT32 ETH_LoopbackMode; /*!< Selects or not the internal MAC MII Loopback mode
                                     This parameter can be a value of @ref ETH_Loop_Back_Mode */
 
-    UINT32 ETH_Mode; /*!< Selects the MAC duplex mode: Half-Duplex or Full-Duplex mode
+	UINT32 ETH_Mode; /*!< Selects the MAC duplex mode: Half-Duplex or Full-Duplex mode
                             This parameter can be a value of @ref ETH_Duplex_Mode */
 
-    UINT32 ETH_ChecksumOffload; /*!< Selects or not the IPv4 checksum checking for received frame payloads' TCP/UDP/ICMP headers.
+	UINT32 ETH_ChecksumOffload; /*!< Selects or not the IPv4 checksum checking for received frame payloads' TCP/UDP/ICMP headers.
                                        This parameter can be a value of @ref ETH_Checksum_Offload */
 
-    UINT32 ETH_RetryTransmission; /*!< Selects or not the MAC attempt retries transmission, based on the settings of BL,
+	UINT32 ETH_RetryTransmission; /*!< Selects or not the MAC attempt retries transmission, based on the settings of BL,
                                          when a colision occurs (Half-Duplex mode)
                                          This parameter can be a value of @ref ETH_Retry_Transmission */
 
-    UINT32 ETH_AutomaticPadCRCStrip; /*!< Selects or not the Automatic MAC Pad/CRC Stripping
+	UINT32 ETH_AutomaticPadCRCStrip; /*!< Selects or not the Automatic MAC Pad/CRC Stripping
                                             This parameter can be a value of @ref ETH_Automatic_Pad_CRC_Strip */
 
-    UINT32 ETH_BackOffLimit; /*!< Selects the BackOff limit value
+	UINT32 ETH_BackOffLimit; /*!< Selects the BackOff limit value
                                     This parameter can be a value of @ref ETH_Back_Off_Limit */
 
-    UINT32 ETH_DeferralCheck; /*!< Selects or not the deferral check function (Half-Duplex mode)
+	UINT32 ETH_DeferralCheck; /*!< Selects or not the deferral check function (Half-Duplex mode)
                                      This parameter can be a value of @ref ETH_Deferral_Check */
 
-    UINT32 ETH_ReceiveAll; /*!< Selects or not all frames reception by the MAC (No fitering)
+	UINT32 ETH_ReceiveAll; /*!< Selects or not all frames reception by the MAC (No fitering)
                                   This parameter can be a value of @ref ETH_Receive_All */
 
-    UINT32 ETH_SourceAddrFilter; /*!< Selects the Source Address Filter mode
+	UINT32 ETH_SourceAddrFilter; /*!< Selects the Source Address Filter mode
                                         This parameter can be a value of @ref ETH_Source_Addr_Filter */
 
-    UINT32 ETH_PassControlFrames; /*!< Sets the forwarding mode of the control frames (including unicast and multicast PAUSE frames)
+	UINT32 ETH_PassControlFrames; /*!< Sets the forwarding mode of the control frames (including unicast and multicast PAUSE frames)
                                          This parameter can be a value of @ref ETH_Pass_Control_Frames */
 
-    UINT32 ETH_BroadcastFramesReception; /*!< Selects or not the reception of Broadcast Frames
+	UINT32 ETH_BroadcastFramesReception; /*!< Selects or not the reception of Broadcast Frames
                                                 This parameter can be a value of @ref ETH_Broadcast_Frames_Reception */
 
-    UINT32 ETH_DestinationAddrFilter; /*!< Sets the destination filter mode for both unicast and multicast frames
+	UINT32 ETH_DestinationAddrFilter; /*!< Sets the destination filter mode for both unicast and multicast frames
                                              This parameter can be a value of @ref ETH_Destination_Addr_Filter */
 
-    UINT32 ETH_PromiscuousMode; /*!< Selects or not the Promiscuous Mode
+	UINT32 ETH_PromiscuousMode; /*!< Selects or not the Promiscuous Mode
                                        This parameter can be a value of @ref ETH_Promiscuous_Mode */
 
-    UINT32 ETH_MulticastFramesFilter; /*!< Selects the Multicast Frames filter mode: None/HashTableFilter/PerfectFilter/PerfectHashTableFilter
+	UINT32 ETH_MulticastFramesFilter; /*!< Selects the Multicast Frames filter mode: None/HashTableFilter/PerfectFilter/PerfectHashTableFilter
                                              This parameter can be a value of @ref ETH_Multicast_Frames_Filter */
 
-    UINT32 ETH_UnicastFramesFilter; /*!< Selects the Unicast Frames filter mode: HashTableFilter/PerfectFilter/PerfectHashTableFilter
+	UINT32 ETH_UnicastFramesFilter; /*!< Selects the Unicast Frames filter mode: HashTableFilter/PerfectFilter/PerfectHashTableFilter
                                            This parameter can be a value of @ref ETH_Unicast_Frames_Filter */
 
-    UINT32 ETH_HashTableHigh; /*!< This field holds the higher 32 bits of Hash table.  */
+	UINT32 ETH_HashTableHigh; /*!< This field holds the higher 32 bits of Hash table.  */
 
-    UINT32 ETH_HashTableLow; /*!< This field holds the lower 32 bits of Hash table.  */
+	UINT32 ETH_HashTableLow; /*!< This field holds the lower 32 bits of Hash table.  */
 
-    UINT32 ETH_PauseTime; /*!< This field holds the value to be used in the Pause Time field in the
+	UINT32 ETH_PauseTime; /*!< This field holds the value to be used in the Pause Time field in the
                                  transmit control frame */
 
-    UINT32 ETH_ZeroQuantaPause; /*!< Selects or not the automatic generation of Zero-Quanta Pause Control frames
+	UINT32 ETH_ZeroQuantaPause; /*!< Selects or not the automatic generation of Zero-Quanta Pause Control frames
                                        This parameter can be a value of @ref ETH_Zero_Quanta_Pause */
 
-    UINT32 ETH_PauseLowThreshold; /*!< This field configures the threshold of the PAUSE to be checked for
+	UINT32 ETH_PauseLowThreshold; /*!< This field configures the threshold of the PAUSE to be checked for
                                          automatic retransmission of PAUSE Frame
                                          This parameter can be a value of @ref ETH_Pause_Low_Threshold */
 
-    UINT32 ETH_UnicastPauseFrameDetect; /*!< Selects or not the MAC detection of the Pause frames (with MAC Address0
+	UINT32 ETH_UnicastPauseFrameDetect; /*!< Selects or not the MAC detection of the Pause frames (with MAC Address0
                                                unicast address and unique multicast address)
                                                This parameter can be a value of @ref ETH_Unicast_Pause_Frame_Detect */
 
-    UINT32 ETH_ReceiveFlowControl; /*!< Enables or disables the MAC to decode the received Pause frame and
+	UINT32 ETH_ReceiveFlowControl; /*!< Enables or disables the MAC to decode the received Pause frame and
                                           disable its transmitter for a specified time (Pause Time)
                                           This parameter can be a value of @ref ETH_Receive_Flow_Control */
 
-    UINT32 ETH_TransmitFlowControl; /*!< Enables or disables the MAC to transmit Pause frames (Full-Duplex mode)
+	UINT32 ETH_TransmitFlowControl; /*!< Enables or disables the MAC to transmit Pause frames (Full-Duplex mode)
                                            or the MAC back-pressure operation (Half-Duplex mode)
                                            This parameter can be a value of @ref ETH_Transmit_Flow_Control */
 
-    UINT32 ETH_VLANTagComparison; /*!< Selects the 12-bit VLAN identifier or the complete 16-bit VLAN tag for
+	UINT32 ETH_VLANTagComparison; /*!< Selects the 12-bit VLAN identifier or the complete 16-bit VLAN tag for
                                          comparison and filtering
                                          This parameter can be a value of @ref ETH_VLAN_Tag_Comparison */
 
-    UINT32 ETH_VLANTagIdentifier; /*!< Holds the VLAN tag identifier for receive frames */
+	UINT32 ETH_VLANTagIdentifier; /*!< Holds the VLAN tag identifier for receive frames */
 
-    /**
-     * @brief / * DMA
-     */
+	/**
+	 * @brief / * DMA
+	 */
 
-    UINT32 ETH_DropTCPIPChecksumErrorFrame; /*!< Selects or not the Dropping of TCP/IP Checksum Error Frames
+	UINT32 ETH_DropTCPIPChecksumErrorFrame; /*!< Selects or not the Dropping of TCP/IP Checksum Error Frames
                                                    This parameter can be a value of @ref ETH_Drop_TCP_IP_Checksum_Error_Frame */
 
-    UINT32 ETH_ReceiveStoreForward; /*!< Enables or disables the Receive store and forward mode
+	UINT32 ETH_ReceiveStoreForward; /*!< Enables or disables the Receive store and forward mode
                                            This parameter can be a value of @ref ETH_Receive_Store_Forward */
 
-    UINT32 ETH_FlushReceivedFrame; /*!< Enables or disables the flushing of received frames
+	UINT32 ETH_FlushReceivedFrame; /*!< Enables or disables the flushing of received frames
                                           This parameter can be a value of @ref ETH_Flush_Received_Frame */
 
-    UINT32 ETH_TransmitStoreForward; /*!< Enables or disables Transmit store and forward mode
+	UINT32 ETH_TransmitStoreForward; /*!< Enables or disables Transmit store and forward mode
                                             This parameter can be a value of @ref ETH_Transmit_Store_Forward */
 
-    UINT32 ETH_TransmitThresholdControl; /*!< Selects or not the Transmit Threshold Control
+	UINT32 ETH_TransmitThresholdControl; /*!< Selects or not the Transmit Threshold Control
                                                 This parameter can be a value of @ref ETH_Transmit_Threshold_Control */
 
-    UINT32 ETH_ForwardErrorFrames; /*!< Selects or not the forward to the DMA of erroneous frames
+	UINT32 ETH_ForwardErrorFrames; /*!< Selects or not the forward to the DMA of erroneous frames
                                           This parameter can be a value of @ref ETH_Forward_Error_Frames */
 
-    UINT32 ETH_ForwardUndersizedGoodFrames; /*!< Enables or disables the Rx FIFO to forward Undersized frames (frames with no Error
+	UINT32 ETH_ForwardUndersizedGoodFrames; /*!< Enables or disables the Rx FIFO to forward Undersized frames (frames with no Error
                                                    and length less than 64 bytes) including pad-bytes and CRC)
                                                    This parameter can be a value of @ref ETH_Forward_Undersized_Good_Frames */
 
-    UINT32 ETH_ReceiveThresholdControl; /*!< Selects the threshold level of the Receive FIFO
+	UINT32 ETH_ReceiveThresholdControl; /*!< Selects the threshold level of the Receive FIFO
                                                This parameter can be a value of @ref ETH_Receive_Threshold_Control */
 
-    UINT32 ETH_SecondFrameOperate; /*!< Selects or not the Operate on second frame mode, which allows the DMA to process a second
+	UINT32 ETH_SecondFrameOperate; /*!< Selects or not the Operate on second frame mode, which allows the DMA to process a second
                                           frame of Transmit data even before obtaining the status for the first frame.
                                           This parameter can be a value of @ref ETH_Second_Frame_Operate */
 
-    UINT32 ETH_AddressAlignedBeats; /*!< Enables or disables the Address Aligned Beats
+	UINT32 ETH_AddressAlignedBeats; /*!< Enables or disables the Address Aligned Beats
                                            This parameter can be a value of @ref ETH_Address_Aligned_Beats */
 
-    UINT32 ETH_FixedBurst; /*!< Enables or disables the AHB Master interface fixed burst transfers
+	UINT32 ETH_FixedBurst; /*!< Enables or disables the AHB Master interface fixed burst transfers
                                   This parameter can be a value of @ref ETH_Fixed_Burst */
 
-    UINT32 ETH_RxDMABurstLength; /*!< Indicates the maximum number of beats to be transferred in one Rx DMA transaction
+	UINT32 ETH_RxDMABurstLength; /*!< Indicates the maximum number of beats to be transferred in one Rx DMA transaction
                                         This parameter can be a value of @ref ETH_Rx_DMA_Burst_Length */
 
-    UINT32 ETH_TxDMABurstLength; /*!< Indicates sthe maximum number of beats to be transferred in one Tx DMA transaction
+	UINT32 ETH_TxDMABurstLength; /*!< Indicates sthe maximum number of beats to be transferred in one Tx DMA transaction
                                         This parameter can be a value of @ref ETH_Tx_DMA_Burst_Length */
 
-    UINT32 ETH_DescriptorSkipLength; /*!< Specifies the number of word to skip between two unchained descriptors (Ring mode) */
+	UINT32 ETH_DescriptorSkipLength; /*!< Specifies the number of word to skip between two unchained descriptors (Ring mode) */
 
-    UINT32 ETH_DMAArbitration; /*!< Selects the DMA Tx/Rx arbitration
+	UINT32 ETH_DMAArbitration; /*!< Selects the DMA Tx/Rx arbitration
                                       This parameter can be a value of @ref ETH_DMA_Arbitration */
 } ETH_InitTypeDef;
 
@@ -2426,10 +2426,10 @@ typedef struct
  */
 typedef struct
 {
-    UINT32 Status;              /*!< Status */
-    UINT32 ControlBufferSize;   /*!< Control and Buffer1, Buffer2 lengths */
-    UINT32 Buffer1Addr;         /*!< Buffer1 address pointer */
-    UINT32 Buffer2NextDescAddr; /*!< Buffer2 or next descriptor address pointer */
+	UINT32 Status;              /*!< Status */
+	UINT32 ControlBufferSize;   /*!< Control and Buffer1, Buffer2 lengths */
+	UINT32 Buffer1Addr;         /*!< Buffer1 address pointer */
+	UINT32 Buffer2NextDescAddr; /*!< Buffer2 or next descriptor address pointer */
 } ETH_DMADESCTypeDef;
 
 /**
@@ -2448,10 +2448,10 @@ typedef struct
 /* #define USE_Delay */
 
 #ifdef USE_Delay
-  #include "main.h"
-  #define _eth_delay_    Delay  /*!< User can provide more timing precise _eth_delay_ function */
+#include "main.h"
+#define _eth_delay_    Delay  /*!< User can provide more timing precise _eth_delay_ function */
 #else
-  #define _eth_delay_    ETH_Delay  /*!< Default _eth_delay_ function with less precise timing */
+#define _eth_delay_    ETH_Delay  /*!< Default _eth_delay_ function with less precise timing */
 #endif
 
 /**--------------------------------------------------------------------------**/

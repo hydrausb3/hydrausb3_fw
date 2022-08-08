@@ -12,7 +12,7 @@
 #define __CH56x_COMM_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 #include "stdio.h"
@@ -40,13 +40,13 @@
 #define Debug_UART2        2
 #define Debug_UART3        3
 
-/* SystemCoreClock */ 
-#ifndef	 FREQ_SYS  
-#define  FREQ_SYS		80000000   
-#endif   
+/* SystemCoreClock */
+#ifndef	 FREQ_SYS
+#define  FREQ_SYS		80000000
+#endif
 
-#define DelayMs(x)      mDelaymS(x)	  
-#define DelayUs(x)      mDelayuS(x)	  
+#define DelayMs(x)      mDelaymS(x)
+#define DelayUs(x)      mDelayuS(x)
 
 #ifdef __cplusplus
 }

@@ -13,7 +13,7 @@
 #define __CH56x_ECDC_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* Encryption and decryption mode */

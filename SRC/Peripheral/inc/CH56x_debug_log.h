@@ -11,16 +11,16 @@
 #define CH56X_DEBUG_LOG_H_
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 #define DEBUG_LOG_BUF_SIZE (4096-1) /* Maximum string size */
- /* 4096 bytes is the size of USB3 SS Bulk with Burst buffer to output log over USB3 SS or USB2 HS */
- typedef struct
- {
-	 char buf[DEBUG_LOG_BUF_SIZE+1];
-	 volatile uint16_t idx; /* Position in the buffer */
- } debug_log_buf_t;
+/* 4096 bytes is the size of USB3 SS Bulk with Burst buffer to output log over USB3 SS or USB2 HS */
+typedef struct
+{
+	char buf[DEBUG_LOG_BUF_SIZE+1];
+	volatile uint16_t idx; /* Position in the buffer */
+} debug_log_buf_t;
 
 void log_init(debug_log_buf_t *buf);
 void log_time_reinit(void);

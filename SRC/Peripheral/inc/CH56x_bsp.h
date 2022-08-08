@@ -3,7 +3,7 @@
 * Author             : bvernoux
 * Version            : V1.0.1
 * Date               : 2022/08/07
-* Description        : This file contains all the functions prototypes for 
+* Description        : This file contains all the functions prototypes for
 *                      Board Support Package(BSP) related to Init/Delays/Timebase
 *                      DisableInterrupts/EnableInterrupts
 * Copyright (c) 2022 Benjamin VERNOUX
@@ -13,7 +13,7 @@
 #define __CH56x_BSP_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 #include "CH56xSFR.h"
@@ -21,13 +21,14 @@
 /* Memory mapped structure for lowlevel SysTick access */
 typedef struct __attribute__((packed))
 {
- __IO uint32_t CTLR;
- __IO uint32_t CNT_LSB;
- __IO uint32_t CNT_MSB;
- __IO uint32_t CMP_LSB;
- __IO uint32_t CMP_MSB;
- __IO uint32_t CNTFG;
-}SysTickU32_Type;
+	__IO uint32_t CTLR;
+	__IO uint32_t CNT_LSB;
+	__IO uint32_t CNT_MSB;
+	__IO uint32_t CMP_LSB;
+	__IO uint32_t CMP_MSB;
+	__IO uint32_t CNTFG;
+}
+SysTickU32_Type;
 #define SysTickU32 ((SysTickU32_Type *)0xE000F000)
 
 extern uint64_t bsp_us_nbcycles;
@@ -49,7 +50,7 @@ void bsp_init(uint32_t systemclck);
 
 /*
 Returns the number of system ticks since the system boot
-This function is thread-safe 
+This function is thread-safe
 Shall be called only after a call to bsp_init
 */
 uint64_t bsp_get_tick(void);
@@ -75,21 +76,21 @@ Precondition: call to bsp_init
 */
 void bsp_wait_nb_cycles(uint32_t nb_cycles);
 
-/* 
+/*
 Returns the Number of tick for 1 microsecond
 This function is thread-safe
 Precondition: call to bsp_init
 */
 #define  bsp_get_nbtick_1us() (bsp_us_nbcycles)
 
-/* 
+/*
 Returns the Number of tick for 1 millisecond
 This function is thread-safe
 Precondition: call to bsp_init
 */
 #define bsp_get_nbtick_1ms() (bsp_ms_nbcycles)
 
-/* 
+/*
 Returns the tick frequency in Hz
 This function is thread-safe
 Precondition: call to bsp_init

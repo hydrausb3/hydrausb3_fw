@@ -3,7 +3,7 @@
 * Author             : bvernoux
 * Version            : V1.0
 * Date               : 2022/07/30
-* Description        : This file contains all the functions prototypes for 
+* Description        : This file contains all the functions prototypes for
 *                      Board Support Package(BSP) for HydraUSB3 Dev Board
 * Copyright (c) 2022 Benjamin VERNOUX
 * SPDX-License-Identifier: Apache-2.0
@@ -12,20 +12,20 @@
 #define __CH56X_HYDRAUSB3_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 #include "CH56xSFR.h"
 
 /* Macros for ULED / UBTN */
- /* ULED PB22 */
- #define ULED_PIN (GPIO_Pin_22)
- #define ULED_ON() (GPIOB_SetBits(GPIO_Pin_22))
- #define ULED_OFF() (GPIOB_ResetBits(GPIO_Pin_22))
- /* UBTN PB23 */
- #define UBTN_PIN (GPIO_Pin_23)
+/* ULED PB22 */
+#define ULED_PIN (GPIO_Pin_22)
+#define ULED_ON() (GPIOB_SetBits(GPIO_Pin_22))
+#define ULED_OFF() (GPIOB_ResetBits(GPIO_Pin_22))
+/* UBTN PB23 */
+#define UBTN_PIN (GPIO_Pin_23)
 
- /* Used by hydrausb3_sync2boards() */
+/* Used by hydrausb3_sync2boards() */
 #define HYDRAUSB3_SYNCHRO_TIMEOUT (12000000) // About 700ms at 120MHz with -O3 / -Os
 
 /* Definition of GPIO PORTA/PORTB Flag used in e_HydraUSB3_PortPinType */
@@ -90,22 +90,22 @@ typedef enum
 	PB23 = (HYDRAUSB3_PORTB_FLAG | GPIO_Pin_23)
 } e_HydraUSB3_PortPinType;
 
- /**
-   * @brief  HydraUSB3 Dual board type
-   */
- typedef enum
- {
-     HYDRAUSB3_HOST = 0, /* HOST = Primary/main board */
-     HYDRAUSB3_DEVICE = 1, /* DEVICE = Secondary board */
- }e_HYDRAUSB3_TypeDef;
+/**
+  * @brief  HydraUSB3 Dual board type
+  */
+typedef enum
+{
+	HYDRAUSB3_HOST = 0, /* HOST = Primary/main board */
+	HYDRAUSB3_DEVICE = 1, /* DEVICE = Secondary board */
+} e_HYDRAUSB3_TypeDef;
 
- /*******************************************************************************
-  * @fn     hydrausb3_gpio_init
-  *
-  * @brief  Initializes HydraUSB3 board (mainly GPIO)
-  *
-  * @return None
-  **/
+/*******************************************************************************
+ * @fn     hydrausb3_gpio_init
+ *
+ * @brief  Initializes HydraUSB3 board (mainly GPIO)
+ *
+ * @return None
+ **/
 void hydrausb3_gpio_init(void);
 
 /*******************************************************************************

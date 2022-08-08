@@ -12,7 +12,7 @@
 #define __CH56x_SPI_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /**
@@ -34,16 +34,16 @@ typedef enum
 	Mode0_HighBitINFront,
 	Mode3_LowBitINFront,
 	Mode3_HighBitINFront,
-}ModeBitOrderTypeDef;
+} ModeBitOrderTypeDef;
 
 /**
   * @brief  Configuration SPI slave mode
   */
 typedef enum
 {
-Mode_DataStream = 0,
-Mose_FirstCmd,
-}Slave_ModeTypeDef;
+	Mode_DataStream = 0,
+	Mose_FirstCmd,
+} Slave_ModeTypeDef;
 
 /**************** SPI0 */
 void SPI0_MasterDefInit(void);

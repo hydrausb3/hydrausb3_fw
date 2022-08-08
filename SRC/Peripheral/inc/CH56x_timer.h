@@ -12,7 +12,7 @@
 #define __CH56x_TIMER_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /**
@@ -24,7 +24,7 @@ typedef enum
 	PWM_Times_4 = 1,  // PWM Effective output repeats 4 times
 	PWM_Times_8 = 2,  // PWM Effective output repeats 8 times
 	PWM_Times_16 = 3, // PWM Effective output repeats 16 times
-}PWM_RepeatTsTypeDef;
+} PWM_RepeatTsTypeDef;
 
 /**
   * @brief  Input capture edge method
@@ -35,7 +35,7 @@ typedef enum
 	Edge_To_Edge = 1,         // between any edge
 	FallEdge_To_FallEdge = 2, // falling edge to falling edge
 	RiseEdge_To_RiseEdge = 3, // rising edge to rising edge
-}CapModeTypeDef;
+} CapModeTypeDef;
 
 /**
   * @brief  Direct access memory loop mode
@@ -44,7 +44,7 @@ typedef enum
 {
 	Mode_Single = 0, // single mode
 	Mode_LOOP = 1, // loop mode
-}DMAModeTypeDef;
+} DMAModeTypeDef;
 
 
 /**
@@ -54,7 +54,7 @@ typedef enum
 {
 	high_on_low = 0, // Default low level, active high level
 	low_on_high = 1, // Default high level, active low level
-}PWM_PolarTypeDef;
+} PWM_PolarTypeDef;
 
 /****************** TMR0 */
 // Timing and counting
@@ -133,7 +133,7 @@ void TMR2_DMACfg(UINT8 s, UINT16 startAddr, UINT16 endAddr, DMAModeTypeDef m); /
 #define TMR2_GetITFlag(f) (R8_TMR2_INT_FLAG & f) /* Get interrupt flag status */
 
 #ifdef __cplusplus
- }
+}
 #endif
 
 #endif // __CH56x_TIMER_H__

@@ -12,7 +12,7 @@
 #define __CH56x_HSPI_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /**
@@ -20,9 +20,9 @@
   */
 typedef enum
 {
-    HSPI_HOST = 0, /* HSPI_HOST Send Data */
-    HSPI_DEVICE = 1, /* HSPI_DEVICE Receive Data */
-}HSPI_ModeTypeDef;
+	HSPI_HOST = 0, /* HSPI_HOST Send Data */
+	HSPI_DEVICE = 1, /* HSPI_DEVICE Receive Data */
+} HSPI_ModeTypeDef;
 
 /*******************************************************************************
  * @fn     HSPI_DoubleDMA_Init
@@ -46,8 +46,8 @@ typedef enum
  * @return   None
  */
 void HSPI_DoubleDMA_Init(HSPI_ModeTypeDef mode_type, uint8_t mode_data,
-        uint32_t DMA0_addr , uint32_t DMA1_addr,
-        uint16_t DMA_addr_len);
+						 uint32_t DMA0_addr, uint32_t DMA1_addr,
+						 uint16_t DMA_addr_len);
 
 /*******************************************************************************
  * @fn     HSPI_INTCfg

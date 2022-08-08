@@ -31,28 +31,28 @@ extern "C" {
 //#define SDS_PLL_DIV   (16<<8) // 60*(DIV+2)MHz
 typedef enum _sds_pll_freq
 {
-  //SDS_PLL_FREQ_1_98G = (31<<8), // 60*(31+2)MHz = 0x1F00 => RX ERR / Data corrupted (Not supported)
-  //SDS_PLL_FREQ_1_62G = (25<<8), // 60*(25+2)MHz = 0x1900 => RX ERR (Not supported)
-  //SDS_PLL_FREQ_1_56G = (24<<8), // 60*(24+2)MHz = 0x1800 => RX ERR (Not supported)
-  //SDS_PLL_FREQ_1_50G = (23<<8), // 60*(23+2)MHz = 0x1700 => RX ERR (Not supported)
-  //SDS_PLL_FREQ_1_44G = (22<<8), // 60*(22+2)MHz = 0x1600 => RX ERR (Not supported)
-  SDS_PLL_FREQ_1_38G = (21<<8), // 60*(21+2)MHz = 0x1500 (Experimental not officially supported)
-  SDS_PLL_FREQ_1_32G = (20<<8), // 60*(20+2)MHz = 0x1400 (Experimental not officially supported)
-  SDS_PLL_FREQ_1_26G = (19<<8), // 60*(19+2)MHz = 0x1300 (Experimental not officially supported)
-  SDS_PLL_FREQ_1_20G = (18<<8), // 60*(18+2)MHz = 0x1200 => Official SerDes Speed 1.2Gbps
-  SDS_PLL_FREQ_1_14G = (17<<8), // 60*(17+2)MHz = 0x1100
-  SDS_PLL_FREQ_1_08G = (16<<8), // 60*(16+2)MHz = 0x1000
-  SDS_PLL_FREQ_1_02G = (15<<8), // 60*(15+2)MHz = 0xF000
-  SDS_PLL_FREQ_960M  = (14<<8), // 60*(14+2)MHz = 0xE000
-  SDS_PLL_FREQ_900M  = (13<<8), // 60*(13+2)MHz = 0x0D00
-  SDS_PLL_FREQ_600M  = ( 8<<8), // 60*( 8+2)MHz = 0x0800
-  SDS_PLL_FREQ_540M  = ( 7<<8), // 60*( 7+2)MHz = 0x0700
-  SDS_PLL_FREQ_480M  = ( 6<<8), // 60*( 6+2)MHz = 0x0600
-  SDS_PLL_FREQ_420M  = ( 5<<8), // 60*( 5+2)MHz = 0x0500
-  SDS_PLL_FREQ_360M  = ( 4<<8), // 60*( 4+2)MHz = 0x0400
-  SDS_PLL_FREQ_300M  = ( 3<<8), // 60*( 3+2)MHz = 0x0300
-  SDS_PLL_FREQ_240M  = ( 2<<8), // 60*( 2+2)MHz = 0x0200 (Experimental not officially supported)
-  SDS_PLL_FREQ_180M  = ( 1<<8)  // 60*( 1+2)MHz = 0x0100 (Experimental not officially supported)
+	//SDS_PLL_FREQ_1_98G = (31<<8), // 60*(31+2)MHz = 0x1F00 => RX ERR / Data corrupted (Not supported)
+	//SDS_PLL_FREQ_1_62G = (25<<8), // 60*(25+2)MHz = 0x1900 => RX ERR (Not supported)
+	//SDS_PLL_FREQ_1_56G = (24<<8), // 60*(24+2)MHz = 0x1800 => RX ERR (Not supported)
+	//SDS_PLL_FREQ_1_50G = (23<<8), // 60*(23+2)MHz = 0x1700 => RX ERR (Not supported)
+	//SDS_PLL_FREQ_1_44G = (22<<8), // 60*(22+2)MHz = 0x1600 => RX ERR (Not supported)
+	SDS_PLL_FREQ_1_38G = (21<<8), // 60*(21+2)MHz = 0x1500 (Experimental not officially supported)
+	SDS_PLL_FREQ_1_32G = (20<<8), // 60*(20+2)MHz = 0x1400 (Experimental not officially supported)
+	SDS_PLL_FREQ_1_26G = (19<<8), // 60*(19+2)MHz = 0x1300 (Experimental not officially supported)
+	SDS_PLL_FREQ_1_20G = (18<<8), // 60*(18+2)MHz = 0x1200 => Official SerDes Speed 1.2Gbps
+	SDS_PLL_FREQ_1_14G = (17<<8), // 60*(17+2)MHz = 0x1100
+	SDS_PLL_FREQ_1_08G = (16<<8), // 60*(16+2)MHz = 0x1000
+	SDS_PLL_FREQ_1_02G = (15<<8), // 60*(15+2)MHz = 0xF000
+	SDS_PLL_FREQ_960M  = (14<<8), // 60*(14+2)MHz = 0xE000
+	SDS_PLL_FREQ_900M  = (13<<8), // 60*(13+2)MHz = 0x0D00
+	SDS_PLL_FREQ_600M  = ( 8<<8), // 60*( 8+2)MHz = 0x0800
+	SDS_PLL_FREQ_540M  = ( 7<<8), // 60*( 7+2)MHz = 0x0700
+	SDS_PLL_FREQ_480M  = ( 6<<8), // 60*( 6+2)MHz = 0x0600
+	SDS_PLL_FREQ_420M  = ( 5<<8), // 60*( 5+2)MHz = 0x0500
+	SDS_PLL_FREQ_360M  = ( 4<<8), // 60*( 4+2)MHz = 0x0400
+	SDS_PLL_FREQ_300M  = ( 3<<8), // 60*( 3+2)MHz = 0x0300
+	SDS_PLL_FREQ_240M  = ( 2<<8), // 60*( 2+2)MHz = 0x0200 (Experimental not officially supported)
+	SDS_PLL_FREQ_180M  = ( 1<<8)  // 60*( 1+2)MHz = 0x0100 (Experimental not officially supported)
 } e_sds_pll_freq;
 
 #define SDS_DMA_EN      (1<<7) // 0x80
@@ -121,7 +121,7 @@ void SerDes_Tx_Init(e_sds_pll_freq SDS_PLL_FREQ);
                    DMA1_addr: DMA1 starting address
 * Return         : None
 *******************************************************************************/
-void SerDes_DoubleDMA_Rx_CFG(uint32_t DMA0_addr , uint32_t DMA1_addr);
+void SerDes_DoubleDMA_Rx_CFG(uint32_t DMA0_addr, uint32_t DMA1_addr);
 
 /*******************************************************************************
 * Function Name  : SerDes_DMA_Rx_CFG

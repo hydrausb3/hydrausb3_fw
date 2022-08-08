@@ -13,7 +13,7 @@
 #define __CH56x_SYS_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 #include "CH56xSFR.h"
@@ -27,7 +27,7 @@ typedef enum
 	INFO_BOOT_EN,	  // Whether the system boot program BootLoader is enabled
 	INFO_DEBUG_EN,	  // Whether the system emulation debugging interface is enabled
 	INFO_LOADER,	  // Whether the current system is in the Bootloader area
-}SYS_InfoStaTypeDef;
+} SYS_InfoStaTypeDef;
 
 #define SYS_GetChipID() R8_CHIP_ID /* Get the chip ID class, generally a fixed value */
 #define SYS_GetAccessID() R8_SAFE_ACCESS_ID /* Get the security access ID, usually a fixed value */

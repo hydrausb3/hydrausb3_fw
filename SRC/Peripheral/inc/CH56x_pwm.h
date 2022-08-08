@@ -13,7 +13,7 @@
 #define __CH56x_PWM_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /**
@@ -31,7 +31,7 @@ typedef enum
 {
 	High_Level = 0, // Default low level, active high level
 	Low_Level, // Default high level, active low level
-}PWMX_PolarTypeDef;
+} PWMX_PolarTypeDef;
 
 /**
   * @brief  Configuration PWM0_3 Cycle size
@@ -40,7 +40,7 @@ typedef enum
 {
 	PWMX_Cycle_256 = 0, // 256 PWMX cycles
 	PWMX_Cycle_255, // 255 PWMX cycles
-}PWMX_CycleTypeDef;
+} PWMX_CycleTypeDef;
 
 #define  PWMX_CLKCfg(d) (R8_PWM_CLOCK_DIV=d) // PWM Reference Clock Configuration
 void PWMX_CycleCfg(PWMX_CycleTypeDef cyc); // PWM output waveform period configuration

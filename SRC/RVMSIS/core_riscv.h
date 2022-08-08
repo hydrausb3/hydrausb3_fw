@@ -12,7 +12,7 @@
 #define __CORE_RV3A_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 #include <stdint.h>
@@ -20,9 +20,9 @@
 
 /* IO definitions */
 #ifdef __cplusplus
-  #define     __I     volatile                /*!< defines 'read only' permissions      */
+#define     __I     volatile                /*!< defines 'read only' permissions      */
 #else
-  #define     __I     volatile const          /*!< defines 'read only' permissions     */
+#define     __I     volatile const          /*!< defines 'read only' permissions     */
 #endif
 #define     __O     volatile                  /*!< defines 'write only' permissions     */
 #define     __IO    volatile                  /*!< defines 'read / write' permissions   */
@@ -34,39 +34,42 @@ typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;
 typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;
 
 /* memory mapped structure for Program Fast Interrupt Controller (PFIC) */
-typedef struct __attribute__((packed)) {
-    __I  UINT32 ISR[8];
-    __I  UINT32 IPR[8];
-    __IO UINT32 ITHRESDR;
-    __IO UINT32 FIBADDRR;
-    __IO UINT32 CFGR;
-    __I  UINT32 GISR;
-    UINT8 RESERVED0[0x10];
-    __IO UINT32 FIOFADDRR[4];
-    UINT8 RESERVED1[0x90];
-    __O  UINT32 IENR[8];
-    UINT8 RESERVED2[0x60];
-    __O  UINT32 IRER[8];
-    UINT8 RESERVED3[0x60];
-    __O  UINT32 IPSR[8];
-    UINT8 RESERVED4[0x60];
-    __O  UINT32 IPRR[8];
-    UINT8 RESERVED5[0x60];
-    __IO UINT32 IACTR[8];
-    UINT8 RESERVED6[0xE0];
-    __IO UINT8 IPRIOR[256];
-    UINT8 RESERVED7[0x810];
-    __IO UINT32 SCTLR;
-}PFIC_Type;
+typedef struct __attribute__((packed))
+{
+	__I  UINT32 ISR[8];
+	__I  UINT32 IPR[8];
+	__IO UINT32 ITHRESDR;
+	__IO UINT32 FIBADDRR;
+	__IO UINT32 CFGR;
+	__I  UINT32 GISR;
+	UINT8 RESERVED0[0x10];
+	__IO UINT32 FIOFADDRR[4];
+	UINT8 RESERVED1[0x90];
+	__O  UINT32 IENR[8];
+	UINT8 RESERVED2[0x60];
+	__O  UINT32 IRER[8];
+	UINT8 RESERVED3[0x60];
+	__O  UINT32 IPSR[8];
+	UINT8 RESERVED4[0x60];
+	__O  UINT32 IPRR[8];
+	UINT8 RESERVED5[0x60];
+	__IO UINT32 IACTR[8];
+	UINT8 RESERVED6[0xE0];
+	__IO UINT8 IPRIOR[256];
+	UINT8 RESERVED7[0x810];
+	__IO UINT32 SCTLR;
+}
+PFIC_Type;
 
 /* memory mapped structure for SysTick */
 typedef struct __attribute__((packed))
 {
-    __IO UINT32 CTLR;
-    __IO UINT64 CNT;
-    __IO UINT64 CMP;
-    __IO UINT32 CNTFG;
-}SysTick_Type;
+	__IO UINT32 CTLR;
+	__IO UINT64 CNT;
+	__IO UINT64 CMP;
+	__IO UINT32 CNTFG;
+}
+SysTick_Type;
 
 
 #define PFIC            ((PFIC_Type *) 0xE000E000 )
@@ -86,7 +89,7 @@ typedef struct __attribute__((packed))
  */
 RV_STATIC_INLINE void __NOP()
 {
-  __asm volatile ("nop");
+	__asm volatile ("nop");
 }
 
 /*********************************************************************
@@ -98,8 +101,9 @@ RV_STATIC_INLINE void __NOP()
  *
  * @return  none
  */
-RV_STATIC_INLINE void PFIC_EnableIRQ(IRQn_Type IRQn){
-    PFIC->IENR[((UINT32)(IRQn) >> 5)] = (1 << ((UINT32)(IRQn) & 0x1F));
+RV_STATIC_INLINE void PFIC_EnableIRQ(IRQn_Type IRQn)
+{
+	PFIC->IENR[((UINT32)(IRQn) >> 5)] = (1 << ((UINT32)(IRQn) & 0x1F));
 }
 
 /*********************************************************************
@@ -111,13 +115,14 @@ RV_STATIC_INLINE void PFIC_EnableIRQ(IRQn_Type IRQn){
  *
  * @return  none
  */
-RV_STATIC_INLINE void PFIC_DisableIRQ(IRQn_Type IRQn){
-    UINT32 t;
+RV_STATIC_INLINE void PFIC_DisableIRQ(IRQn_Type IRQn)
+{
+	UINT32 t;
 
-    t = PFIC->ITHRESDR;
-    PFIC->ITHRESDR = 0x10;
-    PFIC->IRER[((UINT32)(IRQn) >> 5)] = (1 << ((UINT32)(IRQn) & 0x1F));
-    PFIC->ITHRESDR = t;
+	t = PFIC->ITHRESDR;
+	PFIC->ITHRESDR = 0x10;
+	PFIC->IRER[((UINT32)(IRQn) >> 5)] = (1 << ((UINT32)(IRQn) & 0x1F));
+	PFIC->ITHRESDR = t;
 }
 
 /*********************************************************************
@@ -130,8 +135,9 @@ RV_STATIC_INLINE void PFIC_DisableIRQ(IRQn_Type IRQn){
  * @return  1 - Interrupt Enable
  *          0 - Interrupt Disable
  */
-RV_STATIC_INLINE UINT32 PFIC_GetStatusIRQ(IRQn_Type IRQn){
-    return((UINT32) ((PFIC->ISR[(UINT32)(IRQn) >> 5] & (1 << ((UINT32)(IRQn) & 0x1F)))?1:0));
+RV_STATIC_INLINE UINT32 PFIC_GetStatusIRQ(IRQn_Type IRQn)
+{
+	return((UINT32) ((PFIC->ISR[(UINT32)(IRQn) >> 5] & (1 << ((UINT32)(IRQn) & 0x1F)))?1:0));
 }
 
 /*********************************************************************
@@ -146,7 +152,7 @@ RV_STATIC_INLINE UINT32 PFIC_GetStatusIRQ(IRQn_Type IRQn){
  */
 RV_STATIC_INLINE UINT32 PFIC_GetPendingIRQ(IRQn_Type IRQn)
 {
-    return((UINT32) ((PFIC->IPR[(UINT32)(IRQn) >> 5] & (1 << ((UINT32)(IRQn) & 0x1F)))?1:0));
+	return((UINT32) ((PFIC->IPR[(UINT32)(IRQn) >> 5] & (1 << ((UINT32)(IRQn) & 0x1F)))?1:0));
 }
 
 /*********************************************************************
@@ -158,8 +164,9 @@ RV_STATIC_INLINE UINT32 PFIC_GetPendingIRQ(IRQn_Type IRQn)
  *
  * @return  None
  */
-RV_STATIC_INLINE void PFIC_SetPendingIRQ(IRQn_Type IRQn){
-    PFIC->IPSR[((UINT32)(IRQn) >> 5)] = (1 << ((UINT32)(IRQn) & 0x1F));
+RV_STATIC_INLINE void PFIC_SetPendingIRQ(IRQn_Type IRQn)
+{
+	PFIC->IPSR[((UINT32)(IRQn) >> 5)] = (1 << ((UINT32)(IRQn) & 0x1F));
 }
 
 /*********************************************************************
@@ -173,7 +180,7 @@ RV_STATIC_INLINE void PFIC_SetPendingIRQ(IRQn_Type IRQn){
  */
 RV_STATIC_INLINE void PFIC_ClearPendingIRQ(IRQn_Type IRQn)
 {
-    PFIC->IPRR[((UINT32)(IRQn) >> 5)] = (1 << ((UINT32)(IRQn) & 0x1F));
+	PFIC->IPRR[((UINT32)(IRQn) >> 5)] = (1 << ((UINT32)(IRQn) & 0x1F));
 }
 
 /*********************************************************************
@@ -186,8 +193,9 @@ RV_STATIC_INLINE void PFIC_ClearPendingIRQ(IRQn_Type IRQn)
  * @return  1 - Interrupt Active
  *          0 - Interrupt No Active
  */
-RV_STATIC_INLINE UINT32 PFIC_GetActive(IRQn_Type IRQn){
-    return((UINT32)((PFIC->IACTR[(UINT32)(IRQn) >> 5] & (1 << ((UINT32)(IRQn) & 0x1F)))?1:0));
+RV_STATIC_INLINE UINT32 PFIC_GetActive(IRQn_Type IRQn)
+{
+	return((UINT32)((PFIC->IACTR[(UINT32)(IRQn) >> 5] & (1 << ((UINT32)(IRQn) & 0x1F)))?1:0));
 }
 
 /*********************************************************************
@@ -201,8 +209,9 @@ RV_STATIC_INLINE UINT32 PFIC_GetActive(IRQn_Type IRQn){
  *              bit6~bit4 - subpriority
  * @return  None
  */
-RV_STATIC_INLINE void PFIC_SetPriority(IRQn_Type IRQn, UINT8 priority){
-    PFIC->IPRIOR[(UINT32)(IRQn)] = priority;
+RV_STATIC_INLINE void PFIC_SetPriority(IRQn_Type IRQn, UINT8 priority)
+{
+	PFIC->IPRIOR[(UINT32)(IRQn)] = priority;
 }
 
 /*********************************************************************
@@ -212,8 +221,9 @@ RV_STATIC_INLINE void PFIC_SetPriority(IRQn_Type IRQn, UINT8 priority){
  *
  * @return  None
  */
-__attribute__( ( always_inline ) ) RV_STATIC_INLINE void __SEV(void){
-    PFIC->SCTLR |= (1<<3);
+__attribute__( ( always_inline ) ) RV_STATIC_INLINE void __SEV(void)
+{
+	PFIC->SCTLR |= (1<<3);
 }
 
 /*********************************************************************
@@ -223,9 +233,10 @@ __attribute__( ( always_inline ) ) RV_STATIC_INLINE void __SEV(void){
  *
  * @return  None
  */
-__attribute__( ( always_inline ) ) RV_STATIC_INLINE void __WFI(void){
-    PFIC->SCTLR &= ~(1<<3);	// wfi
-    asm volatile ("wfi");
+__attribute__( ( always_inline ) ) RV_STATIC_INLINE void __WFI(void)
+{
+	PFIC->SCTLR &= ~(1<<3);	// wfi
+	asm volatile ("wfi");
 }
 
 /*********************************************************************
@@ -235,11 +246,12 @@ __attribute__( ( always_inline ) ) RV_STATIC_INLINE void __WFI(void){
  *
  * @return  None
  */
-__attribute__( ( always_inline ) ) RV_STATIC_INLINE void __WFE(void){
-    PFIC->SCTLR |= (1<<3)|(1<<5);		// (wfi->wfe)+(__sev)
-    asm volatile ("wfi");
-    PFIC->SCTLR |= (1<<3);
-    asm volatile ("wfi");
+__attribute__( ( always_inline ) ) RV_STATIC_INLINE void __WFE(void)
+{
+	PFIC->SCTLR |= (1<<3)|(1<<5);		// (wfi->wfe)+(__sev)
+	asm volatile ("wfi");
+	PFIC->SCTLR |= (1<<3);
+	asm volatile ("wfi");
 }
 
 /*********************************************************************
@@ -252,10 +264,11 @@ __attribute__( ( always_inline ) ) RV_STATIC_INLINE void __WFE(void){
  *          num - VTF Interrupt Numbers
  * @return  None
  */
-RV_STATIC_INLINE void PFIC_SetFastIRQ(UINT32 addr, IRQn_Type IRQn, UINT8 num){
-    if(num > 3)  return ;
-    PFIC->FIBADDRR = addr;
-    PFIC->FIOFADDRR[num] = ((UINT32)IRQn<<24)|(addr&0xfffff);
+RV_STATIC_INLINE void PFIC_SetFastIRQ(UINT32 addr, IRQn_Type IRQn, UINT8 num)
+{
+	if(num > 3)  return ;
+	PFIC->FIBADDRR = addr;
+	PFIC->FIOFADDRR[num] = ((UINT32)IRQn<<24)|(addr&0xfffff);
 }
 
 /*********************************************************************
@@ -265,8 +278,9 @@ RV_STATIC_INLINE void PFIC_SetFastIRQ(UINT32 addr, IRQn_Type IRQn, UINT8 num){
  *
  * @return  None
  */
-RV_STATIC_INLINE void PFIC_SystemReset(void){
-    PFIC->CFGR = PFIC_KEY3|(1<<7);
+RV_STATIC_INLINE void PFIC_SystemReset(void)
+{
+	PFIC->CFGR = PFIC_KEY3|(1<<7);
 }
 
 /*********************************************************************
@@ -275,16 +289,19 @@ RV_STATIC_INLINE void PFIC_SystemReset(void){
  * @brief   Enable Hardware Stack
  *
  * @param   NewState - DISABLE or ENABLE
- 
+
  * @return  None
  */
-RV_STATIC_INLINE void PFIC_HaltPushCfg(FunctionalState NewState){
-    if (NewState != DISABLE){
-        PFIC->CFGR = PFIC_KEY1;
-    }
-    else{
-        PFIC->CFGR = PFIC_KEY1|(1<<0);
-    }
+RV_STATIC_INLINE void PFIC_HaltPushCfg(FunctionalState NewState)
+{
+	if (NewState != DISABLE)
+	{
+		PFIC->CFGR = PFIC_KEY1;
+	}
+	else
+	{
+		PFIC->CFGR = PFIC_KEY1|(1<<0);
+	}
 }
 
 /*********************************************************************
@@ -293,16 +310,19 @@ RV_STATIC_INLINE void PFIC_HaltPushCfg(FunctionalState NewState){
  * @brief   Enable Interrupt Nesting
  *
  * @param   NewState - DISABLE or ENABLE
- 
+
  * @return  None
  */
-RV_STATIC_INLINE void PFIC_INTNestCfg(FunctionalState NewState){
-    if (NewState != DISABLE){
-        PFIC->CFGR = PFIC_KEY1;
-    }
-    else{
-        PFIC->CFGR = PFIC_KEY1|(1<<1);
-    }
+RV_STATIC_INLINE void PFIC_INTNestCfg(FunctionalState NewState)
+{
+	if (NewState != DISABLE)
+	{
+		PFIC->CFGR = PFIC_KEY1;
+	}
+	else
+	{
+		PFIC->CFGR = PFIC_KEY1|(1<<1);
+	}
 }
 
 #define SysTick_LOAD_RELOAD_Msk            (0xFFFFFFFFFFFFFFFFULL)
@@ -311,19 +331,20 @@ RV_STATIC_INLINE void PFIC_INTNestCfg(FunctionalState NewState){
 #define SysTick_CTRL_TICKINT_Msk           (1 << 1)
 #define SysTick_CTRL_ENABLE_Msk            (1 << 0)
 
-RV_STATIC_INLINE uint32_t SysTick_Config( UINT64 ticks ){
-  if ((ticks - 1) > SysTick_LOAD_RELOAD_Msk)  return (1); /* Reload value impossible */
+RV_STATIC_INLINE uint32_t SysTick_Config( UINT64 ticks )
+{
+	if ((ticks - 1) > SysTick_LOAD_RELOAD_Msk)  return (1); /* Reload value impossible */
 
-  SysTick->CMP  = ticks - 1; /* set reload register */
-  PFIC_EnableIRQ( SysTick_IRQn );
-  SysTick->CTLR  = SysTick_CTRL_RELOAD_Msk    |
-                   SysTick_CTRL_CLKSOURCE_Msk |
-                   SysTick_CTRL_TICKINT_Msk   |
-                   SysTick_CTRL_ENABLE_Msk; /* Enable SysTick IRQ and SysTick Timer */
-  return (0); /* Function successful */
+	SysTick->CMP  = ticks - 1; /* set reload register */
+	PFIC_EnableIRQ( SysTick_IRQn );
+	SysTick->CTLR  = SysTick_CTRL_RELOAD_Msk    |
+					 SysTick_CTRL_CLKSOURCE_Msk |
+					 SysTick_CTRL_TICKINT_Msk   |
+					 SysTick_CTRL_ENABLE_Msk; /* Enable SysTick IRQ and SysTick Timer */
+	return (0); /* Function successful */
 }
 
-/* Core_Exported_Functions */  
+/* Core_Exported_Functions */
 extern uint32_t __get_FFLAGS(void);
 extern void __set_FFLAGS(uint32_t value);
 extern uint32_t __get_FRM(void);

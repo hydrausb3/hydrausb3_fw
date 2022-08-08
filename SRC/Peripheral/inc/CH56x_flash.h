@@ -11,7 +11,7 @@
 #define __CH56x_FLASH_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 #include "CH56xSFR.h"

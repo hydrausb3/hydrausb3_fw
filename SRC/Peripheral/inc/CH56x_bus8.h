@@ -13,7 +13,7 @@
 #define __CH56x_BUS8_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 
@@ -37,7 +37,7 @@
 void BUS8_Init(UINT8 addroe, UINT8 width, UINT8 hold, UINT8 setup);
 
 
-	 
+
 #ifdef __cplusplus
 }
 #endif

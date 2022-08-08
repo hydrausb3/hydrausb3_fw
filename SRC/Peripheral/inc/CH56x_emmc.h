@@ -13,7 +13,7 @@
 #define __CH56x_EMMC_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* CMD code */
@@ -73,20 +73,21 @@
 #define EMMCPLUGIN (1<<12)
 
 /* EMMC information */
-typedef struct _EMMC_PARAMETER{
-UINT8  EMMCLinkSatus;   // connecting type
-UINT8  EMMCCardSatus;   // EMMC operation status
-UINT8  EMMCType;        // EMMC type
-UINT8  EMMCVoltageMode; // EMMC useful voltage type  bit0:3.3v bit1:1.8v
-UINT32 EMMC_CID[4];
-UINT32 EMMC_CSD[4];
-UINT16 EMMC_RCA;        // relative address
-UINT16 EMMCSecSize;		// single section capacity
-UINT32 EMMCSecNum;		// capacity of section
+typedef struct _EMMC_PARAMETER
+{
+	UINT8  EMMCLinkSatus;   // connecting type
+	UINT8  EMMCCardSatus;   // EMMC operation status
+	UINT8  EMMCType;        // EMMC type
+	UINT8  EMMCVoltageMode; // EMMC useful voltage type  bit0:3.3v bit1:1.8v
+	UINT32 EMMC_CID[4];
+	UINT32 EMMC_CSD[4];
+	UINT16 EMMC_RCA;        // relative address
+	UINT16 EMMCSecSize;		// single section capacity
+	UINT32 EMMCSecNum;		// capacity of section
 
-UINT8  EMMCOpErr;		// latest error status
+	UINT8  EMMCOpErr;		// latest error status
 
-}EMMC_PARAMETER, *PSD_PARAMETER;
+} EMMC_PARAMETER, *PSD_PARAMETER;
 
 //#define RESP_TYPE_48  (0<<8)
 #define RESP_TYPE_136 (1<<8)

@@ -12,7 +12,7 @@
 #define __CH56x_GPIO_H__
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 #define GPIO_Pin_0   (0x00000001) /*!< Pin 0 selected */
@@ -41,7 +41,7 @@
 #define GPIO_Pin_23  (0x00800000) /*!< Pin 23 selected */
 #define GPIO_Pin_24  (0x01000000) /*!< Pin 24 selected */
 #define GPIO_Pin_All (0xFFFFFFFF) /*!< All pins selected */
- 
+
 /**
   * @brief  GPIO mode structure configuration
   */
@@ -58,7 +58,7 @@ typedef enum
 	GPIO_Highspeed_PP_16mA,
 	GPIO_ModeOut_OP_8mA,
 	GPIO_ModeOut_OP_16mA,
-}GPIOModeTypeDef;
+} GPIOModeTypeDef;
 
 /**
   * @brief  GPIO interrupt structure configuration
@@ -70,7 +70,7 @@ typedef enum
 	GPIO_ITMode_FallEdge,  // Falling edge trigger
 	GPIO_ITMode_RiseEdge,  // Rising edge trigger
 
-}GPIOITModeTpDef;
+} GPIOITModeTpDef;
 
 /**
   * @brief  GPIOMCO structure configuration
@@ -80,14 +80,14 @@ typedef enum
 	MCO_125 = 0,
 	MCO_25 = 4,
 	MCO_2d5 = 0xC,
-}MCOMode;
+} MCOMode;
 
 void GPIOA_ModeCfg(UINT32 pin, GPIOModeTypeDef mode); /* GPIOA Port Pin Mode Configuration */
 void GPIOB_ModeCfg(UINT32 pin, GPIOModeTypeDef mode); /* GPIOB Port Pin Mode Configuration */
 #define	GPIOA_ResetBits(pin) (R32_PA_CLR |= pin) /* GPIOA Port pin output deasserted */
 #define	GPIOA_SetBits(pin) (R32_PA_OUT |= pin) /* GPIOA Port pin output set high */
 #define	GPIOB_ResetBits(pin) (R32_PB_CLR |= pin) /* GPIOB Port pin output deasserted */
-#define	GPIOB_SetBits(pin) (R32_PB_OUT |= pin) /* GPIOB Port pin output set high */	 
+#define	GPIOB_SetBits(pin) (R32_PB_OUT |= pin) /* GPIOB Port pin output set high */
 #define	GPIOA_InverseBits(pin) (R32_PA_OUT ^= pin) /* GPIOA Port pin output level flip */
 #define	GPIOB_InverseBits(pin) (R32_PB_OUT ^= pin) /* GPIOB Port pin output level flip */
 #define	GPIOA_ReadPort() (R32_PA_PIN) /* GPIOA Port 32-bit data is returned, the lower 16 bits are valid */
