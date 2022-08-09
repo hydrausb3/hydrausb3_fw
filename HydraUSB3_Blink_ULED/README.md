@@ -1,5 +1,5 @@
 ## HydraUSB3_Blink_ULED
-HydraUSB3_Blink_ULED repository contains open source (see [LICENSE](LICENSE)) test firmware for HydraUSB3 v1 board using WCH CH569W MCU.
+HydraUSB3_Blink_ULED repository contains open source (see [LICENSE](../LICENSE)) test firmware for HydraUSB3 v1 board using WCH CH569W MCU.
 * Contributor shall check [CODING_STYLE.md](../CODING_STYLE.md)
 
 For more details on HydraUSB3 v1 see https://hydrabus.com/hydrausb3-v1-0-specifications
