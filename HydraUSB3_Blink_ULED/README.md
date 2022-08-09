@@ -13,7 +13,7 @@ The aim of this example is to discover minimalist example with following feature
 
 Note:
 * The current/power consumption can be checked with a multimeter in milliamps mode connected on P4 SHUNT (requires to remove the Jumper on **P4 SHUNT**).
-* To check the power consumption at max speed 120MHz just change the #define FREQ_SYS in [User/main.c](User/main.c) to `#define FREQ_SYS (120000000)`.
+* To check the power consumption at max speed 120MHz just change the #define FREQ_SYS in [User/Main.c](User/Main.c) to `#define FREQ_SYS (120000000)`.
 
 This example is a very basic example to blink a LED called **ULED** (each 500ms)
 * When pressing continuously **UBTN** the **ULED** blink quickly (each 100ms).
