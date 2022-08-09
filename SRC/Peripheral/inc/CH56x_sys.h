@@ -2,7 +2,7 @@
 * File Name          : CH56x_sys.h
 * Author             : WCH, bvernoux
 * Version            : V1.1
-* Date               : 2022/07/30
+* Date               : 2022/08/07
 * Description        : This file contains all the functions prototypes for
 *                      SystemCoreClock, UART Printf , Delay functions .
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
@@ -31,7 +31,7 @@ typedef enum
 
 #define SYS_GetChipID() R8_CHIP_ID /* Get the chip ID class, generally a fixed value */
 #define SYS_GetAccessID() R8_SAFE_ACCESS_ID /* Get the security access ID, usually a fixed value */
-UINT8 SYS_GetInfoSta(SYS_InfoStaTypeDef i); /* Get current system information status */
+uint8_t SYS_GetInfoSta(SYS_InfoStaTypeDef i); /* Get current system information status */
 
 void Delay_Init(uint32_t systemclck);
 void mDelayuS(uint32_t n);
@@ -44,8 +44,8 @@ void SYS_ResetExecute(void); /* Perform a system software reset */
 
 //WWDG
 #define  WWDG_SetCounter(c) (R8_WDOG_COUNT = c) /* Load the initial value of watchdog count, increment type */
-void  WWDG_ITCfg(UINT8 s); /* Watchdog overflow interrupt enable */
-void  WWDG_ResetCfg(UINT8 s); /* Watchdog overflow reset enable */
+void  WWDG_ITCfg(uint8_t s); /* Watchdog overflow interrupt enable */
+void  WWDG_ResetCfg(uint8_t s); /* Watchdog overflow reset enable */
 #define  WWDG_GetFlowFlag() (R8_RST_WDOG_CTRL&RB_WDOG_INT_FLAG) /* Get the current watchdog timer overflow flag */
 void WWDG_ClearFlag(void); /* Clear watchdog interrupt flag, reload count value can also be cleared */
 

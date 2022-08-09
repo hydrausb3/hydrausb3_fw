@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_timer.ch
 * Author             : WCH, bvernoux
-* Version            : V1.1
-* Date               : 2022/07/30
+* Version            : V1.2
+* Date               : 2022/08/07
 * Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * Copyright (c) 2022 Benjamin VERNOUX
@@ -58,8 +58,8 @@ typedef enum
 
 /****************** TMR0 */
 // Timing and counting
-void TMR0_TimerInit(UINT32 t); /* Timing function initialization */
-void TMR0_EXTSignalCounterInit(UINT32 c); /* External signal count function initialization */
+void TMR0_TimerInit(uint32_t t); /* Timing function initialization */
+void TMR0_EXTSignalCounterInit(uint32_t c); /* External signal count function initialization */
 #define TMR0_GetCurrentCount() R32_TMR0_COUNT /* Get the current count value, max 67108864 */
 
 // Pulse width modulation function
@@ -82,8 +82,8 @@ void TMR0_CapInit(CapModeTypeDef cap); /* External signal capture function initi
 
 /****************** TMR1 */
 // Timing and counting
-void TMR1_TimerInit(UINT32 t); /* Timing function initialization */
-void TMR1_EXTSignalCounterInit(UINT32 c); /* External signal count function initialization */
+void TMR1_TimerInit(uint32_t t); /* Timing function initialization */
+void TMR1_EXTSignalCounterInit(uint32_t c); /* External signal count function initialization */
 #define  TMR1_GetCurrentCount() R32_TMR1_COUNT /* Get the current count value, max 67108864 */
 
 // Pulse width modulation function
@@ -97,7 +97,7 @@ void TMR1_CapInit(CapModeTypeDef cap); /* External signal capture function initi
 #define TMR1_CAPGetData() R32_TMR1_FIFO /* Get pulse data */
 #define TMR1_CAPDataCounter() R8_TMR1_FIFO_COUNT /* Get the current number of captured data */
 
-void TMR1_DMACfg(UINT8 s, UINT16 startAddr, UINT16 endAddr, DMAModeTypeDef m); /* DMA configuration  */
+void TMR1_DMACfg(uint8_t s, uint16_t startAddr, uint16_t endAddr, DMAModeTypeDef m); /* DMA configuration  */
 
 #define TMR1_Disable() (R8_TMR1_CTRL_MOD &= ~RB_TMR_COUNT_EN) /* Disable TMR1 */
 // refer to TMR1 interrupt bit define
@@ -108,8 +108,8 @@ void TMR1_DMACfg(UINT8 s, UINT16 startAddr, UINT16 endAddr, DMAModeTypeDef m); /
 
 /****************** TMR2 */
 // Timing and counting
-void TMR2_TimerInit(UINT32 t); /* Timing function initialization */
-void TMR2_EXTSignalCounterInit(UINT32 c); /* External signal count function initialization */
+void TMR2_TimerInit(uint32_t t); /* Timing function initialization */
+void TMR2_EXTSignalCounterInit(uint32_t c); /* External signal count function initialization */
 #define  TMR2_GetCurrentCount() R32_TMR2_COUNT /* Get the current count value, max 67108864 */
 
 // Pulse width modulation function
@@ -123,7 +123,7 @@ void TMR2_CapInit(CapModeTypeDef cap); /* External signal capture function initi
 #define TMR2_CAPGetData() R32_TMR2_FIFO /* Get pulse data */
 #define TMR2_CAPDataCounter() R8_TMR2_FIFO_COUNT /* Get the current number of captured data */
 
-void TMR2_DMACfg(UINT8 s, UINT16 startAddr, UINT16 endAddr, DMAModeTypeDef m); /* DMA configuration  */
+void TMR2_DMACfg(uint8_t s, uint16_t startAddr, uint16_t endAddr, DMAModeTypeDef m); /* DMA configuration  */
 
 #define TMR2_Disable() (R8_TMR2_CTRL_MOD &= ~RB_TMR_COUNT_EN) /* Disable TMR2 */
 // refer to TMR2 interrupt bit define

@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_ecdc.h
 * Author             : WCH, bvernoux
-* Version            : V1.0.1
-* Date               : 2022/07/30
+* Version            : V1.1
+* Date               : 2022/08/07
 * Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * Copyright (c) 2022 Benjamin VERNOUX
@@ -46,13 +46,13 @@ extern "C" {
 #define   RAM_TO_PERIPHERAL_ENCRY   0x04
 #define   RAM_TO_PERIPHERAL_DECRY   0x0c
 
-void ECDC_Init(UINT8 ecdcmode, UINT8 clkmode, UINT8 keylen, PUINT32 pkey, PUINT32 pcount);
-void ECDC_SetKey(PUINT32 pkey, UINT8 keylen);
-void ECDC_SetCount(PUINT32 pcount);
-void ECDC_Excute(UINT8 excutemode, UINT8 endianmode);
-void ECDC_SingleRegister(PUINT32 pWdatbuff, PUINT32 pRdatbuff);
-void ECDC_SelfDMA(UINT32 ram_addr, UINT32 ram_len);
-void ECDC_RloadCount(UINT8 excutemode, UINT8 endianmode, PUINT32 pcount);
+void ECDC_Init(uint8_t ecdcmode, uint8_t clkmode, uint8_t keylen, puint32_t pkey, puint32_t pcount);
+void ECDC_SetKey(puint32_t pkey, uint8_t keylen);
+void ECDC_SetCount(puint32_t pcount);
+void ECDC_Excute(uint8_t excutemode, uint8_t endianmode);
+void ECDC_SingleRegister(puint32_t pWdatbuff, puint32_t pRdatbuff);
+void ECDC_SelfDMA(uint32_t ram_addr, uint32_t ram_len);
+void ECDC_RloadCount(uint8_t excutemode, uint8_t endianmode, puint32_t pcount);
 
 #ifdef __cplusplus
 }

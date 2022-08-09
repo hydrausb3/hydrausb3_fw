@@ -52,9 +52,9 @@ void PWMX_CycleCfg( PWMX_CycleTypeDef cyc )
  *					DISABLE - 关闭PWM
  * @return   None
  */
-void PWMX_ACTOUT( UINT8 ch, UINT8 da, PWMX_PolarTypeDef pr, UINT8 s)
+void PWMX_ACTOUT( uint8_t ch, uint8_t da, PWMX_PolarTypeDef pr, uint8_t s)
 {
-	UINT8 i;
+	uint8_t i;
 
 	if(s == DISABLE)	R8_PWM_CTRL_MOD &= ~(ch);                        //判断PWM是否进行输出使能
 	else
@@ -63,7 +63,7 @@ void PWMX_ACTOUT( UINT8 ch, UINT8 da, PWMX_PolarTypeDef pr, UINT8 s)
 		(pr)?(R8_PWM_CTRL_MOD|=(ch<<4)):(R8_PWM_CTRL_MOD&=~(ch<<4));     //PWM输出极性控制       1：默认高电平，低有效；0：默认低电平，高有效。
 		for(i=0; i<4; i++)
 		{
-			if((ch>>i)&1)		*((PUINT8V)((&R8_PWM0_DATA)+i)) = da;
+			if((ch>>i)&1)		*((vpuint8_t)((&R8_PWM0_DATA)+i)) = da;
 		}
 		R8_PWM_CTRL_MOD |= (ch);
 	}

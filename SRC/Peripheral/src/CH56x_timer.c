@@ -20,7 +20,7 @@
  *
  * @return   None
  */
-void TMR0_TimerInit( UINT32 t )
+void TMR0_TimerInit( uint32_t t )
 {
 	R32_TMR0_CNT_END = t;
 	R8_TMR0_CTRL_MOD = RB_TMR_ALL_CLEAR;
@@ -36,7 +36,7 @@ void TMR0_TimerInit( UINT32 t )
  *
  * @return   None
  */
-void TMR1_TimerInit( UINT32 t )
+void TMR1_TimerInit( uint32_t t )
 {
 	R32_TMR1_CNT_END = t;
 	R8_TMR1_CTRL_MOD = RB_TMR_ALL_CLEAR;
@@ -52,7 +52,7 @@ void TMR1_TimerInit( UINT32 t )
  *
  * @return   None
  */
-void TMR2_TimerInit( UINT32 t )
+void TMR2_TimerInit( uint32_t t )
 {
 	R32_TMR2_CNT_END = t;
 	R8_TMR2_CTRL_MOD = RB_TMR_ALL_CLEAR;
@@ -68,7 +68,7 @@ void TMR2_TimerInit( UINT32 t )
  *
  * @return  None
  */
-void TMR0_EXTSignalCounterInit( UINT32 c )
+void TMR0_EXTSignalCounterInit( uint32_t c )
 {
 	R32_TMR0_CNT_END = c;
 	R8_TMR0_CTRL_MOD = RB_TMR_ALL_CLEAR;
@@ -84,7 +84,7 @@ void TMR0_EXTSignalCounterInit( UINT32 c )
  *
  * @return  None
  */
-void TMR1_EXTSignalCounterInit( UINT32 c )
+void TMR1_EXTSignalCounterInit( uint32_t c )
 {
 	R32_TMR1_CNT_END = c;
 	R8_TMR1_CTRL_MOD = RB_TMR_ALL_CLEAR;
@@ -100,7 +100,7 @@ void TMR1_EXTSignalCounterInit( UINT32 c )
  *
  * @return  None
  */
-void TMR2_EXTSignalCounterInit( UINT32 c )
+void TMR2_EXTSignalCounterInit( uint32_t c )
 {
 	R32_TMR2_CNT_END = c;
 	R8_TMR2_CTRL_MOD = RB_TMR_ALL_CLEAR;
@@ -226,7 +226,7 @@ void TMR2_CapInit( CapModeTypeDef cap )
  *                 DMAModeTypeDef
  * @return   None
  **/
-void TMR1_DMACfg( UINT8 s, UINT16 startAddr, UINT16 endAddr, DMAModeTypeDef m )
+void TMR1_DMACfg( uint8_t s, uint16_t startAddr, uint16_t endAddr, DMAModeTypeDef m )
 {
 	if(s == DISABLE)
 	{
@@ -253,7 +253,7 @@ void TMR1_DMACfg( UINT8 s, UINT16 startAddr, UINT16 endAddr, DMAModeTypeDef m )
  * @return   None
  **/
 
-void TMR2_DMACfg( UINT8 s, UINT16 startAddr, UINT16 endAddr, DMAModeTypeDef m )
+void TMR2_DMACfg( uint8_t s, uint16_t startAddr, uint16_t endAddr, DMAModeTypeDef m )
 {
 	if(s == DISABLE)
 	{

@@ -63,7 +63,7 @@ uint32_t addr_cnt = 0;
 #define BLINK_SLOW   250
 int blink_ms = BLINK_SLOW;
 
-int is_HostBoard; /* Return TRUE or FALSE */
+bool_t is_HostBoard; /* Return true or false */
 
 /* Required for log_init() => log_printf()/cprintf() */
 debug_log_buf_t log_buf;
@@ -94,12 +94,12 @@ int main()
 	/******************************************/
 	if(hydrausb3_pb24() == 0)
 	{
-		is_HostBoard = TRUE;
+		is_HostBoard = true;
 		i = hydrausb3_sync2boards(PA14, PA12, HYDRAUSB3_HOST);
 	}
 	else
 	{
-		is_HostBoard = FALSE;
+		is_HostBoard = false;
 		i = hydrausb3_sync2boards(PA14, PA12, HYDRAUSB3_DEVICE);
 	}
 	log_printf("SYNC %08d\n", i);
@@ -112,7 +112,7 @@ int main()
 	/****************************************/
 
 	log_printf("Start\n");
-	if(is_HostBoard == FALSE)
+	if(is_HostBoard == false)
 	{
 		log_printf("HSPI_Tx 2022/07/30 @ChipID=%02X\n", R8_CHIP_ID );
 	}
@@ -122,7 +122,7 @@ int main()
 	}
 	log_printf("FSYS=%d\n", FREQ_SYS);
 
-	if (is_HostBoard ==  FALSE) // HOST TX Mode
+	if (is_HostBoard ==  false) // HOST TX Mode
 	{
 		log_printf("HSPI Host Data_Size=%d\n", Data_Size);
 		HSPI_DoubleDMA_Init(HSPI_HOST, RB_HSPI_DAT32_MOD, TX_DMA_Addr0, TX_DMA_Addr1, DMA_Tx_Len);
@@ -131,7 +131,7 @@ int main()
 		// Write RAMX
 		for(i = 0; i < 8192; i++) // 8192*4 = 32K
 		{
-			*(UINT32*)(0x20020000+i*4) = (i + 0x55555555);
+			*(uint32_t*)(0x20020000+i*4) = (i + 0x55555555);
 		}
 
 		log_printf("Wait 100us\n"); /* Wait 100us RX is ready before to TX */
@@ -157,7 +157,7 @@ int main()
 				// Write RAMX
 				for(i=0; i<8192; i++) // 8192*4 = 32K
 				{
-					*(UINT32*)(0x20020000+i*4) = i + 0x55555555;
+					*(uint32_t*)(0x20020000+i*4) = i + 0x55555555;
 				}
 				log_printf("Start Tx 32K\n");
 				HSPI_DMA_Tx();
@@ -209,7 +209,7 @@ int main()
 				for(i = 0; i < 8192; i++) // 8192*4 = 32K
 				{
 					uint32_t val_u32;
-					val_u32 = *(UINT32*)(0x20020000+i*4);
+					val_u32 = *(uint32_t*)(0x20020000+i*4);
 					if(val_u32 != (i + 0x55555555))
 					{
 						Rx_Verify_Flag = 1;
@@ -244,7 +244,7 @@ int main()
 			log_printf("Clear RAMX 32K\n");
 			for(i=0; i<8192; i++) // 8192*4 = 32K
 			{
-				*(UINT32*)(0x20020000+i*4) = 0;
+				*(uint32_t*)(0x20020000+i*4) = 0;
 			}
 			log_printf("DMA_RX_Addr0[0]=0x%08X [8191]=0x%08X\n",
 					   ((uint32_t*)RX_DMA_Addr0)[0], ((uint32_t*)RX_DMA_Addr0)[8191]);
@@ -280,7 +280,7 @@ void HSPI_IRQHandler(void)
 	{
 		ULED_ON();
 		R8_HSPI_INT_FLAG = RB_HSPI_IF_T_DONE;  // Clear Interrupt
-		if (is_HostBoard ==  FALSE) // HOST TX Mode
+		if (is_HostBoard ==  false) // HOST TX Mode
 		{
 			Tx_Cnt++;
 			addr_cnt++;

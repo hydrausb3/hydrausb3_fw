@@ -1,7 +1,7 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_flash.h
 * Author             : Hans Baier
-* Version            : V1.1.1
+* Version            : V1.2
 * Date               : 2022/08/07
 * Description        : Contains functions for reading and writing flash
 * Copyright (c) 2022 Hans Baier
@@ -17,13 +17,13 @@ extern "C" {
 
 #include "CH56xSFR.h"
 
-UINT8  FLASH_ROMA_ReadByte(UINT32 addr);
-UINT32 FLASH_ROMA_ReadWord(UINT32 addr);
-UINT8  FLASH_ROMA_READ(UINT32 StartAddr, PUINT32 Buffer, UINT32 Length);
+uint8_t  FLASH_ROMA_ReadByte(uint32_t addr);
+uint32_t FLASH_ROMA_ReadWord(uint32_t addr);
+uint8_t  FLASH_ROMA_READ(uint32_t StartAddr, puint32_t Buffer, uint32_t Length);
 
-UINT8  FLASH_ROMA_WRITE(UINT32 StartAddr, PVOID Buffer, UINT32 Length);
-UINT8  FLASH_ROMA_ERASE_4K(UINT32 Addr);
-UINT8  FLASH_ROMA_ERASE_64K(UINT32 Addr);
+uint8_t  FLASH_ROMA_WRITE(uint32_t StartAddr, void* Buffer, uint32_t Length);
+uint8_t  FLASH_ROMA_ERASE_4K(uint32_t Addr);
+uint8_t  FLASH_ROMA_ERASE_64K(uint32_t Addr);
 
 #ifdef __cplusplus
 }

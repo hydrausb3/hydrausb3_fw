@@ -201,13 +201,13 @@ void UART3_DefInit( void )
  *
  * @return   None
  */
-void UART0_BaudRateCfg( UINT32 baudrate )
+void UART0_BaudRateCfg( uint32_t baudrate )
 {
-	UINT32	x;
+	uint32_t	x;
 
 	x = 10 * FREQ_SYS / 8 / baudrate;
 	x = ( x + 5 ) / 10;
-	R16_UART0_DL = (UINT16)x;
+	R16_UART0_DL = (uint16_t)x;
 }
 
 /*******************************************************************************
@@ -217,13 +217,13 @@ void UART0_BaudRateCfg( UINT32 baudrate )
  *
  * @return   None
  */
-void UART1_BaudRateCfg( UINT32 baudrate )
+void UART1_BaudRateCfg( uint32_t baudrate )
 {
-	UINT32	x;
+	uint32_t	x;
 
 	x = 10 * FREQ_SYS / 8 / baudrate;
 	x = ( x + 5 ) / 10;
-	R16_UART1_DL = (UINT16)x;
+	R16_UART1_DL = (uint16_t)x;
 }
 
 /*******************************************************************************
@@ -233,13 +233,13 @@ void UART1_BaudRateCfg( UINT32 baudrate )
  *
  * @return   None
  */
-void UART2_BaudRateCfg( UINT32 baudrate )
+void UART2_BaudRateCfg( uint32_t baudrate )
 {
-	UINT32	x;
+	uint32_t	x;
 
 	x = 10 * FREQ_SYS / 8 / baudrate;
 	x = ( x + 5 ) / 10;
-	R16_UART2_DL = (UINT16)x;
+	R16_UART2_DL = (uint16_t)x;
 }
 
 /*******************************************************************************
@@ -249,13 +249,13 @@ void UART2_BaudRateCfg( UINT32 baudrate )
  *
  * @return   None
  */
-void UART3_BaudRateCfg( UINT32 baudrate )
+void UART3_BaudRateCfg( uint32_t baudrate )
 {
-	UINT32	x;
+	uint32_t	x;
 
 	x = 10 * FREQ_SYS / 8 / baudrate;
 	x = ( x + 5 ) / 10;
-	R16_UART3_DL = (UINT16)x;
+	R16_UART3_DL = (uint16_t)x;
 }
 
 /*******************************************************************************
@@ -329,7 +329,7 @@ void UART3_ByteTrigCfg( UARTByteTRIGTypeDef b )
  *					RB_IER_RECV_RDY   - Receive data interrupt
  * @return   None
  **/
-void UART0_INTCfg( UINT8 s,  UINT8 i )
+void UART0_INTCfg( uint8_t s,  uint8_t i )
 {
 	if( s )
 	{
@@ -358,7 +358,7 @@ void UART0_INTCfg( UINT8 s,  UINT8 i )
  *
  * @return   None
  **/
-void UART1_INTCfg( UINT8 s,  UINT8 i )
+void UART1_INTCfg( uint8_t s,  uint8_t i )
 {
 	if( s )
 	{
@@ -387,7 +387,7 @@ void UART1_INTCfg( UINT8 s,  UINT8 i )
  *
  * @return   None
  **/
-void UART2_INTCfg( UINT8 s,  UINT8 i )
+void UART2_INTCfg( uint8_t s,  uint8_t i )
 {
 	if( s )
 	{
@@ -416,7 +416,7 @@ void UART2_INTCfg( UINT8 s,  UINT8 i )
  *
  * @return   None
  **/
-void UART3_INTCfg( UINT8 s,  UINT8 i )
+void UART3_INTCfg( uint8_t s,  uint8_t i )
 {
 	if( s )
 	{
@@ -486,9 +486,9 @@ void UART3_Reset( void )
  *         l - Length of data to be sent
  * @return   None
  */
-void UART0_SendString( PUINT8 buf, UINT16 l )
+void UART0_SendString( puint8_t buf, uint16_t l )
 {
-	UINT16 len = l;
+	uint16_t len = l;
 
 	while(len)
 	{
@@ -509,9 +509,9 @@ void UART0_SendString( PUINT8 buf, UINT16 l )
  *         l - Length of data to be sent
  * @return   None
  */
-void UART1_SendString( PUINT8 buf, UINT16 l )
+void UART1_SendString( puint8_t buf, uint16_t l )
 {
-	UINT16 len = l;
+	uint16_t len = l;
 
 	while(len)
 	{
@@ -532,9 +532,9 @@ void UART1_SendString( PUINT8 buf, UINT16 l )
  *         l - Length of data to be sent
  * @return   None
  */
-void UART2_SendString( PUINT8 buf, UINT16 l )
+void UART2_SendString( puint8_t buf, uint16_t l )
 {
-	UINT16 len = l;
+	uint16_t len = l;
 
 	while(len)
 	{
@@ -555,9 +555,9 @@ void UART2_SendString( PUINT8 buf, UINT16 l )
  *         l - Length of data to be sent
  * @return   None
  */
-void UART3_SendString( PUINT8 buf, UINT16 l )
+void UART3_SendString( puint8_t buf, uint16_t l )
 {
-	UINT16 len = l;
+	uint16_t len = l;
 
 	while(len)
 	{
@@ -578,9 +578,9 @@ void UART3_SendString( PUINT8 buf, UINT16 l )
  *
  * @return Read data length
  */
-UINT16 UART0_RecvString( PUINT8 buf )
+uint16_t UART0_RecvString( puint8_t buf )
 {
-	UINT16 len = 0;
+	uint16_t len = 0;
 
 	while( R8_UART0_RFC )
 	{
@@ -600,9 +600,9 @@ UINT16 UART0_RecvString( PUINT8 buf )
  *
  * @return Read data length
  */
-UINT16 UART1_RecvString( PUINT8 buf )
+uint16_t UART1_RecvString( puint8_t buf )
 {
-	UINT16 len = 0;
+	uint16_t len = 0;
 
 	while( R8_UART1_RFC )
 	{
@@ -625,7 +625,7 @@ UINT16 UART1_RecvString( PUINT8 buf )
  */
 uint16_t UART1_rx(uint8_t* buf, int buf_len_max)
 {
-	UINT16 len = 0;
+	uint16_t len = 0;
 
 	while( R8_UART1_RFC )
 	{
@@ -653,9 +653,9 @@ uint16_t UART1_rx(uint8_t* buf, int buf_len_max)
  * @return Read data length
  */
 
-UINT16 UART2_RecvString( PUINT8 buf )
+uint16_t UART2_RecvString( puint8_t buf )
 {
-	UINT16 len = 0;
+	uint16_t len = 0;
 
 	while( R8_UART2_RFC )
 	{
@@ -678,7 +678,7 @@ UINT16 UART2_RecvString( PUINT8 buf )
  */
 uint16_t UART2_rx(uint8_t* buf, int buf_len_max)
 {
-	UINT16 len = 0;
+	uint16_t len = 0;
 
 	while( R8_UART2_RFC )
 	{
@@ -706,9 +706,9 @@ uint16_t UART2_rx(uint8_t* buf, int buf_len_max)
  * @return Read data length
  */
 
-UINT16 UART3_RecvString( PUINT8 buf )
+uint16_t UART3_RecvString( puint8_t buf )
 {
-	UINT16 len = 0;
+	uint16_t len = 0;
 
 	while( R8_UART3_RFC )
 	{
@@ -731,7 +731,7 @@ UINT16 UART3_RecvString( PUINT8 buf )
  */
 uint16_t UART3_rx(uint8_t* buf, int buf_len_max)
 {
-	UINT16 len = 0;
+	uint16_t len = 0;
 
 	while( R8_UART3_RFC )
 	{

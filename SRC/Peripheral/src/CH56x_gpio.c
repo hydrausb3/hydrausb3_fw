@@ -33,7 +33,7 @@
  *
  * @return   None
  */
-void GPIOA_ModeCfg( UINT32 pin, GPIOModeTypeDef mode )
+void GPIOA_ModeCfg( uint32_t pin, GPIOModeTypeDef mode )
 {
 	switch(mode)
 	{
@@ -139,7 +139,7 @@ void GPIOA_ModeCfg( UINT32 pin, GPIOModeTypeDef mode )
  * @return   None
  */
 
-void GPIOB_ModeCfg( UINT32 pin, GPIOModeTypeDef mode )
+void GPIOB_ModeCfg( uint32_t pin, GPIOModeTypeDef mode )
 {
 	switch(mode)
 	{
@@ -236,7 +236,7 @@ void GPIOB_ModeCfg( UINT32 pin, GPIOModeTypeDef mode )
  *
  * @return   None
  */
-void GPIOA_ITModeCfg( UINT32 pin, GPIOITModeTpDef mode )
+void GPIOA_ITModeCfg( uint32_t pin, GPIOITModeTpDef mode )
 {
 	switch( mode )
 	{
@@ -286,7 +286,7 @@ void GPIOA_ITModeCfg( UINT32 pin, GPIOITModeTpDef mode )
  * @return   None
  */
 
-void GPIOB_ITModeCfg( UINT32 pin, GPIOITModeTpDef mode )
+void GPIOB_ITModeCfg( uint32_t pin, GPIOITModeTpDef mode )
 {
 	switch( mode )
 	{
@@ -484,7 +484,7 @@ void GPIOB_ITModeCfg( UINT32 pin, GPIOITModeTpDef mode )
  *					RB_PIN_MII	  -  Ethernet -  RMII ->  RGMII
  * @return   None
  */
-void GPIOPinRemap( UINT8 s, UINT16 perph )
+void GPIOPinRemap( uint8_t s, uint16_t perph )
 {
 	if( s )     R8_PIN_ALTERNATE |= perph;
 	else        R8_PIN_ALTERNATE &= ~perph;
@@ -502,7 +502,7 @@ void GPIOPinRemap( UINT8 s, UINT16 perph )
  *	                MCO_2d5,
  * @return   None
  */
-void GPIOMco( UINT8 s, UINT16 freq )
+void GPIOMco( uint8_t s, uint16_t freq )
 {
 	if(s)
 	{

@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_pwr.h
 * Author             : WCH, bvernoux
-* Version            : V1.0.1
-* Date               : 2022/07/30
+* Version            : V1.1
+* Date               : 2022/08/07
 * Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * Copyright (c) 2022 Benjamin VERNOUX
@@ -38,8 +38,8 @@ extern "C" {
 #define BIT_SLP_CLK_ETH   RB_SLP_CLK_ETH    /*!< ETH peripher clk bit */
 #define BIT_SLP_CLK_ECDC  RB_SLP_CLK_ECDC   /*!< ECDC peripher clk bit */
 
-void PWR_PeriphClkCfg( UINT8 s, UINT16 perph );    /* Peripheral Clock Control Bits */
-void PWR_PeriphWakeUpCfg( UINT8 s, UINT16 perph ); /* Sleep wake source configuration */
+void PWR_PeriphClkCfg( uint8_t s, uint16_t perph );    /* Peripheral Clock Control Bits */
+void PWR_PeriphWakeUpCfg( uint8_t s, uint16_t perph ); /* Sleep wake source configuration */
 void LowPower_Idle( void );                        /* Low Power - IDLE Mode */
 void LowPower_Halt( void );                        /* Low Power - Halt Mode */
 void LowPower_Sleep( void );                       /* Low Power - Sleep Mode */

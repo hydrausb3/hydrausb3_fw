@@ -99,9 +99,9 @@ void SystemInit(uint32_t systemclck)
  *
  * @return   Hz
  */
-UINT32 GetSysClock( void )
+uint32_t GetSysClock( void )
 {
-	UINT8  rev;
+	uint8_t  rev;
 
 	rev = R8_CLK_PLL_DIV & 0x0F;
 	if(R8_CLK_CFG_CTRL & RB_CLK_SEL_PLL)

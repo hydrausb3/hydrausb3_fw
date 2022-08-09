@@ -23,7 +23,7 @@
 
  * @return   None
  */
-void PWR_PeriphClkCfg( UINT8 s, UINT16 perph )
+void PWR_PeriphClkCfg( uint8_t s, uint16_t perph )
 {
 	if( s == DISABLE )
 	{
@@ -56,7 +56,7 @@ void PWR_PeriphClkCfg( UINT8 s, UINT16 perph )
  *                 ALL              -  以上所有
  * @return   None
  */
-void PWR_PeriphWakeUpCfg( UINT8 s, UINT16 perph )
+void PWR_PeriphWakeUpCfg( uint8_t s, uint16_t perph )
 {
 	if( s == DISABLE )
 	{

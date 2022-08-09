@@ -1,13 +1,13 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_bus8.h
-* Author             : WCH
-* Version            : V1.0
-* Date               : 2020/07/31
+* Author             : WCH, bvernoux
+* Version            : V1.1
+* Date               : 2022/08/07
 * Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
+* Copyright (c) 2022 Benjamin VERNOUX
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
-
 
 #ifndef __CH56x_BUS8_H__
 #define __CH56x_BUS8_H__
@@ -15,7 +15,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 #define ADDR_NONE	0x00
 #define ADDR_6		0x04
@@ -33,14 +32,10 @@ extern "C" {
 #define SETUP_2		0x00
 #define SETUP_3		0x80
 
-
-void BUS8_Init(UINT8 addroe, UINT8 width, UINT8 hold, UINT8 setup);
-
-
+void BUS8_Init(uint8_t addroe, uint8_t width, uint8_t hold, uint8_t setup);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif  // __CH56x_BUS8_H__	
-

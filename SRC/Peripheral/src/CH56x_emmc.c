@@ -16,7 +16,7 @@
  *
  * @return   OP_SUCCESS
  */
-UINT8 EMMCIO0Init( void )
+uint8_t EMMCIO0Init( void )
 {
 	/* GPIO configuration */
 	R32_PB_DRV |= bSDCMD;       //Command Line
@@ -61,7 +61,7 @@ UINT8 EMMCIO0Init( void )
  *
  * @return   CMD_NULL
  **/
-UINT8 CheckCMDComp( PSD_PARAMETER pEMMCPara )
+uint8_t CheckCMDComp( PSD_PARAMETER pEMMCPara )
 {
 	if(R16_EMMC_INT_FG & RB_EMMC_IF_CMDDONE)
 	{
@@ -83,8 +83,8 @@ UINT8 CheckCMDComp( PSD_PARAMETER pEMMCPara )
  */
 void EMMCResetIdle( PSD_PARAMETER pEMMCPara )
 {
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
 
 	cmd_arg_val = 0x0;
 	cmd_set_val = 0x0|EMMC_CMD0;
@@ -102,13 +102,13 @@ void EMMCResetIdle( PSD_PARAMETER pEMMCPara )
  *
  * @return   CMD_SUCCESS
  */
-UINT8 EMMCReadOCR( PSD_PARAMETER pEMMCPara )
+uint8_t EMMCReadOCR( PSD_PARAMETER pEMMCPara )
 {
-	UINT8  i;
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
-	UINT8  sta = 0;
-	UINT32 cmd_rsp_val;  //command returned value
+	uint8_t  i;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
+	uint8_t  sta = 0;
+	uint32_t cmd_rsp_val;  //command returned value
 
 	for(i=0; i<100; i++)
 	{
@@ -155,11 +155,11 @@ UINT8 EMMCReadOCR( PSD_PARAMETER pEMMCPara )
  *
  * @return   OP_SUCCESS
  **/
-UINT8 EMMCReadCID( PSD_PARAMETER pEMMCPara )
+uint8_t EMMCReadCID( PSD_PARAMETER pEMMCPara )
 {
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
-	UINT8  sta;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
+	uint8_t  sta;
 
 	cmd_arg_val = 0;
 	cmd_set_val = 0 |
@@ -192,11 +192,11 @@ UINT8 EMMCReadCID( PSD_PARAMETER pEMMCPara )
  *
  * @return   OP_SUCCESS
  */
-UINT8 EMMCSetRCA( PSD_PARAMETER pEMMCPara )
+uint8_t EMMCSetRCA( PSD_PARAMETER pEMMCPara )
 {
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
-	UINT8  sta;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
+	uint8_t  sta;
 
 	cmd_arg_val = 0xAAAA0000;
 	cmd_set_val = RB_EMMC_CKIDX |
@@ -227,12 +227,12 @@ UINT8 EMMCSetRCA( PSD_PARAMETER pEMMCPara )
  *
  * @return   OP_SUCCESS
  */
-UINT8 EMMCReadCSD( PSD_PARAMETER pEMMCPara )
+uint8_t EMMCReadCSD( PSD_PARAMETER pEMMCPara )
 {
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
-	UINT8  sta;
-	UINT32 disk_block_num = 0;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
+	uint8_t  sta;
+	uint32_t disk_block_num = 0;
 
 	cmd_arg_val = pEMMCPara->EMMC_RCA<<16;
 	cmd_set_val = 0 |
@@ -281,11 +281,11 @@ UINT8 EMMCReadCSD( PSD_PARAMETER pEMMCPara )
  *
  * @return   OP_SUCCESS
  */
-UINT8 SelectEMMCCard(PSD_PARAMETER pEMMCPara)
+uint8_t SelectEMMCCard(PSD_PARAMETER pEMMCPara)
 {
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
-	UINT8  sta;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
+	uint8_t  sta;
 
 	cmd_arg_val = pEMMCPara->EMMC_RCA<<16;
 	cmd_set_val = RB_EMMC_CKIDX |
@@ -301,11 +301,11 @@ UINT8 SelectEMMCCard(PSD_PARAMETER pEMMCPara)
 	return sta;
 }
 
-UINT8 ReadEMMCStatus(PSD_PARAMETER pEMMCPara)
+uint8_t ReadEMMCStatus(PSD_PARAMETER pEMMCPara)
 {
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
-	UINT8  sta;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
+	uint8_t  sta;
 
 	cmd_arg_val = pEMMCPara->EMMC_RCA<<16;
 	cmd_set_val = RB_EMMC_CKIDX |
@@ -331,11 +331,11 @@ UINT8 ReadEMMCStatus(PSD_PARAMETER pEMMCPara)
  *
  * @return   OP_SUCCESS
  */
-UINT8 EMMCSetBusWidth(PSD_PARAMETER pEMMCPara, UINT8 bus_mode)
+uint8_t EMMCSetBusWidth(PSD_PARAMETER pEMMCPara, uint8_t bus_mode)
 {
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
-	UINT8  sta;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
+	uint8_t  sta;
 
 	if(bus_mode == 0)       cmd_arg_val = 0x03B70100;
 	else                    cmd_arg_val = 0x03B70200;
@@ -352,11 +352,11 @@ UINT8 EMMCSetBusWidth(PSD_PARAMETER pEMMCPara, UINT8 bus_mode)
 	return sta;
 }
 
-UINT8 EMMCSetHighSpeed(PSD_PARAMETER pEMMCPara)
+uint8_t EMMCSetHighSpeed(PSD_PARAMETER pEMMCPara)
 {
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
-	UINT8  sta;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
+	uint8_t  sta;
 
 	cmd_arg_val = 0x03B90100;
 	cmd_set_val = RB_EMMC_CKIDX |
@@ -382,10 +382,10 @@ UINT8 EMMCSetHighSpeed(PSD_PARAMETER pEMMCPara)
  * @return   OP_SUCCESS
  **/
 #define  SD2CMD   EMMCSendCmd
-__attribute__ ((aligned(8))) UINT8  buf[512]   __attribute__((section(".DMADATA")));
-UINT8 EMMCCardConfig( PSD_PARAMETER pEMMCPara )
+__attribute__ ((aligned(8))) uint8_t  buf[512]   __attribute__((section(".DMADATA")));
+uint8_t EMMCCardConfig( PSD_PARAMETER pEMMCPara )
 {
-	UINT8  sta;
+	uint8_t  sta;
 	//cmd0
 	EMMCResetIdle( pEMMCPara );
 	mDelaymS(30);
@@ -410,7 +410,7 @@ UINT8 EMMCCardConfig( PSD_PARAMETER pEMMCPara )
 	{
 		sta = EMMCCardReadEXCSD( pEMMCPara, buf );
 		if(sta!=OP_SUCCESS)     return OP_FAILED;
-		pEMMCPara->EMMCSecNum = *((PUINT32)&buf[212]);      // SEC_COUNT [215:212] MSB-LSB
+		pEMMCPara->EMMCSecNum = *((puint32_t)&buf[212]);      // SEC_COUNT [215:212] MSB-LSB
 	}
 	//cmd6
 	sta = EMMCSetBusWidth(pEMMCPara, 1);
@@ -432,9 +432,9 @@ UINT8 EMMCCardConfig( PSD_PARAMETER pEMMCPara )
 	return OP_SUCCESS;
 }
 
-UINT8 EMMCCardConfig_N( PSD_PARAMETER pEMMCPara )
+uint8_t EMMCCardConfig_N( PSD_PARAMETER pEMMCPara )
 {
-	UINT8  sta;
+	uint8_t  sta;
 
 	EMMCResetIdle( pEMMCPara );
 	mDelaymS(30);
@@ -478,7 +478,7 @@ UINT8 EMMCCardConfig_N( PSD_PARAMETER pEMMCPara )
 	{
 		sta = EMMCCardReadEXCSD( pEMMCPara, buf );
 		if(sta!=OP_SUCCESS)     return OP_FAILED;
-		pEMMCPara->EMMCSecNum = *((PUINT32)&buf[212]);      // SEC_COUNT [215:212] MSB-LSB
+		pEMMCPara->EMMCSecNum = *((puint32_t)&buf[212]);      // SEC_COUNT [215:212] MSB-LSB
 	}
 	sta = EMMCSetBusWidth(pEMMCPara, 1);
 	if(sta!=CMD_SUCCESS)    return OP_FAILED;
@@ -502,7 +502,7 @@ UINT8 EMMCCardConfig_N( PSD_PARAMETER pEMMCPara )
  *
  * @return   OP_SUCCESS
 *******************************************************************************/
-UINT8 EMMCIOTransErrorDeal( PSD_PARAMETER pEMMCPara )
+uint8_t EMMCIOTransErrorDeal( PSD_PARAMETER pEMMCPara )
 {
 	pEMMCPara->EMMCOpErr = R16_EMMC_INT_FG;
 	R16_EMMC_INT_FG = 0xffff;
@@ -520,12 +520,12 @@ UINT8 EMMCIOTransErrorDeal( PSD_PARAMETER pEMMCPara )
  *
  * @return   OP_SUCCESS
  **/
-UINT8 EMMCCardReadEXCSD( PSD_PARAMETER pEMMCPara, PUINT8 pRdatbuf )
+uint8_t EMMCCardReadEXCSD( PSD_PARAMETER pEMMCPara, puint8_t pRdatbuf )
 {
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
 
-	R32_EMMC_DMA_BEG1 = (UINT32)pRdatbuf;
+	R32_EMMC_DMA_BEG1 = (uint32_t)pRdatbuf;
 	R32_EMMC_TRAN_MODE = 0;
 	R32_EMMC_BLOCK_CFG = 512<<16 | 1;
 
@@ -559,14 +559,14 @@ UINT8 EMMCCardReadEXCSD( PSD_PARAMETER pEMMCPara, PUINT8 pRdatbuf )
  *
  * @return   OP_SUCCESS
  **/
-UINT8 EMMCCardReadOneSec( PSD_PARAMETER pEMMCPara, PUINT8 pRdatbuf, UINT32 Lbaaddr )
+uint8_t EMMCCardReadOneSec( PSD_PARAMETER pEMMCPara, puint8_t pRdatbuf, uint32_t Lbaaddr )
 {
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
 
 	if(Lbaaddr > (pEMMCPara->EMMCSecNum))       return  OP_INVALID_ADD;
 
-	R32_EMMC_DMA_BEG1 = (UINT32)pRdatbuf;
+	R32_EMMC_DMA_BEG1 = (uint32_t)pRdatbuf;
 	R32_EMMC_TRAN_MODE = 0;
 	R32_EMMC_BLOCK_CFG = (pEMMCPara->EMMCSecSize)<<16 | 1;
 
@@ -600,15 +600,15 @@ UINT8 EMMCCardReadOneSec( PSD_PARAMETER pEMMCPara, PUINT8 pRdatbuf, UINT32 Lbaad
  *
  * @return   OP_SUCCESS
  */
-UINT8 EMMCCardReadMulSec( PSD_PARAMETER pEMMCPara, PUINT16 pReqnum, PUINT8 pRdatbuf, UINT32 Lbaaddr )
+uint8_t EMMCCardReadMulSec( PSD_PARAMETER pEMMCPara, puint16_t pReqnum, puint8_t pRdatbuf, uint32_t Lbaaddr )
 {
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
-	UINT8  sta;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
+	uint8_t  sta;
 
 	if(Lbaaddr > (pEMMCPara->EMMCSecNum))       return  OP_INVALID_ADD;
 
-	R32_EMMC_DMA_BEG1 = (UINT32)pRdatbuf;                                       //data buffer address
+	R32_EMMC_DMA_BEG1 = (uint32_t)pRdatbuf;                                       //data buffer address
 	R32_EMMC_TRAN_MODE = 0;                                                     //EMMC to controller
 	R32_EMMC_BLOCK_CFG = (pEMMCPara->EMMCSecSize)<<16 | (*pReqnum);
 
@@ -643,7 +643,7 @@ UINT8 EMMCCardReadMulSec( PSD_PARAMETER pEMMCPara, PUINT16 pReqnum, PUINT8 pRdat
 	}
 
 	R16_EMMC_INT_FG = 0xffff;
-	*pReqnum = (UINT16)R32_EMMC_STATUS;     // successfully transferred sections
+	*pReqnum = (uint16_t)R32_EMMC_STATUS;     // successfully transferred sections
 
 	return  sta;
 }
@@ -657,11 +657,11 @@ UINT8 EMMCCardReadMulSec( PSD_PARAMETER pEMMCPara, PUINT16 pReqnum, PUINT8 pRdat
  *         Lbaaddr -
  * @return   OP_SUCCESS
  **/
-UINT8 EMMCCardWriteMulSec( PSD_PARAMETER pEMMCPara, PUINT16 pReqnum, PUINT8 pWdatbuf, UINT32 Lbaaddr )
+uint8_t EMMCCardWriteMulSec( PSD_PARAMETER pEMMCPara, puint16_t pReqnum, puint8_t pWdatbuf, uint32_t Lbaaddr )
 {
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
-	UINT8  sta;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
+	uint8_t  sta;
 
 	if(Lbaaddr > (pEMMCPara->EMMCSecNum))       return  OP_INVALID_ADD;
 
@@ -682,7 +682,7 @@ UINT8 EMMCCardWriteMulSec( PSD_PARAMETER pEMMCPara, PUINT16 pReqnum, PUINT8 pWda
 	//DAT
 
 	R32_EMMC_TRAN_MODE = RB_EMMC_DMA_DIR;
-	R32_EMMC_DMA_BEG1 = (UINT32)pWdatbuf;
+	R32_EMMC_DMA_BEG1 = (uint32_t)pWdatbuf;
 	R32_EMMC_BLOCK_CFG = (pEMMCPara->EMMCSecSize)<<16 | (*pReqnum);
 
 	while(1)
@@ -714,7 +714,7 @@ UINT8 EMMCCardWriteMulSec( PSD_PARAMETER pEMMCPara, PUINT16 pReqnum, PUINT8 pWda
 	}
 
 	R16_EMMC_INT_FG = 0xffff;
-	*pReqnum = (UINT16)R32_EMMC_STATUS;
+	*pReqnum = (uint16_t)R32_EMMC_STATUS;
 
 	return  sta;
 }
@@ -731,11 +731,11 @@ UINT8 EMMCCardWriteMulSec( PSD_PARAMETER pEMMCPara, PUINT16 pReqnum, PUINT8 pWda
  *
  * @return   None
  ***/
-UINT8 AES_EMMCWriteMulSec( PSD_PARAMETER pEMMCPara, PUINT32 pReqnum, PUINT32 pWdatbuf, UINT32 Lbaaddr, UINT8 excutemode, UINT8 endianmode, PUINT32 pcount)//闁哄洤鐡ㄩ弫鍏肩閸℃ɑ娈堕柟璇″枤鐞氼偊宕归敓锟�?
+uint8_t AES_EMMCWriteMulSec( PSD_PARAMETER pEMMCPara, puint32_t pReqnum, puint32_t pWdatbuf, uint32_t Lbaaddr, uint8_t excutemode, uint8_t endianmode, puint32_t pcount)//闁哄洤鐡ㄩ弫鍏肩閸℃ɑ娈堕柟璇″枤鐞氼偊宕归敓锟�?
 {
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
-	UINT8  sta;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
+	uint8_t  sta;
 
 	if(Lbaaddr > (pEMMCPara->EMMCSecNum))       return  OP_INVALID_ADD;
 
@@ -758,7 +758,7 @@ UINT8 AES_EMMCWriteMulSec( PSD_PARAMETER pEMMCPara, PUINT32 pReqnum, PUINT32 pWd
 	ECDC_Excute(excutemode, endianmode);
 
 	R32_EMMC_TRAN_MODE |= RB_EMMC_DMA_DIR;
-	R32_EMMC_DMA_BEG1 = (UINT32)pWdatbuf;
+	R32_EMMC_DMA_BEG1 = (uint32_t)pWdatbuf;
 	R32_EMMC_BLOCK_CFG = (pEMMCPara->EMMCSecSize)<<16 | (*pReqnum);
 
 	while(1)
@@ -793,7 +793,7 @@ UINT8 AES_EMMCWriteMulSec( PSD_PARAMETER pEMMCPara, PUINT32 pReqnum, PUINT32 pWd
 	}
 
 	R16_EMMC_INT_FG = 0xffff;
-	*pReqnum = (UINT16)R32_EMMC_STATUS;     //the number of blocks transferred successfully
+	*pReqnum = (uint16_t)R32_EMMC_STATUS;     //the number of blocks transferred successfully
 
 	return  sta;
 }
@@ -811,10 +811,10 @@ UINT8 AES_EMMCWriteMulSec( PSD_PARAMETER pEMMCPara, PUINT32 pReqnum, PUINT32 pWd
  * @return   OP_SUCCESS - suc
  *           other - err
  **/
-UINT8 AES_EMMCReadMulSec( PSD_PARAMETER pEMMCPara, PUINT32 pReqnum, PUINT32 pRdatbuf, UINT32 Lbaaddr, UINT8 excutemode, UINT8 endianmode, PUINT32 pcount)//闁哄洤鐡ㄩ弫鍏肩閸℃ɑ娈堕柟璇″枤鐞氼偊宕归敓锟�?
+uint8_t AES_EMMCReadMulSec( PSD_PARAMETER pEMMCPara, puint32_t pReqnum, puint32_t pRdatbuf, uint32_t Lbaaddr, uint8_t excutemode, uint8_t endianmode, puint32_t pcount)//闁哄洤鐡ㄩ弫鍏肩閸℃ɑ娈堕柟璇″枤鐞氼偊宕归敓锟�?
 {
-	UINT32 cmd_arg_val;
-	UINT16 cmd_set_val;
+	uint32_t cmd_arg_val;
+	uint16_t cmd_set_val;
 
 	if(Lbaaddr > (pEMMCPara->EMMCSecNum))       return  OP_INVALID_ADD;
 
@@ -828,7 +828,7 @@ UINT8 AES_EMMCReadMulSec( PSD_PARAMETER pEMMCPara, PUINT32 pReqnum, PUINT32 pRda
 
 	ECDC_Excute(excutemode, endianmode);
 
-	R32_EMMC_DMA_BEG1 = (UINT32)pRdatbuf;
+	R32_EMMC_DMA_BEG1 = (uint32_t)pRdatbuf;
 	R32_EMMC_TRAN_MODE &= ~RB_EMMC_DMA_DIR;
 	R32_EMMC_BLOCK_CFG = (pEMMCPara->EMMCSecSize)<<16 | (*pReqnum);
 
@@ -860,7 +860,7 @@ UINT8 AES_EMMCReadMulSec( PSD_PARAMETER pEMMCPara, PUINT32 pReqnum, PUINT32 pRda
 
 
 	R16_EMMC_INT_FG = 0xffff;
-	*pReqnum = (UINT16)R32_EMMC_STATUS;     //the number of blocks transferred successfully
+	*pReqnum = (uint16_t)R32_EMMC_STATUS;     //the number of blocks transferred successfully
 
 	return  OP_SUCCESS;
 }

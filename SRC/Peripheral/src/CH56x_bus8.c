@@ -42,7 +42,7 @@ void BUS8_GPIO_Init(void)
  *
  * @return  None
  */
-void BUS8_Init(UINT8 addroe, UINT8 width, UINT8 hold, UINT8 setup)
+void BUS8_Init(uint8_t addroe, uint8_t width, uint8_t hold, uint8_t setup)
 {
 	R8_XBUS_CONFIG =  addroe | width | hold | setup;
 	R8_XBUS_CONFIG |= RB_XBUS_ENABLE;	//Enable

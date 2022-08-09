@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_clk.h
 * Author             : WCH, bvernoux
-* Version            : V1.1
-* Date               : 2022/07/30
+* Version            : V1.2
+* Date               : 2022/08/07
 * Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * Copyright (c) 2022 Benjamin VERNOUX
@@ -28,7 +28,7 @@ enum
 };
 
 void SystemInit(uint32_t systemclck); /* System clock initialization */
-UINT32 GetSysClock( void ); /* Get the current system clock */
+uint32_t GetSysClock( void ); /* Get the current system clock */
 
 #ifdef __cplusplus
 }

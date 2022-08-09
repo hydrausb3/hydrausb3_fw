@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_pwm.h
 * Author             : WCH, bvernoux
-* Version            : V1.0.1
-* Date               : 2022/07/30
+* Version            : V1.1
+* Date               : 2022/08/07
 * Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * Copyright (c) 2022 Benjamin VERNOUX
@@ -51,7 +51,7 @@ void PWMX_CycleCfg(PWMX_CycleTypeDef cyc); // PWM output waveform period configu
 #define PWM3_ActDataWidth(d) (R8_PWM3_DATA = d) //PWM3 Effective data pulse width
 
 // Duty Cycle = Data Valid Width / Waveform Period
-void PWMX_ACTOUT(UINT8 ch, UINT8 da, PWMX_PolarTypeDef pr, UINT8 s); // PWM0-3 output waveform configuration
+void PWMX_ACTOUT(uint8_t ch, uint8_t da, PWMX_PolarTypeDef pr, uint8_t s); // PWM0-3 output waveform configuration
 
 #ifdef __cplusplus
 }

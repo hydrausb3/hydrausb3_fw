@@ -61,7 +61,7 @@ void mDelaymS(uint32_t n)
  * @param  i -
  * @return  stat
  **/
-UINT8 SYS_GetInfoSta( SYS_InfoStaTypeDef i )
+uint8_t SYS_GetInfoSta( SYS_InfoStaTypeDef i )
 {
 	return (R8_RST_BOOT_STAT&(1<<i));
 }
@@ -92,7 +92,7 @@ void SYS_ResetExecute( void )
  *
  * @return   None
  **/
-void  WWDG_ITCfg( UINT8 s )
+void  WWDG_ITCfg( uint8_t s )
 {
 	R8_SAFE_ACCESS_SIG = 0x57; // enable safe access mode
 	R8_SAFE_ACCESS_SIG = 0xa8;
@@ -114,7 +114,7 @@ void  WWDG_ITCfg( UINT8 s )
  *
  * @return   None
  **/
-void WWDG_ResetCfg( UINT8 s )
+void WWDG_ResetCfg( uint8_t s )
 {
 	R8_SAFE_ACCESS_SIG = 0x57; // enable safe access mode
 	R8_SAFE_ACCESS_SIG = 0xa8;

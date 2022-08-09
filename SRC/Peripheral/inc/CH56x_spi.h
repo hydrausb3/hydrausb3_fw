@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_spi.h
 * Author             : WCH, bvernoux
-* Version            : V1.0.1
-* Date               : 2022/07/30
+* Version            : V1.1
+* Date               : 2022/08/07
 * Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * Copyright (c) 2022 Benjamin VERNOUX
@@ -49,23 +49,23 @@ typedef enum
 void SPI0_MasterDefInit(void);
 void SPI0_DataMode(ModeBitOrderTypeDef m);
 
-void SPI0_MasterSendByte(UINT8 d);
-UINT8 SPI0_MasterRecvByte(void);
+void SPI0_MasterSendByte(uint8_t d);
+uint8_t SPI0_MasterRecvByte(void);
 
-void SPI0_MasterTrans(UINT8 *pbuf, UINT16 len);
-void SPI0_MasterRecv(UINT8 *pbuf, UINT16 len);
+void SPI0_MasterTrans(uint8_t *pbuf, uint16_t len);
+void SPI0_MasterRecv(uint8_t *pbuf, uint16_t len);
 
-void SPI0_MasterDMATrans(PUINT8 pbuf, UINT16 len);
-void SPI0_MasterDMARecv(PUINT8 pbuf, UINT16 len);
+void SPI0_MasterDMATrans(puint8_t pbuf, uint16_t len);
+void SPI0_MasterDMARecv(puint8_t pbuf, uint16_t len);
 
 
 void SPI0_SlaveInit(void);
 #define SetFirst0Data(d) (R8_SPI0_SLAVE_PRE = d)
-void SPI0_SlaveSendByte(UINT8 d);
-UINT8 SPI0_SlaveRecvByte(void);
+void SPI0_SlaveSendByte(uint8_t d);
+uint8_t SPI0_SlaveRecvByte(void);
 
-void SPI0_SlaveTrans(UINT8 *pbuf, UINT16 len);
-void SPI0_SlaveRecv(PUINT8 pbuf, UINT16 len);
+void SPI0_SlaveTrans(uint8_t *pbuf, uint16_t len);
+void SPI0_SlaveRecv(puint8_t pbuf, uint16_t len);
 
 // refer to SPI0 interrupt bit define
 #define SPI0_ITCfg(s,f) ((s)?(R8_SPI0_INTER_EN|=f):(R8_SPI0_INTER_EN&=~f))
@@ -76,22 +76,22 @@ void SPI0_SlaveRecv(PUINT8 pbuf, UINT16 len);
 void SPI1_MasterDefInit(void);
 void SPI1_DataMode(ModeBitOrderTypeDef m);
 
-void SPI1_MasterSendByte(UINT8 d);
-UINT8 SPI1_MasterRecvByte(void);
+void SPI1_MasterSendByte(uint8_t d);
+uint8_t SPI1_MasterRecvByte(void);
 
-void SPI1_MasterTrans(UINT8 *pbuf, UINT16 len);
-void SPI1_MasterRecv(UINT8 *pbuf, UINT16 len);
+void SPI1_MasterTrans(uint8_t *pbuf, uint16_t len);
+void SPI1_MasterRecv(uint8_t *pbuf, uint16_t len);
 
-void SPI1_MasterDMATrans(PUINT8 pbuf, UINT16 len);
-void SPI1_MasterDMARecv(PUINT8 pbuf, UINT16 len);
+void SPI1_MasterDMATrans(puint8_t pbuf, uint16_t len);
+void SPI1_MasterDMARecv(puint8_t pbuf, uint16_t len);
 
 void SPI1_SlaveInit(void);
 #define SetFirst1Data(d) (R8_SPI1_SLAVE_PRE = d)
-void SPI1_SlaveSendByte(UINT8 d);
-UINT8 SPI1_SlaveRecvByte(void);
+void SPI1_SlaveSendByte(uint8_t d);
+uint8_t SPI1_SlaveRecvByte(void);
 
-void SPI1_SlaveTrans(UINT8 *pbuf, UINT16 len);
-void SPI1_SlaveRecv(PUINT8 pbuf, UINT16 len);
+void SPI1_SlaveTrans(uint8_t *pbuf, uint16_t len);
+void SPI1_SlaveRecv(puint8_t pbuf, uint16_t len);
 
 // refer to SPI1 interrupt bit define
 #define SPI1_ITCfg(s,f) ((s)?(R8_SPI1_INTER_EN|=f):(R8_SPI1_INTER_EN&=~f))

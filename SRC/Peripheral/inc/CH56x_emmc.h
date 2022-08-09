@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_emmc.h
 * Author             : WCH, bvernoux
-* Version            : V1.0.1
-* Date               : 2022/07/30
+* Version            : V1.1
+* Date               : 2022/08/07
 * Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * Copyright (c) 2022 Benjamin VERNOUX
@@ -75,17 +75,17 @@ extern "C" {
 /* EMMC information */
 typedef struct _EMMC_PARAMETER
 {
-	UINT8  EMMCLinkSatus;   // connecting type
-	UINT8  EMMCCardSatus;   // EMMC operation status
-	UINT8  EMMCType;        // EMMC type
-	UINT8  EMMCVoltageMode; // EMMC useful voltage type  bit0:3.3v bit1:1.8v
-	UINT32 EMMC_CID[4];
-	UINT32 EMMC_CSD[4];
-	UINT16 EMMC_RCA;        // relative address
-	UINT16 EMMCSecSize;		// single section capacity
-	UINT32 EMMCSecNum;		// capacity of section
+	uint8_t  EMMCLinkSatus;   // connecting type
+	uint8_t  EMMCCardSatus;   // EMMC operation status
+	uint8_t  EMMCType;        // EMMC type
+	uint8_t  EMMCVoltageMode; // EMMC useful voltage type  bit0:3.3v bit1:1.8v
+	uint32_t EMMC_CID[4];
+	uint32_t EMMC_CSD[4];
+	uint16_t EMMC_RCA;        // relative address
+	uint16_t EMMCSecSize;		// single section capacity
+	uint32_t EMMCSecNum;		// capacity of section
 
-	UINT8  EMMCOpErr;		// latest error status
+	uint8_t  EMMCOpErr;		// latest error status
 
 } EMMC_PARAMETER, *PSD_PARAMETER;
 
@@ -110,25 +110,25 @@ typedef struct _EMMC_PARAMETER
 #define EMMCSendCmd(a, b) {R32_EMMC_ARGUMENT = a; R16_EMMC_CMD_SET = b;}
 #define EMMCDat0Sta (R32_EMMC_STATUS&(1<<17)) /* EMMC data0 status */
 
-extern UINT8 EMMCIO0Init(void);
-extern UINT8 CheckCMDComp(PSD_PARAMETER pEMMCPara);
+extern uint8_t EMMCIO0Init(void);
+extern uint8_t CheckCMDComp(PSD_PARAMETER pEMMCPara);
 extern void EMMCResetIdle(PSD_PARAMETER pEMMCPara);
-extern UINT8 EMMCReadOCR(PSD_PARAMETER pEMMCPara);
-extern UINT8 EMMCReadCID(PSD_PARAMETER pEMMCPara);
-extern UINT8 EMMCSetRCA(PSD_PARAMETER pEMMCPara);
-extern UINT8 EMMCReadCSD(PSD_PARAMETER pEMMCPara);
-extern UINT8 SelectEMMCCard(PSD_PARAMETER pEMMCPara);
-extern UINT8 ReadEMMCStatus(PSD_PARAMETER pEMMCPara);
-extern UINT8 EMMCSetBusWidth(PSD_PARAMETER pEMMCPara, UINT8 bus_mode);
-extern UINT8 EMMCSetHighSpeed(PSD_PARAMETER pEMMCPara);
-extern UINT8 EMMCCardConfig(PSD_PARAMETER pEMMCPara);
-extern UINT8 EMMCIOTransErrorDeal(PSD_PARAMETER pEMMCPara);
-extern UINT8 EMMCCardReadEXCSD(PSD_PARAMETER pEMMCPara, PUINT8 pRdatbuf);
-extern UINT8 AES_EMMCWriteMulSec(PSD_PARAMETER pEMMCPara, PUINT32 pReqnum, PUINT32 pWdatbuf, UINT32 Lbaaddr, UINT8 excutemode, UINT8 endianmode, PUINT32 pcount);
-extern UINT8 AES_EMMCReadMulSec(PSD_PARAMETER pEMMCPara, PUINT32 pReqnum, PUINT32 pRdatbuf, UINT32 Lbaaddr, UINT8 excutemode, UINT8 endianmode, PUINT32 pcount);
-UINT8 EMMCCardReadOneSec(PSD_PARAMETER pEMMCPara, PUINT8 pRdatbuf, UINT32 Lbaaddr);
-UINT8 EMMCCardReadMulSec(PSD_PARAMETER pEMMCPara, PUINT16 pReqnum, PUINT8 pRdatbuf, UINT32 Lbaaddr);
-UINT8 EMMCCardWriteMulSec(PSD_PARAMETER pEMMCPara, PUINT16 pReqnum, PUINT8 pWdatbuf, UINT32 Lbaaddr);
+extern uint8_t EMMCReadOCR(PSD_PARAMETER pEMMCPara);
+extern uint8_t EMMCReadCID(PSD_PARAMETER pEMMCPara);
+extern uint8_t EMMCSetRCA(PSD_PARAMETER pEMMCPara);
+extern uint8_t EMMCReadCSD(PSD_PARAMETER pEMMCPara);
+extern uint8_t SelectEMMCCard(PSD_PARAMETER pEMMCPara);
+extern uint8_t ReadEMMCStatus(PSD_PARAMETER pEMMCPara);
+extern uint8_t EMMCSetBusWidth(PSD_PARAMETER pEMMCPara, uint8_t bus_mode);
+extern uint8_t EMMCSetHighSpeed(PSD_PARAMETER pEMMCPara);
+extern uint8_t EMMCCardConfig(PSD_PARAMETER pEMMCPara);
+extern uint8_t EMMCIOTransErrorDeal(PSD_PARAMETER pEMMCPara);
+extern uint8_t EMMCCardReadEXCSD(PSD_PARAMETER pEMMCPara, puint8_t pRdatbuf);
+extern uint8_t AES_EMMCWriteMulSec(PSD_PARAMETER pEMMCPara, puint32_t pReqnum, puint32_t pWdatbuf, uint32_t Lbaaddr, uint8_t excutemode, uint8_t endianmode, puint32_t pcount);
+extern uint8_t AES_EMMCReadMulSec(PSD_PARAMETER pEMMCPara, puint32_t pReqnum, puint32_t pRdatbuf, uint32_t Lbaaddr, uint8_t excutemode, uint8_t endianmode, puint32_t pcount);
+uint8_t EMMCCardReadOneSec(PSD_PARAMETER pEMMCPara, puint8_t pRdatbuf, uint32_t Lbaaddr);
+uint8_t EMMCCardReadMulSec(PSD_PARAMETER pEMMCPara, puint16_t pReqnum, puint8_t pRdatbuf, uint32_t Lbaaddr);
+uint8_t EMMCCardWriteMulSec(PSD_PARAMETER pEMMCPara, puint16_t pReqnum, puint8_t pWdatbuf, uint32_t Lbaaddr);
 
 #ifdef __cplusplus
 }

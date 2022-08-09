@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_gpio.h
 * Author             : WCH, bvernoux
-* Version            : V1.1
-* Date               : 2022/07/30
+* Version            : V1.2
+* Date               : 2022/08/07
 * Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
 * Copyright (c) 2022 Benjamin VERNOUX
@@ -82,8 +82,8 @@ typedef enum
 	MCO_2d5 = 0xC,
 } MCOMode;
 
-void GPIOA_ModeCfg(UINT32 pin, GPIOModeTypeDef mode); /* GPIOA Port Pin Mode Configuration */
-void GPIOB_ModeCfg(UINT32 pin, GPIOModeTypeDef mode); /* GPIOB Port Pin Mode Configuration */
+void GPIOA_ModeCfg(uint32_t pin, GPIOModeTypeDef mode); /* GPIOA Port Pin Mode Configuration */
+void GPIOB_ModeCfg(uint32_t pin, GPIOModeTypeDef mode); /* GPIOB Port Pin Mode Configuration */
 #define	GPIOA_ResetBits(pin) (R32_PA_CLR |= pin) /* GPIOA Port pin output deasserted */
 #define	GPIOA_SetBits(pin) (R32_PA_OUT |= pin) /* GPIOA Port pin output set high */
 #define	GPIOB_ResetBits(pin) (R32_PB_CLR |= pin) /* GPIOB Port pin output deasserted */
@@ -95,8 +95,8 @@ void GPIOB_ModeCfg(UINT32 pin, GPIOModeTypeDef mode); /* GPIOB Port Pin Mode Con
 #define	GPIOA_ReadPortPin(pin) (R32_PA_PIN&pin) /* GPIOA Port pin status, 0-pin low, (!0)-pin high */
 #define	GPIOB_ReadPortPin(pin) (R32_PB_PIN&pin) /* GPIOB Port pin status, 0-pin low, (!0)-pin high */
 
-void GPIOA_ITModeCfg(UINT32 pin, GPIOITModeTpDef mode);	/* GPIOA Pin Interrupt Mode Configuration */
-void GPIOB_ITModeCfg(UINT32 pin, GPIOITModeTpDef mode);	/* GPIOB Pin Interrupt Mode Configuration */
+void GPIOA_ITModeCfg(uint32_t pin, GPIOITModeTpDef mode);	/* GPIOA Pin Interrupt Mode Configuration */
+void GPIOB_ITModeCfg(uint32_t pin, GPIOITModeTpDef mode);	/* GPIOB Pin Interrupt Mode Configuration */
 #define	GPIOA_ReadITFlagPort() (R8_GPIO_INT_FLAG) /* Read GPIOA Port Interrupt Flag Status */
 #define	GPIOB_ReadITFlagPort() (R8_GPIO_INT_FLAG) /* Read GPIOB Port Interrupt Flag Status */
 
@@ -122,8 +122,8 @@ void GPIOB_ITModeCfg(UINT32 pin, GPIOITModeTpDef mode);	/* GPIOB Pin Interrupt M
 #define	GPIOB_12_ClearITFlagBit() (R8_GPIO_INT_FLAG = 0x40)
 #define	GPIOB_15_ClearITFlagBit() (R8_GPIO_INT_FLAG = 0x80)
 
-void GPIOPinRemap(UINT8 s, UINT16 perph); /* Peripheral Function Pin Mapping */
-void GPIOMco(UINT8 s, UINT16 freq); /* MCO function */
+void GPIOPinRemap(uint8_t s, uint16_t perph); /* Peripheral Function Pin Mapping */
+void GPIOMco(uint8_t s, uint16_t freq); /* MCO function */
 
 #ifdef __cplusplus
 }

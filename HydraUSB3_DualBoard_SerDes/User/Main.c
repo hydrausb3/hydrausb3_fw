@@ -51,7 +51,7 @@ volatile uint32_t SDS_STATUS[2];
 volatile uint32_t i=0;
 volatile uint32_t k=0;
 
-int is_HostBoard; /* Return TRUE or FALSE */
+int is_HostBoard; /* Return true or false */
 
 #ifdef CNT_64BITS
 uint64_t CNT_S;
@@ -62,7 +62,7 @@ uint32_t CNT_E;
 #endif
 uint32_t CNT_nb_cycles;
 
-int is_HostBoard; /* Return TRUE or FALSE */
+int is_HostBoard; /* Return true or false */
 
 /* Required for log_init() => log_printf()/cprintf() */
 debug_log_buf_t log_buf;
@@ -92,12 +92,12 @@ int main()
 	/******************************************/
 	if(hydrausb3_pb24() == 0)
 	{
-		is_HostBoard = TRUE;
+		is_HostBoard = true;
 		i = hydrausb3_sync2boards(PA14, PA12, HYDRAUSB3_HOST);
 	}
 	else
 	{
-		is_HostBoard = FALSE;
+		is_HostBoard = false;
 		i = hydrausb3_sync2boards(PA14, PA12, HYDRAUSB3_DEVICE);
 	}
 	log_printf("SYNC %08d\n", i);
@@ -112,16 +112,16 @@ int main()
 	log_printf("Start\n");
 	if(hydrausb3_pb24() == 0)
 	{
-		is_HostBoard = TRUE;
+		is_HostBoard = true;
 		log_printf("SerDes_Rx 2022/07/30 start @ChipID=%02X (CPU Freq=%d MHz)\n", R8_CHIP_ID, (FREQ_SYS/1000000));
 	}
 	else
 	{
-		is_HostBoard = FALSE;
+		is_HostBoard = false;
 		log_printf("SerDes_Tx 2022/07/30 start @ChipID=%02X (CPU Freq=%d MHz)\n", R8_CHIP_ID, (FREQ_SYS/1000000));
 	}
 
-	if(is_HostBoard == FALSE) // SerDes TX
+	if(is_HostBoard == false) // SerDes TX
 	{
 		uint32_t data=0;
 		int n;
