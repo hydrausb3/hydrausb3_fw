@@ -9,7 +9,7 @@ The aim of this example is to discover minimalist example with following feature
   * For more details on HydraUSB3 v1 WCH CH569 UART see https://github.com/hydrausb3/hydrausb3_hw/blob/main/HydraUSB3_V1_CH569_UART.ods
 * Use a delay (with API `bsp_wait_ms_delay()`).
 * Read a button status **UBTN** (with API `hydrausb3_ubtn()`).
-* Drive a led **ULED** (with macro `ULED_ON()` & `ULED_OFF()`) with minimal MCU speed frequency set to 15MHz (see `#define FREQ_SYS` in [User/main.c](User/main.c)).
+* Drive a led **ULED** (with macro `ULED_ON()` & `ULED_OFF()`) with minimal MCU speed frequency set to 15MHz (see `#define FREQ_SYS` in [User/Main.c](User/Main.c)).
 
 Note:
 * The current/power consumption can be checked with a multimeter in milliamps mode connected on P4 SHUNT (requires to remove the Jumper on **P4 SHUNT**).
