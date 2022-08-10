@@ -2,6 +2,8 @@ RM := rm -rf
 
 COMPILER_PREFIX ?= riscv-none-embed
 
+PROJECT = HydraUSB3_Blink_ULED
+
 # BSP
 C_SRCS += ../SRC/RVMSIS/core_riscv.c
 OBJS   += core_riscv.o
@@ -65,23 +67,23 @@ INCLUDES = \
 
 # Add inputs and outputs from these tool invocations to the build variables
 SECONDARY_FLASH += \
-HydraUSB3_Blink_ULED.hex \
-HydraUSB3_Blink_ULED.bin \
+$(PROJECT).hex \
+$(PROJECT).bin \
 
 SECONDARY_LIST += \
-HydraUSB3_Blink_ULED.lst \
+$(PROJECT).lst \
 
 SECONDARY_SIZE += \
-HydraUSB3_Blink_ULED.siz \
+$(PROJECT).siz \
 
 SECONDARY_MAP += \
-HydraUSB3_Blink_ULED.map \
+$(PROJECT).map \
 
 SECONDARY_OUTPUTS = $(SECONDARY_FLASH) $(SECONDARY_LIST) $(SECONDARY_SIZE) $(SECONDARY_MAP)
 secondary-outputs: $(SECONDARY_OUTPUTS)
 
 # All Target
-all: HydraUSB3_Blink_ULED.elf secondary-outputs
+all: $(PROJECT).elf secondary-outputs
 
 startup_CH56x.o: ../SRC/Startup/startup_CH56x.S
 	@echo 'Building file: $<'
@@ -104,40 +106,40 @@ startup_CH56x.o: ../SRC/Startup/startup_CH56x.S
 	@echo ' '
 
 # Tool invocations
-HydraUSB3_Blink_ULED.elf: $(OBJS) $(USER_OBJS)
+$(PROJECT).elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU RISC-V Cross C Linker'
-	$(COMPILER_PREFIX)-gcc -march=rv32imac -mabi=ilp32 -msmall-data-limit=8 -mno-save-restore -O3 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g -T ".ld" -nostartfiles -Xlinker --gc-sections  -Xlinker --print-memory-usage -Wl,-Map,"HydraUSB3_Blink_ULED.map" --specs=nano.specs --specs=nosys.specs -o "HydraUSB3_Blink_ULED.elf" $(OBJS) $(LIBS)
+	$(COMPILER_PREFIX)-gcc -march=rv32imac -mabi=ilp32 -msmall-data-limit=8 -mno-save-restore -O3 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g -T ".ld" -nostartfiles -Xlinker --gc-sections  -Xlinker --print-memory-usage -Wl,-Map,"$(PROJECT).map" --specs=nano.specs --specs=nosys.specs -o "$(PROJECT).elf" $(OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build
 
-HydraUSB3_Blink_ULED.hex: HydraUSB3_Blink_ULED.elf
+$(PROJECT).hex: $(PROJECT).elf
 	@echo 'Invoking: GNU RISC-V Cross Create Flash Image'
-	$(COMPILER_PREFIX)-objcopy -O ihex "HydraUSB3_Blink_ULED.elf"  "HydraUSB3_Blink_ULED.hex"
+	$(COMPILER_PREFIX)-objcopy -O ihex "$(PROJECT).elf"  "$(PROJECT).hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-HydraUSB3_Blink_ULED.lst: HydraUSB3_Blink_ULED.elf
+$(PROJECT).lst: $(PROJECT).elf
 	@echo 'Invoking: GNU RISC-V Cross Create Listing'
-	$(COMPILER_PREFIX)-objdump --source --all-headers --demangle --line-numbers --wide "HydraUSB3_Blink_ULED.elf" > "HydraUSB3_Blink_ULED.lst"
+	$(COMPILER_PREFIX)-objdump --source --all-headers --demangle --line-numbers --wide "$(PROJECT).elf" > "$(PROJECT).lst"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-HydraUSB3_Blink_ULED.siz: HydraUSB3_Blink_ULED.elf
+$(PROJECT).siz: $(PROJECT).elf
 	@echo 'Invoking: GNU RISC-V Cross Print Size'
-	$(COMPILER_PREFIX)-size --format=berkeley "HydraUSB3_Blink_ULED.elf"
+	$(COMPILER_PREFIX)-size --format=berkeley "$(PROJECT).elf"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS) $(DEPS) $(SECONDARY_OUTPUTS) HydraUSB3_Blink_ULED.elf
+	-$(RM) $(OBJS) $(DEPS) $(SECONDARY_OUTPUTS) $(PROJECT).elf
 	-@echo ' '
 
 post-build:
 	-@echo 'Create Flash Image BIN'
-	-$(COMPILER_PREFIX)-objcopy -O binary "HydraUSB3_Blink_ULED.elf"  "HydraUSB3_Blink_ULED.bin"
+	-$(COMPILER_PREFIX)-objcopy -O binary "$(PROJECT).elf"  "$(PROJECT).bin"
 	-@echo ' '
 
 .PHONY: all clean dependents post-build
