@@ -45,9 +45,9 @@ int main()
 	log_init(&log_buf);
 	/* Configure serial debugging for printf()/log_printf()... */
 	UART1_init(UART1_BAUD, FREQ_SYS);
-	
+
 	log_printf("Start\n");
-	
+
 	while(1)
 	{
 		if(hydrausb3_ubtn())

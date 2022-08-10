@@ -1,7 +1,7 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name   : Main.c
 * Author      : bvernoux
-* Version     : V1.0.1
+* Version     : V1.0.2
 * Date        : 2022/08/07
 * Description : Basic example to test HSPI communication between 2x HydraUSB3 boards
 * Copyright (c) 2022 Benjamin VERNOUX
@@ -63,7 +63,7 @@ uint32_t addr_cnt = 0;
 #define BLINK_SLOW   250
 int blink_ms = BLINK_SLOW;
 
-bool_t is_HostBoard; /* Return true or false */
+bool_t is_RX; /* Return true or false */
 
 /* Required for log_init() => log_printf()/cprintf() */
 debug_log_buf_t log_buf;
@@ -94,12 +94,12 @@ int main()
 	/******************************************/
 	if(hydrausb3_pb24() == 0)
 	{
-		is_HostBoard = true;
+		is_RX = true;
 		i = hydrausb3_sync2boards(PA14, PA12, HYDRAUSB3_HOST);
 	}
 	else
 	{
-		is_HostBoard = false;
+		is_RX = false;
 		i = hydrausb3_sync2boards(PA14, PA12, HYDRAUSB3_DEVICE);
 	}
 	log_printf("SYNC %08d\n", i);
@@ -112,7 +112,7 @@ int main()
 	/****************************************/
 
 	log_printf("Start\n");
-	if(is_HostBoard == false)
+	if(is_RX == false)
 	{
 		log_printf("HSPI_Tx 2022/07/30 @ChipID=%02X\n", R8_CHIP_ID );
 	}
@@ -122,9 +122,9 @@ int main()
 	}
 	log_printf("FSYS=%d\n", FREQ_SYS);
 
-	if (is_HostBoard ==  false) // HOST TX Mode
+	if (is_RX ==  false) // TX Mode
 	{
-		log_printf("HSPI Host Data_Size=%d\n", Data_Size);
+		log_printf("HSPI TX Data_Size=%d\n", Data_Size);
 		HSPI_DoubleDMA_Init(HSPI_HOST, RB_HSPI_DAT32_MOD, TX_DMA_Addr0, TX_DMA_Addr1, DMA_Tx_Len);
 
 		log_printf("Write RAMX 0x20020000 32K\n");
@@ -177,9 +177,9 @@ int main()
 			bsp_wait_ms_delay(blink_ms);
 		}
 	}
-	else   // DEVICE RX mode
+	else // RX mode
 	{
-		log_printf("HSPI Dev Data_Size=%d\n", Data_Size);
+		log_printf("HSPI RX Data_Size=%d\n", Data_Size);
 
 		log_printf("Clear RAMX 32K\n");
 		for(i = 0; i < 8192; i++) // 8192*4 = 32K
@@ -280,7 +280,7 @@ void HSPI_IRQHandler(void)
 	{
 		ULED_ON();
 		R8_HSPI_INT_FLAG = RB_HSPI_IF_T_DONE;  // Clear Interrupt
-		if (is_HostBoard ==  false) // HOST TX Mode
+		if (is_RX ==  false) // TX Mode
 		{
 			Tx_Cnt++;
 			addr_cnt++;
