@@ -1,7 +1,7 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_debug_log.c
 * Author             : bvernoux
-* Version            : V1.0.1
+* Version            : V1.0.2
 * Date               : 2022/08/07
 * Description
 * Copyright (c) 2022 Benjamin VERNOUX
@@ -81,11 +81,11 @@ void cprintf(const char *fmt, ...)
 			memcpy(&debug_log_buf->buf[idx], log_printf_buff, print_size);
 			debug_log_buf->idx += print_size;
 		}
-	}
 #if(defined DEBUG)
-	if(print_size > 0)
 		fwrite(log_printf_buff, sizeof(char), print_size, stdout);
 #endif
+	}
+
 	bsp_enable_interrupt(); // Exit Critical Section
 }
 
@@ -138,9 +138,6 @@ void log_printf(const char *fmt, ...)
 #ifndef CH56x_DEBUG_LOG_BASIC_TIMESTAMP
 #ifdef CH56x_DEBUG_LOG_LIBDIVIDE_SYSLCLK
 	{
-		uint32_t start, stop;
-		start = bsp_get_SysTickCNT_LSB();
-
 		// Fast, computes division using libdivide
 		sec = (uint32_t)libdivide_u64_do(deltaCNT64, &fast_u64_divSysClock);
 		deltaCNT64 -= ((uint64_t)(sec) * (uint64_t)(tick_freq) );
@@ -149,13 +146,9 @@ void log_printf(const char *fmt, ...)
 		deltaCNT64 -= ( (uint64_t)(msec) * (uint64_t)( (CH56x_DEBUG_LOG_LIBDIVIDE_SYSLCLK/1000ULL) ) );
 
 		usec = (uint32_t)libdivide_u64_do(deltaCNT64, &fast_u64_divSysClock_nbtick_1us);
-
-		stop = bsp_get_SysTickCNT_LSB(); // CNT is decremented so comparison is inverted
 	}
 #else
 	{
-		uint32_t start, stop;
-		start = bsp_get_SysTickCNT_LSB();
 		uint32_t nbtick_1ms = bsp_get_nbtick_1ms();
 
 		sec = (uint32_t)( deltaCNT64 / (uint64_t)(tick_freq) );
@@ -165,8 +158,6 @@ void log_printf(const char *fmt, ...)
 		deltaCNT64 -= ( (uint64_t)(msec) * (uint64_t)(nbtick_1ms) );
 
 		usec = (uint32_t)( deltaCNT64 / (uint64_t)(bsp_get_nbtick_1us()) );
-
-		stop = bsp_get_SysTickCNT_LSB(); // CNT is decremented so comparison is inverted
 	}
 #endif
 #endif // ifndef CH56x_DEBUG_LOG_BASIC_TIMESTAMP
@@ -175,7 +166,6 @@ void log_printf(const char *fmt, ...)
 #ifdef CH56x_DEBUG_LOG_BASIC_TIMESTAMP
 	print_size1 = sprintf(log_printf_buff, "0x%08X ", (uint32_t)(delta));
 #else
-	//print_size1 = sprintf(log_printf_buff, "%02us %03ums %03uus(0x%08X)(%d) ", sec, msec, usec, (uint32_t)(delta), (start - stop));
 	print_size1 = sprintf(log_printf_buff, "%02us %03ums %03uus ", sec, msec, usec);
 #endif
 
