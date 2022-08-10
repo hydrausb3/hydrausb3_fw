@@ -5,8 +5,8 @@ hydrausb3_fw repository contains open source (see [LICENSE](LICENSE)) test firmw
 For more details on HydraUSB3 see https://hydrabus.com/hydrausb3-v1-0-specifications
 
 All examples with name HydraUSB3_DualBoard_XXX requires 2x HydraUSB3 v1 boards to be plugged together.
-* First HydraUSB3 board shall have PB24 not populated (called Host board)
-* Seconds HydraUSB3 board shall have PB24 populated with a 2.54mm Jumper (called Device board)
+* First HydraUSB3 board shall have PB24 not populated (called RX mode)
+* Seconds HydraUSB3 board shall have PB24 populated with a 2.54mm Jumper (called TX mode)
 
 ![2xHydraUSB3 plugged together](2xHydraUSB3_Plugged_TopView.png)
 
