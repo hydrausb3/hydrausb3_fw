@@ -35,18 +35,10 @@ INCLUDES = \
   -I"../SRC/Startup"
 
 # Add inputs and outputs from these tool invocations to the build variables
-SECONDARY_FLASH += \
-$(PROJECT).hex \
-$(PROJECT).bin \
-
-SECONDARY_LIST += \
-$(PROJECT).lst \
-
-SECONDARY_SIZE += \
-$(PROJECT).siz \
-
-SECONDARY_MAP += \
-$(PROJECT).map \
+SECONDARY_FLASH += $(PROJECT).hex $(PROJECT).bin
+SECONDARY_LIST  += $(PROJECT).lst
+SECONDARY_SIZE  += $(PROJECT).siz
+SECONDARY_MAP   += $(PROJECT).map
 
 SECONDARY_OUTPUTS = $(SECONDARY_FLASH) $(SECONDARY_LIST) $(SECONDARY_SIZE) $(SECONDARY_MAP)
 secondary-outputs: $(SECONDARY_OUTPUTS)
