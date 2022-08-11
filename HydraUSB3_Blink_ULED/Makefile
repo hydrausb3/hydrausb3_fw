@@ -84,7 +84,6 @@ $(PROJECT).elf: $(OBJS)
 $(PROJECT).hex: $(PROJECT).elf
 	@echo 'Invoking: GNU RISC-V Cross Create Flash Image'
 	$(COMPILER_PREFIX)-objcopy -O ihex "$(PROJECT).elf"  "$(PROJECT).hex"
-	@echo 'Finished building: $@'
 	@echo ' '
 
 $(PROJECT).bin: $(PROJECT).elf
@@ -95,13 +94,11 @@ $(PROJECT).bin: $(PROJECT).elf
 $(PROJECT).lst: $(PROJECT).elf
 	@echo 'Invoking: GNU RISC-V Cross Create Listing'
 	$(COMPILER_PREFIX)-objdump --source --all-headers --demangle --line-numbers --wide "$(PROJECT).elf" > "$(PROJECT).lst"
-	@echo 'Finished building: $@'
 	@echo ' '
 
 $(PROJECT).siz: $(PROJECT).elf
 	@echo 'Invoking: GNU RISC-V Cross Print Size'
 	$(COMPILER_PREFIX)-size --format=berkeley "$(PROJECT).elf"
-	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
