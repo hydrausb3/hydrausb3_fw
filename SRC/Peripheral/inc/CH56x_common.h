@@ -1,7 +1,7 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56x_COMM.h
 * Author             : WCH, bvernoux
-* Version            : V1.1
+* Version            : V1.1.1
 * Date               : 2022/07/30
 * Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
@@ -33,20 +33,21 @@ extern "C" {
 #include "CH56x_pwr.h"
 #include "CH56x_emmc.h"
 #include "CH56x_serdes.h"
+#include "CH56x_flash.h"
 
 /* UART Printf Definition */
-#define Debug_UART0        0
-#define Debug_UART1        1
-#define Debug_UART2        2
-#define Debug_UART3        3
+#define Debug_UART0 0
+#define Debug_UART1 1
+#define Debug_UART2 2
+#define Debug_UART3 3
 
 /* SystemCoreClock */
 #ifndef	 FREQ_SYS
-#define  FREQ_SYS		80000000
+#define  FREQ_SYS 80000000
 #endif
 
-#define DelayMs(x)      mDelaymS(x)
-#define DelayUs(x)      mDelayuS(x)
+#define DelayMs(x) mDelaymS(x)
+#define DelayUs(x) mDelayuS(x)
 
 #ifdef __cplusplus
 }
