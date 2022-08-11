@@ -23,10 +23,11 @@ OBJS += startup_CH56x.o
 DEPS  = $(subst .o,.d,$(OBJS))
 LIBS  =
 
-DEBUG  = -g -DDEBUG=1
-C_OPTS = -march=rv32imac -mabi=ilp32 -msmall-data-limit=8 -mno-save-restore -O3 \
-         -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections \
-         $(INCLUDES) $(DEBUG) -std=gnu99 -MMD -MP -MT"$(@)"
+DEBUG       = -g -DDEBUG=1
+BASE_OPTS   = -march=rv32imac -mabi=ilp32 -msmall-data-limit=8 -mno-save-restore -O3 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections
+C_OPTS      = $(BASE_OPTS) $(DEBUG) \
+              $(INCLUDES) -std=gnu99 -MMD -MP -MT"$(@)"
+LD_OPTS     = -T ".ld" -nostartfiles -Xlinker --gc-sections  -Xlinker --print-memory-usage -Wl,-Map,"$(PROJECT).map" --specs=nano.specs --specs=nosys.specs
 
 INCLUDES = \
   -I"$(RVMSIS_DIR)" \
@@ -78,7 +79,7 @@ startup_CH56x.o: ../SRC/Startup/startup_CH56x.S
 $(PROJECT).elf: $(OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU RISC-V Cross C Linker'
-	$(COMPILER_PREFIX)-gcc -march=rv32imac -mabi=ilp32 -msmall-data-limit=8 -mno-save-restore -O3 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections  -g -T ".ld" -nostartfiles -Xlinker --gc-sections  -Xlinker --print-memory-usage -Wl,-Map,"$(PROJECT).map" --specs=nano.specs --specs=nosys.specs -o "$(PROJECT).elf" $(OBJS) $(LIBS)
+	$(COMPILER_PREFIX)-gcc $(BASE_OPTS) $(LD_OPTS) -o "$(PROJECT).elf" $(OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build
