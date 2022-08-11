@@ -77,18 +77,20 @@ startup_CH56x.o: ../SRC/Startup/startup_CH56x.S
 
 # Tool invocations
 $(PROJECT).elf: $(OBJS)
-	@echo 'Building target: $@'
 	@echo 'Invoking: GNU RISC-V Cross C Linker'
 	$(COMPILER_PREFIX)-gcc $(BASE_OPTS) $(LD_OPTS) -o "$(PROJECT).elf" $(OBJS) $(LIBS)
-	@echo 'Finished building target: $@'
 	@echo ' '
-	$(MAKE) --no-print-directory post-build
 
 $(PROJECT).hex: $(PROJECT).elf
 	@echo 'Invoking: GNU RISC-V Cross Create Flash Image'
 	$(COMPILER_PREFIX)-objcopy -O ihex "$(PROJECT).elf"  "$(PROJECT).hex"
 	@echo 'Finished building: $@'
 	@echo ' '
+
+$(PROJECT).bin: $(PROJECT).elf
+	-@echo 'Create Flash Image BIN'
+	-$(COMPILER_PREFIX)-objcopy -O binary "$(PROJECT).elf"  "$(PROJECT).bin"
+	-@echo ' '
 
 $(PROJECT).lst: $(PROJECT).elf
 	@echo 'Invoking: GNU RISC-V Cross Create Listing'
@@ -107,9 +109,4 @@ clean:
 	-$(RM) $(OBJS) $(DEPS) $(SECONDARY_OUTPUTS) $(PROJECT).elf
 	-@echo ' '
 
-post-build:
-	-@echo 'Create Flash Image BIN'
-	-$(COMPILER_PREFIX)-objcopy -O binary "$(PROJECT).elf"  "$(PROJECT).bin"
-	-@echo ' '
-
-.PHONY: all clean dependents post-build
+.PHONY: all clean dependents
