@@ -2,36 +2,45 @@ RM := rm -rf
 
 COMPILER_PREFIX ?= riscv-none-embed
 
-PROJECT = HydraUSB3_Blink_ULED
+# Define option(s) defined in pre-processor compiler option(s)
+DEFINE_OPTS = -DDEBUG=1
+# Optimisation option(s)
+OPTIM_OPTS = -O3
+# Debug option(s)
+DEBUG = -g
+
+BUILD_DIR = ./build
+
+PROJECT = $(BUILD_DIR)/HydraUSB3_Blink_ULED
 
 RVMSIS_DIR   = ../SRC/RVMSIS
 RVMSIS_SRCS  = $(wildcard $(RVMSIS_DIR)/*.c)
-OBJS        += $(patsubst $(RVMSIS_DIR)/%.c,%.o,$(RVMSIS_SRCS))
+OBJS        += $(patsubst $(RVMSIS_DIR)/%.c,$(BUILD_DIR)/%.o,$(RVMSIS_SRCS))
 
 PERIPH_DIR   = ../SRC/Peripheral
 PERIPH_SRCS  = $(wildcard $(PERIPH_DIR)/src/*.c)
-OBJS        += $(patsubst $(PERIPH_DIR)/src/%.c,%.o,$(PERIPH_SRCS))
+OBJS        += $(patsubst $(PERIPH_DIR)/src/%.c,$(BUILD_DIR)/%.o,$(PERIPH_SRCS))
 
 USER_DIR     = ./User
 USER_SRCS    = $(wildcard $(USER_DIR)/*.c)
-OBJS        += $(patsubst $(USER_DIR)/%.c,%.o,$(USER_SRCS))
+OBJS        += $(patsubst $(USER_DIR)/%.c,$(BUILD_DIR)/%.o,$(USER_SRCS))
 
 C_SRCS = $(RVMSIS_SRCS) $(PERIPH_SRCS) $(USER_SRCS)
 
 # All of the sources participating in the build are defined here
-OBJS += startup_CH56x.o
+OBJS += $(BUILD_DIR)/startup_CH56x.o
 DEPS  = $(subst .o,.d,$(OBJS))
 LIBS  =
 
-DEBUG       = -g -DDEBUG=1
-BASE_OPTS   = -march=rv32imac -mabi=ilp32 -msmall-data-limit=8 -mno-save-restore -O3 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections
-C_OPTS      = $(BASE_OPTS) $(DEBUG) \
+BASE_OPTS   = -march=rv32imac -mabi=ilp32 -msmall-data-limit=8 $(OPTIM_OPTS) -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections
+C_OPTS      = $(BASE_OPTS) $(DEBUG) $(DEFINE_OPTS)\
               $(INCLUDES) -std=gnu99 -MMD -MP -MT"$(@)"
-LD_OPTS     = -T ".ld" -nostartfiles -Xlinker --gc-sections  -Xlinker --print-memory-usage -Wl,-Map,"$(PROJECT).map" --specs=nano.specs --specs=nosys.specs
+LD_OPTS     = -T ".ld" -nostartfiles -Xlinker --gc-sections -Xlinker --print-memory-usage -Wl,-Map,"$(PROJECT).map" --specs=nano.specs --specs=nosys.specs
 
 INCLUDES = \
   -I"$(RVMSIS_DIR)" \
   -I"$(PERIPH_DIR)/inc" \
+  -I"$(USER_DIR)" \
   -I"../SRC/Startup"
 
 # Add inputs and outputs from these tool invocations to the build variables
@@ -46,23 +55,33 @@ secondary-outputs: $(SECONDARY_OUTPUTS)
 # All Target
 all: $(PROJECT).elf secondary-outputs
 
-startup_CH56x.o: ../SRC/Startup/startup_CH56x.S
+.PRECIOUS: $(BUILD_DIR)/. $(BUILD_DIR)%/.
+
+$(BUILD_DIR)/.:
+	mkdir -p $@
+
+$(BUILD_DIR)%/.:
+	mkdir -p $@
+
+.SECONDEXPANSION:
+
+$(BUILD_DIR)/startup_CH56x.o: ../SRC/Startup/startup_CH56x.S | $$(@D)/.
 	@echo 'Building file: $<'
 	$(COMPILER_PREFIX)-gcc $(C_OPTS) -x assembler -c -o "$@" "$<"
 	@echo ' '
 
-%.o: ./User/%.c
+$(BUILD_DIR)/%.o: ./User/%.c | $$(@D)/.
 	@echo $(OBJS)
 	@echo 'Building file: $<'
 	$(COMPILER_PREFIX)-gcc $(C_OPTS) -c -o "$@" "$<"
 	@echo ' '
 
-%.o: ../SRC/RVMSIS/%.c
+$(BUILD_DIR)/%.o: ../SRC/RVMSIS/%.c | $$(@D)/.
 	@echo 'Building file: $<'
 	$(COMPILER_PREFIX)-gcc $(C_OPTS) -c -o "$@" "$<"
 	@echo ' '
 
-%.o: ../SRC/Peripheral/src/%.c
+$(BUILD_DIR)/%.o: ../SRC/Peripheral/src/%.c | $$(@D)/.
 	@echo 'Building file: $<'
 	$(COMPILER_PREFIX)-gcc $(C_OPTS) -c -o "$@" "$<"
 	@echo ' '
