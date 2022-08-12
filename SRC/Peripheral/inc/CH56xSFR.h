@@ -1,7 +1,7 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : CH56xSFR.h
 * Author             : WCH, bvernoux(ADDR USBSS/SERDES)
-* Version            : V1.1
+* Version            : V1.1.1
 * Date               : 2022/08/07
 * Description
 * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
@@ -87,17 +87,17 @@ typedef volatile unsigned long *vpuint32_t;
 #endif
 
 /* Calculate the byte offset of a field in a structure of type */
-#define FIELD_OFFSET(Type, Field)       ((uint16_t) & (((Type *)0)->Field))
+#define FIELD_OFFSET(Type, Field) ((uint16_t) & (((Type *)0)->Field))
 
 /* Calculate the size of a field in a structure of type */
-#define FIELD_SIZE(Type, Field)         (sizeof(((Type *)0)->Field))
+#define FIELD_SIZE(Type, Field) (sizeof(((Type *)0)->Field))
 
 /* An expression that yields the type of a field in a struct */
-#define FIELD_TYPE(Type, Field)         (((Type *)0)->Field)
+#define FIELD_TYPE(Type, Field) (((Type *)0)->Field)
 
 /* Return the number of elements in a statically sized array */
-#define NUMBER_OF(Array)                (sizeof(Array) / sizeof((Array)[0]))
-#define NUMBER_OF_FIELD(Type, Field)    (NUMBER_OF(FIELD_TYPE(Type, Field)))
+#define NUMBER_OF(Array) (sizeof(Array) / sizeof((Array)[0]))
+#define NUMBER_OF_FIELD(Type, Field) (NUMBER_OF(FIELD_TYPE(Type, Field)))
 
 #ifdef __cplusplus
 }
@@ -113,7 +113,6 @@ extern "C" {
 #endif
 
 /* ********************************************************************************************************************* */
-
 // Address Space
 //    CODE:   00000000H - 0007FFFFH   512KB
 //    DATA:   20000000H - 20003FFFH   16KB
@@ -960,60 +959,60 @@ extern "C" {
 
 /* HSPI register address offset and bit define */
 #define HSPI_RTX_CFG            0
-#define RB_HSPI_MODE            0x01        // RW, parallel if mode: 1=UP, 0=DOWN
-#define RB_HSPI_DUALDMA         0x02        // RW, parallel if dualdma mode enable
-#define RB_HSPI_MSK_SIZE        0x0C        // RW, parallel if data mode
-#define RB_HSPI_DAT8_MOD        0x00        // RW, 00=8bits mode
-#define RB_HSPI_DAT16_MOD       0x04        // RW, 01=16bits mode
-#define RB_HSPI_DAT32_MOD       0x08        // RW, 10=32bits mode
-#define RB_HSPI_TX_TOG_EN       0x20        // RW, parallel if tx addr toggle enable
-#define RB_HSPI_RX_TOG_EN       0x40        // RW, parallel if rx addr toggle enable
-#define RB_HSPI_HW_ACK          0x80        // RW, parallel if tx ack by hardware
+#define RB_HSPI_MODE            0x01 // RW, parallel if mode: 1=UP, 0=DOWN
+#define RB_HSPI_DUALDMA         0x02 // RW, parallel if dualdma mode enable
+#define RB_HSPI_MSK_SIZE        0x0C // RW, parallel if data mode
+#define RB_HSPI_DAT8_MOD        0x00 // RW, 00=8bits mode
+#define RB_HSPI_DAT16_MOD       0x04 // RW, 01=16bits mode
+#define RB_HSPI_DAT32_MOD       0x08 // RW, 10=32bits mode
+#define RB_HSPI_TX_TOG_EN       0x20 // RW, parallel if tx addr toggle enable
+#define RB_HSPI_RX_TOG_EN       0x40 // RW, parallel if rx addr toggle enable
+#define RB_HSPI_HW_ACK          0x80 // RW, parallel if tx ack by hardware
 #define HSPI_RTX_CTRL           1
-#define RB_HSPI_ENABLE          0x01        // RW, parallel if enable
-#define RB_HSPI_DMA_EN          0x02        // RW, parallel if dma enable
-#define RB_HSPI_SW_ACT          0x04        // RW, parallel if transmit software trigger
-#define RB_HSPI_ALL_CLR         0x08        // RW, parallel if all clear
-#define RB_HSPI_TRX_RST         0x10        // RW, parallel if tx and rx logic clear, high action
+#define RB_HSPI_ENABLE          0x01 // RW, parallel if enable
+#define RB_HSPI_DMA_EN          0x02 // RW, parallel if dma enable
+#define RB_HSPI_SW_ACT          0x04 // RW, parallel if transmit software trigger
+#define RB_HSPI_ALL_CLR         0x08 // RW, parallel if all clear
+#define RB_HSPI_TRX_RST         0x10 // RW, parallel if tx and rx logic clear, high action
 #define HSPI_INT_EN             2
-#define RB_HSPI_IE_T_DONE       0x01        // RW, parallel if transmit done interrupt enable
-#define RB_HSPI_IE_R_DONE       0x02        // RW, parallel if receive done interrupt enable
-#define RB_HSPI_IE_FIFO_OV      0x04        // RW, parallel if fifo overflow interrupt enable
-#define RB_HSPI_IE_B_DONE       0x08        // RW, RW, parallel if tx burst done interrupt enable
+#define RB_HSPI_IE_T_DONE       0x01 // RW, parallel if transmit done interrupt enable
+#define RB_HSPI_IE_R_DONE       0x02 // RW, parallel if receive done interrupt enable
+#define RB_HSPI_IE_FIFO_OV      0x04 // RW, parallel if fifo overflow interrupt enable
+#define RB_HSPI_IE_B_DONE       0x08 // RW, RW, parallel if tx burst done interrupt enable
 #define HSPI_RTX_AUX            3
-#define RB_HSPI_TCK_MOD         0x01        // RW, parallel if tx clk polar control, 0=not invert, 1=invert
-#define RB_HSPI_RCK_MOD         0x02        // RW, parallel if rx clk polar control, 0=not invert, 1=invert
-#define RB_HSPI_ACK_TX_MOD      0x04        // RW, parallel if tx ack mode cfg, 0=ram write done to send, 1=delay done to send
-#define RB_HSPI_ACK_CNT_SEL     0x18        // RW, delay time of parallel if send ack when receive done
-#define RB_ACK_CNT_2            0x00        // RW, delay 2 clock to send ack
-#define RB_ACK_CNT_4            0x08        // RW, delay 4 clock to send ack
-#define RB_ACK_CNT_6            0x10        // RW, delay 6 clock to send ack
-#define RB_ACK_CNT_8            0x18        // RW, delay 8 clock to send ack
-#define RB_HSPI_REQ_FT          0x20        // RW, enable fast DMA request
+#define RB_HSPI_TCK_MOD         0x01 // RW, parallel if tx clk polar control, 0=not invert, 1=invert
+#define RB_HSPI_RCK_MOD         0x02 // RW, parallel if rx clk polar control, 0=not invert, 1=invert
+#define RB_HSPI_ACK_TX_MOD      0x04 // RW, parallel if tx ack mode cfg, 0=ram write done to send, 1=delay done to send
+#define RB_HSPI_ACK_CNT_SEL     0x18 // RW, delay time of parallel if send ack when receive done
+#define RB_ACK_CNT_2            0x00 // RW, delay 2 clock to send ack
+#define RB_ACK_CNT_4            0x08 // RW, delay 4 clock to send ack
+#define RB_ACK_CNT_6            0x10 // RW, delay 6 clock to send ack
+#define RB_ACK_CNT_8            0x18 // RW, delay 8 clock to send ack
+#define RB_HSPI_REQ_FT          0x20 // RW, enable fast DMA request
 #define HSPI_TX_ADDR0           4
 #define HSPI_TX_ADDR1           5
 #define HSPI_RX_ADDR0           6
 #define HSPI_RX_ADDR1           7
 #define HSPI_BURST_CFG          8
-#define RB_HSPI_BURST_EN        0x0001      // RW, burst transmit enable
-#define RB_HSPI_BURST_LEN       0xFF00      // RW, burst transmit length
+#define RB_HSPI_BURST_EN        0x0001 // RW, burst transmit enable
+#define RB_HSPI_BURST_LEN       0xFF00 // RW, burst transmit length
 #define HSPI_UDF0               9
 #define HSPI_UDF1               10
 #define HSPI_INT_FLAG           11
-#define RB_HSPI_IF_T_DONE       0x01        // RW1, interrupt flag for parallel if transmit done
-#define RB_HSPI_IF_R_DONE       0x02        // RW1, interrupt flag for parallel if receive done
-#define RB_HSPI_IF_FIFO_OV      0x04        // RW1, interrupt flag for parallel if FIFO overflow
-#define RB_HSPI_IF_B_DONE       0x08        // RW1, interrupt flag for parallel if tx burst done
+#define RB_HSPI_IF_T_DONE       0x01   // RW1, interrupt flag for parallel if transmit done
+#define RB_HSPI_IF_R_DONE       0x02   // RW1, interrupt flag for parallel if receive done
+#define RB_HSPI_IF_FIFO_OV      0x04   // RW1, interrupt flag for parallel if FIFO overflow
+#define RB_HSPI_IF_B_DONE       0x08   // RW1, interrupt flag for parallel if tx burst done
 #define HSPI_RTX_STATUS         12
-//#define  RB_HSPI_TX_OK          0x01						// RO, data transmit OK (received ack)
-#define RB_HSPI_CRC_ERR         0x02        // RO, CRC error occur
-#define RB_HSPI_NUM_MIS         0x04        // RO, rx and tx sequence number mismatch
+//#define  RB_HSPI_TX_OK          0x01 // RO, data transmit OK (received ack)
+#define RB_HSPI_CRC_ERR         0x02   // RO, CRC error occur
+#define RB_HSPI_NUM_MIS         0x04   // RO, rx and tx sequence number mismatch
 #define HSPI_TX_SC              13
-#define RB_HSPI_TX_NUM          0x0F        // RW, parallel if tx sequence num
-#define RB_HSPI_TX_TOG          0x10        // RW, parallel if tx addr toggle flag
+#define RB_HSPI_TX_NUM          0x0F   // RW, parallel if tx sequence num
+#define RB_HSPI_TX_TOG          0x10   // RW, parallel if tx addr toggle flag
 #define HSPI_RX_SC              14
-#define RB_HSPI_RX_NUM          0x0F        // RW, parallel if rx sequence num
-#define RB_HSPI_RX_TOG          0x10        // RW, parallel if rx addr toggle flag
+#define RB_HSPI_RX_NUM          0x0F   // RW, parallel if rx sequence num
+#define RB_HSPI_RX_TOG          0x10   // RW, parallel if rx addr toggle flag
 
 /* DVP register */
 #define R32_DVP_CR              (*((vpuint32_t)0x4000E000)) // RW, DVP control register
@@ -1032,51 +1031,51 @@ extern "C" {
 
 /* DVP register address offset and bit define */
 #define DVP_CR0                 0
-#define RB_DVP_ENABLE           0x01        // RW, DVP enable
-#define RB_DVP_V_POLAR          0x02        // RW, DVP VSYNC polarity control: 1 = invert, 0 = not invert
-#define RB_DVP_H_POLAR          0x04        // RW, DVP HSYNC polarity control: 1 = invert, 0 = not invert
-#define RB_DVP_P_POLAR          0x08        // RW, DVP PCLK polarity control: 1 = invert, 0 = not invert
+#define RB_DVP_ENABLE           0x01 // RW, DVP enable
+#define RB_DVP_V_POLAR          0x02 // RW, DVP VSYNC polarity control: 1 = invert, 0 = not invert
+#define RB_DVP_H_POLAR          0x04 // RW, DVP HSYNC polarity control: 1 = invert, 0 = not invert
+#define RB_DVP_P_POLAR          0x08 // RW, DVP PCLK polarity control: 1 = invert, 0 = not invert
 #define RB_DVP_MSK_DAT_MOD      0x30
-#define RB_DVP_D8_MOD           0x00        // RW, DVP 8bits data mode
-#define RB_DVP_D10_MOD          0x10        // RW, DVP 10bits data mode
-#define RB_DVP_D12_MOD          0x20        // RW, DVP 12bits data mode
-#define RB_DVP_JPEG             0x40        // RW, DVP JPEG mode
-#define RB_DVP_RAW_CM           0x80        // RW, DVP row count mode: 1 = count on falling edge of HSYNC, 0 = count on the end of col count
+#define RB_DVP_D8_MOD           0x00 // RW, DVP 8bits data mode
+#define RB_DVP_D10_MOD          0x10 // RW, DVP 10bits data mode
+#define RB_DVP_D12_MOD          0x20 // RW, DVP 12bits data mode
+#define RB_DVP_JPEG             0x40 // RW, DVP JPEG mode
+#define RB_DVP_RAW_CM           0x80 // RW, DVP row count mode: 1 = count on falling edge of HSYNC, 0 = count on the end of col count
 #define DVP_CR1                 1
-#define RB_DVP_DMA_EN           0x01        // RW, DVP dma enable
-#define RB_DVP_ALL_CLR          0x02        // RW, DVP all clear, high action
-#define RB_DVP_RCV_CLR          0x04        // RW, DVP receive logic clear, high action
-#define RB_DVP_BUF_TOG          0x08        // RW, DVP bug toggle by software, write 1 to toggle, ignored writing 0
+#define RB_DVP_DMA_EN           0x01 // RW, DVP dma enable
+#define RB_DVP_ALL_CLR          0x02 // RW, DVP all clear, high action
+#define RB_DVP_RCV_CLR          0x04 // RW, DVP receive logic clear, high action
+#define RB_DVP_BUF_TOG          0x08 // RW, DVP bug toggle by software, write 1 to toggle, ignored writing 0
 #define DVP_INT_EN              2
-#define RB_DVP_IE_STR_FRM       0x01        // RW, DVP frame start interrupt enable
-#define RB_DVP_IE_ROW_DONE      0x02        // RW, DVP row received done interrupt enable
-#define RB_DVP_IE_FRM_DONE      0x04        // RW, DVP frame received done interrupt enable
-#define RB_DVP_IE_FIFO_OV       0x08        // RW, DVP receive fifo overflow interrupt enable
-#define RB_DVP_IE_STP_FRM       0x10        // RW, DVP frame stop interrupt enable
+#define RB_DVP_IE_STR_FRM       0x01 // RW, DVP frame start interrupt enable
+#define RB_DVP_IE_ROW_DONE      0x02 // RW, DVP row received done interrupt enable
+#define RB_DVP_IE_FRM_DONE      0x04 // RW, DVP frame received done interrupt enable
+#define RB_DVP_IE_FIFO_OV       0x08 // RW, DVP receive fifo overflow interrupt enable
+#define RB_DVP_IE_STP_FRM       0x10 // RW, DVP frame stop interrupt enable
 #define DVP_ROW_NUM             3
 #define DVP_DMA_BUF0            4
 #define DVP_DMA_BUF1            5
 #define DVP_INT_FLAG            6
-#define RB_DVP_IF_STR_FRM       0x01        // RW1, interrupt flag for DVP frame start
-#define RB_DVP_IF_ROW_DONE      0x02        // RW1, interrupt flag for DVP row receive done
-#define RB_DVP_IF_FRM_DONE      0x04        // RW1, interrupt flag for DVP frame receive done
-#define RB_DVP_IF_FIFO_OV       0x08        // RW1, interrupt flag for DVP receive fifo overflow
-#define RB_DVP_IF_STP_FRM       0x10        // RW1, interrupt flag for DVP frame stop
+#define RB_DVP_IF_STR_FRM       0x01 // RW1, interrupt flag for DVP frame start
+#define RB_DVP_IF_ROW_DONE      0x02 // RW1, interrupt flag for DVP row receive done
+#define RB_DVP_IF_FRM_DONE      0x04 // RW1, interrupt flag for DVP frame receive done
+#define RB_DVP_IF_FIFO_OV       0x08 // RW1, interrupt flag for DVP receive fifo overflow
+#define RB_DVP_IF_STP_FRM       0x10 // RW1, interrupt flag for DVP frame stop
 #define DVP_FIFO_ST             7
-#define RB_DVP_FIFO_RDY         0x01        // RO, DVP receive fifo ready
-#define RB_DVP_FIFO_FULL        0x02        // RO, DVP receive fifo full
-#define RB_DVP_FIFO_OV          0x04        // RO, DVP receive fifo overflow
-#define RB_DVP_MSK_FIFO_CNT     0x70        // RO, DVP receive fifo count
+#define RB_DVP_FIFO_RDY         0x01 // RO, DVP receive fifo ready
+#define RB_DVP_FIFO_FULL        0x02 // RO, DVP receive fifo full
+#define RB_DVP_FIFO_OV          0x04 // RO, DVP receive fifo overflow
+#define RB_DVP_MSK_FIFO_CNT     0x70 // RO, DVP receive fifo count
 #define DVP_ROW_CNT             8
 #define DVP_COL_CNT             9
 
 /* SPI Flash register */
 #define R32_SPI_ROM_CTRL        (*((vpuint32_t)0x40001018))
 #define R8_SPI_ROM_CTRL         (*((vpuint8_t)0x40001018))
-#define R32_SPI_ROM_DATA        (*((vpuint32_t)0x40001014))   //RW
-#define R8_SPI_ROM_DATA         (*((vpuint8_t)0x40001018))    //RW
-#define R16_SPI_ROM_CR          (*((vpuint16_t)0x4000101A))   //RW
-#define R8_SPI_ROM_CR           (*((vpuint8_t)0x4000101A))   //RW
+#define R32_SPI_ROM_DATA        (*((vpuint32_t)0x40001014)) //RW
+#define R8_SPI_ROM_DATA         (*((vpuint8_t)0x40001018)) //RW
+#define R16_SPI_ROM_CR          (*((vpuint16_t)0x4000101A)) //RW
+#define R8_SPI_ROM_CR           (*((vpuint8_t)0x4000101A)) //RW
 
 /* SPI Flash register address offset and bit define */
 #define SPI_ROM_DATA            0
@@ -1109,10 +1108,10 @@ extern "C" {
 
 /* EMMC register address offset and bit define */
 #define EMMC_CLK_DIV            0x38
-#define RB_EMMC_PHASEINV        0x400       // invert chip output sdclk phase
-#define RB_EMMC_CLKMode         0x200       // 1:25-100m 0:400k
-#define RB_EMMC_CLKOE           0x100       // chip output sdclk oe
-#define RB_EMMC_DIV_MASK        0x1F        // clk div
+#define RB_EMMC_PHASEINV        0x400   // invert chip output sdclk phase
+#define RB_EMMC_CLKMode         0x200   // 1:25-100m 0:400k
+#define RB_EMMC_CLKOE           0x100   // chip output sdclk oe
+#define RB_EMMC_DIV_MASK        0x1F    // clk div
 #define EMMC_ARGUMENT           0x00
 #define EMMC_CMD_SET            0x04
 #define RB_EMMC_CKIDX           0x800
@@ -1125,31 +1124,31 @@ extern "C" {
 #define EMMC_RESPONSE3          0x14
 #define EMMC_WRITE_CONT         0x14
 #define EMMC_CONTROL            0x18
-#define RB_EMMC_NEGSMP          0x0020      // controller use nagedge sample cmd, dat[7:0], when use UHS-I mode, timing is difficult to meet, use the negedge will be better, default is @posedge sample
-#define RB_EMMC_RST_LGC         0x0010      // reset the data tran/recv logic, this bit is useful when block CRC error in multiple rd/wr situation, default is valid
-#define RB_EMMC_DMAEN           0x0008      // enable the dma, if the 1# 2# 3# controller is to be used, should also open the 0# dma enable, 0# dma work as the whole enable, default dma is closed
-#define RB_EMMC_ALL_CLR         0x0004      // reset all the inner logic, default is valid
+#define RB_EMMC_NEGSMP          0x0020  // controller use nagedge sample cmd, dat[7:0], when use UHS-I mode, timing is difficult to meet, use the negedge will be better, default is @posedge sample
+#define RB_EMMC_RST_LGC         0x0010  // reset the data tran/recv logic, this bit is useful when block CRC error in multiple rd/wr situation, default is valid
+#define RB_EMMC_DMAEN           0x0008  // enable the dma, if the 1# 2# 3# controller is to be used, should also open the 0# dma enable, 0# dma work as the whole enable, default dma is closed
+#define RB_EMMC_ALL_CLR         0x0004  // reset all the inner logic, default is valid
 #define RB_EMMC_LW_MASK         0x0003
-#define bLW_OP_DAT8             0x0002      // use data line [7:0], can be set only in 0# 2# controller
-#define bLW_OP_DAT4             0x0001      // use data line [3:0], the default is this value
-#define bLW_OP_DAT0             0x0000      // use data line [0] only
+#define bLW_OP_DAT8             0x0002  // use data line [7:0], can be set only in 0# 2# controller
+#define bLW_OP_DAT4             0x0001  // use data line [3:0], the default is this value
+#define bLW_OP_DAT0             0x0000  // use data line [0] only
 #define EMMC_TIMEOUT            0x1C
 #define RB_EMMC_TOCNT_MASK      0x000F
-#define EMMC_STATUS             0x20        // SD status
-#define RB_EMMC_DAT0STA         0x20000     // indicate dat[0] line is high level now
-#define RB_EMMC_CMDSTA          0x10000     // indicate cmd line is high level now
+#define EMMC_STATUS             0x20    // SD status
+#define RB_EMMC_DAT0STA         0x20000 // indicate dat[0] line is high level now
+#define RB_EMMC_CMDSTA          0x10000 // indicate cmd line is high level now
 #define EMMC_INT_FG             0x24
-#define RB_EMMC_IF_SDIOINT      0x200       // interrupt from SDIO card inside
-#define RB_EMMC_IF_FIFO_OV      0x100       // fifo overflow, when write sd, indicate empty overflow, when read sd, indicate full overflow
-#define RB_EMMC_IF_BKGAP        0x080       // every block gap interrupt when multiple read/write, allow drive change the DMA address at this moment
-#define RB_EMMC_IF_TRANDONE     0x040       // all the blocks have been tran/recv successfully
-#define RB_EMMC_IF_TRANERR      0x020       // last block have encountered a CRC error
-#define RB_EMMC_IF_DATTMO       0x010       // data line busy timeout
-#define RB_EMMC_IF_CMDDONE      0x008       // when cmd hasn't response, indicate cmd has been sent, when cmd has a response, indicate cmd has bee sent and has received the response
-#define RB_EMMC_IF_REIDX_ER     0x004       // indicate INDEX error of the response
-#define RB_EMMC_IF_RECRC_WR     0x002       // indicate CRC error of the response
-#define RB_EMMC_IF_RE_TMOUT     0x001       // indicate when expect the response, timeout
-#define EMMC_INT_EN             0x28        // interrupt enable
+#define RB_EMMC_IF_SDIOINT      0x200   // interrupt from SDIO card inside
+#define RB_EMMC_IF_FIFO_OV      0x100   // fifo overflow, when write sd, indicate empty overflow, when read sd, indicate full overflow
+#define RB_EMMC_IF_BKGAP        0x080   // every block gap interrupt when multiple read/write, allow drive change the DMA address at this moment
+#define RB_EMMC_IF_TRANDONE     0x040   // all the blocks have been tran/recv successfully
+#define RB_EMMC_IF_TRANERR      0x020   // last block have encountered a CRC error
+#define RB_EMMC_IF_DATTMO       0x010   // data line busy timeout
+#define RB_EMMC_IF_CMDDONE      0x008   // when cmd hasn't response, indicate cmd has been sent, when cmd has a response, indicate cmd has bee sent and has received the response
+#define RB_EMMC_IF_REIDX_ER     0x004   // indicate INDEX error of the response
+#define RB_EMMC_IF_RECRC_WR     0x002   // indicate CRC error of the response
+#define RB_EMMC_IF_RE_TMOUT     0x001   // indicate when expect the response, timeout
+#define EMMC_INT_EN             0x28    // interrupt enable
 #define RB_EMMC_IE_SDIOINT      0x200
 #define RB_EMMC_IE_FIFO_OV      0x100
 #define RB_EMMC_IE_BKGAP        0x080
@@ -1165,37 +1164,37 @@ extern "C" {
 #define EMMC_BLOCK_CFG          0x30
 #define RB_EMMC_BKSIZE_MASK     0x01FF0000
 #define RB_EMMC_BKNUM_MASK      0xFFFF
-#define EMMC_TRAN_MODE          0x34        // tran mode
-#define RB_EMMC_DULEDMA_EN      0x10000     // enable double buffer dma
+#define EMMC_TRAN_MODE          0x34    // tran mode
+#define RB_EMMC_DULEDMA_EN      0x10000 // enable double buffer dma
 #define RB_EMMC_DMATN_CNT       0x7f00
 #define RB_EMMC_FIFO_RDY        0x00c0
-#define RB_EMMC_AUTOGAPSTOP     0x00010     // enable auto set bTM_GAP_STOP when tran start
-#define RB_EMMC_MODE_BOOT       0x00004     // enable emmc boot mode
-#define RB_EMMC_GAP_STOP        0x00002     // set gap stop
-#define RB_EMMC_DMA_DIR         0x00001     // set direction is controller to emmc card
+#define RB_EMMC_AUTOGAPSTOP     0x00010 // enable auto set bTM_GAP_STOP when tran start
+#define RB_EMMC_MODE_BOOT       0x00004 // enable emmc boot mode
+#define RB_EMMC_GAP_STOP        0x00002 // set gap stop
+#define RB_EMMC_DMA_DIR         0x00001 // set direction is controller to emmc card
 
 /* ECED AES/SM4 register */
 #define R16_ECEC_CTRL           (*((vpuint16_t)(0x40007000)))
-#define RB_ECDC_DAT_MOD         0x02000     // source data and result data is bit endian
+#define RB_ECDC_DAT_MOD         0x02000  // source data and result data is bit endian
 #define RB_ECDC_KLEN_MASK       0x0C00
-#define RB_ECDC_CIPHER_MOD      0x0200      // 1:CTR mode 0:ECB mode
-#define RB_ECDC_ALGRM_MOD       0x0100      // 1:AES 0:SM4
-#define RB_ECDC_WRSRAM_EN       0x0080      // module dma enable
+#define RB_ECDC_CIPHER_MOD      0x0200   // 1:CTR mode 0:ECB mode
+#define RB_ECDC_ALGRM_MOD       0x0100   // 1:AES 0:SM4
+#define RB_ECDC_WRSRAM_EN       0x0080   // module dma enable
 #define RB_ECDC_CLKDIV_MASK     0x0030
-#define RB_ECDC_MODE_SEL        0x0008      // 1:decryption mode 0:encryption mode
-#define RB_ECDC_WRPERI_EN       0x0004      // when read data from dma, 1:encrypt/decrypt 0:no action
-#define RB_ECDC_RDPERI_EN       0x0002      // when write data to dma,  1:encrypt/decrypt 0:no action
-#define RB_ECDC_KEYEX_EN        0x0001      // enable key expansion
+#define RB_ECDC_MODE_SEL        0x0008   // 1:decryption mode 0:encryption mode
+#define RB_ECDC_WRPERI_EN       0x0004   // when read data from dma, 1:encrypt/decrypt 0:no action
+#define RB_ECDC_RDPERI_EN       0x0002   // when write data to dma,  1:encrypt/decrypt 0:no action
+#define RB_ECDC_KEYEX_EN        0x0001   // enable key expansion
 
 #define R8_ECDC_INT_EN          (*((vpuint8_t)(0x40007002)))
-#define RB_ECDC_IE_WRSRAM       0x04        // interrupt en
-#define RB_ECDC_IE_SINGLE       0x02        // interrupt en
-#define RB_ECDC_IE_EKDONE       0x01        // interrupt en
+#define RB_ECDC_IE_WRSRAM       0x04     // interrupt en
+#define RB_ECDC_IE_SINGLE       0x02     // interrupt en
+#define RB_ECDC_IE_EKDONE       0x01     // interrupt en
 
 #define R8_ECDC_INT_FG          (*((vpuint8_t)(0x40007006)))
-#define RB_ECDC_IF_WRSRAM       0x04        // interrupt en
-#define RB_ECDC_IF_SINGLE       0x02        // interrupt en
-#define RB_ECDC_IF_EKDONE       0x01        // interrupt en
+#define RB_ECDC_IF_WRSRAM       0x04     // interrupt en
+#define RB_ECDC_IF_SINGLE       0x02     // interrupt en
+#define RB_ECDC_IF_EKDONE       0x01     // interrupt en
 
 //	the following 8*32-bit registers are used to store 128/192/256-bit key
 #define R32_ECDC_KEY_255T224    (*((vpuint32_t)(0x40007008)))
@@ -1243,27 +1242,27 @@ extern "C" {
 #define ID_CH565W               0x73        // chip ID for CH565W
 
 /* Interrupt routine address and interrupt number */
-#define INT_ID_WDOG             16          // interrupt number for watch-dog timer or software
-#define INT_ID_TMR0             17          // interrupt number for timer0
-#define INT_ID_GPIO             18          // interrupt number for GPIO
-#define INT_ID_SPI0             19          // interrupt number for SPI0
-#define INT_ID_USBSS            20          // interrupt number for USBSS
-#define INT_ID_LINK             21          // interrupt number for USBSS Linklayer
-#define INT_ID_TMR1             22          // interrupt number for timer1
-#define INT_ID_TMR2             23          // interrupt number for timer2
-#define INT_ID_UART0            24          // interrupt number for UART0
-#define INT_ID_USBHS            25          // interrupt number for USBHS
-#define INT_ID_EMMC             26          // interrupt number for EMMC
-#define INT_ID_DVP              27          // interrupt number for DVP
-#define INT_ID_HSPI             28          // interrupt number for HSPI
-#define INT_ID_SPI1             29          // interrupt number for SPI1
-#define INT_ID_UART1            30          // interrupt number for UART1
-#define INT_ID_UART2            31          // interrupt number for UART2
-#define INT_ID_UART3            32          // interrupt number for UART3
-#define INT_ID_SERDES           33          // interrupt number for SERDES
-#define INT_ID_ETH              34          // interrupt number for ETH
-#define INT_ID_PMT              35          // interrupt number for ETH power management
-#define INT_ID_ECDC             36          // interrupt number for ECDC
+#define INT_ID_WDOG             16 // interrupt number for watch-dog timer or software
+#define INT_ID_TMR0             17 // interrupt number for timer0
+#define INT_ID_GPIO             18 // interrupt number for GPIO
+#define INT_ID_SPI0             19 // interrupt number for SPI0
+#define INT_ID_USBSS            20 // interrupt number for USBSS
+#define INT_ID_LINK             21 // interrupt number for USBSS Linklayer
+#define INT_ID_TMR1             22 // interrupt number for timer1
+#define INT_ID_TMR2             23 // interrupt number for timer2
+#define INT_ID_UART0            24 // interrupt number for UART0
+#define INT_ID_USBHS            25 // interrupt number for USBHS
+#define INT_ID_EMMC             26 // interrupt number for EMMC
+#define INT_ID_DVP              27 // interrupt number for DVP
+#define INT_ID_HSPI             28 // interrupt number for HSPI
+#define INT_ID_SPI1             29 // interrupt number for SPI1
+#define INT_ID_UART1            30 // interrupt number for UART1
+#define INT_ID_UART2            31 // interrupt number for UART2
+#define INT_ID_UART3            32 // interrupt number for UART3
+#define INT_ID_SERDES           33 // interrupt number for SERDES
+#define INT_ID_ETH              34 // interrupt number for ETH
+#define INT_ID_PMT              35 // interrupt number for ETH power management
+#define INT_ID_ECDC             36 // interrupt number for ECDC
 
 #define INT_VEC_ENTRY_SZ        4                                  // size of each interrupt vector entry
 #define INT_ADDR_WDOG           (INT_ID_WDOG * INT_VEC_ENTRY_SZ)   // interrupt vector address for watch-dog timer or software
@@ -1401,15 +1400,15 @@ extern "C" {
 #define R8_UEP2_TX_CTRL       (*((vpuint8_t)(USB_BASE_ADDR + 0x07A)))  // endpoint 2 control
 #define R8_UEP2_RX_CTRL       (*((vpuint8_t)(USB_BASE_ADDR + 0x07B)))  // endpoint 2 control
 
-#define R16_UH_EP_PID         R16_UEP2_T_LEN                         // host endpoint and PID
-#define R8_UH_RX_CTRL         R8_UEP2_RX_CTRL                        // host receiver endpoint control
+#define R16_UH_EP_PID         R16_UEP2_T_LEN // host endpoint and PID
+#define R8_UH_RX_CTRL         R8_UEP2_RX_CTRL // host receiver endpoint control
 #define R32_USB_EP3_CTRL      (*((vpuint32_t)(USB_BASE_ADDR + 0x07C))) // endpoint 3 control & transmittal length
 #define R16_UEP3_T_LEN        (*((vpuint16_t)(USB_BASE_ADDR + 0x07C))) // endpoint 3 transmittal length
 #define R8_UEP3_TX_CTRL       (*((vpuint8_t)(USB_BASE_ADDR + 0x07E)))  // endpoint 3 control
 #define R8_UEP3_RX_CTRL       (*((vpuint8_t)(USB_BASE_ADDR + 0x07F)))  // endpoint 3 control
 
-#define R16_UH_TX_LEN         R16_UEP3_T_LEN    // host transmittal endpoint transmittal length
-#define R8_UH_TX_CTRL         R8_UEP3_TX_CTRL   // host transmittal endpoint control
+#define R16_UH_TX_LEN         R16_UEP3_T_LEN // host transmittal endpoint transmittal length
+#define R8_UH_TX_CTRL         R8_UEP3_TX_CTRL // host transmittal endpoint control
 
 #define R32_USB_EP4_CTRL      (*((vpuint32_t)(USB_BASE_ADDR + 0x080))) // endpoint 4 control & transmittal length
 #define R16_UEP4_T_LEN        (*((vpuint16_t)(USB_BASE_ADDR + 0x080))) // endpoint 4 transmittal length
@@ -1436,64 +1435,64 @@ extern "C" {
 /*  USB register address offset and bit define */
 
 /* USB base control registers: R8_USB_CTRL  */
-#define RB_USB_HOST_MODE      0x80              // enable USB host mode: 0=device mode, 1=host mode
-#define RB_USB_SPTP_MASK      0x60              // enable USB low speed: 00=full speed, 01=high speed, 10 =low speed
+#define RB_USB_HOST_MODE      0x80 // enable USB host mode: 0=device mode, 1=host mode
+#define RB_USB_SPTP_MASK      0x60 // enable USB low speed: 00=full speed, 01=high speed, 10 =low speed
 #define UCST_FS               0x00
 #define UCST_HS               0x20
 #define UCST_LS               0x40
-#define RB_DEV_PU_EN          0x10              // USB device enable and internal pullup resistance enable
-#define RB_USB_INT_BUSY       0x08              // enable automatic responding busy for device mode or automatic pause for host mode during interrupt flag UIF_TRANSFER valid
-#define RB_USB_RESET_SIE      0x04              // force reset USB SIE, need software clear
-#define RB_USB_CLR_ALL        0x02              // force clear FIFO and count of USB
-#define RB_USB_DMA_EN         0x01              // DMA enable and DMA interrupt enable for USB
+#define RB_DEV_PU_EN          0x10 // USB device enable and internal pullup resistance enable
+#define RB_USB_INT_BUSY       0x08 // enable automatic responding busy for device mode or automatic pause for host mode during interrupt flag UIF_TRANSFER valid
+#define RB_USB_RESET_SIE      0x04 // force reset USB SIE, need software clear
+#define RB_USB_CLR_ALL        0x02 // force clear FIFO and count of USB
+#define RB_USB_DMA_EN         0x01 // DMA enable and DMA interrupt enable for USB
 
 /* USB interrupt enable registers: R8_USB_INT_EN  */
-#define RB_USB_IE_DEV_NAK     0x80              // enable interrupt for NAK responded for USB device mode
+#define RB_USB_IE_DEV_NAK     0x80 // enable interrupt for NAK responded for USB device mode
 #define RB_USB_IE_ISOACT      0x40
 #define RB_USB_IE_SETUPACT    0x20
-#define RB_USB_IE_FIFOOV      0x10              // enable interrupt for FIFO overflow
-#define RB_USB_IE_SOF         0x08              // enable interrupt for host SOF timer action for USB host mode
-#define RB_USB_IE_SUSPEND     0x04              // enable interrupt for USB suspend or resume event
-#define RB_USB_IE_TRANS       0x02              // enable interrupt for USB transfer completion
-#define RB_USB_IE_DETECT      0x01              // enable interrupt for USB device detected event for USB host mode
-#define RB_USB_IE_BUSRST      0x01              // enable interrupt for USB bus reset event for USB device mode
+#define RB_USB_IE_FIFOOV      0x10 // enable interrupt for FIFO overflow
+#define RB_USB_IE_SOF         0x08 // enable interrupt for host SOF timer action for USB host mode
+#define RB_USB_IE_SUSPEND     0x04 // enable interrupt for USB suspend or resume event
+#define RB_USB_IE_TRANS       0x02 // enable interrupt for USB transfer completion
+#define RB_USB_IE_DETECT      0x01 // enable interrupt for USB device detected event for USB host mode
+#define RB_USB_IE_BUSRST      0x01 // enable interrupt for USB bus reset event for USB device mode
 
 /* R8_USB_SUSPEND  */
 //#define bUS_WAKE_UP 0x04  // wake up from suspend
-#define RB_DEV_WAKEUP         0x02              //remote resume
+#define RB_DEV_WAKEUP         0x02 //remote resume
 
 /* R8_USB_SPD_TYPE  */
 #define RB_USBSPEED_MASK      0x03
-#define UST_FS                0x00              // USB_SPD_TYPE is full speed
-#define UST_HS                0x01              // USB_SPD_TYPE is high speed
-#define UST_LS                0x02              // USB_SPD_TYPE is low speed
+#define UST_FS                0x00 // USB_SPD_TYPE is full speed
+#define UST_HS                0x01 // USB_SPD_TYPE is high speed
+#define UST_LS                0x02 // USB_SPD_TYPE is low speed
 
 /* ReadOnly, USB miscellaneous status registers:  R8_USB_MIS_ST  */
-#define RB_USB_SOF_PRES       0x80              // ReadOnly: indicate host SOF timer presage status
-#define RB_USB_SOF_ACT        0x40              // ReadOnly: indicate host SOF timer action status for USB host
-#define RB_USB_SIE_FREE       0x20              // ReadOnly: indicate USB SIE free status
-#define RB_USB_FIFO_RDY       0x10              // ReadOnly: indicate USB receiving FIFO ready status (not empty)
-#define RB_USBBUS_RESET       0x08              // ReadOnly: indicate USB bus reset status
-#define RB_USBBUS_SUSPEND     0x04              // ReadOnly: indicate USB suspend status
-#define RB_USB_ATTACH         0x02              // ReadOnly: indicate device attached status on USB hub DP/DM
-#define RB_USB_SPLIT_EN       0x01              // ReadOnly: indicate host allow SPLIT packet
+#define RB_USB_SOF_PRES       0x80 // ReadOnly: indicate host SOF timer presage status
+#define RB_USB_SOF_ACT        0x40 // ReadOnly: indicate host SOF timer action status for USB host
+#define RB_USB_SIE_FREE       0x20 // ReadOnly: indicate USB SIE free status
+#define RB_USB_FIFO_RDY       0x10 // ReadOnly: indicate USB receiving FIFO ready status (not empty)
+#define RB_USBBUS_RESET       0x08 // ReadOnly: indicate USB bus reset status
+#define RB_USBBUS_SUSPEND     0x04 // ReadOnly: indicate USB suspend status
+#define RB_USB_ATTACH         0x02 // ReadOnly: indicate device attached status on USB hub DP/DM
+#define RB_USB_SPLIT_EN       0x01 // ReadOnly: indicate host allow SPLIT packet
 
 /* USB interrupt flag registers:  R8_USB_INT_FG   */
 #define RB_USB_IF_ISOACT      0x40
 #define RB_USB_IF_SETUOACT    0x20
-#define RB_USB_IF_FIFOOV      0x10              // FIFO overflow interrupt flag for USB, direct bit address clear or write 1 to clear
-#define RB_USB_IF_HST_SOF     0x08              // host SOF timer interrupt flag for USB host, direct bit address clear or write 1 to clear
-#define RB_USB_IF_SUSPEND     0x04              // USB suspend or resume event interrupt flag, direct bit address clear or write 1 to clear
-#define RB_USB_IF_TRANSFER    0x02              // USB transfer completion interrupt flag, direct bit address clear or write 1 to clear
-#define RB_USB_IF_DETECT      0x01              // device detected event interrupt flag for USB host mode, direct bit address clear or write 1 to clear
-#define RB_USB_IF_BUSRST      0x01              // bus reset event interrupt flag for USB device mode, direct bit address clear or write 1 to clear
+#define RB_USB_IF_FIFOOV      0x10 // FIFO overflow interrupt flag for USB, direct bit address clear or write 1 to clear
+#define RB_USB_IF_HST_SOF     0x08 // host SOF timer interrupt flag for USB host, direct bit address clear or write 1 to clear
+#define RB_USB_IF_SUSPEND     0x04 // USB suspend or resume event interrupt flag, direct bit address clear or write 1 to clear
+#define RB_USB_IF_TRANSFER    0x02 // USB transfer completion interrupt flag, direct bit address clear or write 1 to clear
+#define RB_USB_IF_DETECT      0x01 // device detected event interrupt flag for USB host mode, direct bit address clear or write 1 to clear
+#define RB_USB_IF_BUSRST      0x01 // bus reset event interrupt flag for USB device mode, direct bit address clear or write 1 to clear
 
 /* ReadOnly, USB interrupt status registers:  R8_USB_INT_ST  */
-#define RB_USB_ST_NAK         0x80              // ReadOnly: indicate current USB transfer is NAK received for USB device mode
-#define RB_USB_ST_TOGOK       0x40              // ReadOnly: indicate current USB transfer toggle is OK
-#define RB_DEV_TOKEN_MASK     0x30              // ReadOnly: bit mask of current token PID code received for USB device mode
-#define RB_DEV_ENDP_MASK      0x0F              // ReadOnly: bit mask of current transfer endpoint number for USB device mode
-#define RB_HOST_RES_MASK      0x0F              // ReadOnly: bit mask of current transfer handshake response for USB host mode: 0000=no response, time out from device, others=handshake response PID received
+#define RB_USB_ST_NAK         0x80 // ReadOnly: indicate current USB transfer is NAK received for USB device mode
+#define RB_USB_ST_TOGOK       0x40 // ReadOnly: indicate current USB transfer toggle is OK
+#define RB_DEV_TOKEN_MASK     0x30 // ReadOnly: bit mask of current token PID code received for USB device mode
+#define RB_DEV_ENDP_MASK      0x0F // ReadOnly: bit mask of current transfer endpoint number for USB device mode
+#define RB_HOST_RES_MASK      0x0F // ReadOnly: bit mask of current transfer handshake response for USB host mode: 0000=no response, time out from device, others=handshake response PID received
 
 #define UIS_TOKEN_OUT         0x00
 #define UIS_TOKEN_SOF         0x10
@@ -1506,9 +1505,9 @@ extern "C" {
 //   11: SETUP token PID received
 
 /* USB device endpoint 1/4 buffer mode registers: R8_UEP4_1_MOD */
-#define RB_UEP1_RX_EN         0x80              // enable USB endpoint 1 receiving (OUT)
-#define RB_UEP1_TX_EN         0x40              // enable USB endpoint 1 transmittal (IN)
-#define RB_UEP1_BUF_MOD       0x10              // buffer mode of USB endpoint 1
+#define RB_UEP1_RX_EN         0x80 // enable USB endpoint 1 receiving (OUT)
+#define RB_UEP1_TX_EN         0x40 // enable USB endpoint 1 transmittal (IN)
+#define RB_UEP1_BUF_MOD       0x10 // buffer mode of USB endpoint 1
 // bUEPn_RX_EN & bUEPn_TX_EN & bUEPn_BUF_MOD: USB endpoint 1/2/3 buffer mode, buffer start address is UEPn_DMA
 //   0 0 x:  disable endpoint and disable buffer
 //   1 0 0:  512 bytes buffer for receiving (OUT endpoint)
@@ -1517,34 +1516,34 @@ extern "C" {
 //   0 1 1:  dual 512 bytes buffer by toggle bit bUEP_T_TOG selection for transmittal (IN endpoint), total=1024bytes
 //   1 1 0:  512 bytes buffer for receiving (OUT endpoint) + 512 bytes buffer for transmittal (IN endpoint), total=1024bytes
 //   1 1 1:  dual 512 bytes buffer by bUEP_R_TOG selection for receiving (OUT endpoint) + dual 512 bytes buffer by bUEP_T_TOG selection for transmittal (IN endpoint), total=2048bytes
-#define RB_UEP4_RX_EN         0x08              // enable USB endpoint 4 receiving (OUT)
-#define RB_UEP4_TX_EN         0x04              // enable USB endpoint 4 transmittal (IN)
-#define RB_UEP4_BUF_MOD       0x01              // buffer mode of USB endpoint 4
+#define RB_UEP4_RX_EN         0x08 // enable USB endpoint 4 receiving (OUT)
+#define RB_UEP4_TX_EN         0x04 // enable USB endpoint 4 transmittal (IN)
+#define RB_UEP4_BUF_MOD       0x01 // buffer mode of USB endpoint 4
 
 /* USB device endpoint 2/3 buffer mode registers: R8_UEP2_3_MOD */
-#define RB_UEP3_RX_EN         0x80              // enable USB endpoint 3 receiving (OUT)
-#define RB_UEP3_TX_EN         0x40              // enable USB endpoint 3 transmittal (IN)
-#define RB_UEP3_BUF_MOD       0x10              // buffer mode of USB endpoint 3
-#define RB_UEP2_RX_EN         0x08              // enable USB endpoint 2 receiving (OUT)
-#define RB_UEP2_TX_EN         0x04              // enable USB endpoint 2 transmittal (IN)
-#define RB_UEP2_BUF_MOD       0x01              // buffer mode of USB endpoint 2
+#define RB_UEP3_RX_EN         0x80 // enable USB endpoint 3 receiving (OUT)
+#define RB_UEP3_TX_EN         0x40 // enable USB endpoint 3 transmittal (IN)
+#define RB_UEP3_BUF_MOD       0x10 // buffer mode of USB endpoint 3
+#define RB_UEP2_RX_EN         0x08 // enable USB endpoint 2 receiving (OUT)
+#define RB_UEP2_TX_EN         0x04 // enable USB endpoint 2 transmittal (IN)
+#define RB_UEP2_BUF_MOD       0x01 // buffer mode of USB endpoint 2
 
 /* USB device endpoint 5/6 buffer mode registers: R8_UEP5_6_MOD */
-#define RB_UEP6_RX_EN         0x80              // enable USB endpoint 6 receiving (OUT)
-#define RB_UEP6_TX_EN         0x40              // enable USB endpoint 6 transmittal (IN)
-#define RB_UEP6_BUF_MOD       0x10              // buffer mode of USB endpoint 6
-#define RB_UEP5_RX_EN         0x08              // enable USB endpoint 5 receiving (OUT)
-#define RB_UEP5_TX_EN         0x04              // enable USB endpoint 5 transmittal (IN)
-#define RB_UEP5_BUF_MOD       0x01              // buffer mode of USB endpoint 5
+#define RB_UEP6_RX_EN         0x80 // enable USB endpoint 6 receiving (OUT)
+#define RB_UEP6_TX_EN         0x40 // enable USB endpoint 6 transmittal (IN)
+#define RB_UEP6_BUF_MOD       0x10 // buffer mode of USB endpoint 6
+#define RB_UEP5_RX_EN         0x08 // enable USB endpoint 5 receiving (OUT)
+#define RB_UEP5_TX_EN         0x04 // enable USB endpoint 5 transmittal (IN)
+#define RB_UEP5_BUF_MOD       0x01 // buffer mode of USB endpoint 5
 
 /* USB device endpoint 7 buffer mode registers: R8_UEP7_MOD */
-#define RB_UEP7_RX_EN         0x08              // enable USB endpoint 7 receiving (OUT)
-#define RB_UEP7_TX_EN         0x04              // enable USB endpoint 7 transmittal (IN)
-#define RB_UEP7_BUF_MOD       0x01              // buffer mode of USB endpoint 7
+#define RB_UEP7_RX_EN         0x08 // enable USB endpoint 7 receiving (OUT)
+#define RB_UEP7_TX_EN         0x04 // enable USB endpoint 7 transmittal (IN)
+#define RB_UEP7_BUF_MOD       0x01 // buffer mode of USB endpoint 7
 
 /* R8_UEPn_TX_CTRL  n=0-15 */
-#define RB_UEP_T_AUTOTOG      0x20              // enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
-#define RB_UEP_T_TOG_MASK     0x18              // prepared data toggle flag of USB endpoint X transmittal (IN): 00=DATA0, 01=DATA1, 10=DATA2, 11=MDATA
+#define RB_UEP_T_AUTOTOG      0x20 // enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+#define RB_UEP_T_TOG_MASK     0x18 // prepared data toggle flag of USB endpoint X transmittal (IN): 00=DATA0, 01=DATA1, 10=DATA2, 11=MDATA
 #define RB_UEP_T_TOG_0        (0 << 3)
 #define RB_UEP_T_TOG_1        (1 << 3)
 #define RB_UEP_T_TOG_2        (2 << 3)
@@ -1560,8 +1559,8 @@ extern "C" {
 //   11: STALL (error)
 
 /* R8_UEPn_RX_CTRL  n=0-15 */
-#define RB_UEP_R_AUTOTOG      0x20              // enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
-#define RB_UEP_R_TOG_MASK     0x18              // expected data toggle flag of USB endpoint X receiving (OUT): 00s=DATA0, 01=DATA1, 10=DATA2, 11=MDATA
+#define RB_UEP_R_AUTOTOG      0x20 // enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+#define RB_UEP_R_TOG_MASK     0x18 // expected data toggle flag of USB endpoint X receiving (OUT): 00s=DATA0, 01=DATA1, 10=DATA2, 11=MDATA
 #define RB_UEP_R_TOG_0        (0 << 3)
 #define RB_UEP_R_TOG_1        (1 << 3)
 #define RB_UEP_R_TOG_2        (2 << 3)
@@ -1585,7 +1584,7 @@ extern "C" {
 #define UEP_MDATA             (0x03 << 3)
 
 /*   R8_UHOST_CTRL */
-#define RB_UH_AUTOSOF_EN      0x80              // USB host automatic SOF enable
+#define RB_UH_AUTOSOF_EN      0x80 // USB host automatic SOF enable
 #define RB_UH_BUS_RESUME      0x04
 #define RB_UH_BUS_SUSPEND     0x02
 #define RB_UH_BUS_RESET       0x01
@@ -1605,26 +1604,26 @@ extern "C" {
 //   1 1:  dual 512 bytes buffer by toggle bit bUH_R_TOG selection for receiving (IN endpoint), total=1024bytes
 
 /* USB host PID registers:  R16_UH_EP_PID  */
-#define RB_UH_TOKEN_MASK      0xF0              // bit mask of token PID for USB host transfer
-#define RB_UH_EPNUM_MASK      0x0F              // bit mask of endpoint number for USB host transfer
+#define RB_UH_TOKEN_MASK      0xF0 // bit mask of token PID for USB host transfer
+#define RB_UH_EPNUM_MASK      0x0F // bit mask of endpoint number for USB host transfer
 
 /* USB host RX control registers: R8_UH_RX_CTRL  */
-#define RB_UH_RDATA_NO        0x40              // expect no data packet, for high speed hub in host mode
-#define RB_UH_R_AUTOTOG       0x20              // enable automatic toggle after successful receiver completion: 0=manual toggle, 1=automatic toggle
-#define RB_UH_R_TOG_MASK      0x18              // expected data toggle flag of host receiving (IN): 00=DATA0, 01=DATA1, 10=DATA2, 11=MDATA
-#define RB_UH_RRES_NO         0x04              // prepared no response, 1=enable, 0=disable, for non-zero endpoint isochronous transactions
-#define RB_UH_RRES_MASK       0x03              // prepared handshake response type for host receiving (IN)
+#define RB_UH_RDATA_NO        0x40 // expect no data packet, for high speed hub in host mode
+#define RB_UH_R_AUTOTOG       0x20 // enable automatic toggle after successful receiver completion: 0=manual toggle, 1=automatic toggle
+#define RB_UH_R_TOG_MASK      0x18 // expected data toggle flag of host receiving (IN): 00=DATA0, 01=DATA1, 10=DATA2, 11=MDATA
+#define RB_UH_RRES_NO         0x04 // prepared no response, 1=enable, 0=disable, for non-zero endpoint isochronous transactions
+#define RB_UH_RRES_MASK       0x03 // prepared handshake response type for host receiving (IN)
 // bUH_R_RES1 & bUH_R_RES0: handshake response type for host receiving (IN)
 //   00: ACK (ready)
 //   10: NAK (busy)
 //   11: STALL (error)
 
 /* USB host TX control registers: R8_UH_TX_CTRL */
-#define RB_UH_TDATA_NO        0x40              // prepared no data packet, for high speed hub in host mode
-#define RB_UH_T_AUTOTOG       0x20              // enable automatic toggle after successful transfer completion: 0=manual toggle, 1=automatic toggle
-#define RB_UH_T_TOG_MASK      0x18              // prepared data toggle flag of host transmittal (SETUP/OUT): 00=DATA0, 01=DATA1, 10=DATA2, 11=MDATA
-#define RB_UH_TRES_NO         0x04              // expected no response, 1=enable, 0=disable, for non-zero endpoint isochronous transactions
-#define RB_UH_TRES_MASK       0x03              // expected handshake response type for host transmittal (SETUP/OUT)
+#define RB_UH_TDATA_NO        0x40 // prepared no data packet, for high speed hub in host mode
+#define RB_UH_T_AUTOTOG       0x20 // enable automatic toggle after successful transfer completion: 0=manual toggle, 1=automatic toggle
+#define RB_UH_T_TOG_MASK      0x18 // prepared data toggle flag of host transmittal (SETUP/OUT): 00=DATA0, 01=DATA1, 10=DATA2, 11=MDATA
+#define RB_UH_TRES_NO         0x04 // expected no response, 1=enable, 0=disable, for non-zero endpoint isochronous transactions
+#define RB_UH_TRES_MASK       0x03 // expected handshake response type for host transmittal (SETUP/OUT)
 // bUH_T_RES1 & bUH_T_RES0: expected handshake response type for host transmittal (SETUP/OUT)
 //   00: ACK (ready)
 //   10: NAK (busy)
@@ -1774,14 +1773,14 @@ typedef struct __PACKED
 extern "C" {
 #endif
 
-/* 连接设备速度定义 */
-#define USB_DEV_SPEED_LS    0x01  /* 当前为低速设备 */
-#define USB_DEV_SPEED_FS    0x00  /* 当前为全速设备 */
-#define USB_DEV_SPEED_HS    0x02
+/* Connecting Device Speed Definition */
+#define USB_DEV_SPEED_LS    0x01 /* USB Low Speed */
+#define USB_DEV_SPEED_FS    0x00 /* USB Full Speed */
+#define USB_DEV_SPEED_HS    0x02 /* USB High Speed */
 
 /* USB PID */
 #ifndef USB_PID_SETUP
-#define USB_PID_NULL     0x00  /* reserved PID */
+#define USB_PID_NULL     0x00 /* reserved PID */
 #define USB_PID_PING     0x04
 #define USB_PID_SOF      0x05
 #define USB_PID_SETUP    0x0D
@@ -1931,24 +1930,24 @@ extern "C" {
 #endif
 
 #ifndef USB_DEVICE_ADDR
-#define USB_DEVICE_ADDR    0x02  /* 默认的USB设备地址 */
+#define USB_DEVICE_ADDR    0x02 /* Default USB device address */
 #endif
 #ifndef DEFAULT_ENDP0_SIZE
-#define DEFAULT_ENDP0_SIZE    8  /* default maximum packet size for endpoint 0 */
+#define DEFAULT_ENDP0_SIZE    8 /* Default maximum packet size for endpoint 0 */
 #endif
 #ifndef MAX_PACKET_SIZE
-#define MAX_PACKET_SIZE    512  /* maximum packet size */
+#define MAX_PACKET_SIZE    512 /* maximum packet size */
 #endif
 #ifndef USB_BO_CBW_SIZE
-#define USB_BO_CBW_SIZE    0x1F  /* 命令块CBW的总长度 */
-#define USB_BO_CSW_SIZE    0x0D  /* 命令状态块CSW的总长度 */
+#define USB_BO_CBW_SIZE    0x1F /* The total length of the command block CBW */
+#define USB_BO_CSW_SIZE    0x0D /* Total length of command status block CSW */
 #endif
 #ifndef USB_BO_CBW_SIG0
-#define USB_BO_CBW_SIG0    0x55  /* 命令块CBW识别标志'USBC' */
+#define USB_BO_CBW_SIG0    0x55 /* Command block CBW identification flag 'USBC' */
 #define USB_BO_CBW_SIG1    0x53
 #define USB_BO_CBW_SIG2    0x42
 #define USB_BO_CBW_SIG3    0x43
-#define USB_BO_CSW_SIG0    0x55  /* 命令状态块CSW识别标志'USBS' */
+#define USB_BO_CSW_SIG0    0x55 /* Command Status Block CSW Identification Flag 'USBS' */
 #define USB_BO_CSW_SIG1    0x53
 #define USB_BO_CSW_SIG2    0x42
 #define USB_BO_CSW_SIG3    0x53
@@ -2125,26 +2124,26 @@ typedef struct __PACKED _USB_INTERFACE_POWER_DESCRIPTOR
 } USB_ITF_PWR_DESCR, *PUSB_ITF_PWR_DESCR;
 #endif
 
-#define USB_BO_CBW_SIG    0x43425355  /* 命令块CBW识别标志'USBC' */
-#define USB_BO_CSW_SIG    0x53425355  /* 命令状态块CSW识别标志'USBS' */
+#define USB_BO_CBW_SIG    0x43425355 /* Command block CBW identification flag 'USBC' */
+#define USB_BO_CSW_SIG    0x53425355 /* Command Status Block CSW Identification Flag 'USBS' */
 
 typedef struct __PACKED _UDISK_BOC_CBW
 {
 	uint32_t mCBW_Sig;
 	uint32_t mCBW_Tag;
-	uint32_t mCBW_DataLen; /* 输入: 数据传输长度 */
-	uint8_t  mCBW_Flag;    /* 输入: 传输方向等标志 */
+	uint32_t mCBW_DataLen; /* Input: Data transfer length */
+	uint8_t  mCBW_Flag; /* Input: flag such as transmission direction */
 	uint8_t  mCBW_LUN;
-	uint8_t  mCBW_CB_Len;     /* 输入: 命令块的长度,有效值是1到16 */
-	uint8_t  mCBW_CB_Buf[16]; /* 输入: 命令块,该缓冲区最多为16个字节 */
+	uint8_t  mCBW_CB_Len; /* Input: The length of the command block, valid values are 1 to 16 */
+	uint8_t  mCBW_CB_Buf[16]; /* Input: command block, the buffer can be up to 16 bytes */
 } UDISK_BOC_CBW, *PUDISK_BOC_CBW;
 
 typedef struct __PACKED _UDISK_BOC_CSW
 {
 	uint32_t mCSW_Sig;
 	uint32_t mCSW_Tag;
-	uint32_t mCSW_Residue; /* 返回: 剩余数据长度 */
-	uint8_t  mCSW_Status;  /* 返回: 命令执行结果状态 */
+	uint32_t mCSW_Residue; /* Returns: remaining data length */
+	uint8_t  mCSW_Status; /* Returns: command execution result status */
 } UDISK_BOC_CSW, *PUDISK_BOC_CSW;
 
 #ifdef __cplusplus
@@ -2196,7 +2195,7 @@ extern "C" {
 /**
  * @brief  ETH MAC Init structure definition
  * @note   The user should not configure all the ETH_InitTypeDef structure's fields.
- *   By calling the ETH_StructInit function the structure抯 fields are set to their default values.
+ *   By calling the ETH_StructInit function the structure fields are set to their default values.
  *   Only the parameters that will be set to a non-default value should be configured.
  */
 
@@ -2322,7 +2321,6 @@ typedef struct
 	/**
 	 * @brief / * DMA
 	 */
-
 	uint32_t ETH_DropTCPIPChecksumErrorFrame; /*!< Selects or not the Dropping of TCP/IP Checksum Error Frames
                                                    This parameter can be a value of @ref ETH_Drop_TCP_IP_Checksum_Error_Frame */
 
