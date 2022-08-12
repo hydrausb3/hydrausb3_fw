@@ -26,5 +26,5 @@ Can be also done automatically with open source tool AStyle: http://astyle.sourc
 With following syntax (Linux):
 ```
 cd ~\hydrausb3_fw
-astyle-T --indent-switches --style=bsd --lineend=linux --recursive *.c *.h
+astyle -T --indent-switches --style=bsd --lineend=linux --recursive *.c *.h
 ```
