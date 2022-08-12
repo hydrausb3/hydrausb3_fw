@@ -15,7 +15,7 @@
 /* System clock / MCU frequency in Hz */
 #define FREQ_SYS (120000000)
 
-#if(defined DEBUG) // DEBUG=1 to be defined in pre-processor compiler option
+#if(defined DEBUG) // DEBUG=1 to be defined in Makefile DEFINE_OPTS (Example DEFINE_OPTS = -DDEBUG=1)
 //#define UART1_BAUD (115200)
 //#define UART1_BAUD (921600)
 //#define UART1_BAUD (3000000) // Real baud rate 3Mbauds(For Fsys 96MHz or 120MHz) => Requires USB2HS Serial like FTDI C232HM-DDHSL-0
@@ -80,8 +80,10 @@ int main()
 	/* Init BSP (MCU Frequency & SysTick) */
 	bsp_init(FREQ_SYS);
 	log_init(&log_buf);
+#if(defined DEBUG)
 	/* Configure serial debugging for printf()/log_printf()... */
 	UART1_init(UART1_BAUD, FREQ_SYS);
+#endif
 	printf("\n");
 
 	/******************************************/

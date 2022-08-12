@@ -16,7 +16,7 @@
 /* System clock / MCU frequency in Hz (lowest possible speed 15MHz) */
 #define FREQ_SYS (15000000)
 
-#if(defined DEBUG) // DEBUG=1 to be defined in pre-processor compiler option
+#if(defined DEBUG) // DEBUG=1 to be defined in Makefile DEFINE_OPTS (Example DEFINE_OPTS = -DDEBUG=1)
 #define UART1_BAUD (9600)
 #endif
 
@@ -43,9 +43,10 @@ int main()
 	bsp_init(FREQ_SYS);
 	/* Configure serial debugging for printf()/log_printf()... */
 	log_init(&log_buf);
+#if(defined DEBUG)
 	/* Configure serial debugging for printf()/log_printf()... */
 	UART1_init(UART1_BAUD, FREQ_SYS);
-
+#endif
 	log_printf("Start\n");
 
 	while(1)
