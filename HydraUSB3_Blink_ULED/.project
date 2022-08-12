@@ -26,19 +26,19 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>Peripheral</name>
+			<name>drv</name>
 			<type>2</type>
-			<locationURI>PARENT-1-PROJECT_LOC/SRC/Peripheral</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/wch-ch56x-bsp/drv</locationURI>
 		</link>
 		<link>
-			<name>RVMSIS</name>
+			<name>rvmsis</name>
 			<type>2</type>
-			<locationURI>PARENT-1-PROJECT_LOC/SRC/RVMSIS</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/wch-ch56x-bsp/rvmsis</locationURI>
 		</link>
 		<link>
-			<name>Startup</name>
+			<name>startup</name>
 			<type>2</type>
-			<locationURI>PARENT-1-PROJECT_LOC/SRC/Startup</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/wch-ch56x-bsp/startup</locationURI>
 		</link>
 	</linkedResources>
 	<filteredResources>

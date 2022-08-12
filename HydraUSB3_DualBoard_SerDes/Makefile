@@ -13,35 +13,32 @@ BUILD_DIR = ./build
 
 PROJECT = $(BUILD_DIR)/HydraUSB3_DualBoard_SerDes
 
-RVMSIS_DIR   = ../SRC/RVMSIS
-RVMSIS_SRCS  = $(wildcard $(RVMSIS_DIR)/*.c)
-OBJS        += $(patsubst $(RVMSIS_DIR)/%.c,$(BUILD_DIR)/%.o,$(RVMSIS_SRCS))
+RVMSIS_DIR  = ../wch-ch56x-bsp/rvmsis
+RVMSIS_SRCS = $(wildcard $(RVMSIS_DIR)/*.c)
+OBJS       += $(patsubst $(RVMSIS_DIR)/%.c,$(BUILD_DIR)/%.o,$(RVMSIS_SRCS))
 
-PERIPH_DIR   = ../SRC/Peripheral
-PERIPH_SRCS  = $(wildcard $(PERIPH_DIR)/src/*.c)
-OBJS        += $(patsubst $(PERIPH_DIR)/src/%.c,$(BUILD_DIR)/%.o,$(PERIPH_SRCS))
+DRV_DIR   = ../wch-ch56x-bsp/drv
+DRV_SRCS  = $(wildcard $(DRV_DIR)/*.c)
+OBJS     += $(patsubst $(DRV_DIR)/%.c,$(BUILD_DIR)/%.o,$(DRV_SRCS))
 
-USER_DIR     = ./User
-USER_SRCS    = $(wildcard $(USER_DIR)/*.c)
-OBJS        += $(patsubst $(USER_DIR)/%.c,$(BUILD_DIR)/%.o,$(USER_SRCS))
-
-C_SRCS = $(RVMSIS_SRCS) $(PERIPH_SRCS) $(USER_SRCS)
+USER_DIR  = ./User
+USER_SRCS = $(wildcard $(USER_DIR)/*.c)
+OBJS     += $(patsubst $(USER_DIR)/%.c,$(BUILD_DIR)/%.o,$(USER_SRCS))
 
 # All of the sources participating in the build are defined here
 OBJS += $(BUILD_DIR)/startup_CH56x.o
 DEPS  = $(subst .o,.d,$(OBJS))
 LIBS  =
 
-BASE_OPTS   = -march=rv32imac -mabi=ilp32 -msmall-data-limit=8 $(OPTIM_OPTS) -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections
-C_OPTS      = $(BASE_OPTS) $(DEBUG) $(DEFINE_OPTS)\
+BASE_OPTS = -march=rv32imac -mabi=ilp32 -msmall-data-limit=8 $(OPTIM_OPTS) -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections
+C_OPTS    = $(BASE_OPTS) $(DEBUG) $(DEFINE_OPTS)\
               $(INCLUDES) -std=gnu99 -MMD -MP -MT"$(@)"
-LD_OPTS     = -T ".ld" -nostartfiles -Xlinker --gc-sections -Xlinker --print-memory-usage -Wl,-Map,"$(PROJECT).map" --specs=nano.specs --specs=nosys.specs
+LD_OPTS   = -T ".ld" -nostartfiles -Xlinker --gc-sections -Xlinker --print-memory-usage -Wl,-Map,"$(PROJECT).map" --specs=nano.specs --specs=nosys.specs
 
 INCLUDES = \
   -I"$(RVMSIS_DIR)" \
-  -I"$(PERIPH_DIR)/inc" \
-  -I"$(USER_DIR)" \
-  -I"../SRC/Startup"
+  -I"$(DRV_DIR)" \
+  -I"$(USER_DIR)"
 
 # Add inputs and outputs from these tool invocations to the build variables
 SECONDARY_FLASH += $(PROJECT).hex $(PROJECT).bin
@@ -65,7 +62,7 @@ $(BUILD_DIR)%/.:
 
 .SECONDEXPANSION:
 
-$(BUILD_DIR)/startup_CH56x.o: ../SRC/Startup/startup_CH56x.S | $$(@D)/.
+$(BUILD_DIR)/startup_CH56x.o: ../wch-ch56x-bsp/startup/startup_CH56x.S | $$(@D)/.
 	@echo 'Building file: $<'
 	$(COMPILER_PREFIX)-gcc $(C_OPTS) -x assembler -c -o "$@" "$<"
 	@echo ' '
@@ -76,12 +73,12 @@ $(BUILD_DIR)/%.o: ./User/%.c | $$(@D)/.
 	$(COMPILER_PREFIX)-gcc $(C_OPTS) -c -o "$@" "$<"
 	@echo ' '
 
-$(BUILD_DIR)/%.o: ../SRC/RVMSIS/%.c | $$(@D)/.
+$(BUILD_DIR)/%.o: ../wch-ch56x-bsp/rvmsis/%.c | $$(@D)/.
 	@echo 'Building file: $<'
 	$(COMPILER_PREFIX)-gcc $(C_OPTS) -c -o "$@" "$<"
 	@echo ' '
 
-$(BUILD_DIR)/%.o: ../SRC/Peripheral/src/%.c | $$(@D)/.
+$(BUILD_DIR)/%.o: ../wch-ch56x-bsp/drv/%.c | $$(@D)/.
 	@echo 'Building file: $<'
 	$(COMPILER_PREFIX)-gcc $(C_OPTS) -c -o "$@" "$<"
 	@echo ' '
