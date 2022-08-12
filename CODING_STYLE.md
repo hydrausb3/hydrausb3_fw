@@ -23,4 +23,8 @@ Coding Style of the project: Linux Kernel coding style see: https://www.kernel.o
 
 Can be also done automatically with open source tool AStyle: http://astyle.sourceforge.net/
 
-With following syntax: `astyle -T --indent-switches --style=bsd --lineend=linux my_c_file.c`
+With following syntax (Linux):
+```
+cd ~\hydrausb3_fw
+astyle-T --indent-switches --style=bsd --lineend=linux --recursive *.c *.h
+```
