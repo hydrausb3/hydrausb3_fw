@@ -1,4 +1,4 @@
-# HydraUSB3 v1 Test firmware / examples / libraries(drivers)
+# HydraUSB3 v1 Test firmware / examples
 hydrausb3_fw repository contains open source (see [LICENSE](LICENSE)) test firmware / examples / libraries(drivers)(see [peripheral](SRC/Peripheral/)) for HydraUSB3 board using WCH CH569W MCU.
 * Contributor shall check [CODING_STYLE.md](CODING_STYLE.md)
 
