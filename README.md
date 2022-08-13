@@ -1,5 +1,5 @@
 # HydraUSB3 v1 Test firmware / examples
-hydrausb3_fw repository contains open source (see [LICENSE](LICENSE)) test firmware / examples / libraries(drivers)(see [peripheral](SRC/Peripheral/)) for HydraUSB3 board using WCH CH569W MCU.
+hydrausb3_fw repository contains open source (see [LICENSE](LICENSE)) test firmware / examples for HydraUSB3 v1 devkit using WCH CH569 MCU.
 * Contributor shall check [CODING_STYLE.md](CODING_STYLE.md)
 
 For more details on HydraUSB3 see https://hydrabus.com/hydrausb3-v1-0-specifications
@@ -10,7 +10,7 @@ All examples with name HydraUSB3_DualBoard_XXX requires 2x HydraUSB3 v1 boards t
 
 ![2xHydraUSB3 plugged together](2xHydraUSB3_Plugged_TopView.png)
 
-[SRC](SRC/) directory contains [Startup](SRC/Startup/) / [Linker Script](SRC/Ld/) / [RVMSIS](SRC/RVMSIS/) / [Peripherals code](SRC/Peripheral/) based on WCH official code from https://github.com/openwch/ch569/tree/main/EVT/EXAM/SRC (but heavily refactored/rewritten on lot of parts)
+[wch-ch56x-bsp](https://github.com/hydrausb3/wch-ch56x-bsp) submodule contains the BSP (Board Support Package) based on WCH official code from https://github.com/openwch/ch569/tree/main/EVT/EXAM/SRC (but heavily refactored/rewritten on lot of parts)
 
 ### How to build the firmware source code for HydraUSB3(CH569 MCU) with MounRiver Studio(Eclipse based) IDE
 It is recommended to use MounRiver Studio "Embedded RISC-V IDE" or "RISC-V IDE (Community)" to build the source code 
