@@ -26,6 +26,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>board</name>
+			<type>2</type>
+			<locationURI>PARENT-1-PROJECT_LOC/wch-ch56x-bsp/board</locationURI>
+		</link>	
+		<link>
 			<name>drv</name>
 			<type>2</type>
 			<locationURI>PARENT-1-PROJECT_LOC/wch-ch56x-bsp/drv</locationURI>

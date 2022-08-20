@@ -1,14 +1,13 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name   : Main.c
 * Author      : bvernoux
-* Version     : V1.0.1
-* Date        : 2022/07/30
+* Version     : V1.1.0
+* Date        : 2022/08/20
 * Description : Basic example to test SerDes communication between 2x HydraUSB3 boards
 * Copyright (c) 2022 Benjamin VERNOUX
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
 #include "CH56x_common.h"
-#include "CH56x_hydrausb3.h"
 #include "CH56x_debug_log.h"
 
 #undef FREQ_SYS
@@ -75,10 +74,11 @@ int main()
 {
 	uint32_t *p32_txdma = (uint32_t *)TX_DMA_addr;
 
-	/* Configure GPIO In/Out default/safe state for HydraUSB3 */
-	hydrausb3_gpio_init();
+	/* Configure GPIO In/Out default/safe state for the board */
+	bsp_gpio_init();
 	/* Init BSP (MCU Frequency & SysTick) */
 	bsp_init(FREQ_SYS);
+	/* Configure serial debugging for printf()/log_printf()... */
 	log_init(&log_buf);
 #if(defined DEBUG)
 	/* Configure serial debugging for printf()/log_printf()... */
@@ -90,36 +90,35 @@ int main()
 	/* Start Synchronization between 2 Boards */
 	/* J3 MOSI(PA14) & J3 SCS(PA12) signals   */
 	/******************************************/
-	if(hydrausb3_pb24() == 0)
+	if(bsp_switch() == 0)
 	{
 		is_RX = true;
-		i = hydrausb3_sync2boards(PA14, PA12, HYDRAUSB3_HOST);
+		i = bsp_sync2boards(PA14, PA12, BSP_HOST);
 	}
 	else
 	{
 		is_RX = false;
-		i = hydrausb3_sync2boards(PA14, PA12, HYDRAUSB3_DEVICE);
+		i = bsp_sync2boards(PA14, PA12, BSP_DEVICE);
 	}
 	log_printf("SYNC %08d\n", i);
 	log_time_reinit(); // Reinit log time after synchro
 	/* Test Synchronization to be checked with Oscilloscope/LA */
-	ULED_ON();
-	ULED_OFF();
+	bsp_uled_on();
+	bsp_uled_off();
 	/****************************************/
 	/* End Synchronization between 2 Boards */
 	/****************************************/
 
 	log_printf("Start\n");
-	if(hydrausb3_pb24() == 0)
+	if(is_RX == false)
 	{
-		is_RX = true;
-		log_printf("SerDes_Rx 2022/07/30 start @ChipID=%02X (CPU Freq=%d MHz)\n", R8_CHIP_ID, (FREQ_SYS/1000000));
+		log_printf("SerDes_Tx 2022/08/20 @ChipID=%02X\n", R8_CHIP_ID);
 	}
 	else
 	{
-		is_RX = false;
-		log_printf("SerDes_Tx 2022/07/30 start @ChipID=%02X (CPU Freq=%d MHz)\n", R8_CHIP_ID, (FREQ_SYS/1000000));
+		log_printf("SerDes_Rx 2022/08/20 @ChipID=%02X\n", R8_CHIP_ID);
 	}
+	log_printf("FSYS=%d\n", FREQ_SYS);
 
 	if(is_RX == false) // SerDes TX
 	{
@@ -319,17 +318,17 @@ int main()
 					break;
 			}
 			/* Send same data 2 times to test the Double DMA RX mechanism */
-			ULED_ON();
+			bsp_uled_on();
 			SerDes_DMA_Tx();
 			SerDes_Wait_Txdone();
-			ULED_OFF();
+			bsp_uled_off();
 
-			ULED_ON();
+			bsp_uled_on();
 			SerDes_DMA_Tx();
 			SerDes_Wait_Txdone();
-			ULED_OFF();
+			bsp_uled_off();
 
-			if(hydrausb3_ubtn()) // Send data in burst continuously
+			if(bsp_ubtn()) // Send data in burst continuously
 			{
 				p32_txdma = (uint32_t *)TX_DMA_addr;
 				n=0;
@@ -343,17 +342,17 @@ int main()
 				while(n!=(4096/4));
 				SerDes_DMA_Tx_CFG(TX_DMA_addr,4096,SERDES_CUSTOM_NUMBER);
 
-				while(hydrausb3_ubtn())
+				while(bsp_ubtn())
 				{
-					ULED_ON();
+					bsp_uled_on();
 					SerDes_DMA_Tx();
 					SerDes_Wait_Txdone();
-					ULED_OFF();
+					bsp_uled_off();
 
-					ULED_ON();
+					bsp_uled_on();
 					SerDes_DMA_Tx();
 					SerDes_Wait_Txdone();
-					ULED_OFF();
+					bsp_uled_off();
 
 					bsp_wait_us_delay(100); /* Wait 100us (about 80us to transmit 2x*4096bytes @1.2Gbps) */
 				}
@@ -451,8 +450,7 @@ int main()
 * Input          : None
 * Return         : None
 *******************************************************************************/
-void SERDES_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
-void SERDES_IRQHandler(void)
+__attribute__((interrupt("WCH-Interrupt-fast"))) void SERDES_IRQHandler(void)
 {
 	uint32_t sds_it_status;
 	sds_it_status = SerDes_StatusIT();
@@ -476,23 +474,23 @@ void SERDES_IRQHandler(void)
 #endif
 			SDS_STATUS[1] = sds_it_status;
 		}
-		ULED_ON();
+		bsp_uled_on();
 		k++;
 		SerDes_ClearIT(SDS_RX_INT_FLG|SDS_COMMA_INT_FLG);
-		ULED_OFF();
+		bsp_uled_off();
 	}
 	if(sds_it_status & SDS_RX_ERR_FLG)
 	{
-		ULED_ON();
+		bsp_uled_on();
 		SDS_RX_ERR++;
 		SerDes_ClearIT(SDS_RX_ERR_FLG);
-		ULED_OFF();
+		bsp_uled_off();
 	}
 	if(sds_it_status & SDS_FIFO_OV_FLG)
 	{
-		ULED_ON();
+		bsp_uled_on();
 		SDS_FIFO_OV++;
 		SerDes_ClearIT(SDS_FIFO_OV_FLG);
-		ULED_OFF();
+		bsp_uled_off();
 	}
 }

@@ -1,16 +1,14 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name   : Main.c
 * Author      : bvernoux
-* Version     : V1.0.2
-* Date        : 2022/08/07
+* Version     : V1.1.0
+* Date        : 2022/08/20
 * Description : Basic example to test HSPI communication between 2x HydraUSB3 boards
 * Copyright (c) 2022 Benjamin VERNOUX
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
-#include <stdarg.h>
 #include "CH56x_common.h"
 #include "CH56x_debug_log.h"
-#include "CH56x_hydrausb3.h"
 
 #undef FREQ_SYS
 /* System clock / MCU frequency(HSPI Frequency) in Hz */
@@ -79,10 +77,11 @@ int main()
 {
 	uint32_t i;
 
-	/* Configure GPIO In/Out default/safe state for HydraUSB3 */
-	hydrausb3_gpio_init();
+	/* Configure GPIO In/Out default/safe state for the board */
+	bsp_gpio_init();
 	/* Init BSP (MCU Frequency & SysTick) */
 	bsp_init(FREQ_SYS);
+	/* Configure serial debugging for printf()/log_printf()... */
 	log_init(&log_buf);
 #if(defined DEBUG)
 	/* Configure serial debugging for printf()/log_printf()... */
@@ -94,21 +93,21 @@ int main()
 	/* Start Synchronization between 2 Boards */
 	/* J3 MOSI(PA14) & J3 SCS(PA12) signals   */
 	/******************************************/
-	if(hydrausb3_pb24() == 0)
+	if(bsp_switch() == 0)
 	{
 		is_RX = true;
-		i = hydrausb3_sync2boards(PA14, PA12, HYDRAUSB3_HOST);
+		i = bsp_sync2boards(PA14, PA12, BSP_HOST);
 	}
 	else
 	{
 		is_RX = false;
-		i = hydrausb3_sync2boards(PA14, PA12, HYDRAUSB3_DEVICE);
+		i = bsp_sync2boards(PA14, PA12, BSP_DEVICE);
 	}
 	log_printf("SYNC %08d\n", i);
 	log_time_reinit(); // Reinit log time after synchro
 	/* Test Synchronization to be checked with Oscilloscope/LA */
-	ULED_ON();
-	ULED_OFF();
+	bsp_uled_on();
+	bsp_uled_off();
 	/****************************************/
 	/* End Synchronization between 2 Boards */
 	/****************************************/
@@ -116,11 +115,11 @@ int main()
 	log_printf("Start\n");
 	if(is_RX == false)
 	{
-		log_printf("HSPI_Tx 2022/07/30 @ChipID=%02X\n", R8_CHIP_ID );
+		log_printf("HSPI_Tx 2022/08/20 @ChipID=%02X\n", R8_CHIP_ID );
 	}
 	else
 	{
-		log_printf("HSPI_Rx 2022/07/30 @ChipID=%02X\n", R8_CHIP_ID );
+		log_printf("HSPI_Rx 2022/08/20 @ChipID=%02X\n", R8_CHIP_ID );
 	}
 	log_printf("FSYS=%d\n", FREQ_SYS);
 
@@ -141,9 +140,9 @@ int main()
 
 		log_printf("Start Tx 32K data\n");
 
-		ULED_ON();
+		bsp_uled_on();
 		HSPI_DMA_Tx();
-		ULED_OFF();
+		bsp_uled_off();
 
 		while(Tx_End_Flag == 0);
 
@@ -152,9 +151,9 @@ int main()
 		bsp_wait_ms_delay(20);
 		while(1)
 		{
-			if( hydrausb3_ubtn() )
+			if( bsp_ubtn() )
 			{
-				ULED_ON();
+				bsp_uled_on();
 
 				// Write RAMX
 				for(i=0; i<8192; i++) // 8192*4 = 32K
@@ -173,9 +172,9 @@ int main()
 			{
 				blink_ms = BLINK_SLOW;
 			}
-			ULED_ON();
+			bsp_uled_on();
 			bsp_wait_ms_delay(blink_ms);
-			ULED_OFF();
+			bsp_uled_off();
 			bsp_wait_ms_delay(blink_ms);
 		}
 	}
@@ -272,15 +271,14 @@ void HSPI_IRQHandler_ReInitRX(void)
  *
  * @return  none
  */
-void HSPI_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
-void HSPI_IRQHandler(void)
+__attribute__((interrupt("WCH-Interrupt-fast"))) void HSPI_IRQHandler(void)
 {
 	/**************/
 	/** Transmit **/
 	/**************/
 	if(R8_HSPI_INT_FLAG & RB_HSPI_IF_T_DONE) // Single packet sending completed
 	{
-		ULED_ON();
+		bsp_uled_on();
 		R8_HSPI_INT_FLAG = RB_HSPI_IF_T_DONE;  // Clear Interrupt
 		if (is_RX ==  false) // TX Mode
 		{
@@ -316,7 +314,7 @@ void HSPI_IRQHandler(void)
 	/*************/
 	if(R8_HSPI_INT_FLAG & RB_HSPI_IF_R_DONE) // Single packet reception completed
 	{
-		ULED_ON();
+		bsp_uled_on();
 		//log_printf("R8_HSPI_INT_FLAG=0x%02X\n", R8_HSPI_INT_FLAG);
 		R8_HSPI_INT_FLAG = RB_HSPI_IF_R_DONE;  // Clear Interrupt
 
@@ -373,5 +371,5 @@ void HSPI_IRQHandler(void)
 		Rx_End_Flag = 1;
 	}
 	*/
-	ULED_OFF();
+	bsp_uled_off();
 }

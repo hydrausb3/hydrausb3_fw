@@ -1,16 +1,14 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name   : Main.c
 * Author      : bvernoux
-* Version     : V1.0
-* Date        : 2022/07/30
+* Version     : V1.1.0
+* Date        : 2022/08/20
 * Description : Basic example with minimal MCU speed(15MHz) and ULED blinking
 * Copyright (c) 2022 Benjamin VERNOUX
 * SPDX-License-Identifier: Apache-2.0
 *******************************************************************************/
-#include <stdarg.h>
 #include "CH56x_common.h"
 #include "CH56x_debug_log.h"
-#include "CH56x_hydrausb3.h"
 
 #undef FREQ_SYS
 /* System clock / MCU frequency in Hz (lowest possible speed 15MHz) */
@@ -37,8 +35,8 @@ debug_log_buf_t log_buf;
  */
 int main()
 {
-	/* Configure GPIO In/Out default/safe state for HydraUSB3 */
-	hydrausb3_gpio_init();
+	/* Configure GPIO In/Out default/safe state for the board */
+	bsp_gpio_init();
 	/* Init BSP (MCU Frequency & SysTick) */
 	bsp_init(FREQ_SYS);
 	/* Configure serial debugging for printf()/log_printf()... */
@@ -51,7 +49,7 @@ int main()
 
 	while(1)
 	{
-		if(hydrausb3_ubtn())
+		if(bsp_ubtn())
 		{
 			blink_ms = BLINK_FAST;
 		}
@@ -59,9 +57,9 @@ int main()
 		{
 			blink_ms = BLINK_SLOW;
 		}
-		ULED_ON();
+		bsp_uled_on();
 		bsp_wait_ms_delay(blink_ms);
-		ULED_OFF();
+		bsp_uled_off();
 		bsp_wait_ms_delay(blink_ms);
 		log_printf("Blink\n");
 	}

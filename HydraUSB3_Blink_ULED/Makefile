@@ -21,6 +21,10 @@ DRV_DIR   = ../wch-ch56x-bsp/drv
 DRV_SRCS  = $(wildcard $(DRV_DIR)/*.c)
 OBJS     += $(patsubst $(DRV_DIR)/%.c,$(BUILD_DIR)/%.o,$(DRV_SRCS))
 
+BOARD_DIR   = ../wch-ch56x-bsp/board
+BOARD_SRCS  = ../wch-ch56x-bsp/board/hydrausb3_v1.c
+OBJS     += $(patsubst $(BOARD_DIR)/%.c,$(BUILD_DIR)/%.o,$(BOARD_SRCS))
+
 USER_DIR  = ./User
 USER_SRCS = $(wildcard $(USER_DIR)/*.c)
 OBJS     += $(patsubst $(USER_DIR)/%.c,$(BUILD_DIR)/%.o,$(USER_SRCS))
@@ -38,6 +42,7 @@ LD_OPTS   = -T ".ld" -nostartfiles -Xlinker --gc-sections -Xlinker --print-memor
 INCLUDES = \
   -I"$(RVMSIS_DIR)" \
   -I"$(DRV_DIR)" \
+  -I"$(BOARD_DIR)" \
   -I"$(USER_DIR)"
 
 # Add inputs and outputs from these tool invocations to the build variables
@@ -79,6 +84,11 @@ $(BUILD_DIR)/%.o: ../wch-ch56x-bsp/rvmsis/%.c | $$(@D)/.
 	@echo ' '
 
 $(BUILD_DIR)/%.o: ../wch-ch56x-bsp/drv/%.c | $$(@D)/.
+	@echo 'Building file: $<'
+	$(COMPILER_PREFIX)-gcc $(C_OPTS) -c -o "$@" "$<"
+	@echo ' '
+
+$(BUILD_DIR)/%.o: ../wch-ch56x-bsp/board/%.c | $$(@D)/.
 	@echo 'Building file: $<'
 	$(COMPILER_PREFIX)-gcc $(C_OPTS) -c -o "$@" "$<"
 	@echo ' '
