@@ -1,4 +1,6 @@
 ## HydraUSB3_USB
+
+### HydraUSB3_USB firmware
 HydraUSB3_USB repository contains open source (see [LICENSE](../LICENSE)) test firmware for HydraUSB3 v1 board using WCH CH569W MCU.
 * Contributor shall check [CODING_STYLE.md](../CODING_STYLE.md)
 * For more details on HydraUSB3 v1 see https://hydrabus.com/hydrausb3-v1-0-specifications
@@ -32,6 +34,14 @@ The aim of this example is to use USB2 High Speed and USB3 Super Speed (Device B
 This firmware shall be used with the PC tool [hydrausb3_host/HydraUSB3_USB_benchmark](https://github.com/hydrausb3/hydrausb3_host/tree/main/HydraUSB3_USB_benchmark) to check different commands and do a benchmark with different speed USB2.0 High Speed and USB3.0 Super Speed
 * The USB2 High Speed benchmark reach more than 48MBytes/s average or more (depending on the PC)
 * The USB3 Super Speed benchmark reach more than 330MBytes/s average or more (depending on the PC)
+
+### Flash tool `wch-isp` (To flash this firmware on the WCH CH569 MCU)
+- Pre-built binaries (Windows/Ubuntu): https://github.com/hydrausb3/wch-isp/releases
+- Documentation: https://github.com/hydrausb3/wch-isp
+
+### PC host tool `HydraUSB3_USB_benchmark` (PC host tool to communicate with this firmware)
+- Pre-built binaries (Windows/Ubuntu): https://github.com/hydrausb3/hydrausb3_host/releases
+- Documentation: https://github.com/hydrausb3/hydrausb3_host/tree/main/HydraUSB3_USB_benchmark
 
 For more details on how to build and flash this example on HydraUSB3 v1 board see the Wiki:
 * For GNU/Linux:
