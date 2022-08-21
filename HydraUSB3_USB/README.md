@@ -21,7 +21,7 @@ The aim of this example is to use USB2 High Speed and USB3 Super Speed (Device B
 * The USB2/USB3 Device stack is fully compatible with Linux
 * The USB2/USB3 Device stack support automatic plug&play driver installation(WinUSB) for Windows8 or more 
    * Windows Compatible ID see https://github.com/pbatard/libwdi/wiki/WCID-Devices#What_is_WCID
-   * For the USB descriptors (see [wch-ch56x-bsp/usb/usb_devbulk/CH56x_usb_devbulk_desc_cmd.c](wch-ch56x-bsp/usb/usb_devbulk/CH56x_usb_devbulk_desc_cmd.c))
+   * For the USB descriptors (see [wch-ch56x-bsp/usb/usb_devbulk/CH56x_usb_devbulk_desc_cmd.c](https://github.com/hydrausb3/wch-ch56x-bsp/blob/main/usb/usb_devbulk/CH56x_usb_devbulk_desc_cmd.c))
    * USB String Serial Number include unique 64bits identifier for each board
      * Example format "HydraUSB3_SN:0123456789ABCDEF"
    * USB2.0 / 3.0 Binary Device Object Store (BOS) descriptor
