@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name          : Main.c
 * Author             : bvernoux
-* Version            : V1.0
-* Date               : 2022/08/20
+* Version            : V1.0.1
+* Date               : 2022/08/22
 * Description        : Example USB Device Bulk
 *                      For USB2 High Speed and USB3 Super Speed(with Burst)
 *                      Support Windows Compatible ID(USB WCID)
@@ -33,8 +33,11 @@
 
 /* Blink time in ms */
 #define BLINK_FAST (50) // Blink LED each 100ms (50*2)
-#define BLINK_SLOW (250) // Blink LED each 500ms (250*2)
-int blink_ms = BLINK_SLOW;
+
+#define BLINK_USB3 (250) // Blink LED each 500ms (250*2)
+#define BLINK_USB2 (500) // Blink LED each 1000ms (500*2)
+
+int blink_ms = BLINK_USB2;
 
 debug_log_buf_t log_buf;
 
@@ -80,7 +83,7 @@ int main()
 			   unique_id.sn_8b[0], unique_id.sn_8b[1], unique_id.sn_8b[2], unique_id.sn_8b[3],
 			   unique_id.sn_8b[4], unique_id.sn_8b[5], unique_id.sn_8b[6], unique_id.sn_8b[7]);
 
-	log_printf("HydraUSB3_USB FW v1.0 20-Aug-2022(CPU Freq=%d MHz)\n", (FREQ_SYS/1000000));
+	log_printf("HydraUSB3_USB FW v1.0.1 22-Aug-2022(CPU Freq=%d MHz)\n", (FREQ_SYS/1000000));
 	log_printf("DEF_ENDP1_MAX_SIZE=%d DEF_ENDP2_MAX_SIZE=%d\n", DEF_ENDP1_MAX_SIZE, DEF_ENDP2_MAX_SIZE);
 
 	// USB2 & USB3 Init
@@ -126,7 +129,7 @@ int main()
 							old_DeviceUsbType = g_DeviceUsbType;
 							log_printf("USB2\n");
 						}
-						blink_ms = BLINK_SLOW;
+						blink_ms = BLINK_USB2;
 						bsp_uled_on();
 						bsp_wait_ms_delay(blink_ms);
 						bsp_uled_off();
@@ -141,7 +144,7 @@ int main()
 							old_DeviceUsbType = g_DeviceUsbType;
 							log_printf("USB3\n");
 						}
-						blink_ms = BLINK_SLOW;
+						blink_ms = BLINK_USB3;
 						bsp_uled_on();
 						bsp_wait_ms_delay(blink_ms);
 						bsp_uled_off();
