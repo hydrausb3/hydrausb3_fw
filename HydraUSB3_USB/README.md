@@ -17,9 +17,9 @@ The aim of this example is to use USB2 High Speed and USB3 Super Speed (Device B
   * `USB_CMD_BOOT` : Reboot the board
 * USB Bulk Endpoints configuration (see [wch-ch56x-bsp/usb/usb_devbulk](wch-ch56x-bsp/usb/usb_devbulk))
   * Endpoint1 is used for command/answer with 4KiB buffer(IN) and  4KiB buffer(OUT)
-      * This Endpoint use 4 burst over USB3 (4KiB)
-  * Endpoint2 is used for fast USB streaming with 8KiB buffers(IN/OUT)
-    * This Endpoint use 8 burst over USB3 (8KiB)
+    * This Endpoint use 4 burst over USB3 (4KiB)
+  * Endpoint2 is used for fast USB streaming with 4KiB buffers(IN/OUT)
+    * This Endpoint use 4 burst over USB3 (4KiB)
 * The USB2/USB3 Device stack is fully compatible with Linux
 * The USB2/USB3 Device stack support automatic plug&play driver installation(WinUSB) for Windows8 or more 
    * Windows Compatible ID see https://github.com/pbatard/libwdi/wiki/WCID-Devices#What_is_WCID
