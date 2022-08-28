@@ -15,7 +15,7 @@ The aim of this example is to use USB2 High Speed and USB3 Super Speed (Device B
   * `USB_CMD_USB2` : Switch to USB2 even if USB3 is available
   * `USB_CMD_USB3` : Switch to USB3 or do a fall-back to USB2 if not available
   * `USB_CMD_BOOT` : Reboot the board
-* USB Bulk Endpoints configuration (see [wch-ch56x-bsp/usb/usb_devbulk](wch-ch56x-bsp/usb/usb_devbulk))
+* USB Bulk Endpoints configuration (see [wch-ch56x-bsp/usb/usb_devbulk](https://github.com/hydrausb3/wch-ch56x-bsp/blob/main/usb/usb_devbulk))
   * Endpoint1 is used for command/answer with 4KiB buffer(IN) and  4KiB buffer(OUT)
     * This Endpoint use 4 burst over USB3 (4KiB)
   * Endpoint2 is used for fast USB streaming with 4KiB buffers(IN/OUT)
