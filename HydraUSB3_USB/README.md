@@ -35,9 +35,9 @@ This firmware shall be used with the PC tool [hydrausb3_host/HydraUSB3_USB_bench
 * The USB2 High Speed benchmark reach more than 48MBytes/s average or more (depending on the PC)
 * The USB3 Super Speed benchmark reach more than 330MBytes/s average or more (depending on the PC)
 
-### Flash tool `wch-isp` (To flash this firmware on the WCH CH569 MCU)
-- Pre-built binaries (Windows/Ubuntu): https://github.com/hydrausb3/wch-isp/releases
-- Documentation: https://github.com/hydrausb3/wch-isp
+### Flash tool `wch-ch56x-isp` (To flash this firmware on the WCH CH569 MCU)
+- Pre-built binaries (Windows/Ubuntu): https://github.com/hydrausb3/wch-ch56x-isp/releases
+- Documentation: https://github.com/hydrausb3/wch-ch56x-isp
 
 ### PC host tool `HydraUSB3_USB_benchmark` (PC host tool to communicate with this firmware)
 - Pre-built binaries (Windows/Ubuntu): https://github.com/hydrausb3/hydrausb3_host/releases
