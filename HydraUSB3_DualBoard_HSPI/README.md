@@ -16,8 +16,8 @@ The aim of this example is to use HSPI(High Speed Parallel Interface running at 
     | Yellow ADBUS1 RX(Pin3)  | J5 TXD1         |
     | Black GND (Pin10)       | GND (near RXD1) |
   * For more details on HydraUSB3 v1 WCH CH569 UART see https://github.com/hydrausb3/hydrausb3_hw/blob/main/HydraUSB3_V1_CH569_UART.ods
-* Usage of PB24 GPIO to detect TX mode/RX mode board (with API `hydrausb3_pb24()`)
-* Synchronize 2 HydraUSB3 v1 boards at startup using 2 GPIOs (with API `hydrausb3_sync2boards()`).
+* Usage of PB24 GPIO to detect TX mode/RX mode board (with API `bsp_switch()`)
+* Synchronize 2 HydraUSB3 v1 boards at startup using 2 GPIOs (with API `bsp_sync2boards()`).
 * Usage of HSPI in TX mode (with API `HSPI_DoubleDMA_Init()` and `HSPI_DMA_Tx()`)
 * Usage of HSPI in RX mode (with API `HSPI_DoubleDMA_Init()`)
 * Usage of HSPI Interrupt see (`HSPI_IRQHandler()` see Transmit/Receive code)
