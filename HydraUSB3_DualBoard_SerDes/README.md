@@ -5,7 +5,14 @@ HydraUSB3_DualBoard_SerDes repository contains open source (see [LICENSE](../LIC
 
 This example(DualBoard) requires 2x HydraUSB3 v1 boards to be plugged together.
 * First HydraUSB3 board(on bottom) shall have PB24 not populated (called RX mode)
-* Seconds HydraUSB3 board(on top of First board) shall have PB24 populated with a 2.54mm Jumper (called TX mode)
+* Second HydraUSB3 board(on top of First board) shall have PB24 populated with a 2.54mm Jumper (called TX mode)
+* Connect HydraUSB3 SerDes P6 GXP/GXM on both boards
+  * Connect a 2.54mm DuPont/Jumper Wire Female to Female from First HydraUSB3 board(on bottom) P6 GXP to Second HydraUSB3 board(on top of First board) P6 GXP
+  * Connect a 2.54mm DuPont/Jumper Wire Female to Female from First HydraUSB3 board(on bottom) P6 GXM to Second HydraUSB3 board(on top of First board) P6 GXM
+    | First HydraUSB3 board|Second HydraUSB3 board|
+    |----------------------|----------------------|
+    | P6 GXP               | P6 GXP               |
+    | P6 GXM               | P6 GXM               |
 
 The aim of this example is to use SerDes with Dual HydraUSB3 v1 boards connected together with following features/API
 * Main code available in [User/Main.c](User/Main.c)
