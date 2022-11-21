@@ -17,10 +17,10 @@ For Linux:
  * See Wiki How to build flash and use examples on Linux with shell:
    * https://github.com/hydrausb3/hydrausb3_fw/wiki/how-to-build-flash-and-use-examples-on-linux
  * See Wiki How to build flash and use examples on Linux with Eclipse IDE:
-   * https://github.com/hydrausb3/hydrausb3_fw/wiki/how-to-build-flash-and-use-examples-on-linux-(Eclipse-IDE)
+   * https://github.com/hydrausb3/hydrausb3_fw/wiki/how-to-build-flash-and-use-examples-on-linux-Eclipse-IDE
 
 For Windows(requires MSYS2/MINGW64):
  * See Wiki How to build flash and use examples on Windows with MSYS2/MINGW64 shell:
    * https://github.com/hydrausb3/hydrausb3_fw/wiki/how-to-build-flash-and-use-examples-on-windows
  * See Wiki How to build flash and use examples on Windows with Eclipse IDE:
-   * https://github.com/hydrausb3/hydrausb3_fw/wiki/how-to-build-flash-and-use-examples-on-windows-(Eclipse-IDE)
+   * https://github.com/hydrausb3/hydrausb3_fw/wiki/how-to-build-flash-and-use-examples-on-windows-Eclipse-IDE
