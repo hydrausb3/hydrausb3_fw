@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name   : Main.c
 * Author      : bvernoux
-* Version     : V1.1.0
-* Date        : 2022/08/20
+* Version     : V1.1.1
+* Date        : 2022/12/11
 * Description : Basic example to test SerDes communication between 2x HydraUSB3 boards
 * Copyright (c) 2022 Benjamin VERNOUX
 * SPDX-License-Identifier: Apache-2.0
@@ -59,7 +59,7 @@ uint32_t CNT_E;
 #endif
 uint32_t CNT_nb_cycles;
 
-int is_RX; /* Return true or false */
+int is_board1; /* Return true or false */
 
 /* Required for log_init() => log_printf()/cprintf() */
 debug_log_buf_t log_buf;
@@ -92,15 +92,18 @@ int main()
 	/******************************************/
 	if(bsp_switch() == 0)
 	{
-		is_RX = true;
-		i = bsp_sync2boards(PA14, PA12, BSP_HOST);
+		is_board1 = false;
+		i = bsp_sync2boards(PA14, PA12, BSP_BOARD2);
 	}
 	else
 	{
-		is_RX = false;
-		i = bsp_sync2boards(PA14, PA12, BSP_DEVICE);
+		is_board1 = true;
+		i = bsp_sync2boards(PA14, PA12, BSP_BOARD1);
 	}
-	log_printf("SYNC %08d\n", i);
+	if(i > 0)
+		log_printf("SYNC %08d\n", i);
+	else
+		log_printf("SYNC Err Timeout\n");
 	log_time_reinit(); // Reinit log time after synchro
 	/* Test Synchronization to be checked with Oscilloscope/LA */
 	bsp_uled_on();
@@ -110,17 +113,17 @@ int main()
 	/****************************************/
 
 	log_printf("Start\n");
-	if(is_RX == false)
+	if(is_board1 == false)
 	{
-		log_printf("SerDes_Tx 2022/08/20 @ChipID=%02X\n", R8_CHIP_ID);
+		log_printf("SerDes_Tx(Board2 Bottom) 2022/12/11 @ChipID=%02X\n", R8_CHIP_ID);
 	}
 	else
 	{
-		log_printf("SerDes_Rx 2022/08/20 @ChipID=%02X\n", R8_CHIP_ID);
+		log_printf("SerDes_Rx(Board1 Top) 2022/12/11 @ChipID=%02X\n", R8_CHIP_ID);
 	}
 	log_printf("FSYS=%d\n", FREQ_SYS);
 
-	if(is_RX == false) // SerDes TX
+	if(is_board1 == false) // SerDes TX
 	{
 		uint32_t data=0;
 		int n;
