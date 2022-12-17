@@ -1,8 +1,8 @@
 /********************************** (C) COPYRIGHT *******************************
 * File Name   : Main.c
 * Author      : bvernoux
-* Version     : V1.1.0
-* Date        : 2022/08/20
+* Version     : V1.1.1
+* Date        : 2022/12/11
 * Description : Basic example to test HSPI communication between 2x HydraUSB3 boards
 * Copyright (c) 2022 Benjamin VERNOUX
 * SPDX-License-Identifier: Apache-2.0
@@ -44,9 +44,9 @@
 #define RX_DMA_Addr1   0x20020000 + DMA_Tx_Len1
 
 /* Shared variables */
-volatile int Tx_End_Flag; // Send completion flag
-volatile int Rx_End_Flag; // Receive completion flag
-volatile int Rx_End_Err; // 0=No Error else >0 Error code
+volatile int HSPI_TX_End_Flag; // Send completion flag
+volatile int HSPI_RX_End_Flag; // Receive completion flag
+volatile int HSPI_RX_End_Err; // 0=No Error else >0 Error code
 
 /* HSPI_IRQHandler variables */
 uint32_t Tx_Cnt = 0;
@@ -61,7 +61,7 @@ uint32_t addr_cnt = 0;
 #define BLINK_SLOW   250
 int blink_ms = BLINK_SLOW;
 
-bool_t is_RX; /* Return true or false */
+bool_t is_board1; /* Return true or false */
 
 /* Required for log_init() => log_printf()/cprintf() */
 debug_log_buf_t log_buf;
@@ -95,15 +95,18 @@ int main()
 	/******************************************/
 	if(bsp_switch() == 0)
 	{
-		is_RX = true;
-		i = bsp_sync2boards(PA14, PA12, BSP_HOST);
+		is_board1 = false;
+		i = bsp_sync2boards(PA14, PA12, BSP_BOARD2);
 	}
 	else
 	{
-		is_RX = false;
-		i = bsp_sync2boards(PA14, PA12, BSP_DEVICE);
+		is_board1 = true;
+		i = bsp_sync2boards(PA14, PA12, BSP_BOARD1);
 	}
-	log_printf("SYNC %08d\n", i);
+	if(i > 0)
+		log_printf("SYNC %08d\n", i);
+	else
+		log_printf("SYNC Err Timeout\n");
 	log_time_reinit(); // Reinit log time after synchro
 	/* Test Synchronization to be checked with Oscilloscope/LA */
 	bsp_uled_on();
@@ -113,17 +116,17 @@ int main()
 	/****************************************/
 
 	log_printf("Start\n");
-	if(is_RX == false)
+	if(is_board1 == false)
 	{
-		log_printf("HSPI_Tx 2022/08/20 @ChipID=%02X\n", R8_CHIP_ID );
+		log_printf("HSPI_Tx(Board2 Bottom) 2022/12/11 @ChipID=%02X\n", R8_CHIP_ID);
 	}
 	else
 	{
-		log_printf("HSPI_Rx 2022/08/20 @ChipID=%02X\n", R8_CHIP_ID );
+		log_printf("HSPI_Rx(Board1 Top) 2022/12/11 @ChipID=%02X\n", R8_CHIP_ID);
 	}
 	log_printf("FSYS=%d\n", FREQ_SYS);
 
-	if (is_RX ==  false) // TX Mode
+	if (is_board1 ==  false) // TX Mode
 	{
 		log_printf("HSPI TX Data_Size=%d\n", Data_Size);
 		HSPI_DoubleDMA_Init(HSPI_HOST, RB_HSPI_DAT32_MOD, TX_DMA_Addr0, TX_DMA_Addr1, DMA_Tx_Len);
@@ -144,7 +147,7 @@ int main()
 		HSPI_DMA_Tx();
 		bsp_uled_off();
 
-		while(Tx_End_Flag == 0);
+		while(HSPI_TX_End_Flag == 0);
 
 		log_printf("Tx 32K data suc\r\n");
 		log_printf("Wait 20ms before blink loop\n");
@@ -163,7 +166,7 @@ int main()
 				log_printf("Start Tx 32K\n");
 				HSPI_DMA_Tx();
 
-				while(Tx_End_Flag == 0);
+				while(HSPI_TX_End_Flag == 0);
 				log_printf("Tx 32K OK\n");
 
 				blink_ms = BLINK_ULTRA_FAST;
@@ -190,21 +193,21 @@ int main()
 		log_printf("DMA_RX_Addr0[0]=0x%08X [8191]=0x%08X\n",
 				   ((uint32_t*)RX_DMA_Addr0)[0], ((uint32_t*)RX_DMA_Addr0)[8191]);
 
-		Rx_End_Flag = 0;  // Receive completion flag
-		Rx_End_Err = 0; // 0=No Error else >0 Error code
+		HSPI_RX_End_Flag = 0;  // Receive completion flag
+		HSPI_RX_End_Err = 0; // 0=No Error else >0 Error code
 		HSPI_DoubleDMA_Init(HSPI_DEVICE, RB_HSPI_DAT32_MOD, RX_DMA_Addr0, RX_DMA_Addr1, 0);
 
 		int Rx_Verify_Flag = 0;
 		while(1)
 		{
 			log_printf("Wait Rx\n");
-			while(Rx_End_Flag == 0)
+			while(HSPI_RX_End_Flag == 0)
 			{
 
 			}
 			log_printf("Rx_End\n");
 
-			if(Rx_End_Err == 0)
+			if(HSPI_RX_End_Err == 0)
 			{
 				//verify
 				for(i = 0; i < 8192; i++) // 8192*4 = 32K
@@ -214,7 +217,7 @@ int main()
 					if(val_u32 != (i + 0x55555555))
 					{
 						Rx_Verify_Flag = 1;
-						log_printf("Verify err Rx_End_Err=%d\n", Rx_End_Err);
+						log_printf("Verify err Rx_End_Err=%d\n", HSPI_RX_End_Err);
 						log_printf("Err addr=0x%08X val=0x%08X expected val=0x%08X\n",
 								   (0x20020000+i*4),
 								   val_u32,
@@ -225,7 +228,7 @@ int main()
 			}
 			else
 			{
-				Rx_Verify_Flag = Rx_End_Err;
+				Rx_Verify_Flag = HSPI_RX_End_Err;
 			}
 
 			if(Rx_Verify_Flag == 0)
@@ -250,8 +253,8 @@ int main()
 			log_printf("DMA_RX_Addr0[0]=0x%08X [8191]=0x%08X\n",
 					   ((uint32_t*)RX_DMA_Addr0)[0], ((uint32_t*)RX_DMA_Addr0)[8191]);
 
-			Rx_End_Err = 0;
-			Rx_End_Flag = 0;
+			HSPI_RX_End_Err = 0;
+			HSPI_RX_End_Flag = 0;
 		}
 	}
 }
@@ -280,7 +283,7 @@ __attribute__((interrupt("WCH-Interrupt-fast"))) void HSPI_IRQHandler(void)
 	{
 		bsp_uled_on();
 		R8_HSPI_INT_FLAG = RB_HSPI_IF_T_DONE;  // Clear Interrupt
-		if (is_RX ==  false) // TX Mode
+		if (is_board1 ==  false) // TX Mode
 		{
 			Tx_Cnt++;
 			addr_cnt++;
@@ -305,7 +308,7 @@ __attribute__((interrupt("WCH-Interrupt-fast"))) void HSPI_IRQHandler(void)
 				R32_HSPI_TX_ADDR1 = TX_DMA_Addr1;
 				addr_cnt = 0;
 				Tx_Cnt = 0;
-				Tx_End_Flag = 1;
+				HSPI_TX_End_Flag = 1;
 			}
 		}
 	}
@@ -338,7 +341,7 @@ __attribute__((interrupt("WCH-Interrupt-fast"))) void HSPI_IRQHandler(void)
 			{
 				// Receive completed
 				HSPI_IRQHandler_ReInitRX();
-				Rx_End_Flag = 1;
+				HSPI_RX_End_Flag = 1;
 			}
 		}
 		// Determine whether the CRC is correct
@@ -348,8 +351,8 @@ __attribute__((interrupt("WCH-Interrupt-fast"))) void HSPI_IRQHandler(void)
 			// R8_HSPI_CTRL &= ~RB_HSPI_ENABLE;
 			log_printf("CRC err\n");
 			HSPI_IRQHandler_ReInitRX();
-			Rx_End_Err |= 1;
-			Rx_End_Flag = 1;
+			HSPI_RX_End_Err |= 1;
+			HSPI_RX_End_Flag = 1;
 		}
 		// Whether the received serial number matches, (does not match, modify the packet serial number)
 		if(R8_HSPI_RTX_STATUS & RB_HSPI_NUM_MIS)
@@ -357,8 +360,8 @@ __attribute__((interrupt("WCH-Interrupt-fast"))) void HSPI_IRQHandler(void)
 			// Mismatch
 			log_printf("NUM_MIS err\n");
 			HSPI_IRQHandler_ReInitRX();
-			Rx_End_Err |= 2;
-			Rx_End_Flag = 1;
+			HSPI_RX_End_Err |= 2;
+			HSPI_RX_End_Flag = 1;
 		}
 	}
 	/*
