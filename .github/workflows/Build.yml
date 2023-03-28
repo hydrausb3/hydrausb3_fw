@@ -13,10 +13,6 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Checkout submodules
-        run: git submodule update --init --recursive
-  
       - name: Download GCC archive
         run: wget https://github.com/hydrausb3/riscv-none-elf-gcc-xpack/releases/download/12.2.0-1/xpack-riscv-none-elf-gcc-12.2.0-1-linux-x64.tar.gz
 
@@ -37,6 +33,10 @@ jobs:
         PROJECT_NAME: [HydraUSB3_Blink_ULED, HydraUSB3_DualBoard_HSPI, HydraUSB3_DualBoard_SerDes, HydraUSB3_USB]
     runs-on: ubuntu-latest  
     steps:
+      - uses: actions/checkout@v2
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
+
       - name: Build ${{ matrix.PROJECT_NAME }}
         run: |
           export PATH="$PATH:${{ env.RISCV_GCC_PATH }}"
