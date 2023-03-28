@@ -30,10 +30,10 @@ jobs:
           riscv-none-elf-gcc --version
 
       - name: Build HydraUSB3_Blink_ULED
+        shell: bash
         run: |
           export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
-          cd HydraUSB3_Blink_ULED
-          make
+          cd HydraUSB3_Blink_ULED && make clean all
       - name: Upload artifact HydraUSB3_Blink_ULED
         uses: actions/upload-artifact@v2
         with:
@@ -44,7 +44,7 @@ jobs:
         run: |
           export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
           cd HydraUSB3_DualBoard_HSPI
-          make
+          make clean all
       - name: Upload artifact HydraUSB3_DualBoard_HSPI
         uses: actions/upload-artifact@v2
         with:
@@ -55,7 +55,7 @@ jobs:
         run: |
           export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
           cd HydraUSB3_DualBoard_SerDes
-          make
+          make clean all
       - name: Upload artifact HydraUSB3_DualBoard_SerDes
         uses: actions/upload-artifact@v2
         with:
@@ -66,7 +66,7 @@ jobs:
         run: |
           export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
           cd HydraUSB3_USB
-          make
+          make clean all
       - name: Upload artifact HydraUSB3_USB
         uses: actions/upload-artifact@v2
         with:
