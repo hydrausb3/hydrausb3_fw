@@ -1,0 +1,72 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  HydraUSB3_Blink_ULED:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build app
+      shell: bash
+      run: |
+         cd HydraUSB3_Blink_ULED
+         make
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: HydraUSB3_Blink_ULED
+        path: HydraUSB3_Blink_ULED
+
+  HydraUSB3_DualBoard_HSPI:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build app
+      shell: bash
+      run: |
+         cd HydraUSB3_DualBoard_HSPI
+         make
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: HydraUSB3_DualBoard_HSPI
+        path: HydraUSB3_DualBoard_HSPI
+  
+  HydraUSB3_DualBoard_SerDes:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build app
+      shell: bash
+      run: |
+         cd HydraUSB3_DualBoard_SerDes
+         make
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: HydraUSB3_DualBoard_SerDes
+        path: HydraUSB3_DualBoard_SerDes
+
+  HydraUSB3_USB:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build app
+      shell: bash
+      run: |
+         cd HydraUSB3_USB
+         make
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: HydraUSB3_USB
+        path: HydraUSB3_USB
