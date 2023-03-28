@@ -1,6 +1,17 @@
 RM := rm -rf
 
-COMPILER_PREFIX ?= riscv-none-embed
+# Check and choose riscv compiler either closed source from MounRiver Studio riscv-none-embed" or open source one GCC riscv-none-elf 
+# For open source GCC riscv-none-elf see https://github.com/hydrausb3/riscv-none-elf-gcc-xpack/releases/
+COMPILER_PREFIX := $(shell command -v riscv-none-embed-gcc >/dev/null 2>&1 && echo "riscv-none-embed" || true)
+COMPILER_PREFIX := $(if $(COMPILER_PREFIX),$(COMPILER_PREFIX),$(shell command -v riscv-none-elf-gcc >/dev/null 2>&1 && echo "riscv-none-elf" || true))
+
+ifeq ($(COMPILER_PREFIX),riscv-none-embed)
+    MARCH_OPT := -march=rv32imac
+else ifeq ($(COMPILER_PREFIX),riscv-none-elf)
+    MARCH_OPT := -march=rv32imac_zicsr
+else
+    $(error Unknown COMPILER_PREFIX: $(COMPILER_PREFIX))
+endif
 
 # Define option(s) defined in pre-processor compiler option(s)
 #DEFINE_OPTS = -DDEBUG=1
@@ -40,7 +51,7 @@ OBJS += $(BUILD_DIR)/startup_CH56x.o
 DEPS  = $(subst .o,.d,$(OBJS))
 LIBS  =
 
-BASE_OPTS = -march=rv32imac -mabi=ilp32 -msmall-data-limit=8 $(OPTIM_OPTS) -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections
+BASE_OPTS = $(MARCH_OPT) -mabi=ilp32 -msmall-data-limit=8 $(OPTIM_OPTS) -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections
 C_OPTS    = $(BASE_OPTS) $(DEBUG) $(DEFINE_OPTS)\
               $(INCLUDES) -std=gnu99 -MMD -MP -MT"$(@)"
 LD_OPTS   = -T ".ld" -nostartfiles -Xlinker --gc-sections -Xlinker --print-memory-usage -Wl,-Map,"$(PROJECT).map" --specs=nano.specs --specs=nosys.specs
