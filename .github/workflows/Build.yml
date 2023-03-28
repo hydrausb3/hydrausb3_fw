@@ -6,8 +6,14 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  RISCV_GCC_PATH: /opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin
+
 jobs:
-  Build_hydrausb3_fw_examples:
+  build-and-upload:
+    strategy:
+      matrix:
+        PROJECT_NAME: [HydraUSB3_Blink_ULED, HydraUSB3_DualBoard_HSPI, HydraUSB3_DualBoard_SerDes, HydraUSB3_DualBoard_USB]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -22,56 +28,19 @@ jobs:
           mkdir /opt/gcc_riscv
           tar xvfz xpack-riscv-none-elf-gcc-12.2.0-1-linux-x64.tar.gz -C /opt/gcc_riscv/
 
-      - name: Add GCC to PATH
-        run: |
-          echo 'export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"' >> $GITHUB_ENV
-
       - name: Verify GCC installation
         run: |
-          export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
+          export PATH="$PATH:${{ env.RISCV_GCC_PATH }}"
           riscv-none-elf-gcc --version
 
-      - name: Build HydraUSB3_Blink_ULED
-        shell: bash
+      - name: Build ${{ matrix.PROJECT_NAME }}
         run: |
           export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
-          cd HydraUSB3_Blink_ULED
+          cd ${{ matrix.PROJECT_NAME }}
           make
-      - name: Upload artifact HydraUSB3_Blink_ULED
-        uses: actions/upload-artifact@v2
-        with:
-          name: HydraUSB3_Blink_ULED
-          path: HydraUSB3_Blink_ULED
 
-      - name: Build HydraUSB3_DualBoard_HSPI
-        run: |
-          export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
-          cd HydraUSB3_DualBoard_HSPI
-          make
-      - name: Upload artifact HydraUSB3_DualBoard_HSPI
+      - name: Upload artifact ${{ matrix.PROJECT_NAME }}
         uses: actions/upload-artifact@v2
         with:
-          name: HydraUSB3_DualBoard_HSPI
-          path: HydraUSB3_DualBoard_HSPI
-
-      - name: Build HydraUSB3_DualBoard_SerDes
-        run: |
-          export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
-          cd HydraUSB3_DualBoard_SerDes
-          make
-      - name: Upload artifact HydraUSB3_DualBoard_SerDes
-        uses: actions/upload-artifact@v2
-        with:
-          name: HydraUSB3_DualBoard_SerDes
-          path: HydraUSB3_DualBoard_SerDes
-
-      - name: Build HydraUSB3_USB
-        run: |
-          export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
-          cd HydraUSB3_USB
-          make
-      - name: Upload artifact HydraUSB3_USB
-        uses: actions/upload-artifact@v2
-        with:
-          name: HydraUSB3_USB
-          path: HydraUSB3_USB
+          name: ${{ matrix.PROJECT_NAME }}
+          path: ${{ matrix.PROJECT_NAME }}
