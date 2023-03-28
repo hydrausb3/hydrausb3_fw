@@ -13,7 +13,7 @@ jobs:
   build-and-upload:
     strategy:
       matrix:
-        PROJECT_NAME: [HydraUSB3_Blink_ULED, HydraUSB3_DualBoard_HSPI, HydraUSB3_DualBoard_SerDes, HydraUSB3_DualBoard_USB]
+        PROJECT_NAME: [HydraUSB3_Blink_ULED, HydraUSB3_DualBoard_HSPI, HydraUSB3_DualBoard_SerDes, HydraUSB3_USB]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -35,7 +35,7 @@ jobs:
 
       - name: Build ${{ matrix.PROJECT_NAME }}
         run: |
-          export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
+          export PATH="$PATH:${{ env.RISCV_GCC_PATH }}"
           cd ${{ matrix.PROJECT_NAME }}
           make
 
