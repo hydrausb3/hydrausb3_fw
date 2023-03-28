@@ -25,10 +25,13 @@ jobs:
           echo 'export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"' >> $GITHUB_ENV
 
       - name: Verify GCC installation
-        run: riscv-none-elf-gcc --version
+        run: |
+          export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
+          riscv-none-elf-gcc --version
 
       - name: Build HydraUSB3_Blink_ULED
         run: |
+          export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
           cd HydraUSB3_Blink_ULED
           make
       - name: Upload artifact HydraUSB3_Blink_ULED
@@ -39,6 +42,7 @@ jobs:
 
       - name: Build HydraUSB3_DualBoard_HSPI
         run: |
+          export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
           cd HydraUSB3_DualBoard_HSPI
           make
       - name: Upload artifact HydraUSB3_DualBoard_HSPI
@@ -49,6 +53,7 @@ jobs:
 
       - name: Build HydraUSB3_DualBoard_SerDes
         run: |
+          export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
           cd HydraUSB3_DualBoard_SerDes
           make
       - name: Upload artifact HydraUSB3_DualBoard_SerDes
@@ -59,6 +64,7 @@ jobs:
 
       - name: Build HydraUSB3_USB
         run: |
+          export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"
           cd HydraUSB3_USB
           make
       - name: Upload artifact HydraUSB3_USB
