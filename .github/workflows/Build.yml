@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  Install_toolchain_GCC_RISC-V:
+  Build_hydrausb3_fw_examples:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
