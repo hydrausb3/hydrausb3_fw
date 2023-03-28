@@ -7,66 +7,62 @@ on:
     branches: [ main ]
 
 jobs:
-  HydraUSB3_Blink_ULED:
+  Install_toolchain_GCC_RISC-V:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v2
-    - name: Build app
-      shell: bash
-      run: |
-         cd HydraUSB3_Blink_ULED
-         make
+      - uses: actions/checkout@v2
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: HydraUSB3_Blink_ULED
-        path: HydraUSB3_Blink_ULED
+      - name: Download GCC archive
+        run: wget https://github.com/hydrausb3/riscv-none-elf-gcc-xpack/releases/download/12.2.0-1/xpack-riscv-none-elf-gcc-12.2.0-1-linux-x64.tar.gz
 
-  HydraUSB3_DualBoard_HSPI:
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build app
-      shell: bash
-      run: |
-         cd HydraUSB3_DualBoard_HSPI
-         make
+      - name: Extract GCC archive
+        run: |
+          mkdir /opt/gcc_riscv
+          tar xvfz xpack-riscv-none-elf-gcc-12.2.0-1-linux-x64.tar.gz -C /opt/gcc_riscv/
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: HydraUSB3_DualBoard_HSPI
-        path: HydraUSB3_DualBoard_HSPI
-  
-  HydraUSB3_DualBoard_SerDes:
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build app
-      shell: bash
-      run: |
-         cd HydraUSB3_DualBoard_SerDes
-         make
+      - name: Add GCC to PATH
+        run: |
+          echo 'export PATH="$PATH:/opt/gcc_riscv/xpack-riscv-none-elf-gcc-12.2.0-1/bin"' >> $GITHUB_ENV
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: HydraUSB3_DualBoard_SerDes
-        path: HydraUSB3_DualBoard_SerDes
+      - name: Verify GCC installation
+        run: riscv-none-elf-gcc --version
 
-  HydraUSB3_USB:
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build app
-      shell: bash
-      run: |
-         cd HydraUSB3_USB
-         make
+      - name: Build HydraUSB3_Blink_ULED
+        run: |
+          cd HydraUSB3_Blink_ULED
+          make
+      - name: Upload artifact HydraUSB3_Blink_ULED
+        uses: actions/upload-artifact@v2
+        with:
+          name: HydraUSB3_Blink_ULED
+          path: HydraUSB3_Blink_ULED
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: HydraUSB3_USB
-        path: HydraUSB3_USB
+      - name: Build HydraUSB3_DualBoard_HSPI
+        run: |
+          cd HydraUSB3_DualBoard_HSPI
+          make
+      - name: Upload artifact HydraUSB3_DualBoard_HSPI
+        uses: actions/upload-artifact@v2
+        with:
+          name: HydraUSB3_DualBoard_HSPI
+          path: HydraUSB3_DualBoard_HSPI
+
+      - name: Build HydraUSB3_DualBoard_SerDes
+        run: |
+          cd HydraUSB3_DualBoard_SerDes
+          make
+      - name: Upload artifact HydraUSB3_DualBoard_SerDes
+        uses: actions/upload-artifact@v2
+        with:
+          name: HydraUSB3_DualBoard_SerDes
+          path: HydraUSB3_DualBoard_SerDes
+
+      - name: Build HydraUSB3_USB
+        run: |
+          cd HydraUSB3_USB
+          make
+      - name: Upload artifact HydraUSB3_USB
+        uses: actions/upload-artifact@v2
+        with:
+          name: HydraUSB3_USB
+          path: HydraUSB3_USB
