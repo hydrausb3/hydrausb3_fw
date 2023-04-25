@@ -20,6 +20,15 @@ jobs:
       - name: Checkout submodules
         run: git submodule update --init --recursive
 
+      - name: Get build timestamp
+        id: id_date
+        shell: bash
+        run: echo "timestamp=$(date +%Y-%m-%d-%H-%M-%S)" >> $GITHUB_OUTPUT
+
+      - name: Get app version + timestamp
+        id: id_version
+        run: echo "app_version=v${{github.event.release.tag_name}}-${{steps.id_date.outputs.timestamp}}" >> $GITHUB_OUTPUT
+
       - name: Cache GCC archive
         uses: actions/cache@v3
         with:
@@ -49,8 +58,8 @@ jobs:
           cd ${{ matrix.PROJECT_NAME }}
           make
 
-      - name: Upload artifact ${{ matrix.PROJECT_NAME }}
+      - name: Upload artifact ${{ matrix.PROJECT_NAME }}-${{steps.id_version.outputs.app_version}}
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.PROJECT_NAME }}
+          name: ${{ matrix.PROJECT_NAME }}-${{steps.id_version.outputs.app_version}}
           path: ${{ matrix.PROJECT_NAME }}
