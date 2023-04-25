@@ -27,7 +27,7 @@ jobs:
 
       - name: Get app version + timestamp
         id: id_version
-        run: echo "app_version=v${{github.event.release.tag_name}}-${{steps.id_date.outputs.timestamp}}" >> $GITHUB_OUTPUT
+        run: echo "app_version=branch::$(dirname ${GITHUB_REF#refs/*/})-${{steps.id_date.outputs.timestamp}}" >> $GITHUB_OUTPUT
 
       - name: Cache GCC archive
         uses: actions/cache@v3
